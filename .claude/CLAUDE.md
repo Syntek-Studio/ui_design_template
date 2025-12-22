@@ -47,10 +47,12 @@ src/web/components/
 ```
 src/mobile/components/
 └── ComponentName/
-    ├── ComponentName.tsx      # React Native + Nativewind implementation
-    ├── ComponentName.stories.tsx  # Storybook stories
-    └── index.ts               # Re-exports
+    ├── ComponentName.native.tsx         # React Native + Nativewind implementation
+    ├── ComponentName.stories.native.tsx # Storybook stories
+    └── index.ts                         # Re-exports
 ```
+
+> **Note:** Mobile files use the `.native.tsx` extension for clarity, indicating they are React Native specific.
 
 ### Import Patterns
 
@@ -105,7 +107,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 
 ## PR Workflow
 
-Branch structure: `feature/your-feature` → `testing` → `dev` → `staging` → `main`
+Branch structure: `user-story-number/your-feature-name` → `testing` → `dev` → `staging` → `main`
 
 PR title format: `user-story-number/your-feature-name` (e.g., `US-123/add-loading-button-state`)
 
@@ -115,23 +117,23 @@ Use these agents for specialized tasks:
 
 | Command | Purpose |
 |---------|---------|
-| `/dev-team:review` | Code review for security, performance, and style |
-| `/dev-team:test-writer` | Generate tests for components |
-| `/dev-team:frontend` | UI/UX and accessibility review |
-| `/dev-team:qa-tester` | Find bugs, security flaws, edge cases |
-| `/dev-team:docs` | Write documentation and docstrings |
-| `/dev-team:refactor` | Refactor without changing logic |
-| `/dev-team:plan` | Create architectural plans |
-| `/dev-team:syntax` | Fix syntax and linting errors |
+| `/syntek-dev-suite:review` | Code review for security, performance, and style |
+| `/syntek-dev-suite:test-writer` | Generate tests for components |
+| `/syntek-dev-suite:frontend` | UI/UX and accessibility review |
+| `/syntek-dev-suite:qa-tester` | Find bugs, security flaws, edge cases |
+| `/syntek-dev-suite:docs` | Write documentation and docstrings |
+| `/syntek-dev-suite:refactor` | Refactor without changing logic |
+| `/syntek-dev-suite:plan` | Create architectural plans |
+| `/syntek-dev-suite:syntax` | Fix syntax and linting errors |
 
 ### Recommended Workflow
 
-1. **Planning**: `/dev-team:plan` - Design the component architecture
+1. **Planning**: `/syntek-dev-suite:plan` - Design the component architecture
 2. **Implementation**: Write the component code
-3. **Syntax Check**: `/dev-team:syntax` - Fix any syntax/linting errors
-4. **Testing**: `/dev-team:test-writer` - Generate test cases
-5. **QA**: `/dev-team:qa-tester` - Find bugs and edge cases
-6. **Review**: `/dev-team:review` - Security and code quality check
-7. **Accessibility**: `/dev-team:frontend` - UI/UX and a11y review
-8. **Refactor**: `/dev-team:refactor` - Clean up code if needed
-9. **Documentation**: `/dev-team:docs` - Add documentation
+3. **Syntax Check**: `/syntek-dev-suite:syntax` - Fix any syntax/linting errors
+4. **Testing**: `/syntek-dev-suite:test-writer` - Generate test cases
+5. **QA**: `/syntek-dev-suite:qa-tester` - Find bugs and edge cases
+6. **Review**: `/syntek-dev-suite:review` - Security and code quality check
+7. **Accessibility**: `/syntek-dev-suite:frontend` - UI/UX and a11y review
+8. **Refactor**: `/syntek-dev-suite:refactor` - Clean up code if needed
+9. **Documentation**: `/syntek-dev-suite:docs` - Add documentation

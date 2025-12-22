@@ -8,7 +8,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- 
+- Additional components (Card, Input, Modal, etc.)
+- Dark mode theme support
+- More comprehensive design tokens documentation
+- Accessibility testing and ARIA enhancements
+
+---
+
+## [0.2.0] - 22-12-2025
+
+### Added
+- Syntek Dev Suite plugin configuration for enhanced development workflow
+- Comprehensive design tokens system:
+  - Colour palette with primary, secondary, and semantic colours
+  - Spacing scale (4px grid system)
+  - Typography scales with font families, sizes, and weights
+  - Responsive breakpoints (xs to 2xl)
+  - Shadow definitions (none to 2xl)
+  - Border radius and width tokens
+- Vitest testing framework integration
+- Environment shell scripts for different deployment stages:
+  - `dev.sh` - Development environment
+  - `test.sh` - Testing environment
+  - `staging.sh` - Staging environment
+  - `production.sh` - Production environment
+- Self-learning metrics system in `docs/METRICS/` for tracking agent performance and optimisations
+- Comprehensive documentation:
+  - Updated main README.md with installation, usage, and API examples
+  - Design tokens documentation
+  - Architecture overview
+  - Contributing guidelines
+  - JSDoc comments in token files
+  - Section README files for project organisation
+
+### Changed
+- Updated package.json with new development scripts
+- Enhanced project documentation structure
+- Improved code comments for better maintainability
+
+### Fixed
+- Initial release stabilisation
+
+---
 
 ---
 

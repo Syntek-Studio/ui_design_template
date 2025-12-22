@@ -6,3 +6,6 @@ export * from './web/components';
 
 // Mobile components (React Native + Nativewind)
 export * as Mobile from './mobile/components';
+
+// Design tokens
+export * from './tokens';
