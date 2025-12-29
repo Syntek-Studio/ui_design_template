@@ -14,7 +14,7 @@
  * Use for padding, margins, gaps, and other layout spacing.
  *
  * @example
- * import { spacing } from '@syntek/ui';
+ * import { spacing } from '@template/ui';
  * const padding = spacing[4];  // 16px
  * const margin = spacing[6];   // 24px
  * const gap = spacing[3];      // 12px

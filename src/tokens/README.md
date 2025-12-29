@@ -1,14 +1,40 @@
 # src/tokens/
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Files](#files)
-- [Token System](#token-system)
-- [Usage Guide](#usage-guide)
-- [Design System](#design-system)
-- [Related Sections](#related-sections)
+- [src/tokens/](#srctokens)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Files](#files)
+  - [Token System](#token-system)
+    - [Colours (`colours.ts`)](#colours-coloursts)
+    - [Spacing (`spacing.ts`)](#spacing-spacingts)
+    - [Typography (`typography.ts`)](#typography-typographyts)
+    - [Breakpoints (`breakpoints.ts`)](#breakpoints-breakpointsts)
+    - [Shadows (`shadows.ts`)](#shadows-shadowsts)
+    - [Borders (`borders.ts`)](#borders-bordersts)
+  - [Usage Guide](#usage-guide)
+    - [Importing Tokens](#importing-tokens)
+    - [Using Tokens in Components](#using-tokens-in-components)
+    - [Type Safety](#type-safety)
+  - [Design System](#design-system)
+    - [Colour Palette Strategy](#colour-palette-strategy)
+    - [Spacing Scale](#spacing-scale)
+    - [Typography Hierarchy](#typography-hierarchy)
+    - [Responsive Design](#responsive-design)
+    - [Elevation System](#elevation-system)
+  - [Extending Tokens](#extending-tokens)
+  - [Best Practices](#best-practices)
+  - [Related Sections](#related-sections)
 
 ---
 
@@ -57,7 +83,7 @@ src/tokens/
 The colour palette includes brand, semantic, and neutral colours.
 
 ```typescript
-import { colours } from '@syntek/ui';
+import { colours } from '@template/ui';
 
 // Brand colours with shade variations
 colours.primary;      // {50, 100, 200, ..., 900} - Blue shades
@@ -88,7 +114,7 @@ const errorColor = colours.error;         // #ef4444
 4px-based spacing scale for consistent layout rhythm.
 
 ```typescript
-import { spacing } from '@syntek/ui';
+import { spacing } from '@template/ui';
 
 spacing[0];     // 0px
 spacing[1];     // 4px
@@ -122,7 +148,7 @@ const gap = spacing[3];         // 12px
 Font families, sizes, and weights for consistent text styling.
 
 ```typescript
-import { typography } from '@syntek/ui';
+import { typography } from '@template/ui';
 
 // Font families
 typography.fontFamily.sans;   // Inter, system-ui, sans-serif
@@ -163,7 +189,7 @@ const boldWeight = typography.fontWeight.bold;  // 700
 Responsive design breakpoints for mobile-first approach.
 
 ```typescript
-import { breakpoints } from '@syntek/ui';
+import { breakpoints } from '@template/ui';
 
 breakpoints.xs;     // 0px (default/mobile)
 breakpoints.sm;     // 640px
@@ -191,7 +217,7 @@ className="text-sm md:text-base lg:text-lg"  // Responsive font
 Shadow definitions for elevation and visual hierarchy.
 
 ```typescript
-import { shadows } from '@syntek/ui';
+import { shadows } from '@template/ui';
 
 shadows.none;   // none - No shadow
 shadows.sm;     // Small shadow (1px elevation)
@@ -215,7 +241,7 @@ const subtleShadow = shadows.sm;    // 0 1px 2px 0 rgb(0 0 0 / 0.05)
 Border radius and width definitions for consistent rounded corners and strokes.
 
 ```typescript
-import { borders } from '@syntek/ui';
+import { borders } from '@template/ui';
 
 // Border radius
 borders.radius.none;      // 0px
@@ -251,21 +277,21 @@ const thinBorder = borders.width[1];          // 1px border
 
 **All tokens at once:**
 ```typescript
-import { colours, spacing, typography, breakpoints, shadows, borders } from '@syntek/ui';
+import { colours, spacing, typography, breakpoints, shadows, borders } from '@template/ui';
 ```
 
 **Individual tokens:**
 ```typescript
-import { colours } from '@syntek/ui';
-import { spacing } from '@syntek/ui';
-import { typography } from '@syntek/ui';
+import { colours } from '@template/ui';
+import { spacing } from '@template/ui';
+import { typography } from '@template/ui';
 ```
 
 ### Using Tokens in Components
 
 **Web Component Example:**
 ```typescript
-import { colours, spacing, typography, shadows } from '@syntek/ui';
+import { colours, spacing, typography, shadows } from '@template/ui';
 
 export const Card = ({ children }) => {
   const bgColor = colours.white;
@@ -288,7 +314,7 @@ export const Card = ({ children }) => {
 
 **Mobile Component Example:**
 ```typescript
-import { colours, spacing } from '@syntek/ui';
+import { colours, spacing } from '@template/ui';
 import { View, Text } from 'react-native';
 
 export const Card = ({ children }) => {
@@ -319,7 +345,7 @@ export const Card = ({ children }) => {
 All tokens are fully typed with TypeScript:
 
 ```typescript
-import { colours, type Colours } from '@syntek/ui';
+import { colours, type Colours } from '@template/ui';
 
 // Type-safe access
 const primaryColor: string = colours.primary[500];

@@ -14,7 +14,7 @@
  * Use to establish visual hierarchy and create depth perception.
  *
  * @example
- * import { shadows } from '@syntek/ui';
+ * import { shadows } from '@template/ui';
  * const cardShadow = shadows.md;
  * const floatingShadow = shadows.lg;
  * const subtleShadow = shadows.sm;
