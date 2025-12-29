@@ -1,5 +1,13 @@
 # Git Commit Guide
 
+**Last Updated**: 29/12/2024
+**Version**: 0.5.1
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 This guide follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for consistent, readable commit history.
 
 ## Table of Contents

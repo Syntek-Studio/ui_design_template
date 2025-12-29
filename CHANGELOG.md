@@ -1,7 +1,7 @@
 # Changelog
 
 **Last Updated**: 29/12/2024
-**Version**: 0.1.0
+**Version**: 0.5.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -23,6 +23,98 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.5.1] - 29/12/2024
+
+### Documentation
+- Comprehensive documentation overhaul across all `.md` files
+- Added standardised metadata headers (Last Updated, Version, Maintained By, Language, Timezone)
+- British English (en_GB) conventions applied throughout
+- Added architectural planning documentation in `docs/PLANS/`
+- Enhanced all component and token README files
+
+---
+
+## [0.5.0] - 29/12/2024
+
+### Added
+- Utility functions for component development in `src/utils/`
+  - `classNames.ts` - Class name utility function
+  - `componentStyles.ts` - Component styling utilities
+
+### Changed
+- Enhanced Button component (web) with utilities and improved types
+- Enhanced Button component (mobile) with improved implementation
+- Updated main entry point (`src/index.ts`) with improved type exports
+
+---
+
+## [0.4.0] - 29/12/2024
+
+### Added
+- Comprehensive type system for design tokens in `src/types/`
+- CSS type definitions in `src/types/css.d.ts`
+
+### Changed
+- Enhanced all design token files with TypeScript types and metadata headers:
+  - `src/tokens/borders.ts`
+  - `src/tokens/breakpoints.ts`
+  - `src/tokens/colours.ts`
+  - `src/tokens/shadows.ts`
+  - `src/tokens/spacing.ts`
+  - `src/tokens/typography.ts`
+
+---
+
+## [0.3.0] - 29/12/2024
+
+### Added
+- TypeScript type definitions for Storybook in `.storybook-web/types.d.ts`
+- Comprehensive Storybook documentation in `.storybook-web/README.md`
+
+### Changed
+- Enhanced Storybook configuration with TypeScript support (`.storybook-web/main.ts`)
+- Migrated Storybook preview from `.ts` to `.tsx` (`.storybook-web/preview.tsx`)
+
+### Removed
+- `.storybook-web/preview.ts` (replaced with `.tsx` version)
+
+---
+
+## [0.2.1] - 29/12/2024
+
+### Changed
+- Renamed package from `@syntek/ui` to `@template/ui`
+- Updated all dependencies to latest compatible versions
+
+---
+
+## [0.2.0] - 29/12/2024
+
+### Added
+- Version management system with three-tier documentation:
+  - `VERSION-HISTORY.md` - Technical change log for developers
+  - `CHANGELOG.md` - Brief developer-focused summary
+  - `RELEASES.md` - User-facing feature highlights
+
+### Removed
+- `docs/CHANGELOG.md` (consolidated into root CHANGELOG.md)
+
+---
+
+## [0.1.1] - 29/12/2024
+
+### Added
+- EditorConfig file (`.editorconfig`) for consistent code formatting
+- Git attributes file (`.gitattributes`) for line ending configuration
+- npm configuration file (`.npmrc`) for package registry settings
+- Prettier configuration (`.prettierrc`) for automated code formatting
+- Global TypeScript type definitions in `global.d.ts`
+
+### Changed
+- Enhanced TypeScript configuration with stricter settings in `tsconfig.json`
+
+---
+
 ## [0.1.0] - 29/12/2024
 
 ### Added
@@ -37,39 +129,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Shadow definitions (none to 2xl)
   - Border radius and width tokens
 - Vitest testing framework integration
-- Environment shell scripts for different deployment stages
-- Syntek Dev Suite plugin configuration
-- Self-learning metrics system in `docs/METRICS/` for tracking agent performance
-- Comprehensive documentation structure
+- Storybook for web component documentation
 - Build tooling with tsup for dual format output (CJS/ESM)
 - TypeScript configuration with path aliases
-- Storybook for web component documentation
 - ESLint and code quality tools
-- Version management system (VERSION-HISTORY.md, RELEASES.md, CHANGELOG.md)
-
-### Changed
-- Nothing yet (initial release)
-
-### Fixed
-- Nothing yet (initial release)
+- Syntek Dev Suite plugin configuration
+- Self-learning metrics system in `docs/METRICS/`
+- Comprehensive documentation structure
 
 ### Security
 - TypeScript strict mode enabled for type safety
 - ESLint configured for security linting
 - No runtime dependencies (peer dependencies only)
-
-### Types of Changes
-- **Added**: New features
-- **Changed**: Changes in existing functionality
-- **Deprecated**: Soon-to-be removed features
-- **Removed**: Removed features
-- **Fixed**: Bug fixes
-- **Security**: Vulnerability fixes
-
-### Semantic Versioning
-- **MAJOR** (x.0.0): Breaking changes
-- **MINOR** (0.x.0): New features, backwards compatible
-- **PATCH** (0.0.x): Bug fixes, backwards compatible
 
 ---
 
@@ -83,24 +154,28 @@ When adding entries to the changelog:
 4. Link to PR/issue numbers when applicable
 5. Move unreleased changes to a version section on release
 
-### Example Entry
-```markdown
-## [0.2.0] - 2024-12-01
+### Types of Changes
+- **Added**: New features
+- **Changed**: Changes in existing functionality
+- **Deprecated**: Soon-to-be removed features
+- **Removed**: Removed features
+- **Fixed**: Bug fixes
+- **Security**: Vulnerability fixes
+- **Documentation**: Documentation changes
 
-### Added
-- Input component with validation support (#12)
-- Dark mode theme variants (#15)
-
-### Changed
-- Button component now uses CSS variables for colors (#18)
-- Updated spacing tokens to align with 8px grid (#20)
-
-### Fixed
-- Card shadow not rendering correctly on iOS (#16)
-- TypeScript errors in native Button component (#19)
-```
+### Semantic Versioning
+- **MAJOR** (x.0.0): Breaking changes
+- **MINOR** (0.x.0): New features, backwards compatible
+- **PATCH** (0.0.x): Bug fixes, backwards compatible
 
 ---
 
-[unreleased]: https://github.com/your-org/ui-design-template/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/your-org/ui-design-template/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/your-org/ui-design-template/compare/v0.5.0...v0.5.1
+[0.5.0]: https://github.com/your-org/ui-design-template/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/your-org/ui-design-template/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/your-org/ui-design-template/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/your-org/ui-design-template/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/your-org/ui-design-template/compare/v0.1.1...v0.2.0
+[0.1.1]: https://github.com/your-org/ui-design-template/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/your-org/ui-design-template/releases/tag/v0.1.0
