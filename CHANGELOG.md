@@ -1,5 +1,13 @@
 # Changelog
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -15,47 +23,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [0.2.0] - 22-12-2025
+## [0.1.0] - 29/12/2024
 
 ### Added
-- Syntek Dev Suite plugin configuration for enhanced development workflow
+- Initial project setup and architecture
+- Cross-platform component library structure for React Web and React Native
+- Button component for web and mobile platforms
 - Comprehensive design tokens system:
   - Colour palette with primary, secondary, and semantic colours
-  - Spacing scale (4px grid system)
+  - Spacing scale (4px grid system, 0px to 384px)
   - Typography scales with font families, sizes, and weights
   - Responsive breakpoints (xs to 2xl)
   - Shadow definitions (none to 2xl)
   - Border radius and width tokens
 - Vitest testing framework integration
-- Environment shell scripts for different deployment stages:
-  - `dev.sh` - Development environment
-  - `test.sh` - Testing environment
-  - `staging.sh` - Staging environment
-  - `production.sh` - Production environment
-- Self-learning metrics system in `docs/METRICS/` for tracking agent performance and optimisations
-- Comprehensive documentation:
-  - Updated main README.md with installation, usage, and API examples
-  - Design tokens documentation
-  - Architecture overview
-  - Contributing guidelines
-  - JSDoc comments in token files
-  - Section README files for project organisation
+- Environment shell scripts for different deployment stages
+- Syntek Dev Suite plugin configuration
+- Self-learning metrics system in `docs/METRICS/` for tracking agent performance
+- Comprehensive documentation structure
+- Build tooling with tsup for dual format output (CJS/ESM)
+- TypeScript configuration with path aliases
+- Storybook for web component documentation
+- ESLint and code quality tools
+- Version management system (VERSION-HISTORY.md, RELEASES.md, CHANGELOG.md)
 
 ### Changed
-- Updated package.json with new development scripts
-- Enhanced project documentation structure
-- Improved code comments for better maintainability
+- Nothing yet (initial release)
 
 ### Fixed
-- Initial release stabilisation
+- Nothing yet (initial release)
 
----
-
----
-
-## [0.1.0] - 24-11-2025
-
-### Added - Initial Release
+### Security
+- TypeScript strict mode enabled for type safety
+- ESLint configured for security linting
+- No runtime dependencies (peer dependencies only)
 
 ### Types of Changes
 - **Added**: New features
