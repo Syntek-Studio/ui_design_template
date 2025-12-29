@@ -1,28 +1,23 @@
-import type { StorybookConfig } from '@storybook/react-webpack5';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import type { StorybookConfig } from '@storybook/react-webpack5'
+import type { TransformOptions } from '@babel/core'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-links',
-  ],
+  addons: ['@storybook/addon-docs', '@storybook/addon-links'],
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
   typescript: {
-    reactDocgen: false,
+    reactDocgen: 'react-docgen-typescript',
     check: false,
   },
-  babel: async (options: any) => ({
+  babel: async (options: TransformOptions) => ({
     ...options,
     presets: [
       ['@babel/preset-env', { targets: { browsers: ['>0.25%', 'not dead'] } }],
@@ -32,12 +27,12 @@ const config: StorybookConfig = {
   }),
   webpackFinal: async (config) => {
     // Add React Native Web alias and path aliases
-    config.resolve = config.resolve || {};
+    config.resolve = config.resolve || {}
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       'react-native$': 'react-native-web',
       '@': path.resolve(__dirname, '../src'),
-    };
+    }
 
     config.resolve.extensions = [
       '.web.tsx',
@@ -45,11 +40,11 @@ const config: StorybookConfig = {
       '.web.jsx',
       '.web.js',
       ...(config.resolve.extensions || []),
-    ];
+    ]
 
     // Add babel-loader for TypeScript files
-    config.module = config.module || { rules: [] };
-    config.module.rules = config.module.rules || [];
+    config.module = config.module || { rules: [] }
+    config.module.rules = config.module.rules || []
 
     // Add babel-loader for .ts and .tsx files
     config.module.rules.unshift({
@@ -65,16 +60,16 @@ const config: StorybookConfig = {
           ],
         },
       },
-    });
+    })
 
     // Find and modify existing CSS rule to add PostCSS
-    const rules = config.module.rules as any[];
+    const rules = config.module.rules as Array<{ test?: RegExp; use?: unknown[] }>
     const cssRuleIndex = rules.findIndex(
       (rule) => rule && rule.test && rule.test.toString().includes('css')
-    );
+    )
 
     if (cssRuleIndex !== -1) {
-      const cssRule = rules[cssRuleIndex];
+      const cssRule = rules[cssRuleIndex]
       // Find the use array in the CSS rule
       if (cssRule.use && Array.isArray(cssRule.use)) {
         // Add postcss-loader after css-loader
@@ -85,12 +80,12 @@ const config: StorybookConfig = {
               config: path.resolve(__dirname, '../postcss.config.mjs'),
             },
           },
-        });
+        })
       }
     }
 
-    return config;
+    return config
   },
-};
+}
 
-export default config;
+export default config
