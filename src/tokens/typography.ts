@@ -9,7 +9,7 @@
  * Ensures consistent typography hierarchy across web and mobile platforms.
  *
  * @example
- * import { typography } from '@syntek/ui';
+ * import { typography } from '@template/ui';
  * const fontSize = typography.fontSize.lg;        // { size: 18, lineHeight: 28 }
  * const fontWeight = typography.fontWeight.bold;  // 700
  * const fontFamily = typography.fontFamily.mono;  // Fira Code, monospace

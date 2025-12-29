@@ -13,14 +13,14 @@
  * or for conditional logic in components.
  *
  * @example
- * import { breakpoints } from '@syntek/ui';
+ * import { breakpoints } from '@template/ui';
  * const isMobile = windowWidth < breakpoints.sm;
  * const isTablet = windowWidth >= breakpoints.md;
  *
  * @see {@link https://example.com/design-tokens} Design tokens documentation
  */
 export const breakpoints = {
-  xs: 0,
+  xs: 360,
   sm: 640,
   md: 768,
   lg: 1024,

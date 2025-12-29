@@ -9,7 +9,7 @@
  * Use these colours consistently across components for visual cohesion.
  *
  * @example
- * import { colours } from '@syntek/ui';
+ * import { colours } from '@template/ui';
  * const primaryColor = colours.primary[500];
  * const errorColor = colours.error;
  * const textColor = colours.grey[900];

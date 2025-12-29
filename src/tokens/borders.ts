@@ -20,7 +20,7 @@
  * Use for consistent rounded corners and border styles.
  *
  * @example
- * import { borders } from '@syntek/ui';
+ * import { borders } from '@template/ui';
  * const roundedButton = borders.radius.lg;    // 8px
  * const circleAvatar = borders.radius.full;   // Perfect circle
  * const thinBorder = borders.width[1];        // 1px
