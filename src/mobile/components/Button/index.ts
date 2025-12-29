@@ -1,2 +1,1 @@
-export { Button } from './Button.native';
-export type { ButtonProps } from './Button.native';
+export { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from './Button.native';
