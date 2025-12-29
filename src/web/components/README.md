@@ -2,12 +2,36 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Components](#components)
-- [Component API](#component-api)
-- [Usage Examples](#usage-examples)
-- [Related Sections](#related-sections)
+- [src/web/components/](#srcwebcomponents)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Components](#components)
+    - [Button](#button)
+  - [Component API](#component-api)
+    - [Button Component](#button-component)
+  - [Usage Examples](#usage-examples)
+    - [Basic Button](#basic-button)
+    - [Primary Button](#primary-button)
+    - [Secondary Button](#secondary-button)
+    - [Disabled Button](#disabled-button)
+    - [Custom Styling](#custom-styling)
+    - [Form Integration](#form-integration)
+    - [Loading State Pattern](#loading-state-pattern)
+  - [Component Structure](#component-structure)
+    - [Button Component Example](#button-component-example)
+    - [Button.tsx](#buttontsx)
+    - [Button.stories.tsx](#buttonstoriestsx)
+    - [index.ts](#indexts)
+  - [Adding New Components](#adding-new-components)
+  - [Styling Best Practices](#styling-best-practices)
+    - [Use Tailwind CSS Classes](#use-tailwind-css-classes)
+    - [Responsive Design](#responsive-design)
+    - [Design Tokens](#design-tokens)
+  - [Testing](#testing)
+    - [Storybook](#storybook)
+    - [Unit Tests](#unit-tests)
+  - [Related Sections](#related-sections)
 
 ---
 
@@ -59,7 +83,7 @@ interface ButtonProps {
 
 **Import:**
 ```typescript
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 ```
 
 **Example:**
@@ -114,7 +138,7 @@ export const Button: React.FC<ButtonProps>;
 ### Basic Button
 
 ```typescript
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 
 <Button
   title="Click me"
@@ -165,7 +189,7 @@ import { Button } from '@syntek/ui';
 ### Form Integration
 
 ```typescript
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 import { useState } from 'react';
 
 export function LoginForm() {
@@ -198,7 +222,7 @@ export function LoginForm() {
 ### Loading State Pattern
 
 ```typescript
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 import { useState } from 'react';
 
 export function AsyncButton() {
@@ -359,7 +383,7 @@ className="px-4 md:px-6 lg:px-8 text-sm md:text-base lg:text-lg"
 ### Design Tokens
 
 ```typescript
-import { colours } from '@syntek/ui';
+import { colours } from '@template/ui';
 
 const bgColor = colours.primary[500];  // #3b82f6
 const textColor = colours.white;        // #ffffff

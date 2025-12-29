@@ -1,6 +1,55 @@
 # Documentation Index
 
-Complete guide to all documentation in the @syntek/ui project.
+Complete guide to all documentation in the @template/ui project.
+
+## Table of Contents
+
+- [Documentation Index](#documentation-index)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Navigation](#quick-navigation)
+    - [For New Developers](#for-new-developers)
+    - [For Component Development](#for-component-development)
+    - [For Design System Work](#for-design-system-work)
+    - [For Contributing](#for-contributing)
+    - [For Architecture Understanding](#for-architecture-understanding)
+  - [Complete File Reference](#complete-file-reference)
+    - [Root Documentation](#root-documentation)
+    - [Source Code Documentation](#source-code-documentation)
+    - [Configuration Documentation](#configuration-documentation)
+    - [Project Documentation](#project-documentation)
+  - [Feature Documentation](#feature-documentation)
+    - [Installation \& Setup](#installation--setup)
+    - [Quick Start](#quick-start)
+    - [Components](#components)
+    - [Design Tokens](#design-tokens)
+    - [Styling](#styling)
+    - [Platform Differences](#platform-differences)
+    - [Examples](#examples)
+    - [Creating Components](#creating-components)
+    - [Testing](#testing)
+    - [Git \& Contributing](#git--contributing)
+    - [Architecture](#architecture)
+  - [Documentation by Format](#documentation-by-format)
+    - [Main Documentation Files (Top-level)](#main-documentation-files-top-level)
+    - [Section README Files](#section-readme-files)
+    - [Configuration Files](#configuration-files)
+    - [Changelog \& Guidelines](#changelog--guidelines)
+    - [JSDoc in Source Code](#jsdoc-in-source-code)
+  - [Documentation Standards](#documentation-standards)
+  - [Search By Topic](#search-by-topic)
+    - [Installation \& Dependencies](#installation--dependencies)
+    - [Web Development](#web-development)
+    - [Mobile Development](#mobile-development)
+    - [Design System](#design-system)
+    - [Styling \& CSS](#styling--css)
+    - [Component Development](#component-development)
+    - [Testing](#testing-1)
+    - [Git \& Code Quality](#git--code-quality)
+    - [Project Configuration](#project-configuration)
+  - [Documentation Statistics](#documentation-statistics)
+  - [Keep Documentation Updated](#keep-documentation-updated)
+  - [Documentation Maintenance](#documentation-maintenance)
+
 
 ## Quick Navigation
 

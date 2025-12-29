@@ -1,14 +1,42 @@
 # src/web/
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Files](#files)
-- [Component Pattern](#component-pattern)
-- [Platform Details](#platform-details)
-- [Creating Components](#creating-components)
-- [Related Sections](#related-sections)
+- [src/web/](#srcweb)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Files](#files)
+  - [Component Pattern](#component-pattern)
+    - [Component Folder Structure](#component-folder-structure)
+    - [Component Implementation (`ComponentName.tsx`)](#component-implementation-componentnametsx)
+    - [Storybook Stories (`ComponentName.stories.tsx`)](#storybook-stories-componentnamestoriestsx)
+    - [Re-export (`index.ts`)](#re-export-indexts)
+  - [Platform Details](#platform-details)
+    - [HTML Elements](#html-elements)
+    - [Event Handlers](#event-handlers)
+    - [CSS Classes](#css-classes)
+    - [Focus \& Accessibility](#focus--accessibility)
+  - [Creating Components](#creating-components)
+    - [Step 1: Create Component Folder](#step-1-create-component-folder)
+    - [Step 2: Implement Component](#step-2-implement-component)
+    - [Step 3: Create Stories](#step-3-create-stories)
+    - [Step 4: Create Re-export](#step-4-create-re-export)
+    - [Step 5: Update Components Index](#step-5-update-components-index)
+  - [Styling Guidelines](#styling-guidelines)
+    - [Using Tailwind CSS](#using-tailwind-css)
+    - [Design Tokens](#design-tokens)
+    - [Responsive Design](#responsive-design)
+  - [Testing](#testing)
+  - [Related Sections](#related-sections)
 
 ---
 
@@ -310,7 +338,7 @@ className="custom-button"  // with custom CSS
 Use design tokens from `src/tokens/` for consistency:
 
 ```typescript
-import { colours, spacing } from '@syntek/ui';
+import { colours, spacing } from '@template/ui';
 
 // In component styling
 const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500];

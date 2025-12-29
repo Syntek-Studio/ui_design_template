@@ -1,13 +1,40 @@
 # docs/
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Documentation Files](#documentation-files)
-- [Metrics System](#metrics-system)
-- [Navigation Guide](#navigation-guide)
-- [Contributing to Docs](#contributing-to-docs)
+- [docs/](#docs)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Documentation Files](#documentation-files)
+    - [CHANGELOG.md](#changelogmd)
+    - [GITGUIDE.md](#gitguidemd)
+    - [METRICS/](#metrics)
+  - [Metrics System](#metrics-system)
+    - [Key Components](#key-components)
+    - [Benefits](#benefits)
+    - [Usage](#usage)
+  - [Navigation Guide](#navigation-guide)
+    - [For Developers Starting Out](#for-developers-starting-out)
+    - [For Component Development](#for-component-development)
+    - [For Contributing](#for-contributing)
+    - [For Understanding Design System](#for-understanding-design-system)
+  - [Contributing to Docs](#contributing-to-docs)
+    - [Adding Documentation](#adding-documentation)
+    - [Updating CHANGELOG](#updating-changelog)
+    - [Section README Requirements](#section-readme-requirements)
+  - [Documentation Structure](#documentation-structure)
+  - [Best Practices](#best-practices)
+  - [Related Sections](#related-sections)
+
 
 ---
 

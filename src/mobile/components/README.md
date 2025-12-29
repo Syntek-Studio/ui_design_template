@@ -2,12 +2,41 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Components](#components)
-- [Component API](#component-api)
-- [Usage Examples](#usage-examples)
-- [Related Sections](#related-sections)
+- [src/mobile/components/](#srcmobilecomponents)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Components](#components)
+    - [Button](#button)
+  - [Component API](#component-api)
+    - [Button Component](#button-component)
+  - [Usage Examples](#usage-examples)
+    - [Basic Button](#basic-button)
+    - [Primary Button](#primary-button)
+    - [Secondary Button](#secondary-button)
+    - [Disabled Button](#disabled-button)
+    - [Custom Styling](#custom-styling)
+    - [Form Integration](#form-integration)
+    - [Loading State Pattern](#loading-state-pattern)
+    - [Multiple Buttons Layout](#multiple-buttons-layout)
+  - [Component Structure](#component-structure)
+    - [Button Component Example](#button-component-example)
+    - [Button.tsx](#buttontsx)
+    - [Button.stories.tsx](#buttonstoriestsx)
+    - [index.ts](#indexts)
+  - [Adding New Components](#adding-new-components)
+  - [Styling Best Practices](#styling-best-practices)
+    - [Use Nativewind Classes](#use-nativewind-classes)
+    - [Text Component Requirement](#text-component-requirement)
+    - [Responsive Design](#responsive-design)
+    - [Design Tokens](#design-tokens)
+  - [Testing](#testing)
+    - [Storybook](#storybook)
+    - [Unit Tests](#unit-tests)
+  - [Platform-Specific Considerations](#platform-specific-considerations)
+    - [iOS vs Android](#ios-vs-android)
+    - [Accessibility](#accessibility)
+  - [Related Sections](#related-sections)
 
 ---
 
@@ -60,7 +89,7 @@ interface ButtonProps {
 
 **Import:**
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 
 <Mobile.Button ... />
 ```
@@ -119,7 +148,7 @@ export const Button: React.FC<ButtonProps>;
 ### Basic Button
 
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 
 <Mobile.Button
   title="Press me"
@@ -170,7 +199,7 @@ import { Mobile } from '@syntek/ui';
 ### Form Integration
 
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 import { View, TextInput } from 'react-native';
 import { useState } from 'react';
 
@@ -202,7 +231,7 @@ export function LoginForm() {
 ### Loading State Pattern
 
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 import { View, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 
@@ -236,7 +265,7 @@ export function AsyncButton() {
 ### Multiple Buttons Layout
 
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 import { View } from 'react-native';
 
 export function ConfirmDialog() {
@@ -420,7 +449,7 @@ className="text-sm md:text-base"  // Responsive font sizes
 Use design tokens for dynamic values:
 
 ```typescript
-import { colours } from '@syntek/ui';
+import { colours } from '@template/ui';
 
 const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500];
 ```

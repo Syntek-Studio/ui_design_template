@@ -1,10 +1,37 @@
 # CLAUDE.md
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Table of Contents
+
+- [CLAUDE.md](#claudemd)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [Commands](#commands)
+  - [Architecture](#architecture)
+    - [Entry Point \& Exports](#entry-point--exports)
+    - [Component Structure](#component-structure)
+    - [Import Patterns](#import-patterns)
+    - [Platform Differences](#platform-differences)
+    - [Styling](#styling)
+    - [Path Aliases](#path-aliases)
+    - [Storybook](#storybook)
+  - [Commit Convention](#commit-convention)
+  - [PR Workflow](#pr-workflow)
+  - [Dev Team Agents](#dev-team-agents)
+    - [Recommended Workflow](#recommended-workflow)
 
 ## Project Overview
 
-This is @syntek/ui, a shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.
+This is @template/ui, a shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.
 
 ## Commands
 
@@ -58,10 +85,10 @@ src/mobile/components/
 
 ```typescript
 // Web components (default exports)
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 
 // Mobile components (namespaced)
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 <Mobile.Button title="Click me" onPress={() => {}} />
 ```
 

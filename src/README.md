@@ -1,13 +1,31 @@
 # src/
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Files](#files)
-- [Structure](#structure)
-- [Usage](#usage)
-- [Related Sections](#related-sections)
+- [src/](#src)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Files](#files)
+  - [Structure](#structure)
+    - [Entry Point (`index.ts`)](#entry-point-indexts)
+    - [Web Components (`web/components/`)](#web-components-webcomponents)
+    - [Mobile Components (`mobile/components/`)](#mobile-components-mobilecomponents)
+    - [Design Tokens (`tokens/`)](#design-tokens-tokens)
+  - [Usage](#usage)
+    - [Importing Web Components](#importing-web-components)
+    - [Importing Mobile Components](#importing-mobile-components)
+    - [Using Design Tokens](#using-design-tokens)
+    - [Creating New Components](#creating-new-components)
+  - [Related Sections](#related-sections)
 
 ---
 
@@ -170,7 +188,7 @@ Centralised design system values that should be used across all components:
 ### Importing Web Components
 
 ```typescript
-import { Button, Card, Input } from '@syntek/ui';
+import { Button, Card, Input } from '@template/ui';
 
 // Use in your React component
 <Button title="Click me" variant="primary" onClick={() => {}} />
@@ -179,7 +197,7 @@ import { Button, Card, Input } from '@syntek/ui';
 ### Importing Mobile Components
 
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 
 // Use in your React Native component
 <Mobile.Button title="Click me" variant="primary" onPress={() => {}} />
@@ -188,7 +206,7 @@ import { Mobile } from '@syntek/ui';
 ### Using Design Tokens
 
 ```typescript
-import { colours, spacing, typography, breakpoints, shadows, borders } from '@syntek/ui';
+import { colours, spacing, typography, breakpoints, shadows, borders } from '@template/ui';
 
 // Use tokens for consistent styling
 const primaryColor = colours.primary[500]; // #3b82f6

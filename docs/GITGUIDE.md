@@ -2,6 +2,39 @@
 
 This guide follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for consistent, readable commit history.
 
+## Table of Contents
+
+- [Git Commit Guide](#git-commit-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Commit Template](#commit-template)
+  - [Definitions](#definitions)
+    - [Types](#types)
+    - [Scope](#scope)
+    - [Description](#description)
+    - [Body](#body)
+  - [Git Commit Commands](#git-commit-commands)
+    - [Quick Method: Command Line](#quick-method-command-line)
+    - [Editor Method: Full Template](#editor-method-full-template)
+    - [Git Editor Commands](#git-editor-commands)
+      - [Finding Your Current Editor](#finding-your-current-editor)
+      - [Setting Your Preferred Editor](#setting-your-preferred-editor)
+      - [Editor-Specific Commands](#editor-specific-commands)
+  - [Useful Git Commands](#useful-git-commands)
+    - [Viewing History](#viewing-history)
+    - [Amending Commits](#amending-commits)
+    - [Undoing Changes](#undoing-changes)
+  - [Pull Request Workflow](#pull-request-workflow)
+    - [Branch Strategy](#branch-strategy)
+    - [PR Flow Steps](#pr-flow-steps)
+  - [PR Template](#pr-template)
+    - [Title Format](#title-format)
+    - [PR Body Template](#pr-body-template)
+    - [Example PR](#example-pr)
+  - [Best Practices](#best-practices)
+    - [Commit Messages](#commit-messages)
+    - [Pull Requests](#pull-requests)
+    - [Code Review](#code-review)
+
 ## Commit Template
 
 ```

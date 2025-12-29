@@ -17,8 +17,8 @@ For web components, create in `src/web/components/$1/`:
 - `index.ts` - Re-exports
 
 For mobile components, create in `src/mobile/components/$1/`:
-- `$1.tsx` - React Native + Nativewind implementation
-- `$1.stories.tsx` - Storybook stories
+- `$1.native.tsx` - React Native + Nativewind implementation
+- `$1.stories.native.tsx` - Storybook stories
 - `index.ts` - Re-exports
 
 ## After Creation
