@@ -1,5 +1,13 @@
 # Documentation Index
 
+**Last Updated**: 29/12/2024
+**Version**: 0.5.1
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 Complete guide to all documentation in the @template/ui project.
 
 ## Table of Contents
@@ -322,6 +330,6 @@ Regular maintenance tasks:
 
 ---
 
-**Last Updated:** 22 December 2025
+**Last Updated:** 29/12/2024
 
 For more information, see the main [README.md](README.md) or [docs/README.md](docs/README.md).

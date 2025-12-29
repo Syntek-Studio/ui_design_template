@@ -1,7 +1,7 @@
 # Version History
 
 **Last Updated**: 29/12/2024
-**Version**: 0.1.0
+**Version**: 0.5.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -11,6 +11,13 @@
 ## Table of Contents
 
 - [Unreleased](#unreleased)
+- [0.5.1 - 29/12/2024](#051---29122024)
+- [0.5.0 - 29/12/2024](#050---29122024)
+- [0.4.0 - 29/12/2024](#040---29122024)
+- [0.3.0 - 29/12/2024](#030---29122024)
+- [0.2.1 - 29/12/2024](#021---29122024)
+- [0.2.0 - 29/12/2024](#020---29122024)
+- [0.1.1 - 29/12/2024](#011---29122024)
 - [0.1.0 - 29/12/2024](#010---29122024)
 
 ---
@@ -22,10 +29,255 @@
 
 ---
 
+## [0.5.1] - 29/12/2024
+
+### Summary
+Comprehensive documentation overhaul with standardised metadata headers, British English conventions, and improved structure across all documentation files.
+
+### Breaking Changes
+None - documentation only.
+
+### Database Migrations
+Not applicable - library project.
+
+### API Changes
+None - documentation only.
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `.claude/CLAUDE.md` | Enhanced with metadata headers and improved structure |
+| `.claude/README.md` | Enhanced plugin documentation with metadata headers |
+| `.claude/SYNTEK-GUIDE.md` | Enhanced Syntek Dev Suite guide with metadata headers |
+| `.claude/commands/link.md` | Enhanced link command documentation |
+| `.claude/commands/new-component.md` | Enhanced component creation documentation |
+| `README.md` | Comprehensive overhaul with metadata headers and improved structure |
+| `DOCUMENTATION-INDEX.md` | Enhanced documentation index with metadata headers |
+| `docs/README.md` | Added documentation hub with metadata headers |
+| `docs/GITGUIDE.md` | Enhanced with metadata headers and improved Git workflow documentation |
+| `docs/METRICS/README.md` | Enhanced metrics documentation with metadata headers |
+| `docs/PLANS/PLAN-TEMPLATE-REPOSITORY.MD` | Added architectural planning documentation |
+| `docs/PLANS/TEMPLATE-SUMMARY.MD` | Added template summary documentation |
+| `src/README.md` | Enhanced source code structure documentation |
+| `src/web/README.md` | Enhanced web components documentation |
+| `src/web/components/README.md` | Enhanced web components usage guide |
+| `src/mobile/README.md` | Enhanced mobile components documentation |
+| `src/mobile/components/README.md` | Enhanced mobile components usage guide |
+| `src/tokens/README.md` | Enhanced design tokens documentation |
+
+### Documentation Notes
+- All `.md` files now include standardised metadata headers
+- Consistent British English (en_GB) used throughout
+- DD/MM/YYYY date format applied consistently
+- Europe/London timezone specified for all timestamps
+
+---
+
+## [0.5.0] - 29/12/2024
+
+### Summary
+Added utility system and enhanced Button components for both web and mobile platforms with improved styling utilities and type safety.
+
+### Breaking Changes
+None - all changes are backwards compatible.
+
+### Database Migrations
+Not applicable - library project.
+
+### API Changes
+- New utility functions exported from `src/utils/`
+- Enhanced Button component props with improved types
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `src/utils/classNames.ts` | Added classNames utility function |
+| `src/utils/componentStyles.ts` | Added component styling utilities |
+| `src/utils/index.ts` | Added utils barrel export |
+| `src/utils/README.md` | Added utility documentation |
+| `src/index.ts` | Enhanced main entry point with improved type exports |
+| `src/web/components/Button/Button.tsx` | Enhanced with utilities and improved types |
+| `src/web/components/Button/Button.stories.tsx` | Updated stories for enhanced Button |
+| `src/web/components/Button/index.ts` | Updated exports |
+| `src/mobile/components/Button/Button.native.tsx` | Enhanced mobile implementation |
+| `src/mobile/components/Button/Button.stories.native.tsx` | Updated mobile stories |
+| `src/mobile/components/Button/index.ts` | Updated mobile exports |
+
+### Architecture Notes
+- New utility system reduces code duplication in components
+- Centralised styling logic for consistency across platforms
+
+---
+
+## [0.4.0] - 29/12/2024
+
+### Summary
+Added comprehensive type system for design tokens and enhanced all token files with TypeScript types and documentation headers.
+
+### Breaking Changes
+None - all changes are backwards compatible.
+
+### Database Migrations
+Not applicable - library project.
+
+### API Changes
+- All design tokens now have full TypeScript type definitions
+- New CSS type definitions for improved styling support
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `src/types/css.d.ts` | Added CSS type definitions |
+| `src/tokens/borders.ts` | Enhanced with TypeScript types and metadata header |
+| `src/tokens/breakpoints.ts` | Enhanced with TypeScript types and metadata header |
+| `src/tokens/colours.ts` | Enhanced with TypeScript types and metadata header |
+| `src/tokens/shadows.ts` | Enhanced with TypeScript types and metadata header |
+| `src/tokens/spacing.ts` | Enhanced with TypeScript types and metadata header |
+| `src/tokens/typography.ts` | Enhanced with TypeScript types and metadata header |
+| `src/tokens/README.md` | Enhanced documentation |
+
+### Performance Notes
+- Enhanced type safety improves IDE autocomplete performance
+- Compile-time type checking catches errors early
+
+---
+
+## [0.3.0] - 29/12/2024
+
+### Summary
+Enhanced Storybook configuration with TypeScript support, migrated preview configuration from JavaScript to TypeScript, and added comprehensive Storybook documentation.
+
+### Breaking Changes
+None - all changes are backwards compatible.
+
+### Database Migrations
+Not applicable - library project.
+
+### API Changes
+None - infrastructure changes only.
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `.storybook-web/main.ts` | Enhanced TypeScript configuration |
+| `.storybook-web/preview.ts` | Removed (replaced with .tsx) |
+| `.storybook-web/preview.tsx` | New TypeScript preview configuration |
+| `.storybook-web/types.d.ts` | Added TypeScript type definitions |
+| `.storybook-web/README.md` | Added comprehensive Storybook documentation |
+
+### Configuration Changes
+
+| File | Key | Change |
+|------|-----|--------|
+| `.storybook-web/` | TypeScript | Migrated from JavaScript to TypeScript configuration |
+
+---
+
+## [0.2.1] - 29/12/2024
+
+### Summary
+Updated package configuration with renamed package and updated dependencies.
+
+### Breaking Changes
+None - package rename only affects installation.
+
+### Database Migrations
+Not applicable - library project.
+
+### API Changes
+None - configuration changes only.
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `package.json` | Renamed from @syntek/ui to @template/ui, updated dependencies |
+| `package-lock.json` | Updated dependency lock file |
+
+### Dependencies Updated
+
+| Package | From | To | Notes |
+|---------|------|-----|-------|
+| Various | - | Latest | Updated all dependencies to latest compatible versions |
+
+---
+
+## [0.2.0] - 29/12/2024
+
+### Summary
+Introduction of version management system with VERSION-HISTORY.md, CHANGELOG.md, and RELEASES.md for comprehensive version tracking.
+
+### Breaking Changes
+None - new feature addition.
+
+### Database Migrations
+Not applicable - library project.
+
+### API Changes
+None - documentation only.
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `CHANGELOG.md` | Added developer-focused changelog |
+| `RELEASES.md` | Added user-facing release notes |
+| `VERSION-HISTORY.md` | Added comprehensive technical version history |
+| `docs/CHANGELOG.md` | Removed (consolidated into root CHANGELOG.md) |
+
+### Documentation Notes
+- Established three-tier version documentation system
+- VERSION-HISTORY.md for technical details (developers)
+- CHANGELOG.md for brief developer summary
+- RELEASES.md for user-facing feature highlights
+
+---
+
+## [0.1.1] - 29/12/2024
+
+### Summary
+Added project configuration and tooling setup including EditorConfig, Git attributes, npm configuration, Prettier, global TypeScript definitions, and enhanced TypeScript configuration.
+
+### Breaking Changes
+None - configuration additions only.
+
+### Database Migrations
+Not applicable - library project.
+
+### API Changes
+None - configuration changes only.
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `.editorconfig` | Added EditorConfig for consistent code formatting |
+| `.gitattributes` | Added Git attributes for line endings and file handling |
+| `.npmrc` | Added npm configuration |
+| `.prettierrc` | Added Prettier configuration for code formatting |
+| `global.d.ts` | Added global TypeScript type definitions |
+| `tsconfig.json` | Enhanced TypeScript configuration with stricter settings |
+
+### Configuration Changes
+
+| File | Key | Change |
+|------|-----|--------|
+| `.editorconfig` | - | Added standard editor configuration |
+| `.npmrc` | - | Added npm registry and configuration settings |
+| `.prettierrc` | - | Added code formatting rules |
+| `.gitattributes` | - | Added Git line ending and merge configuration |
+| `tsconfig.json` | `strict` | Enhanced strict mode settings |
+
+---
+
 ## [0.1.0] - 29/12/2024
 
 ### Summary
-Initial release of @tempalte/ui shared component library. Established core architecture for cross-platform React components with TypeScript, Tailwind CSS 4, and Nativewind 4. Implemented comprehensive design token system and development tooling.
+Initial release of @template/ui shared component library. Established core architecture for cross-platform React components with TypeScript, Tailwind CSS 4, and Nativewind 4. Implemented comprehensive design token system and development tooling.
 
 ### Breaking Changes
 None - initial release.
@@ -79,7 +331,7 @@ Not applicable - initial release.
 
 | File | Key | Change |
 |------|-----|--------|
-| `package.json` | `name` | Set to @tempalte/ui |
+| `package.json` | `name` | Set to @template/ui |
 | `package.json` | `version` | Set to 0.1.0 (pre-MVP) |
 | `package.json` | `exports` | Configured dual format exports (CJS/ESM) |
 | `package.json` | `scripts` | Added build, dev, test, lint, storybook commands |

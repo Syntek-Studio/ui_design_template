@@ -1,5 +1,13 @@
 # Self-Learning System Data
 
+**Last Updated**: 29/12/2024
+**Version**: 0.5.1
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 This folder contains data for the Syntek Dev Suite self-learning system. The system improves agent performance based on team feedback.
 
 ## Table of Contents
