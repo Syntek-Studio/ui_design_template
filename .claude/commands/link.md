@@ -11,7 +11,7 @@ Link the package for local development in consuming apps.
 npm link
 
 # In consuming app:
-npm link @syntek/ui
+npm link @template/ui
 ```
 
 **Using yalc (recommended):**
@@ -20,7 +20,7 @@ npm link @syntek/ui
 yalc push
 
 # In consuming app:
-yalc add @syntek/ui
+yalc add @template/ui
 ```
 
 **After changes:**

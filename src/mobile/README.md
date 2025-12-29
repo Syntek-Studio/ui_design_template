@@ -1,14 +1,45 @@
 # src/mobile/
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Files](#files)
-- [Component Pattern](#component-pattern)
-- [Platform Details](#platform-details)
-- [Creating Components](#creating-components)
-- [Related Sections](#related-sections)
+- [src/mobile/](#srcmobile)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Files](#files)
+  - [Component Pattern](#component-pattern)
+    - [Component Folder Structure](#component-folder-structure)
+    - [Component Implementation (`ComponentName.tsx`)](#component-implementation-componentnametsx)
+    - [Storybook Stories (`ComponentName.stories.tsx`)](#storybook-stories-componentnamestoriestsx)
+    - [Re-export (`index.ts`)](#re-export-indexts)
+  - [Platform Details](#platform-details)
+    - [React Native Components](#react-native-components)
+    - [Key Differences from Web](#key-differences-from-web)
+    - [Event Handlers](#event-handlers)
+    - [CSS Classes with Nativewind](#css-classes-with-nativewind)
+  - [Creating Components](#creating-components)
+    - [Step 1: Create Component Folder](#step-1-create-component-folder)
+    - [Step 2: Implement Component](#step-2-implement-component)
+    - [Step 3: Create Stories](#step-3-create-stories)
+    - [Step 4: Create Re-export](#step-4-create-re-export)
+    - [Step 5: Update Components Index](#step-5-update-components-index)
+  - [Styling Guidelines](#styling-guidelines)
+    - [Using Nativewind (Tailwind for Mobile)](#using-nativewind-tailwind-for-mobile)
+    - [Design Tokens](#design-tokens)
+    - [Text Component Requirement](#text-component-requirement)
+    - [Responsive Design](#responsive-design)
+  - [Testing](#testing)
+  - [Integration with React Native Projects](#integration-with-react-native-projects)
+    - [Setup in Your App](#setup-in-your-app)
+  - [Related Sections](#related-sections)
 
 ---
 
@@ -325,7 +356,7 @@ className="my-button"  // with custom CSS/StyleSheet
 Use design tokens from `src/tokens/` for consistency:
 
 ```typescript
-import { colours, spacing } from '@syntek/ui';
+import { colours, spacing } from '@template/ui';
 
 // Note: Design tokens are JavaScript values, not CSS classes
 // Use them for logic-based styling or conditionals
@@ -384,7 +415,7 @@ Note: Mobile Storybook is configured within your React Native project's `.ondevi
 
 1. Install the library:
 ```bash
-npm install @syntek/ui
+npm install @template/ui
 ```
 
 2. Install Nativewind and required dependencies:
@@ -395,7 +426,7 @@ npm install nativewind react-native-reanimated
 3. Configure tailwind.config.js (in your app):
 ```javascript
 module.exports = {
-  content: ['node_modules/@syntek/ui/**/*.{js,ts,jsx,tsx}'],
+  content: ['node_modules/@template/ui/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
@@ -405,7 +436,7 @@ module.exports = {
 
 4. Use components:
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 
 export function App() {
   return (

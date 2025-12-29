@@ -1,24 +1,54 @@
 # Syntek Dev Suite - Plugin Usage Guide
 
-**Version:** 1.0.0
-**Plugin:** syntek-dev-suite
-**Maintained by:** Syntek Developers
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+**Plugin Version**: 1.0.0
+**Plugin**: syntek-dev-suite
 
 ---
 
 ## Table of Contents
 
-- [Quick Start](#quick-start)
-- [Complete Development Workflow](#complete-development-workflow)
-- [Command Types](#command-types)
-- [Agent Commands](#agent-commands)
-- [Plugin Commands](#plugin-commands)
-- [Learning Commands](#learning-commands)
-- [Skills Reference](#skills-reference)
-- [Self-Learning and A/B Testing](#self-learning-and-ab-testing)
-- [Best Practices](#best-practices)
-- [Environment Commands](#environment-commands)
-- [Getting Help](#getting-help)
+- [Syntek Dev Suite - Plugin Usage Guide](#syntek-dev-suite---plugin-usage-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start](#quick-start)
+    - [Basic Usage](#basic-usage)
+  - [Complete Development Workflow](#complete-development-workflow)
+    - [Phase 1: Planning](#phase-1-planning)
+    - [Phase 2: Test-Driven Development](#phase-2-test-driven-development)
+    - [Phase 3: Implementation](#phase-3-implementation)
+    - [Phase 4: Quality Assurance](#phase-4-quality-assurance)
+    - [Phase 5: Completion](#phase-5-completion)
+  - [Command Types](#command-types)
+  - [Agent Commands](#agent-commands)
+    - [Planning \& Architecture](#planning--architecture)
+    - [Development](#development)
+    - [Quality \& Testing](#quality--testing)
+    - [Refactoring \& Maintenance](#refactoring--maintenance)
+    - [Infrastructure](#infrastructure)
+    - [Specialised](#specialised)
+  - [Plugin Commands](#plugin-commands)
+  - [Learning Commands](#learning-commands)
+  - [Skills Reference](#skills-reference)
+    - [Stack Skills](#stack-skills)
+    - [Global Skill](#global-skill)
+  - [Self-Learning and A/B Testing](#self-learning-and-ab-testing)
+    - [How It Works](#how-it-works)
+    - [Giving Feedback](#giving-feedback)
+    - [Project-Specific Learning](#project-specific-learning)
+  - [Best Practices](#best-practices)
+    - [1. Always Start with `/syntek-dev-suite:plan`](#1-always-start-with-syntek-dev-suiteplan)
+    - [2. Use `/syntek-dev-suite:qa-tester` Before Merging](#2-use-syntek-dev-suiteqa-tester-before-merging)
+    - [3. Keep CLAUDE.md Updated](#3-keep-claudemd-updated)
+    - [4. Let Agents Read Files](#4-let-agents-read-files)
+    - [5. Chain Commands Logically](#5-chain-commands-logically)
+    - [6. Commit After Each Step](#6-commit-after-each-step)
+    - [7. Give Feedback](#7-give-feedback)
+  - [Environment Commands](#environment-commands)
+  - [Getting Help](#getting-help)
 
 ---
 

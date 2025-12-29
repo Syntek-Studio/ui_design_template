@@ -2,6 +2,16 @@
 
 This folder contains data for the Syntek Dev Suite self-learning system. The system improves agent performance based on team feedback.
 
+## Table of Contents
+
+- [Self-Learning System Data](#self-learning-system-data)
+  - [Table of Contents](#table-of-contents)
+  - [Folder Structure](#folder-structure)
+  - [Configuration](#configuration)
+  - [How It Works](#how-it-works)
+  - [Commands](#commands)
+  - [Best Practices](#best-practices)
+
 ## Folder Structure
 
 | Folder | Purpose |

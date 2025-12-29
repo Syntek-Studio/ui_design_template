@@ -1,20 +1,41 @@
 # .claude/
 
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
+
 ## Table of Contents
 
-- [Overview](#overview)
-- [Directory Tree](#directory-tree)
-- [Files](#files)
-- [CLAUDE.md](#claudemd)
-- [Commands](#commands)
-- [Metrics System](#metrics-system)
-- [Related Sections](#related-sections)
+- [.claude/](#claude)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Directory Tree](#directory-tree)
+  - [Files](#files)
+  - [CLAUDE.md](#claudemd)
+    - [Project Overview](#project-overview)
+    - [Available Commands](#available-commands)
+    - [Architecture](#architecture)
+    - [Import Patterns](#import-patterns)
+    - [Platform Differences](#platform-differences)
+    - [Commit Convention](#commit-convention)
+    - [PR Workflow](#pr-workflow)
+    - [Dev Team Agents](#dev-team-agents)
+    - [Recommended Workflow](#recommended-workflow)
+  - [Commands](#commands)
+    - [Using Claude Code](#using-claude-code)
+  - [Metrics System](#metrics-system)
+  - [Project Guidelines](#project-guidelines)
+  - [Related Sections](#related-sections)
 
 ---
 
 ## Overview
 
-The `.claude/` folder contains Claude Code configuration files and self-learning metrics for the @syntek/ui project. This configuration helps Claude understand the project structure, conventions, and provides guidance for development tasks.
+The `.claude/` folder contains Claude Code configuration files and self-learning metrics for the @template/ui project. This configuration helps Claude understand the project structure, conventions, and provides guidance for development tasks.
 
 ---
 
@@ -43,7 +64,7 @@ The `CLAUDE.md` file provides essential information about the project:
 ### Project Overview
 
 Defines what the project is:
-- Name: @syntek/ui
+- Name: @template/ui
 - Type: Shared UI component library
 - Platforms: React Web and React Native
 - Tech stack: TypeScript, Tailwind CSS 4, Nativewind 4
@@ -79,10 +100,10 @@ Shows how to import components:
 
 ```typescript
 // Web components (default exports)
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 
 // Mobile components (namespaced)
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 <Mobile.Button ... />
 ```
 

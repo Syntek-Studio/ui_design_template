@@ -1,21 +1,60 @@
-# @syntek/ui
+# @template/ui
+
+**Last Updated**: 29/12/2024
+**Version**: 0.1.0
+**Maintained By**: Development Team
+**Language**: British English (en_GB)
+**Timezone**: Europe/London
+
+---
 
 A shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.
 
 ## Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Architecture](#architecture)
-- [Components](#components)
-- [Design Tokens](#design-tokens)
-- [Styling](#styling)
-- [Examples](#examples)
-- [Documentation](#documentation)
-- [Development](#development)
-- [Contributing](#contributing)
-- [License](#license)
+- [@template/ui](#tempalteui)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [Peer Dependencies](#peer-dependencies)
+  - [Quick Start](#quick-start)
+    - [Web Components](#web-components)
+    - [Mobile Components](#mobile-components)
+    - [Design Tokens](#design-tokens)
+  - [Architecture](#architecture)
+    - [Platform-Specific Implementation](#platform-specific-implementation)
+      - [Web Components](#web-components-1)
+      - [Mobile Components](#mobile-components-1)
+    - [Import Patterns](#import-patterns)
+    - [Platform Differences](#platform-differences)
+  - [Components](#components)
+    - [Button](#button)
+  - [Design Tokens](#design-tokens-1)
+    - [Colours](#colours)
+    - [Spacing](#spacing)
+    - [Typography](#typography)
+    - [Breakpoints](#breakpoints)
+    - [Shadows](#shadows)
+    - [Borders](#borders)
+  - [Styling](#styling)
+    - [Tailwind CSS 4](#tailwind-css-4)
+    - [Custom Styling](#custom-styling)
+    - [PostCSS Configuration](#postcss-configuration)
+  - [Examples](#examples)
+    - [Creating a Login Form](#creating-a-login-form)
+  - [Documentation](#documentation)
+    - [Storybook](#storybook)
+  - [Development](#development)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Available Commands](#available-commands)
+    - [Project Structure](#project-structure)
+    - [Creating New Components](#creating-new-components)
+  - [Contributing](#contributing)
+    - [Commit Convention](#commit-convention)
+    - [Pull Request Workflow](#pull-request-workflow)
+  - [License](#license)
+  - [Support](#support)
 
 ---
 
@@ -36,13 +75,13 @@ A shared UI component library for React Web and React Native applications. Built
 Install the library using npm or yarn:
 
 ```bash
-npm install @syntek/ui
+npm install @template/ui
 ```
 
 Or with yarn:
 
 ```bash
-yarn add @syntek/ui
+yarn add @template/ui
 ```
 
 ### Peer Dependencies
@@ -70,7 +109,7 @@ npm install react-native react-native-web nativewind
 ### Web Components
 
 ```typescript
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 
 export function App() {
   return (
@@ -86,7 +125,7 @@ export function App() {
 ### Mobile Components
 
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 
 export function App() {
   return (
@@ -102,7 +141,7 @@ export function App() {
 ### Design Tokens
 
 ```typescript
-import { colours, spacing, typography, breakpoints } from '@syntek/ui';
+import { colours, spacing, typography, breakpoints } from '@template/ui';
 
 // Colours
 const primaryColor = colours.primary[500]; // #3b82f6
@@ -155,12 +194,12 @@ Located in `src/mobile/components/`, built with:
 
 **Web (default exports):**
 ```typescript
-import { Button, Card, Input } from '@syntek/ui';
+import { Button, Card, Input } from '@template/ui';
 ```
 
 **Mobile (namespaced):**
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 
 <Mobile.Button />
 <Mobile.Card />
@@ -188,7 +227,7 @@ Versatile button component supporting multiple variants and states.
 
 **Web:**
 ```typescript
-import { Button } from '@syntek/ui';
+import { Button } from '@template/ui';
 
 <Button
   title="Submit"
@@ -199,7 +238,7 @@ import { Button } from '@syntek/ui';
 
 **Mobile:**
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 
 <Mobile.Button
   title="Submit"
@@ -226,7 +265,7 @@ The library includes comprehensive design tokens for consistent styling:
 ### Colours
 
 ```typescript
-import { colours } from '@syntek/ui';
+import { colours } from '@template/ui';
 
 colours.primary;    // 50-900 shades
 colours.secondary;  // 50-900 shades
@@ -242,7 +281,7 @@ colours.black;      // #000000
 ### Spacing
 
 ```typescript
-import { spacing } from '@syntek/ui';
+import { spacing } from '@template/ui';
 
 spacing[0];     // 0px
 spacing[1];     // 4px
@@ -255,7 +294,7 @@ spacing[6];     // 24px
 ### Typography
 
 ```typescript
-import { typography } from '@syntek/ui';
+import { typography } from '@template/ui';
 
 // Font families
 typography.fontFamily.sans;  // Inter, system-ui, sans-serif
@@ -276,7 +315,7 @@ typography.fontWeight.bold;      // 700
 ### Breakpoints
 
 ```typescript
-import { breakpoints } from '@syntek/ui';
+import { breakpoints } from '@template/ui';
 
 breakpoints.sm;   // 640px
 breakpoints.md;   // 768px
@@ -288,7 +327,7 @@ breakpoints['2xl']; // 1536px
 ### Shadows
 
 ```typescript
-import { shadows } from '@syntek/ui';
+import { shadows } from '@template/ui';
 
 shadows.none;   // none
 shadows.sm;     // Small shadow
@@ -301,7 +340,7 @@ shadows.inner;  // Inset shadow
 ### Borders
 
 ```typescript
-import { borders } from '@syntek/ui';
+import { borders } from '@template/ui';
 
 // Border radius
 borders.radius.none;   // 0
@@ -360,7 +399,7 @@ The library includes PostCSS configuration for processing Tailwind CSS. See [pos
 
 **Web:**
 ```typescript
-import { Button, Input } from '@syntek/ui';
+import { Button, Input } from '@template/ui';
 import { useState } from 'react';
 
 export function LoginForm() {
@@ -393,7 +432,7 @@ export function LoginForm() {
 
 **Mobile:**
 ```typescript
-import { Mobile } from '@syntek/ui';
+import { Mobile } from '@template/ui';
 import { View } from 'react-native';
 import { useState } from 'react';
 
