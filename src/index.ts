@@ -9,3 +9,6 @@ export * as Mobile from './mobile/components';
 
 // Design tokens
 export * from './tokens';
+
+// Utility functions and shared styles
+export * from './utils';

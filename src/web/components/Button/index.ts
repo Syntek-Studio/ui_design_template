@@ -1,1 +1,1 @@
-export { Button } from './Button.jsx';
+export { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from './Button';
