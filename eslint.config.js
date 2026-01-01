@@ -5,7 +5,7 @@ import tsparser from '@typescript-eslint/parser'
 export default [
   js.configs.recommended,
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: tsparser,
       parserOptions: {
@@ -15,16 +15,32 @@ export default [
           jsx: true,
         },
       },
+      globals: {
+        // React globals
+        React: 'readonly',
+        JSX: 'readonly',
+        // React Native globals
+        __DEV__: 'readonly',
+        // Browser/Node globals
+        console: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        process: 'readonly',
+        // NativeWind augmented className prop
+        className: 'readonly',
+      },
     },
     plugins: {
       '@typescript-eslint': tseslint,
     },
     rules: {
+      ...tseslint.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
   },
   {
-    ignores: ['dist/', 'node_modules/', 'storybook-static/'],
+    ignores: ['dist', 'node_modules', '*.config.js', '*.config.ts', '*.config.mjs'],
   },
 ]

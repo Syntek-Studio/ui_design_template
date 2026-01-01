@@ -5,31 +5,34 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": ["nativewind/types", "node"],
 
-    /* Bundler mode */
+    /* Module Resolution */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
+
+    /* Output */
+    "outDir": "./dist",
+    "sourceMap": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
 
-    /* Path mappings */
-    "baseUrl": ".",
+    /* Path aliases */
     "paths": {
       "@/*": ["./src/*"]
-    },
-
-    /* Declaration */
-    "declaration": true,
-    "declarationMap": true
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.stories.tsx"]
+  "include": ["src", ".storybook-web", "global.d.ts"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
 }
