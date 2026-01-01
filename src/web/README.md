@@ -1,7 +1,7 @@
 # src/web/
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -71,10 +71,10 @@ src/web/
 
 ## Files
 
-| File/Folder | Purpose |
-|-------------|---------|
-| `components/` | Folder containing all web component implementations |
-| `components/index.ts` | Re-exports all web components for public API |
+| File/Folder           | Purpose                                             |
+| --------------------- | --------------------------------------------------- |
+| `components/`         | Folder containing all web component implementations |
+| `components/index.ts` | Re-exports all web components for public API        |
 
 ---
 
@@ -145,8 +145,8 @@ export const Button = ({
 ### Storybook Stories (`ComponentName.stories.tsx`)
 
 ```typescript
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from './Button'
 
 const meta = {
   component: Button,
@@ -154,37 +154,37 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
     title: 'Primary Button',
     variant: 'primary',
   },
-};
+}
 
 export const Secondary: Story = {
   args: {
     title: 'Secondary Button',
     variant: 'secondary',
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     title: 'Disabled Button',
     disabled: true,
   },
-};
+}
 ```
 
 ### Re-export (`index.ts`)
 
 ```typescript
-export { Button, type ButtonProps } from './Button';
+export { Button, type ButtonProps } from './Button'
 ```
 
 ---
@@ -207,15 +207,15 @@ Web components use standard HTML elements:
 
 Web components use React event handlers:
 
-| Handler | Purpose |
-|---------|---------|
-| `onClick` | Click interactions |
-| `onChange` | Input/form value changes |
-| `onFocus` | Element receives focus |
-| `onBlur` | Element loses focus |
-| `onSubmit` | Form submission |
-| `onMouseEnter` | Mouse enters element |
-| `onMouseLeave` | Mouse leaves element |
+| Handler        | Purpose                  |
+| -------------- | ------------------------ |
+| `onClick`      | Click interactions       |
+| `onChange`     | Input/form value changes |
+| `onFocus`      | Element receives focus   |
+| `onBlur`       | Element loses focus      |
+| `onSubmit`     | Form submission          |
+| `onMouseEnter` | Mouse enters element     |
+| `onMouseLeave` | Mouse leaves element     |
 
 ### CSS Classes
 
@@ -223,22 +223,22 @@ All styling uses Tailwind CSS utility classes:
 
 ```typescript
 // Spacing
-'px-4 py-2'                    // Padding
+'px-4 py-2' // Padding
 
 // Colours
-'bg-blue-500 text-white'       // Background and text colour
+'bg-blue-500 text-white' // Background and text colour
 
 // Hover states
-'hover:opacity-90'              // Hover effects
+'hover:opacity-90' // Hover effects
 
 // Active states
-'active:bg-blue-600'            // Active/pressed state
+'active:bg-blue-600' // Active/pressed state
 
 // Disabled states
-'disabled:opacity-50'           // Disabled styling
+'disabled:opacity-50' // Disabled styling
 
 // Responsive
-'md:px-6 lg:px-8'              // Responsive classes
+'md:px-6 lg:px-8' // Responsive classes
 ```
 
 ### Focus & Accessibility
@@ -246,7 +246,7 @@ All styling uses Tailwind CSS utility classes:
 Web components should include focus states for accessibility:
 
 ```typescript
-className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+className = 'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
 ```
 
 ---
@@ -282,22 +282,22 @@ export const MyComponent = ({ title }: MyComponentProps) => {
 Create `src/web/components/MyComponent/MyComponent.stories.tsx`:
 
 ```typescript
-import type { Meta, StoryObj } from '@storybook/react';
-import { MyComponent } from './MyComponent';
+import type { Meta, StoryObj } from '@storybook/react'
+import { MyComponent } from './MyComponent'
 
 const meta = {
   component: MyComponent,
   tags: ['autodocs'],
-} satisfies Meta<typeof MyComponent>;
+} satisfies Meta<typeof MyComponent>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     title: 'My Component',
   },
-};
+}
 ```
 
 ### Step 4: Create Re-export
@@ -305,7 +305,7 @@ export const Default: Story = {
 Create `src/web/components/MyComponent/index.ts`:
 
 ```typescript
-export { MyComponent, type MyComponentProps } from './MyComponent';
+export { MyComponent, type MyComponentProps } from './MyComponent'
 ```
 
 ### Step 5: Update Components Index
@@ -313,8 +313,8 @@ export { MyComponent, type MyComponentProps } from './MyComponent';
 Update `src/web/components/index.ts`:
 
 ```typescript
-export * from './Button';
-export * from './MyComponent';  // Add this line
+export * from './Button'
+export * from './MyComponent' // Add this line
 ```
 
 ---
@@ -327,10 +327,10 @@ Always prefer Tailwind utility classes over custom CSS:
 
 ```typescript
 // Good
-className="px-4 py-2 rounded bg-blue-500 text-white hover:opacity-90"
+className = 'px-4 py-2 rounded bg-blue-500 text-white hover:opacity-90'
 
 // Avoid
-className="custom-button"  // with custom CSS
+className = 'custom-button' // with custom CSS
 ```
 
 ### Design Tokens
@@ -338,10 +338,10 @@ className="custom-button"  // with custom CSS
 Use design tokens from `src/tokens/` for consistency:
 
 ```typescript
-import { colours, spacing } from '@template/ui';
+import { colours, spacing } from '@template/ui'
 
 // In component styling
-const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500];
+const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500]
 ```
 
 ### Responsive Design
@@ -349,9 +349,9 @@ const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary
 Use responsive Tailwind classes:
 
 ```typescript
-className="px-4 md:px-6 lg:px-8"  // Different padding on different screens
-className="text-base md:text-lg"  // Responsive font sizes
-className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"  // Responsive grids
+className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
+className = 'text-base md:text-lg' // Responsive font sizes
+className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3' // Responsive grids
 ```
 
 ---

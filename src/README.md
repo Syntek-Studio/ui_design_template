@@ -1,7 +1,7 @@
 # src/
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -81,13 +81,13 @@ src/
 
 ## Files
 
-| File/Folder | Purpose |
-|-------------|---------|
-| `index.ts` | Main entry point that re-exports all web components, mobile components (namespaced), and design tokens |
-| `tailwind.css` | Tailwind CSS entry file for processing |
-| `web/` | React web components built with HTML and Tailwind CSS |
-| `mobile/` | React Native components using Nativewind |
-| `tokens/` | Shared design system tokens (colours, spacing, typography, etc.) |
+| File/Folder    | Purpose                                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------------------ |
+| `index.ts`     | Main entry point that re-exports all web components, mobile components (namespaced), and design tokens |
+| `tailwind.css` | Tailwind CSS entry file for processing                                                                 |
+| `web/`         | React web components built with HTML and Tailwind CSS                                                  |
+| `mobile/`      | React Native components using Nativewind                                                               |
+| `tokens/`      | Shared design system tokens (colours, spacing, typography, etc.)                                       |
 
 ---
 
@@ -99,13 +99,13 @@ The main entry point re-exports all public API:
 
 ```typescript
 // Web components (default exports)
-export * from './web/components';
+export * from './web/components'
 
 // Mobile components (namespaced)
-export * as Mobile from './mobile/components';
+export * as Mobile from './mobile/components'
 
 // Design tokens
-export * from './tokens';
+export * from './tokens'
 ```
 
 ### Web Components (`web/components/`)
@@ -120,6 +120,7 @@ ComponentName/
 ```
 
 **Example:**
+
 ```typescript
 // src/web/components/Button/Button.tsx
 export interface ButtonProps {
@@ -150,6 +151,7 @@ ComponentName/
 ```
 
 **Example:**
+
 ```typescript
 // src/mobile/components/Button/Button.tsx
 import { Pressable, Text } from 'react-native';
@@ -206,15 +208,15 @@ import { Mobile } from '@template/ui';
 ### Using Design Tokens
 
 ```typescript
-import { colours, spacing, typography, breakpoints, shadows, borders } from '@template/ui';
+import { colours, spacing, typography, breakpoints, shadows, borders } from '@template/ui'
 
 // Use tokens for consistent styling
-const primaryColor = colours.primary[500]; // #3b82f6
-const padding = spacing[4]; // 16px
-const fontSize = typography.fontSize.lg.size; // 18
-const breakpoint = breakpoints.md; // 768px
-const shadow = shadows.md; // Box shadow string
-const radius = borders.radius.lg; // 8px
+const primaryColor = colours.primary[500] // #3b82f6
+const padding = spacing[4] // 16px
+const fontSize = typography.fontSize.lg.size // 18
+const breakpoint = breakpoints.md // 768px
+const shadow = shadows.md // Box shadow string
+const radius = borders.radius.lg // 8px
 ```
 
 ### Creating New Components

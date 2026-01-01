@@ -1,7 +1,7 @@
 # src/utils/
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -38,6 +38,7 @@
 The `src/utils/` folder contains shared utility functions and component style mappings used across both web and mobile components. These utilities ensure consistency, type safety, and DRY principles throughout the component library.
 
 **Key Features:**
+
 - Type-safe class name manipulation utilities
 - Centralised component style mappings (size, variant, rounded)
 - Cross-platform compatibility (web Tailwind CSS and mobile Nativewind)
@@ -59,11 +60,11 @@ src/utils/
 
 ## Files
 
-| File | Purpose |
-|------|---------|
-| `classNames.ts` | Utilities for combining and merging CSS class names |
+| File                 | Purpose                                                |
+| -------------------- | ------------------------------------------------------ |
+| `classNames.ts`      | Utilities for combining and merging CSS class names    |
 | `componentStyles.ts` | Centralised Tailwind CSS class mappings for components |
-| `index.ts` | Main export file for all utilities |
+| `index.ts`           | Main export file for all utilities                     |
 
 ---
 
@@ -89,24 +90,25 @@ Provides helper functions for managing CSS class names in a type-safe manner.
 Centralised style mappings for common component patterns.
 
 **Types:**
+
 - `ComponentSize` - Size variants: `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
 - `ComponentVariant` - Visual variants: `'primary' | 'secondary' | 'tertiary' | 'outline' | 'ghost' | 'link' | 'destructive' | 'success' | 'warning'`
 - `ComponentRounded` - Border radius: `'none' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'`
 
 **Style Mappings:**
 
-| Mapping | Description | Platform |
-|---------|-------------|----------|
-| `sizeClasses` | Padding, text size, and gap spacing for each size | Both |
-| `iconOnlySizeClasses` | Square padding for icon-only components (web) | Web |
-| `iconOnlyMobileSizeClasses` | Square padding with 44px minimum touch target (mobile) | Mobile |
-| `textSizeClasses` | Text size classes for React Native Text components | Mobile |
-| `roundedClasses` | Border radius mappings aligned with design tokens | Both |
-| `variantClasses` | Complete variant styling for web (with hover states) | Web |
-| `mobileVariantClasses` | Variant styling for mobile (active states only) | Mobile |
-| `textColorClasses` | Text colour mappings for each variant | Mobile |
-| `spinnerColors` | Hex colour values for loading spinners | Mobile |
-| `spinnerSizeClasses` | Width/height for SVG loading spinners | Web |
+| Mapping                     | Description                                            | Platform |
+| --------------------------- | ------------------------------------------------------ | -------- |
+| `sizeClasses`               | Padding, text size, and gap spacing for each size      | Both     |
+| `iconOnlySizeClasses`       | Square padding for icon-only components (web)          | Web      |
+| `iconOnlyMobileSizeClasses` | Square padding with 44px minimum touch target (mobile) | Mobile   |
+| `textSizeClasses`           | Text size classes for React Native Text components     | Mobile   |
+| `roundedClasses`            | Border radius mappings aligned with design tokens      | Both     |
+| `variantClasses`            | Complete variant styling for web (with hover states)   | Web      |
+| `mobileVariantClasses`      | Variant styling for mobile (active states only)        | Mobile   |
+| `textColorClasses`          | Text colour mappings for each variant                  | Mobile   |
+| `spinnerColors`             | Hex colour values for loading spinners                 | Mobile   |
+| `spinnerSizeClasses`        | Width/height for SVG loading spinners                  | Web      |
 
 ---
 
@@ -115,21 +117,24 @@ Centralised style mappings for common component patterns.
 ### Importing Utilities
 
 **Import from the main library:**
+
 ```typescript
-import { cn, mergeClasses, sizeClasses, variantClasses } from '@template/ui';
+import { cn, mergeClasses, sizeClasses, variantClasses } from '@template/ui'
 ```
 
 **Import from utils directly:**
+
 ```typescript
-import { cn, mergeClasses } from '@/utils';
-import { sizeClasses, variantClasses, ComponentSize } from '@/utils';
+import { cn, mergeClasses } from '@/utils'
+import { sizeClasses, variantClasses, ComponentSize } from '@/utils'
 ```
 
 ### Using Class Name Utilities
 
 **Conditional Classes with `cn`:**
+
 ```typescript
-import { cn } from '@/utils';
+import { cn } from '@/utils'
 
 const buttonClass = cn(
   'base-button',
@@ -137,25 +142,23 @@ const buttonClass = cn(
   isDisabled && 'opacity-50',
   isFullWidth && 'w-full',
   customClassName
-);
+)
 // Result: "base-button bg-blue-600 w-full" (if isPrimary and isFullWidth are true)
 ```
 
 **Merging Classes with `mergeClasses`:**
-```typescript
-import { mergeClasses } from '@/utils';
 
-const merged = mergeClasses(
-  'px-4 py-2 text-white',
-  'px-4 bg-blue-600',
-  'rounded-lg'
-);
+```typescript
+import { mergeClasses } from '@/utils'
+
+const merged = mergeClasses('px-4 py-2 text-white', 'px-4 bg-blue-600', 'rounded-lg')
 // Result: "px-4 py-2 text-white bg-blue-600 rounded-lg" (duplicates removed)
 ```
 
 ### Using Component Styles in Web Components
 
 **Example: Button Component**
+
 ```typescript
 import {
   sizeClasses,
@@ -180,6 +183,7 @@ export const Button = ({ size = 'md', variant = 'primary', rounded = 'lg', iconO
 ### Using Component Styles in Mobile Components
 
 **Example: Mobile Button Component**
+
 ```typescript
 import {
   sizeClasses,
@@ -226,15 +230,15 @@ import {
   type ComponentSize,
   type ComponentVariant,
   type ComponentRounded,
-  sizeClasses
-} from '@/utils';
+  sizeClasses,
+} from '@/utils'
 
 // Type-safe access
-const size: ComponentSize = 'md';
-const sizeClass: string = sizeClasses[size]; // "px-4 py-2 text-base gap-2"
+const size: ComponentSize = 'md'
+const sizeClass: string = sizeClasses[size] // "px-4 py-2 text-base gap-2"
 
 // TypeScript will error on invalid values
-const invalid: ComponentSize = 'huge'; // Error: Type '"huge"' is not assignable
+const invalid: ComponentSize = 'huge' // Error: Type '"huge"' is not assignable
 ```
 
 ---
@@ -263,10 +267,10 @@ export const sizeClasses: Record<ComponentSize, string> = {
   lg: 'px-6 py-3 text-lg gap-2.5',
   xl: 'px-8 py-4 text-xl gap-3',
   // Add new size here and update the ComponentSize type
-};
+}
 
 // Update the type
-export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 ```
 
 ### Adding a New Variant
@@ -278,7 +282,7 @@ export const variantClasses: Record<ComponentVariant, string> = {
   secondary: '...',
   // Add new variant
   info: 'bg-cyan-600 text-white hover:bg-cyan-700 active:bg-cyan-800 focus:ring-cyan-500 shadow-sm',
-};
+}
 
 // Update the type
 export type ComponentVariant =
@@ -291,7 +295,7 @@ export type ComponentVariant =
   | 'destructive'
   | 'success'
   | 'warning'
-  | 'info'; // Add here
+  | 'info' // Add here
 ```
 
 ### Creating a New Utility Function
@@ -315,7 +319,7 @@ export function classIf(classMap: Record<string, boolean>): string {
   return Object.entries(classMap)
     .filter(([, condition]) => condition)
     .map(([className]) => className)
-    .join(' ');
+    .join(' ')
 }
 ```
 
