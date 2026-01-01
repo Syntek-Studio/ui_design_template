@@ -1,0 +1,76 @@
+{
+  "description": "Status mapping between GitHub and ClickUp for @template/ui",
+  "clickup_statuses": {
+    "open": "Open",
+    "pending": "Pending",
+    "in_progress": "In Progress",
+    "in_review": "In Review",
+    "accepted": "Accepted",
+    "accepted_customer": "Accepted Customer",
+    "rejected": "Rejected",
+    "rejected_customer": "Rejected Customer",
+    "blocked": "Blocked",
+    "completed": "Completed",
+    "closed": "Closed"
+  },
+  "github_to_clickup": {
+    "open": "Open",
+    "in_progress": "In Progress",
+    "in_review": "In Review",
+    "blocked": "Blocked",
+    "closed": "Completed"
+  },
+  "clickup_to_github": {
+    "Open": "open",
+    "Pending": "open",
+    "In Progress": "in_progress",
+    "In Review": "in_review",
+    "Accepted": "in_review",
+    "Accepted Customer": "in_review",
+    "Rejected": "open",
+    "Rejected Customer": "open",
+    "Blocked": "blocked",
+    "Completed": "closed",
+    "Closed": "closed"
+  },
+  "pr_status_mapping": {
+    "draft": "In Progress",
+    "open": "In Review",
+    "merged": "Completed",
+    "closed": "Closed"
+  },
+  "workflow_stages": {
+    "backlog": {
+      "clickup_statuses": ["Open", "Pending"],
+      "github_label": "status: backlog"
+    },
+    "in_progress": {
+      "clickup_statuses": ["In Progress"],
+      "github_label": "status: in-progress"
+    },
+    "review": {
+      "clickup_statuses": ["In Review"],
+      "github_label": "status: review"
+    },
+    "accepted": {
+      "clickup_statuses": ["Accepted"],
+      "github_label": "status: accepted"
+    },
+    "customer_accepted": {
+      "clickup_statuses": ["Accepted Customer"],
+      "github_label": "status: customer-accepted"
+    },
+    "blocked": {
+      "clickup_statuses": ["Blocked"],
+      "github_label": "status: blocked"
+    },
+    "rejected": {
+      "clickup_statuses": ["Rejected", "Rejected Customer"],
+      "github_label": "status: rejected"
+    },
+    "done": {
+      "clickup_statuses": ["Completed", "Closed"],
+      "github_label": "status: done"
+    }
+  }
+}

@@ -1,8 +1,14 @@
-/**
- * Main entry point
- *
- * Default exports (web components)
- * For React Native, use: import { Button } from '@your-org/ui-design-template/native'
- */
+// Main entry point for the UI library
+// Export your components here
 
-export * from './web'
+// Web components
+export * from './web/components';
+
+// Mobile components (React Native + Nativewind)
+export * as Mobile from './mobile/components';
+
+// Design tokens
+export * from './tokens';
+
+// Utility functions and shared styles
+export * from './utils';

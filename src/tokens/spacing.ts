@@ -1,26 +1,62 @@
 /**
- * Design Tokens - Spacing
+ * Spacing scale for consistent layout rhythm
  *
- * Spacing scale for consistent layout across web and native platforms
+ * Based on 4px grid system (0px to 384px) to ensure mathematical consistency
+ * and help achieve pixel-perfect designs.
+ *
+ * Each spacing value represents a multiple of 4px:
+ * - spacing[1] = 4px (base unit)
+ * - spacing[2] = 8px
+ * - spacing[4] = 16px
+ * - spacing[6] = 24px
+ * - And so on...
+ *
+ * Use for padding, margins, gaps, and other layout spacing.
+ *
+ * @example
+ * import { spacing } from '@template/ui';
+ * const padding = spacing[4];  // 16px
+ * const margin = spacing[6];   // 24px
+ * const gap = spacing[3];      // 12px
+ *
+ * @see {@link https://example.com/design-tokens} Design tokens documentation
  */
-
 export const spacing = {
-  xs: 8,    // 0.5rem
-  sm: 12,   // 0.75rem
-  md: 16,   // 1rem
-  lg: 24,   // 1.5rem
-  xl: 32,   // 2rem
-  '2xl': 48, // 3rem
-} as const
+  0: 0,
+  px: 1,
+  0.5: 2,
+  1: 4,
+  1.5: 6,
+  2: 8,
+  2.5: 10,
+  3: 12,
+  3.5: 14,
+  4: 16,
+  5: 20,
+  6: 24,
+  7: 28,
+  8: 32,
+  9: 36,
+  10: 40,
+  11: 44,
+  12: 48,
+  14: 56,
+  16: 64,
+  20: 80,
+  24: 96,
+  28: 112,
+  32: 128,
+  36: 144,
+  40: 160,
+  44: 176,
+  48: 192,
+  52: 208,
+  56: 224,
+  60: 240,
+  64: 256,
+  72: 288,
+  80: 320,
+  96: 384,
+} as const;
 
-export const borderRadius = {
-  sm: 4,    // 0.25rem
-  md: 6,    // 0.375rem
-  lg: 8,    // 0.5rem
-  xl: 12,   // 0.75rem
-  '2xl': 16, // 1rem
-  full: 9999,
-} as const
-
-export type SpacingToken = typeof spacing
-export type BorderRadiusToken = typeof borderRadius
+export type Spacing = typeof spacing;
