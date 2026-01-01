@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "description": "ClickUp integration configuration for @template/ui",
+
+  "workspace": {
+    "space_id": "${CLICKUP_SPACE_ID}",
+    "backlog_folder_id": "${CLICKUP_BACKLOG_FOLDER_ID}",
+    "sprints_folder_id": "${CLICKUP_SPRINT_FOLDER_ID}",
+    "workspace_id": "${CLICKUP_WORKSPACE_ID}"
+  },
+
+  "branch_pattern": "^us(\\d{3})/(.+)$",
+
+  "status_mapping": {
+    "branch_pushed": "Pending",
+    "branch_commit": "In Progress",
+    "pr_to_testing": "In Review",
+    "pr_merged_testing": "In Review",
+    "pr_merged_dev": "In Review",
+    "pr_merged_staging": "Accepted",
+    "pr_merged_main": "Accepted Customer"
+  },
+
+  "branches": {
+    "production": "main",
+    "staging": "staging",
+    "development": "dev",
+    "testing": "testing"
+  },
+
+  "user_story_parsing": {
+    "id_pattern": "US-(\\d{3})",
+    "priority_mapping": {
+      "Critical": 1,
+      "High": 2,
+      "Medium": 3,
+      "Low": 4
+    },
+    "effort_to_points": {
+      "S": 2,
+      "M": 5,
+      "L": 8,
+      "XL": 13
+    }
+  }
+}

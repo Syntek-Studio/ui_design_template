@@ -1,0 +1,417 @@
+name: ClickUp Sync
+
+on:
+  # Trigger on branch creation and commits
+  push:
+    branches:
+      - 'us[0-9][0-9][0-9]/**'
+
+  # Trigger on PR events
+  pull_request:
+    types: [opened, closed]
+    branches:
+      - testing
+      - dev
+      - staging
+      - main
+
+  # Allow manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      task_id:
+        description: 'ClickUp Task ID to update (without CU- prefix)'
+        required: true
+      status:
+        description: 'Status to set'
+        required: true
+        type: choice
+        options:
+          - Open
+          - Pending
+          - In Progress
+          - In Review
+          - Accepted
+          - Accepted Customer
+          - Blocked
+          - Completed
+          - Closed
+
+# SECURITY: Minimal permissions required
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  update-clickup-status:
+    runs-on: ubuntu-latest
+    # SECURITY: Prevent workflow from running on forks (secrets not available)
+    if: github.repository == 'Syntek-Studio/ui_design_template' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Extract User Story ID from Branch
+        id: extract
+        run: |
+          # Get branch name from different event types
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BRANCH="${{ github.head_ref }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "task_id=${{ github.event.inputs.task_id }}" >> $GITHUB_OUTPUT
+            echo "status=${{ github.event.inputs.status }}" >> $GITHUB_OUTPUT
+            echo "manual=true" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            BRANCH="${{ github.ref_name }}"
+          fi
+
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
+          # Extract US number from branch name (e.g., us001/add-button-component -> 001)
+          if [[ "$BRANCH" =~ ^us([0-9]{3})/ ]]; then
+            US_NUM="${BASH_REMATCH[1]}"
+            echo "us_number=$US_NUM" >> $GITHUB_OUTPUT
+            echo "Found user story: US-$US_NUM"
+          else
+            echo "No user story pattern found in branch: $BRANCH"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine Status Based on Event
+        id: status
+        if: steps.extract.outputs.skip != 'true' && steps.extract.outputs.manual != 'true'
+        run: |
+          EVENT="${{ github.event_name }}"
+          ACTION="${{ github.event.action }}"
+          BASE_REF="${{ github.base_ref }}"
+          MERGED="${{ github.event.pull_request.merged }}"
+
+          echo "Event: $EVENT, Action: $ACTION, Base: $BASE_REF, Merged: $MERGED"
+
+          if [[ "$EVENT" == "push" ]]; then
+            # Check if this is the first push (branch creation) or a commit
+            # For now, treat all pushes to us###/* as "In Progress"
+            STATUS="In Progress"
+          elif [[ "$EVENT" == "pull_request" ]]; then
+            if [[ "$ACTION" == "opened" ]]; then
+              # PR opened - status depends on target branch
+              case "$BASE_REF" in
+                testing)
+                  STATUS="In Review"
+                  ;;
+                dev)
+                  STATUS="In Review"
+                  ;;
+                staging)
+                  STATUS="Accepted"
+                  ;;
+                main)
+                  STATUS="Accepted Customer"
+                  ;;
+                *)
+                  STATUS="In Progress"
+                  ;;
+              esac
+            elif [[ "$ACTION" == "closed" && "$MERGED" == "true" ]]; then
+              # PR merged - status depends on target branch
+              case "$BASE_REF" in
+                testing)
+                  STATUS="In Review"
+                  ;;
+                dev)
+                  STATUS="In Review"
+                  ;;
+                staging)
+                  STATUS="Accepted"
+                  ;;
+                main)
+                  STATUS="Accepted Customer"
+                  ;;
+                *)
+                  echo "skip=true" >> $GITHUB_OUTPUT
+                  exit 0
+                  ;;
+              esac
+            else
+              echo "PR closed without merge, skipping"
+              echo "skip=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          fi
+
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Determined status: $STATUS"
+
+      - name: Find ClickUp Task by User Story ID
+        id: find_task
+        if: steps.extract.outputs.skip != 'true' && steps.status.outputs.skip != 'true'
+        env:
+          CLICKUP_API_KEY: ${{ secrets.CLICKUP_API_KEY }}
+          CLICKUP_SPACE_ID: ${{ secrets.CLICKUP_SPACE_ID }}
+          CLICKUP_BACKLOG_FOLDER_ID: ${{ secrets.CLICKUP_BACKLOG_FOLDER_ID }}
+        run: |
+          # SECURITY: Disable command echoing to prevent secret exposure
+          set +x
+
+          US_NUM="${{ steps.extract.outputs.us_number }}"
+          TASK_ID="${{ steps.extract.outputs.task_id }}"
+
+          # SECURITY: Validate US_NUM is exactly 3 digits
+          if [[ -n "$US_NUM" && ! "$US_NUM" =~ ^[0-9]{3}$ ]]; then
+            echo "::error::Invalid user story number format: $US_NUM"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # SECURITY: Validate TASK_ID contains only alphanumeric characters
+          if [[ -n "$TASK_ID" && ! "$TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then
+            echo "::error::Invalid task ID format"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # If manual trigger with task_id, use that directly
+          if [[ -n "$TASK_ID" ]]; then
+            echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Search for task with US-### in the name
+          SEARCH_TERM="US-$US_NUM"
+          echo "Searching for task: $SEARCH_TERM"
+
+          # First, try searching in the backlog folder
+          # SECURITY: Capture HTTP status code separately from response body
+          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
+            "https://api.clickup.com/api/v2/folder/$CLICKUP_BACKLOG_FOLDER_ID" \
+            -H "Authorization: $CLICKUP_API_KEY" \
+            -H "Content-Type: application/json")
+
+          HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n1)
+          RESPONSE=$(echo "$HTTP_RESPONSE" | sed '$d')
+
+          # SECURITY: Check HTTP status before processing response
+          if [[ "$HTTP_CODE" -ne 200 ]]; then
+            echo "::error::ClickUp API request failed with status $HTTP_CODE"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # SECURITY: Validate response is valid JSON before parsing
+          if ! echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
+            echo "::error::Invalid JSON response from ClickUp API"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Get first list ID from the folder
+          LIST_ID=$(echo "$RESPONSE" | jq -r '.lists[0].id // empty')
+
+          if [[ -z "$LIST_ID" || "$LIST_ID" == "null" ]]; then
+            echo "::warning::No lists found in backlog folder"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Search for task in the list
+          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
+            "https://api.clickup.com/api/v2/list/$LIST_ID/task?include_closed=true" \
+            -H "Authorization: $CLICKUP_API_KEY" \
+            -H "Content-Type: application/json")
+
+          HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n1)
+          RESPONSE=$(echo "$HTTP_RESPONSE" | sed '$d')
+
+          if [[ "$HTTP_CODE" -ne 200 ]]; then
+            echo "::error::Failed to get tasks from list"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Find task with matching US number in name
+          # SECURITY: Use jq argument binding to prevent injection
+          TASK_ID=$(echo "$RESPONSE" | jq -r --arg search "$SEARCH_TERM" '.tasks[] | select(.name | contains($search)) | .id' | head -1)
+
+          # SECURITY: Validate extracted task ID format
+          if [[ -n "$TASK_ID" && "$TASK_ID" != "null" && ! "$TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then
+            echo "::error::Invalid task ID returned from API"
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          if [[ -z "$TASK_ID" || "$TASK_ID" == "null" ]]; then
+            # Search across the entire space
+            echo "Not found in backlog, searching space..."
+
+            # SECURITY: Get user ID with error handling
+            USER_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
+              'https://api.clickup.com/api/v2/user' \
+              -H "Authorization: $CLICKUP_API_KEY")
+
+            USER_HTTP_CODE=$(echo "$USER_RESPONSE" | tail -n1)
+            USER_BODY=$(echo "$USER_RESPONSE" | sed '$d')
+
+            if [[ "$USER_HTTP_CODE" -ne 200 ]]; then
+              echo "::error::Failed to get user info from ClickUp"
+              echo "skip=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+
+            USER_ID=$(echo "$USER_BODY" | jq -r '.user.id // empty')
+
+            if [[ -z "$USER_ID" ]]; then
+              echo "::error::Could not extract user ID"
+              echo "skip=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+
+            HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
+              "https://api.clickup.com/api/v2/team/$USER_ID/task?space_ids[]=$CLICKUP_SPACE_ID&include_closed=true" \
+              -H "Authorization: $CLICKUP_API_KEY" \
+              -H "Content-Type: application/json")
+
+            HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n1)
+            RESPONSE=$(echo "$HTTP_RESPONSE" | sed '$d')
+
+            if [[ "$HTTP_CODE" -eq 200 ]] && echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
+              TASK_ID=$(echo "$RESPONSE" | jq -r --arg search "$SEARCH_TERM" '.tasks[] | select(.name | contains($search)) | .id' | head -1)
+            fi
+          fi
+
+          if [[ -z "$TASK_ID" || "$TASK_ID" == "null" ]]; then
+            echo "No task found for $SEARCH_TERM"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            # SECURITY: Final validation of task ID
+            if [[ "$TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then
+              echo "Found task ID: $TASK_ID"
+              echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
+            else
+              echo "::error::Invalid task ID format in final output"
+              echo "skip=true" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Update ClickUp Task Status
+        if: steps.find_task.outputs.skip != 'true' && steps.extract.outputs.skip != 'true' && steps.status.outputs.skip != 'true'
+        env:
+          CLICKUP_API_KEY: ${{ secrets.CLICKUP_API_KEY }}
+        run: |
+          # SECURITY: Disable command echoing to prevent secret exposure
+          set +x
+
+          TASK_ID="${{ steps.find_task.outputs.task_id }}"
+          STATUS="${{ steps.status.outputs.status }}${{ steps.extract.outputs.status }}"
+
+          # SECURITY: Validate task ID format before use
+          if [[ ! "$TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then
+            echo "::error::Invalid task ID format"
+            exit 1
+          fi
+
+          # SECURITY: Validate status is one of allowed values
+          case "$STATUS" in
+            "Open"|"Pending"|"In Progress"|"In Review"|"Accepted"|"Accepted Customer"|"Blocked"|"Completed"|"Closed"|"Rejected"|"Rejected Customer")
+              ;;
+            *)
+              echo "::error::Invalid status value: $STATUS"
+              exit 1
+              ;;
+          esac
+
+          echo "Updating task $TASK_ID to status: $STATUS"
+
+          # SECURITY: Use jq to safely construct JSON payload
+          PAYLOAD=$(jq -n --arg status "$STATUS" '{status: $status}')
+
+          # Update the task status with proper error handling
+          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X PUT \
+            "https://api.clickup.com/api/v2/task/$TASK_ID" \
+            -H "Authorization: $CLICKUP_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+
+          HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n1)
+          RESPONSE=$(echo "$HTTP_RESPONSE" | sed '$d')
+
+          # SECURITY: Check HTTP status before logging response
+          if [[ "$HTTP_CODE" -ne 200 ]]; then
+            echo "::error::ClickUp API request failed with status $HTTP_CODE"
+            # SECURITY: Don't log full response as it may contain sensitive data
+            exit 1
+          fi
+
+          # Check if update was successful
+          if echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
+            UPDATED_STATUS=$(echo "$RESPONSE" | jq -r '.status.status // empty')
+            if [[ "$UPDATED_STATUS" == "$STATUS" ]]; then
+              echo "Successfully updated task to: $STATUS"
+            else
+              echo "Status update may have failed. Expected: $STATUS, Got: $UPDATED_STATUS"
+            fi
+          else
+            echo "::error::Invalid JSON response from ClickUp API"
+            exit 1
+          fi
+
+      - name: Add Comment with PR Link
+        if: github.event_name == 'pull_request' && steps.find_task.outputs.task_id != '' && steps.find_task.outputs.skip != 'true'
+        env:
+          CLICKUP_API_KEY: ${{ secrets.CLICKUP_API_KEY }}
+        run: |
+          # SECURITY: Disable command echoing to prevent secret exposure
+          set +x
+
+          TASK_ID="${{ steps.find_task.outputs.task_id }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_ACTION="${{ github.event.action }}"
+          BASE_REF="${{ github.base_ref }}"
+          MERGED="${{ github.event.pull_request.merged }}"
+
+          # SECURITY: Validate task ID format
+          if [[ ! "$TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then
+            echo "::error::Invalid task ID format"
+            exit 1
+          fi
+
+          # SECURITY: Sanitise PR title to prevent injection
+          # Remove control characters and limit length
+          PR_TITLE_SAFE=$(echo "$PR_TITLE" | tr -cd '[:alnum:][:space:][:punct:]' | head -c 200)
+
+          # SECURITY: Validate PR URL format
+          if [[ ! "$PR_URL" =~ ^https://github\.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+/pull/[0-9]+$ ]]; then
+            echo "::warning::PR URL format unexpected, using sanitised version"
+            PR_URL="[URL redacted for security]"
+          fi
+
+          # SECURITY: Validate BASE_REF is a known branch
+          case "$BASE_REF" in
+            "testing"|"dev"|"staging"|"main")
+              ;;
+            *)
+              BASE_REF="unknown"
+              ;;
+          esac
+
+          if [[ "$PR_ACTION" == "opened" ]]; then
+            COMMENT="Pull Request Opened\n\n[$PR_TITLE_SAFE]($PR_URL)\n\nTarget: \`$BASE_REF\`"
+          elif [[ "$MERGED" == "true" ]]; then
+            COMMENT="Pull Request Merged\n\n[$PR_TITLE_SAFE]($PR_URL)\n\nMerged to: \`$BASE_REF\`"
+          else
+            exit 0
+          fi
+
+          # SECURITY: Use jq to safely construct JSON payload
+          PAYLOAD=$(jq -n --arg comment "$COMMENT" '{comment_text: $comment}')
+
+          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "https://api.clickup.com/api/v2/task/$TASK_ID/comment" \
+            -H "Authorization: $CLICKUP_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+
+          HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n1)
+
+          if [[ "$HTTP_CODE" -eq 200 ]]; then
+            echo "Added comment to task"
+          else
+            echo "::warning::Failed to add comment (HTTP $HTTP_CODE)"
+          fi

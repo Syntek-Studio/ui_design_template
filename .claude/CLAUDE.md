@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Last Updated**: 29/12/2024
+**Last Updated**: 01/01/2026
 **Version**: 0.5.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
@@ -137,6 +137,25 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 Branch structure: `user-story-number/your-feature-name` → `testing` → `dev` → `staging` → `main`
 
 PR title format: `user-story-number/your-feature-name` (e.g., `US-123/add-loading-button-state`)
+
+## Project Management
+
+- **Tool:** ClickUp
+- **Integration:** Bidirectional sync with GitHub
+- **Branch Pattern:** `us###/description` (e.g., `us001/add-button-component`)
+- **Auto-sync:** Enabled via GitHub Actions (`.github/workflows/clickup-sync.yml`)
+- **Documentation:** See `docs/PM-INTEGRATION/` for setup and usage
+
+### ClickUp Status Flow
+
+| Branch/PR Event | ClickUp Status |
+|----------------|----------------|
+| Branch `us###/*` pushed | In Progress |
+| PR opened to `testing` or `dev` | In Review |
+| PR merged to `staging` | Accepted |
+| PR merged to `main` | Accepted Customer |
+
+GitHub Secrets are configured for automatic workflow execution. Local `.env` file only needed for manual script execution.
 
 ## Dev Team Agents
 
