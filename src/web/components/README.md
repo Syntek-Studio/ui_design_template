@@ -1,7 +1,7 @@
 # src/web/components/
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -79,22 +79,25 @@ Versatile button component with multiple variants and states.
 **Location:** `Button/`
 
 **Props:**
+
 ```typescript
 interface ButtonProps {
-  title: string;                          // Button text
-  onClick?: () => void;                   // Click handler
-  variant?: 'primary' | 'secondary';      // Visual variant
-  disabled?: boolean;                     // Disabled state
-  className?: string;                     // Custom Tailwind classes
+  title: string // Button text
+  onClick?: () => void // Click handler
+  variant?: 'primary' | 'secondary' // Visual variant
+  disabled?: boolean // Disabled state
+  className?: string // Custom Tailwind classes
 }
 ```
 
 **Import:**
+
 ```typescript
-import { Button } from '@template/ui';
+import { Button } from '@template/ui'
 ```
 
 **Example:**
+
 ```typescript
 <Button
   title="Submit"
@@ -104,10 +107,12 @@ import { Button } from '@template/ui';
 ```
 
 **Variants:**
+
 - **primary** - Blue background, white text
 - **secondary** - Grey background, white text
 
 **States:**
+
 - Normal - Interactive
 - Hover - Reduced opacity
 - Disabled - 50% opacity
@@ -121,22 +126,22 @@ import { Button } from '@template/ui';
 ```typescript
 export interface ButtonProps {
   /** The button text content */
-  title: string;
+  title: string
 
   /** Callback function when button is clicked */
-  onClick?: () => void;
+  onClick?: () => void
 
   /** Visual style of the button */
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary'
 
   /** Whether the button is disabled */
-  disabled?: boolean;
+  disabled?: boolean
 
   /** Additional Tailwind CSS classes for customisation */
-  className?: string;
+  className?: string
 }
 
-export const Button: React.FC<ButtonProps>;
+export const Button: React.FC<ButtonProps>
 ```
 
 ---
@@ -312,8 +317,8 @@ export const Button = ({
 Provides Storybook documentation and examples:
 
 ```typescript
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from './Button'
 
 const meta = {
   component: Button,
@@ -321,31 +326,31 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
     title: 'Primary Button',
     variant: 'primary',
   },
-};
+}
 
 export const Secondary: Story = {
   args: {
     title: 'Secondary Button',
     variant: 'secondary',
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     title: 'Disabled Button',
     disabled: true,
   },
-};
+}
 ```
 
 ### index.ts
@@ -353,7 +358,7 @@ export const Disabled: Story = {
 Re-exports the component for public API:
 
 ```typescript
-export { Button, type ButtonProps } from './Button';
+export { Button, type ButtonProps } from './Button'
 ```
 
 ---
@@ -376,25 +381,25 @@ export { Button, type ButtonProps } from './Button';
 
 ```typescript
 // Good
-className="px-4 py-2 rounded bg-blue-500 text-white"
+className = 'px-4 py-2 rounded bg-blue-500 text-white'
 
 // Avoid custom CSS
-className="my-custom-button"
+className = 'my-custom-button'
 ```
 
 ### Responsive Design
 
 ```typescript
-className="px-4 md:px-6 lg:px-8 text-sm md:text-base lg:text-lg"
+className = 'px-4 md:px-6 lg:px-8 text-sm md:text-base lg:text-lg'
 ```
 
 ### Design Tokens
 
 ```typescript
-import { colours } from '@template/ui';
+import { colours } from '@template/ui'
 
-const bgColor = colours.primary[500];  // #3b82f6
-const textColor = colours.white;        // #ffffff
+const bgColor = colours.primary[500] // #3b82f6
+const textColor = colours.white // #ffffff
 ```
 
 ---

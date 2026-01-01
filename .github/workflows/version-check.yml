@@ -1,0 +1,66 @@
+name: Version Check
+
+on:
+  pull_request:
+    branches: [main, staging, dev, testing]
+
+jobs:
+  check-version:
+    name: Check Version Updated
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed
+        run: |
+          # Get list of changed files in this PR
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # Check if source code was changed
+          CODE_CHANGED=$(echo "$CHANGED_FILES" | grep -E "^src/.*\.(ts|tsx)$" || true)
+
+          # Check if version files were updated
+          VERSION_UPDATED=$(echo "$CHANGED_FILES" | grep -E "^(VERSION|CHANGELOG\.md|RELEASES\.md|VERSION-HISTORY\.md|package\.json)$" || true)
+
+          if [ -n "$CODE_CHANGED" ]; then
+            echo "code_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "code_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+          if [ -n "$VERSION_UPDATED" ]; then
+            echo "version_updated=true" >> $GITHUB_OUTPUT
+          else
+            echo "version_updated=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check version requirement
+        if: steps.changed.outputs.code_changed == 'true' && steps.changed.outputs.version_updated == 'false'
+        run: |
+          echo "::error::❌ Source code was changed but version was not updated!"
+          echo ""
+          echo "Please update the following before merging:"
+          echo "  1. VERSION file - bump the version number"
+          echo "  2. CHANGELOG.md - document your changes"
+          echo "  3. package.json - update the version field"
+          echo ""
+          echo "Version format: MAJOR.MINOR.PATCH"
+          echo "  - PATCH: Bug fixes"
+          echo "  - MINOR: New features (backwards compatible)"
+          echo "  - MAJOR: Breaking changes"
+          echo ""
+          exit 1
+
+      - name: Version check passed
+        if: steps.changed.outputs.code_changed == 'false' || steps.changed.outputs.version_updated == 'true'
+        run: |
+          if [ "${{ steps.changed.outputs.code_changed }}" == "false" ]; then
+            echo "✅ No source code changes - version update not required"
+          else
+            echo "✅ Version files updated correctly"
+          fi

@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 **Last Updated**: 01/01/2026
-**Version**: 0.5.1
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -56,12 +56,14 @@ npm run lint:fix
 ## Architecture
 
 ### Entry Point & Exports
+
 - [src/index.ts](src/index.ts) - Main entry point that re-exports all components
 - Build outputs CJS and ESM formats via tsup to `dist/`
 
 ### Component Structure
 
 **Web Components** live in `src/web/components/`:
+
 ```
 src/web/components/
 └── ComponentName/
@@ -71,6 +73,7 @@ src/web/components/
 ```
 
 **Mobile Components** live in `src/mobile/components/`:
+
 ```
 src/mobile/components/
 └── ComponentName/
@@ -94,23 +97,26 @@ import { Mobile } from '@template/ui';
 
 ### Platform Differences
 
-| Aspect | Web | Mobile |
-|--------|-----|--------|
-| Click handler | `onClick` | `onPress` |
-| Button element | `<button>` | `<Pressable>` |
-| Hover states | `hover:` | Not supported |
-| Active states | `:active` | `active:` |
-| Text wrapper | Not needed | Required `<Text>` |
+| Aspect         | Web        | Mobile            |
+| -------------- | ---------- | ----------------- |
+| Click handler  | `onClick`  | `onPress`         |
+| Button element | `<button>` | `<Pressable>`     |
+| Hover states   | `hover:`   | Not supported     |
+| Active states  | `:active`  | `active:`         |
+| Text wrapper   | Not needed | Required `<Text>` |
 
 ### Styling
+
 - Uses Tailwind CSS 4 with Nativewind for React Native compatibility
 - Tailwind classes applied directly via `className` prop
 - PostCSS config at `postcss.config.mjs`
 
 ### Path Aliases
+
 - `@/*` maps to `./src/*` (configured in tsconfig.json and Storybook webpack)
 
 ### Storybook
+
 - Web Storybook config: `.storybook-web/`
 - Uses react-webpack5 with Babel for TypeScript
 - Stories auto-discovered from `src/**/*.stories.tsx`
@@ -118,6 +124,7 @@ import { Mobile } from '@template/ui';
 ## Commit Convention
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
+
 ```
 type(scope): Description
 
@@ -148,12 +155,12 @@ PR title format: `user-story-number/your-feature-name` (e.g., `US-123/add-loadin
 
 ### ClickUp Status Flow
 
-| Branch/PR Event | ClickUp Status |
-|----------------|----------------|
-| Branch `us###/*` pushed | In Progress |
-| PR opened to `testing` or `dev` | In Review |
-| PR merged to `staging` | Accepted |
-| PR merged to `main` | Accepted Customer |
+| Branch/PR Event                 | ClickUp Status    |
+| ------------------------------- | ----------------- |
+| Branch `us###/*` pushed         | In Progress       |
+| PR opened to `testing` or `dev` | In Review         |
+| PR merged to `staging`          | Accepted          |
+| PR merged to `main`             | Accepted Customer |
 
 GitHub Secrets are configured for automatic workflow execution. Local `.env` file only needed for manual script execution.
 
@@ -161,16 +168,16 @@ GitHub Secrets are configured for automatic workflow execution. Local `.env` fil
 
 Use these agents for specialized tasks:
 
-| Command | Purpose |
-|---------|---------|
-| `/syntek-dev-suite:review` | Code review for security, performance, and style |
-| `/syntek-dev-suite:test-writer` | Generate tests for components |
-| `/syntek-dev-suite:frontend` | UI/UX and accessibility review |
-| `/syntek-dev-suite:qa-tester` | Find bugs, security flaws, edge cases |
-| `/syntek-dev-suite:docs` | Write documentation and docstrings |
-| `/syntek-dev-suite:refactor` | Refactor without changing logic |
-| `/syntek-dev-suite:plan` | Create architectural plans |
-| `/syntek-dev-suite:syntax` | Fix syntax and linting errors |
+| Command                         | Purpose                                          |
+| ------------------------------- | ------------------------------------------------ |
+| `/syntek-dev-suite:review`      | Code review for security, performance, and style |
+| `/syntek-dev-suite:test-writer` | Generate tests for components                    |
+| `/syntek-dev-suite:frontend`    | UI/UX and accessibility review                   |
+| `/syntek-dev-suite:qa-tester`   | Find bugs, security flaws, edge cases            |
+| `/syntek-dev-suite:docs`        | Write documentation and docstrings               |
+| `/syntek-dev-suite:refactor`    | Refactor without changing logic                  |
+| `/syntek-dev-suite:plan`        | Create architectural plans                       |
+| `/syntek-dev-suite:syntax`      | Fix syntax and linting errors                    |
 
 ### Recommended Workflow
 

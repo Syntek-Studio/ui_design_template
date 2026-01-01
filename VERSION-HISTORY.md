@@ -1,7 +1,7 @@
 # Version History
 
 **Last Updated**: 01/01/2026
-**Version**: 0.6.0
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -13,76 +13,85 @@
 - [Table of Contents](#table-of-contents)
 - [\[Unreleased\]](#unreleased)
   - [Technical Changes](#technical-changes)
-- [\[0.6.0\] - 01/01/2026](#060---01012026)
+- [\[0.7.0\] - 01/01/2026](#070---01012026)
   - [Summary](#summary)
   - [Breaking Changes](#breaking-changes)
   - [Database Migrations](#database-migrations)
   - [API Changes](#api-changes)
   - [Files Changed](#files-changed)
-  - [Removed Files](#removed-files)
   - [Configuration Changes](#configuration-changes)
-  - [Documentation Notes](#documentation-notes)
+  - [Security Notes](#security-notes)
   - [Architecture Notes](#architecture-notes)
-- [\[0.5.1\] - 29/12/2024](#051---29122024)
+- [\[0.6.0\] - 01/01/2026](#060---01012026)
   - [Summary](#summary-1)
   - [Breaking Changes](#breaking-changes-1)
   - [Database Migrations](#database-migrations-1)
   - [API Changes](#api-changes-1)
   - [Files Changed](#files-changed-1)
-  - [Documentation Notes](#documentation-notes-1)
-- [\[0.5.0\] - 29/12/2024](#050---29122024)
+  - [Removed Files](#removed-files)
+  - [Configuration Changes](#configuration-changes-1)
+  - [Documentation Notes](#documentation-notes)
+  - [Architecture Notes](#architecture-notes-1)
+- [\[0.5.1\] - 29/12/2024](#051---29122024)
   - [Summary](#summary-2)
   - [Breaking Changes](#breaking-changes-2)
   - [Database Migrations](#database-migrations-2)
   - [API Changes](#api-changes-2)
   - [Files Changed](#files-changed-2)
-  - [Architecture Notes](#architecture-notes-1)
-- [\[0.4.0\] - 29/12/2024](#040---29122024)
+  - [Documentation Notes](#documentation-notes-1)
+- [\[0.5.0\] - 29/12/2024](#050---29122024)
   - [Summary](#summary-3)
   - [Breaking Changes](#breaking-changes-3)
   - [Database Migrations](#database-migrations-3)
   - [API Changes](#api-changes-3)
   - [Files Changed](#files-changed-3)
-  - [Performance Notes](#performance-notes)
-- [\[0.3.0\] - 29/12/2024](#030---29122024)
+  - [Architecture Notes](#architecture-notes-2)
+- [\[0.4.0\] - 29/12/2024](#040---29122024)
   - [Summary](#summary-4)
   - [Breaking Changes](#breaking-changes-4)
   - [Database Migrations](#database-migrations-4)
   - [API Changes](#api-changes-4)
   - [Files Changed](#files-changed-4)
-  - [Configuration Changes](#configuration-changes-1)
-- [\[0.2.1\] - 29/12/2024](#021---29122024)
+  - [Performance Notes](#performance-notes)
+- [\[0.3.0\] - 29/12/2024](#030---29122024)
   - [Summary](#summary-5)
   - [Breaking Changes](#breaking-changes-5)
   - [Database Migrations](#database-migrations-5)
   - [API Changes](#api-changes-5)
   - [Files Changed](#files-changed-5)
-  - [Dependencies Updated](#dependencies-updated)
-- [\[0.2.0\] - 29/12/2024](#020---29122024)
+  - [Configuration Changes](#configuration-changes-2)
+- [\[0.2.1\] - 29/12/2024](#021---29122024)
   - [Summary](#summary-6)
   - [Breaking Changes](#breaking-changes-6)
   - [Database Migrations](#database-migrations-6)
   - [API Changes](#api-changes-6)
   - [Files Changed](#files-changed-6)
-  - [Documentation Notes](#documentation-notes-2)
-- [\[0.1.1\] - 29/12/2024](#011---29122024)
+  - [Dependencies Updated](#dependencies-updated)
+- [\[0.2.0\] - 29/12/2024](#020---29122024)
   - [Summary](#summary-7)
   - [Breaking Changes](#breaking-changes-7)
   - [Database Migrations](#database-migrations-7)
   - [API Changes](#api-changes-7)
   - [Files Changed](#files-changed-7)
-  - [Configuration Changes](#configuration-changes-2)
-- [\[0.1.0\] - 29/12/2024](#010---29122024)
+  - [Documentation Notes](#documentation-notes-2)
+- [\[0.1.1\] - 29/12/2024](#011---29122024)
   - [Summary](#summary-8)
   - [Breaking Changes](#breaking-changes-8)
   - [Database Migrations](#database-migrations-8)
   - [API Changes](#api-changes-8)
   - [Files Changed](#files-changed-8)
-  - [Dependencies Updated](#dependencies-updated-1)
   - [Configuration Changes](#configuration-changes-3)
+- [\[0.1.0\] - 29/12/2024](#010---29122024)
+  - [Summary](#summary-9)
+  - [Breaking Changes](#breaking-changes-9)
+  - [Database Migrations](#database-migrations-9)
+  - [API Changes](#api-changes-9)
+  - [Files Changed](#files-changed-9)
+  - [Dependencies Updated](#dependencies-updated-1)
+  - [Configuration Changes](#configuration-changes-4)
   - [Performance Notes](#performance-notes-1)
-  - [Security Notes](#security-notes)
-  - [Architecture Notes](#architecture-notes-2)
+  - [Security Notes](#security-notes-1)
+  - [Architecture Notes](#architecture-notes-3)
 
 ---
 
@@ -91,6 +100,97 @@
 ### Technical Changes
 
 - Nothing yet
+
+---
+
+## [0.7.0] - 01/01/2026
+
+### Summary
+
+Comprehensive CI/CD infrastructure implementation with GitHub Actions workflows for continuous integration, automated releases, security scanning (CodeQL, njsscan, Codacy), dependency management, and developer tooling with pre-commit hooks. Renamed package to @syntek-studio/ui and enhanced developer experience with VS Code settings.
+
+### Breaking Changes
+
+| Change                                                 | Migration Path                                                         | Affected Files                       |
+| ------------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------ |
+| Package renamed from @template/ui to @syntek-studio/ui | Update package.json imports from `@template/ui` to `@syntek-studio/ui` | `package.json` in consuming projects |
+
+### Database Migrations
+
+Not applicable - library project.
+
+### API Changes
+
+None - infrastructure and configuration only.
+
+### Files Changed
+
+| File                                        | Changes                                                                                  |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `.github/workflows/ci.yml`                  | Added CI workflow for linting, type-checking, testing, and building on all pull requests |
+| `.github/workflows/release.yml`             | Added automated release workflow triggered on tags (v*.*.\*)                             |
+| `.github/workflows/publish-github.yml`      | Added GitHub Packages publishing workflow                                                |
+| `.github/workflows/version-check.yml`       | Added version consistency validation workflow                                            |
+| `.github/workflows/codeql.yml`              | Added CodeQL security analysis workflow                                                  |
+| `.github/workflows/njsscan.yml`             | Added njsscan security scanning workflow                                                 |
+| `.github/workflows/codacy-analysis.yml`     | Added Codacy static code analysis workflow                                               |
+| `.github/workflows/dependency-review.yml`   | Added dependency vulnerability scanning workflow                                         |
+| `.github/dependabot.yml`                    | Added Dependabot configuration for automated dependency updates                          |
+| `.github/CONTRIBUTING.md`                   | Added comprehensive contributing guidelines                                              |
+| `.github/CODE_OF_CONDUCT.md`                | Added Contributor Covenant Code of Conduct                                               |
+| `.github/SECURITY.md`                       | Added security policy and vulnerability reporting guidelines                             |
+| `.github/ISSUE_TEMPLATE/bug_report.md`      | Added bug report issue template                                                          |
+| `.github/ISSUE_TEMPLATE/feature_request.md` | Added feature request issue template                                                     |
+| `.github/PULL_REQUEST_TEMPLATE.md`          | Added pull request template                                                              |
+| `.husky/pre-commit`                         | Added pre-commit hook for lint-staged                                                    |
+| `package.json`                              | Renamed to @syntek-studio/ui, added husky and lint-staged configuration                  |
+| `.vscode/settings.json`                     | Enhanced VS Code workspace settings for TypeScript, ESLint, and formatting               |
+
+### Configuration Changes
+
+| File                            | Key                   | Change                                                             |
+| ------------------------------- | --------------------- | ------------------------------------------------------------------ |
+| `package.json`                  | `name`                | Changed from @template/ui to @syntek-studio/ui                     |
+| `package.json`                  | `lint-staged`         | Added pre-commit hooks for TypeScript, ESLint, and Prettier        |
+| `package.json`                  | `scripts.prepare`     | Added husky installation script                                    |
+| `.github/workflows/ci.yml`      | `on`                  | Configured to run on pull requests and pushes to main/dev branches |
+| `.github/workflows/release.yml` | `on.push.tags`        | Configured to trigger on version tags (v*.*.\*)                    |
+| `.github/dependabot.yml`        | `updates`             | Configured weekly npm dependency updates                           |
+| `.vscode/settings.json`         | `editor.formatOnSave` | Set to true for automatic formatting                               |
+| `.vscode/settings.json`         | `typescript.tsdk`     | Set to use workspace TypeScript version                            |
+
+### Security Notes
+
+- CodeQL analysis scans for JavaScript/TypeScript security vulnerabilities on every push
+- njsscan performs Node.js-specific security scanning
+- Codacy provides static code analysis with security checks
+- Dependency review workflow blocks PRs with vulnerable dependencies
+- Dependabot automatically creates PRs for security updates
+- Pre-commit hooks enforce code quality and type safety before commits
+- Security policy (SECURITY.md) provides clear vulnerability reporting process
+
+### Architecture Notes
+
+**CI/CD Pipeline:**
+
+- All pull requests run comprehensive checks: lint, type-check, test, build
+- Version tags automatically trigger release creation and publishing
+- GitHub Packages integration for internal package distribution
+- Version consistency validation ensures package.json matches git tags
+
+**Security Infrastructure:**
+
+- Multi-layered security scanning (CodeQL, njsscan, Codacy)
+- Automated dependency vulnerability detection
+- Weekly Dependabot updates for npm packages
+- Pre-commit hooks prevent committing code quality issues
+
+**Developer Experience:**
+
+- Husky + lint-staged enforce code quality locally
+- VS Code settings provide consistent editor configuration
+- Issue and PR templates guide contributions
+- Contributing guidelines streamline collaboration
 
 ---
 
