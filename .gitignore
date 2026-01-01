@@ -17,6 +17,7 @@ dist-ssr
 
 # Storybook
 storybook-static
+*-debug.txt
 
 # Editor directories and files
 .vscode/*
@@ -28,3 +29,9 @@ storybook-static
 *.njsproj
 *.sln
 *.sw?
+
+# Claude Code
+.claude/settings.local.json
+
+# Env variables
+.env

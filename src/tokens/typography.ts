@@ -1,48 +1,50 @@
 /**
- * Design Tokens - Typography
+ * Typography scale for text styling consistency
  *
- * Typography scale and font families for consistent text styling
+ * Provides predefined font families, sizes, and weights for:
+ * - Font families: sans-serif (Inter), serif (Georgia), monospace (Fira Code)
+ * - Font sizes: xs to 6xl with corresponding line heights
+ * - Font weights: thin (100) to black (900)
+ *
+ * Ensures consistent typography hierarchy across web and mobile platforms.
+ *
+ * @example
+ * import { typography } from '@template/ui';
+ * const fontSize = typography.fontSize.lg;        // { size: 18, lineHeight: 28 }
+ * const fontWeight = typography.fontWeight.bold;  // 700
+ * const fontFamily = typography.fontFamily.mono;  // Fira Code, monospace
+ *
+ * @see {@link https://example.com/design-tokens} Design tokens documentation
  */
+export const typography = {
+  fontFamily: {
+    sans: ['Inter', 'system-ui', 'sans-serif'],
+    serif: ['Georgia', 'serif'],
+    mono: ['Fira Code', 'monospace'],
+  },
+  fontSize: {
+    xs: { size: 12, lineHeight: 16 },
+    sm: { size: 14, lineHeight: 20 },
+    base: { size: 16, lineHeight: 24 },
+    lg: { size: 18, lineHeight: 28 },
+    xl: { size: 20, lineHeight: 28 },
+    '2xl': { size: 24, lineHeight: 32 },
+    '3xl': { size: 30, lineHeight: 36 },
+    '4xl': { size: 36, lineHeight: 40 },
+    '5xl': { size: 48, lineHeight: 1 },
+    '6xl': { size: 60, lineHeight: 1 },
+  },
+  fontWeight: {
+    thin: '100',
+    extralight: '200',
+    light: '300',
+    normal: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700',
+    extrabold: '800',
+    black: '900',
+  },
+} as const;
 
-export const fontFamily = {
-  sans: ['Inter', 'system-ui', 'sans-serif'].join(', '),
-  display: ['Poppins', 'sans-serif'].join(', '),
-} as const
-
-export const fontSize = {
-  xs: 12,
-  sm: 14,
-  base: 16,
-  lg: 18,
-  xl: 20,
-  '2xl': 24,
-  '3xl': 30,
-  '4xl': 36,
-  '5xl': 48,
-} as const
-
-export const fontWeight = {
-  thin: '100',
-  extralight: '200',
-  light: '300',
-  normal: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
-  extrabold: '800',
-  black: '900',
-} as const
-
-export const lineHeight = {
-  none: 1,
-  tight: 1.25,
-  snug: 1.375,
-  normal: 1.5,
-  relaxed: 1.625,
-  loose: 2,
-} as const
-
-export type FontFamilyToken = typeof fontFamily
-export type FontSizeToken = typeof fontSize
-export type FontWeightToken = typeof fontWeight
-export type LineHeightToken = typeof lineHeight
+export type Typography = typeof typography;
