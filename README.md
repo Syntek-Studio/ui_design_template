@@ -12,49 +12,48 @@ A shared UI component library for React Web and React Native applications. Built
 
 ## Table of Contents
 
-- [@template/ui](#tempalteui)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Installation](#installation)
-    - [Peer Dependencies](#peer-dependencies)
-  - [Quick Start](#quick-start)
-    - [Web Components](#web-components)
-    - [Mobile Components](#mobile-components)
-    - [Design Tokens](#design-tokens)
-  - [Architecture](#architecture)
-    - [Platform-Specific Implementation](#platform-specific-implementation)
-      - [Web Components](#web-components-1)
-      - [Mobile Components](#mobile-components-1)
-    - [Import Patterns](#import-patterns)
-    - [Platform Differences](#platform-differences)
-  - [Components](#components)
-    - [Button](#button)
-  - [Design Tokens](#design-tokens-1)
-    - [Colours](#colours)
-    - [Spacing](#spacing)
-    - [Typography](#typography)
-    - [Breakpoints](#breakpoints)
-    - [Shadows](#shadows)
-    - [Borders](#borders)
-  - [Styling](#styling)
-    - [Tailwind CSS 4](#tailwind-css-4)
-    - [Custom Styling](#custom-styling)
-    - [PostCSS Configuration](#postcss-configuration)
-  - [Examples](#examples)
-    - [Creating a Login Form](#creating-a-login-form)
-  - [Documentation](#documentation)
-    - [Storybook](#storybook)
-  - [Development](#development)
-    - [Prerequisites](#prerequisites)
-    - [Setup](#setup)
-    - [Available Commands](#available-commands)
-    - [Project Structure](#project-structure)
-    - [Creating New Components](#creating-new-components)
-  - [Contributing](#contributing)
-    - [Commit Convention](#commit-convention)
-    - [Pull Request Workflow](#pull-request-workflow)
-  - [License](#license)
-  - [Support](#support)
+- [Table of Contents](#table-of-contents)
+- [Features](#features)
+- [Installation](#installation)
+  - [Peer Dependencies](#peer-dependencies)
+- [Quick Start](#quick-start)
+  - [Web Components](#web-components)
+  - [Mobile Components](#mobile-components)
+  - [Design Tokens](#design-tokens)
+- [Architecture](#architecture)
+  - [Platform-Specific Implementation](#platform-specific-implementation)
+    - [Web Components](#web-components-1)
+    - [Mobile Components](#mobile-components-1)
+  - [Import Patterns](#import-patterns)
+  - [Platform Differences](#platform-differences)
+- [Components](#components)
+  - [Button](#button)
+- [Design Tokens](#design-tokens-1)
+  - [Colours](#colours)
+  - [Spacing](#spacing)
+  - [Typography](#typography)
+  - [Breakpoints](#breakpoints)
+  - [Shadows](#shadows)
+  - [Borders](#borders)
+- [Styling](#styling)
+  - [Tailwind CSS 4](#tailwind-css-4)
+  - [Custom Styling](#custom-styling)
+  - [PostCSS Configuration](#postcss-configuration)
+- [Examples](#examples)
+  - [Creating a Login Form](#creating-a-login-form)
+- [Documentation](#documentation)
+  - [Storybook](#storybook)
+- [Development](#development)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Available Commands](#available-commands)
+  - [Project Structure](#project-structure)
+  - [Creating New Components](#creating-new-components)
+- [Contributing](#contributing)
+  - [Commit Convention](#commit-convention)
+  - [Pull Request Workflow](#pull-request-workflow)
+- [License](#license)
+- [Support](#support)
 
 ---
 
@@ -109,55 +108,45 @@ npm install react-native react-native-web nativewind
 ### Web Components
 
 ```typescript
-import { Button } from '@template/ui';
+import { Button } from '@template/ui'
 
 export function App() {
-  return (
-    <Button
-      title="Click me"
-      variant="primary"
-      onClick={() => console.log('Clicked!')}
-    />
-  );
+  return <Button title="Click me" variant="primary" onClick={() => console.log('Clicked!')} />
 }
 ```
 
 ### Mobile Components
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@template/ui'
 
 export function App() {
   return (
-    <Mobile.Button
-      title="Click me"
-      variant="primary"
-      onPress={() => console.log('Pressed!')}
-    />
-  );
+    <Mobile.Button title="Click me" variant="primary" onPress={() => console.log('Pressed!')} />
+  )
 }
 ```
 
 ### Design Tokens
 
 ```typescript
-import { colours, spacing, typography, breakpoints } from '@template/ui';
+import { colours, spacing, typography, breakpoints } from '@template/ui'
 
 // Colours
-const primaryColor = colours.primary[500]; // #3b82f6
-const errorColor = colours.error; // #ef4444
+const primaryColor = colours.primary[500] // #3b82f6
+const errorColor = colours.error // #ef4444
 
 // Spacing
-const padding = spacing[4]; // 16px
-const margin = spacing[6]; // 24px
+const padding = spacing[4] // 16px
+const margin = spacing[6] // 24px
 
 // Typography
-const fontSize = typography.fontSize.lg; // { size: 18, lineHeight: 28 }
-const fontWeight = typography.fontWeight.semibold; // 600
+const fontSize = typography.fontSize.lg // { size: 18, lineHeight: 28 }
+const fontWeight = typography.fontWeight.semibold // 600
 
 // Breakpoints
-const mobileBreakpoint = breakpoints.sm; // 640px
-const desktopBreakpoint = breakpoints.lg; // 1024px
+const mobileBreakpoint = breakpoints.sm // 640px
+const desktopBreakpoint = breakpoints.lg // 1024px
 ```
 
 ---
@@ -179,6 +168,7 @@ src/
 #### Web Components
 
 Located in `src/web/components/`, built with:
+
 - React 18/19
 - Tailwind CSS 4 utilities
 - HTML elements (`<button>`, `<div>`, etc.)
@@ -186,6 +176,7 @@ Located in `src/web/components/`, built with:
 #### Mobile Components
 
 Located in `src/mobile/components/`, built with:
+
 - React Native
 - Nativewind 4 for styling
 - React Native components (`<Pressable>`, `<Text>`, etc.)
@@ -193,11 +184,13 @@ Located in `src/mobile/components/`, built with:
 ### Import Patterns
 
 **Web (default exports):**
+
 ```typescript
-import { Button, Card, Input } from '@template/ui';
+import { Button, Card, Input } from '@template/ui'
 ```
 
 **Mobile (namespaced):**
+
 ```typescript
 import { Mobile } from '@template/ui';
 
@@ -208,14 +201,14 @@ import { Mobile } from '@template/ui';
 
 ### Platform Differences
 
-| Aspect | Web | Mobile |
-|--------|-----|--------|
-| Click handler | `onClick` | `onPress` |
-| Button element | `<button>` | `<Pressable>` |
-| Hover states | `hover:` class | Not supported |
-| Active states | `:active` pseudo-class | `active:` class |
-| Text wrapper | Not needed | Required `<Text>` |
-| Focus management | Browser default | Manual implementation |
+| Aspect           | Web                    | Mobile                |
+| ---------------- | ---------------------- | --------------------- |
+| Click handler    | `onClick`              | `onPress`             |
+| Button element   | `<button>`             | `<Pressable>`         |
+| Hover states     | `hover:` class         | Not supported         |
+| Active states    | `:active` pseudo-class | `active:` class       |
+| Text wrapper     | Not needed             | Required `<Text>`     |
+| Focus management | Browser default        | Manual implementation |
 
 ---
 
@@ -226,29 +219,23 @@ import { Mobile } from '@template/ui';
 Versatile button component supporting multiple variants and states.
 
 **Web:**
-```typescript
-import { Button } from '@template/ui';
 
-<Button
-  title="Submit"
-  variant="primary"
-  onClick={() => {}}
-/>
+```typescript
+import { Button } from '@template/ui'
+
+;<Button title="Submit" variant="primary" onClick={() => {}} />
 ```
 
 **Mobile:**
-```typescript
-import { Mobile } from '@template/ui';
 
-<Mobile.Button
-  title="Submit"
-  variant="primary"
-  onPress={() => {}}
-  disabled={false}
-/>
+```typescript
+import { Mobile } from '@template/ui'
+
+;<Mobile.Button title="Submit" variant="primary" onPress={() => {}} disabled={false} />
 ```
 
 **Props:**
+
 - `title` (string) - Button text
 - `variant` ('primary' | 'secondary') - Visual style
 - `onClick`/`onPress` (function, optional) - Click handler
@@ -265,95 +252,95 @@ The library includes comprehensive design tokens for consistent styling:
 ### Colours
 
 ```typescript
-import { colours } from '@template/ui';
+import { colours } from '@template/ui'
 
-colours.primary;    // 50-900 shades
-colours.secondary;  // 50-900 shades
-colours.success;    // #22c55e
-colours.error;      // #ef4444
-colours.warning;    // #f59e0b
-colours.info;       // #3b82f6
-colours.grey;       // 50-900 shades
-colours.white;      // #ffffff
-colours.black;      // #000000
+colours.primary // 50-900 shades
+colours.secondary // 50-900 shades
+colours.success // #22c55e
+colours.error // #ef4444
+colours.warning // #f59e0b
+colours.info // #3b82f6
+colours.grey // 50-900 shades
+colours.white // #ffffff
+colours.black // #000000
 ```
 
 ### Spacing
 
 ```typescript
-import { spacing } from '@template/ui';
+import { spacing } from '@template/ui'
 
-spacing[0];     // 0px
-spacing[1];     // 4px
-spacing[2];     // 8px
-spacing[4];     // 16px
-spacing[6];     // 24px
+spacing[0] // 0px
+spacing[1] // 4px
+spacing[2] // 8px
+spacing[4] // 16px
+spacing[6] // 24px
 // ... up to spacing[96] (384px)
 ```
 
 ### Typography
 
 ```typescript
-import { typography } from '@template/ui';
+import { typography } from '@template/ui'
 
 // Font families
-typography.fontFamily.sans;  // Inter, system-ui, sans-serif
-typography.fontFamily.serif; // Georgia, serif
-typography.fontFamily.mono;  // Fira Code, monospace
+typography.fontFamily.sans // Inter, system-ui, sans-serif
+typography.fontFamily.serif // Georgia, serif
+typography.fontFamily.mono // Fira Code, monospace
 
 // Font sizes
-typography.fontSize.base;     // { size: 16, lineHeight: 24 }
-typography.fontSize.lg;       // { size: 18, lineHeight: 28 }
-typography.fontSize['2xl'];   // { size: 24, lineHeight: 32 }
+typography.fontSize.base // { size: 16, lineHeight: 24 }
+typography.fontSize.lg // { size: 18, lineHeight: 28 }
+typography.fontSize['2xl'] // { size: 24, lineHeight: 32 }
 
 // Font weights
-typography.fontWeight.normal;    // 400
-typography.fontWeight.semibold;  // 600
-typography.fontWeight.bold;      // 700
+typography.fontWeight.normal // 400
+typography.fontWeight.semibold // 600
+typography.fontWeight.bold // 700
 ```
 
 ### Breakpoints
 
 ```typescript
-import { breakpoints } from '@template/ui';
+import { breakpoints } from '@template/ui'
 
-breakpoints.sm;   // 640px
-breakpoints.md;   // 768px
-breakpoints.lg;   // 1024px
-breakpoints.xl;   // 1280px
-breakpoints['2xl']; // 1536px
+breakpoints.sm // 640px
+breakpoints.md // 768px
+breakpoints.lg // 1024px
+breakpoints.xl // 1280px
+breakpoints['2xl'] // 1536px
 ```
 
 ### Shadows
 
 ```typescript
-import { shadows } from '@template/ui';
+import { shadows } from '@template/ui'
 
-shadows.none;   // none
-shadows.sm;     // Small shadow
-shadows.base;   // Base shadow
-shadows.lg;     // Large shadow
-shadows.xl;     // Extra large shadow
-shadows.inner;  // Inset shadow
+shadows.none // none
+shadows.sm // Small shadow
+shadows.base // Base shadow
+shadows.lg // Large shadow
+shadows.xl // Extra large shadow
+shadows.inner // Inset shadow
 ```
 
 ### Borders
 
 ```typescript
-import { borders } from '@template/ui';
+import { borders } from '@template/ui'
 
 // Border radius
-borders.radius.none;   // 0
-borders.radius.sm;     // 2px
-borders.radius.base;   // 4px
-borders.radius.lg;     // 8px
-borders.radius.full;   // 9999px (full circle)
+borders.radius.none // 0
+borders.radius.sm // 2px
+borders.radius.base // 4px
+borders.radius.lg // 8px
+borders.radius.full // 9999px (full circle)
 
 // Border width
-borders.width[0];   // 0
-borders.width[1];   // 1px
-borders.width[2];   // 2px
-borders.width[4];   // 4px
+borders.width[0] // 0
+borders.width[1] // 1px
+borders.width[2] // 2px
+borders.width[4] // 4px
 ```
 
 For detailed token documentation, see [docs/TOKENS.md](docs/TOKENS.md).
@@ -367,11 +354,13 @@ For detailed token documentation, see [docs/TOKENS.md](docs/TOKENS.md).
 The library uses Tailwind CSS 4 for both web and mobile platforms through Nativewind.
 
 **Web Example:**
+
 ```typescript
 <Button className="px-4 py-2 rounded bg-blue-500 text-white hover:opacity-90" />
 ```
 
 **Mobile Example:**
+
 ```typescript
 <Mobile.Button className="px-4 py-2 rounded bg-blue-500 text-white" />
 ```
@@ -381,10 +370,7 @@ The library uses Tailwind CSS 4 for both web and mobile platforms through Native
 Components accept a `className` prop for customisation:
 
 ```typescript
-<Button
-  title="Custom"
-  className="bg-gradient-to-r from-blue-500 to-purple-600"
-/>
+<Button title="Custom" className="bg-gradient-to-r from-blue-500 to-purple-600" />
 ```
 
 ### PostCSS Configuration
@@ -398,17 +384,18 @@ The library includes PostCSS configuration for processing Tailwind CSS. See [pos
 ### Creating a Login Form
 
 **Web:**
+
 ```typescript
-import { Button, Input } from '@template/ui';
-import { useState } from 'react';
+import { Button, Input } from '@template/ui'
+import { useState } from 'react'
 
 export function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = () => {
-    console.log('Login:', { email, password });
-  };
+    console.log('Login:', { email, password })
+  }
 
   return (
     <form className="space-y-4 p-6">
@@ -426,31 +413,28 @@ export function LoginForm() {
       />
       <Button title="Login" onClick={handleSubmit} />
     </form>
-  );
+  )
 }
 ```
 
 **Mobile:**
+
 ```typescript
-import { Mobile } from '@template/ui';
-import { View } from 'react-native';
-import { useState } from 'react';
+import { Mobile } from '@template/ui'
+import { View } from 'react-native'
+import { useState } from 'react'
 
 export function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = () => {
-    console.log('Login:', { email, password });
-  };
+    console.log('Login:', { email, password })
+  }
 
   return (
     <View className="space-y-4 p-6">
-      <Mobile.Input
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
+      <Mobile.Input placeholder="Email" value={email} onChangeText={setEmail} />
       <Mobile.Input
         placeholder="Password"
         value={password}
@@ -459,7 +443,7 @@ export function LoginForm() {
       />
       <Mobile.Button title="Login" onPress={handleSubmit} />
     </View>
-  );
+  )
 }
 ```
 
@@ -617,6 +601,7 @@ feature/your-feature → testing → dev → staging → main
 ```
 
 Create PRs with clear descriptions and include:
+
 - What changed
 - Why it changed
 - Testing performed

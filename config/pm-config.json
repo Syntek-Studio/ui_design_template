@@ -1,0 +1,64 @@
+{
+  "tool": "clickup",
+  "api_version": "v2",
+  "sync_enabled": true,
+  "bidirectional": true,
+  "auto_create_issues": true,
+  "workspace_id": "${CLICKUP_WORKSPACE_ID}",
+  "space_id": "${CLICKUP_SPACE_ID}",
+  "folders": {
+    "backlog": "${CLICKUP_BACKLOG_FOLDER_ID}",
+    "sprints": "${CLICKUP_SPRINT_FOLDER_ID}"
+  },
+  "status_mapping": {
+    "backlog": "to do",
+    "ready": "ready",
+    "in_progress": "in progress",
+    "review": "review",
+    "done": "done",
+    "blocked": "blocked"
+  },
+  "priority_mapping": {
+    "urgent": 1,
+    "high": 2,
+    "normal": 3,
+    "low": 4
+  },
+  "field_mapping": {
+    "story_points": "story_points",
+    "priority": "priority",
+    "sprint": "sprint",
+    "assignee": "assignee",
+    "labels": "tags"
+  },
+  "labels": {
+    "must_have": "must-have",
+    "should_have": "should-have",
+    "could_have": "could-have",
+    "wont_have": "wont-have",
+    "web_component": "web-component",
+    "mobile_component": "mobile-component",
+    "design_system": "design-system",
+    "bug": "bug",
+    "enhancement": "enhancement",
+    "documentation": "documentation"
+  },
+  "notifications": {
+    "on_status_change": true,
+    "on_assignment": true,
+    "on_pr_opened": true,
+    "on_pr_merged": true
+  },
+  "branch_naming": {
+    "enabled": true,
+    "pattern": "{task_id}/{description}",
+    "lowercase": true,
+    "max_length": 60
+  },
+  "pr_settings": {
+    "auto_link_tasks": true,
+    "update_status_on_open": "in progress",
+    "update_status_on_merge": "done",
+    "require_task_in_title": true
+  }
+}

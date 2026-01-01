@@ -10,9 +10,27 @@
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Latest Release](#latest-release)
+  - [Version 0.5.1 - 29 December 2024](#version-051---29-december-2024)
+    - [What's New](#whats-new)
 - [Previous Releases](#previous-releases)
+  - [Version 0.5.0 - 29 December 2024](#version-050---29-december-2024)
+    - [What's New](#whats-new-1)
+  - [Version 0.4.0 - 29 December 2024](#version-040---29-december-2024)
+    - [What's New](#whats-new-2)
+  - [Version 0.3.0 - 29 December 2024](#version-030---29-december-2024)
+    - [What's New](#whats-new-3)
+  - [Version 0.2.1 - 29 December 2024](#version-021---29-december-2024)
+    - [What's New](#whats-new-4)
+  - [Version 0.2.0 - 29 December 2024](#version-020---29-december-2024)
+    - [What's New](#whats-new-5)
+  - [Version 0.1.1 - 29 December 2024](#version-011---29-december-2024)
+    - [What's New](#whats-new-6)
+  - [Version 0.1.0 - 29 December 2024](#version-010---29-december-2024)
+    - [What's Included](#whats-included)
 - [Coming Soon](#coming-soon)
+- [Support \& Feedback](#support--feedback)
 
 ---
 
@@ -128,10 +146,12 @@ Welcome to the first release of **@template/ui**!
 #### What's Included
 
 **Cross-Platform Components**
+
 - Button component for web and mobile
 - Consistent API across platforms
 
 **Design System**
+
 - Colour palette with primary, secondary, and semantic colours
 - Spacing scale (4px grid system)
 - Typography tokens
@@ -139,18 +159,20 @@ Welcome to the first release of **@template/ui**!
 - Shadow and border definitions
 
 **Developer Experience**
+
 - Full TypeScript support
 - Tailwind CSS 4 for web styling
 - Nativewind 4 for React Native
 - Storybook for component documentation
 
 **Getting Started**
+
 ```typescript
 // Web
-import { Button } from '@template/ui';
+import { Button } from '@template/ui'
 
 // Mobile
-import { Mobile } from '@template/ui';
+import { Mobile } from '@template/ui'
 ```
 
 ---
@@ -160,17 +182,20 @@ import { Mobile } from '@template/ui';
 In upcoming releases:
 
 **New Components**
+
 - Card component
 - Input component
 - Modal component
 - Navigation components
 
 **Features**
+
 - Dark mode theme support
 - Animation presets
 - Enhanced accessibility
 
 **Developer Experience**
+
 - More Storybook examples
 - Performance guides
 - Migration documentation
@@ -180,6 +205,7 @@ In upcoming releases:
 ## Support & Feedback
 
 Questions or issues?
+
 - Open an issue on our repository
 - Check documentation in the `docs/` folder
 - Review component examples in Storybook
