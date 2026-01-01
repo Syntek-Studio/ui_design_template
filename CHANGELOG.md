@@ -1,7 +1,7 @@
 # Changelog
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.6.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -20,6 +20,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark mode theme support
 - More comprehensive design tokens documentation
 - Accessibility testing and ARIA enhancements
+
+---
+
+## [0.6.0] - 01/01/2026
+
+### Added
+- ClickUp project management integration with bidirectional GitHub synchronisation
+- GitHub Actions workflow for automatic ClickUp status updates (`.github/workflows/clickup-sync.yml`)
+- PM integration scripts in `scripts/pm/` for manual task management
+- Environment variable template (`.env.example`) for ClickUp API configuration
+- VS Code workspace settings and recommended extensions
+- ClickUp API configuration (`config/clickup.json`)
+- PM status mapping configuration (`config/pm-status-mapping.json`)
+- PM integration documentation in `docs/PM-INTEGRATION/`
+- 23 sprint planning documents in `docs/SPRINTS/`
+- 39 user story definitions in `docs/STORIES/`
+
+### Changed
+- Moved environment scripts from root to `scripts/env/` for better organisation
+- Updated `.claude/CLAUDE.md` with PM integration documentation
+- Updated `.gitignore` to exclude environment files
+- Updated `DOCUMENTATION-INDEX.md` with PM documentation links
+- Updated `README.md` with PM integration section
+
+### Removed
+- `dev.sh`, `staging.sh`, `production.sh`, `test.sh` from root (moved to `scripts/env/`)
 
 ---
 
