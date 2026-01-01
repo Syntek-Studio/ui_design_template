@@ -1,7 +1,7 @@
 # Release Notes
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.6.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -12,21 +12,24 @@
 
 - [Table of Contents](#table-of-contents)
 - [Latest Release](#latest-release)
-  - [Version 0.5.1 - 29 December 2024](#version-051---29-december-2024)
+  - [Version 0.6.0 - 01 January 2026](#version-060---01-january-2026)
     - [What's New](#whats-new)
+    - [Workflow Automation](#workflow-automation)
 - [Previous Releases](#previous-releases)
-  - [Version 0.5.0 - 29 December 2024](#version-050---29-december-2024)
+  - [Version 0.5.1 - 29 December 2024](#version-051---29-december-2024)
     - [What's New](#whats-new-1)
-  - [Version 0.4.0 - 29 December 2024](#version-040---29-december-2024)
+  - [Version 0.5.0 - 29 December 2024](#version-050---29-december-2024)
     - [What's New](#whats-new-2)
-  - [Version 0.3.0 - 29 December 2024](#version-030---29-december-2024)
+  - [Version 0.4.0 - 29 December 2024](#version-040---29-december-2024)
     - [What's New](#whats-new-3)
-  - [Version 0.2.1 - 29 December 2024](#version-021---29-december-2024)
+  - [Version 0.3.0 - 29 December 2024](#version-030---29-december-2024)
     - [What's New](#whats-new-4)
-  - [Version 0.2.0 - 29 December 2024](#version-020---29-december-2024)
+  - [Version 0.2.1 - 29 December 2024](#version-021---29-december-2024)
     - [What's New](#whats-new-5)
-  - [Version 0.1.1 - 29 December 2024](#version-011---29-december-2024)
+  - [Version 0.2.0 - 29 December 2024](#version-020---29-december-2024)
     - [What's New](#whats-new-6)
+  - [Version 0.1.1 - 29 December 2024](#version-011---29-december-2024)
+    - [What's New](#whats-new-7)
   - [Version 0.1.0 - 29 December 2024](#version-010---29-december-2024)
     - [What's Included](#whats-included)
 - [Coming Soon](#coming-soon)
@@ -35,6 +38,33 @@
 ---
 
 ## Latest Release
+
+### Version 0.6.0 - 01 January 2026
+
+**Project Management Integration**
+
+We've added comprehensive ClickUp integration for seamless project management and workflow automation.
+
+#### What's New
+
+- **ClickUp Sync**: Bidirectional synchronisation between GitHub and ClickUp
+- **Automatic Status Updates**: Branch pushes and PR events automatically update ClickUp task status
+- **Sprint Planning**: 23 comprehensive sprint documents to guide development
+- **User Stories**: 39 detailed user stories with acceptance criteria
+- **PM Documentation**: Setup guides and troubleshooting documentation
+
+#### Workflow Automation
+
+| GitHub Event                    | ClickUp Status    |
+| ------------------------------- | ----------------- |
+| Branch `us###/*` pushed         | In Progress       |
+| PR opened to `testing` or `dev` | In Review         |
+| PR merged to `staging`          | Accepted          |
+| PR merged to `main`             | Accepted Customer |
+
+---
+
+## Previous Releases
 
 ### Version 0.5.1 - 29 December 2024
 
@@ -50,8 +80,6 @@ We've completely refreshed all documentation across the project to make it easie
 - **British English**: Consistent language conventions throughout
 
 ---
-
-## Previous Releases
 
 ### Version 0.5.0 - 29 December 2024
 

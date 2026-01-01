@@ -1,7 +1,7 @@
 # Version History
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.6.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -13,66 +13,76 @@
 - [Table of Contents](#table-of-contents)
 - [\[Unreleased\]](#unreleased)
   - [Technical Changes](#technical-changes)
-- [\[0.5.1\] - 29/12/2024](#051---29122024)
+- [\[0.6.0\] - 01/01/2026](#060---01012026)
   - [Summary](#summary)
   - [Breaking Changes](#breaking-changes)
   - [Database Migrations](#database-migrations)
   - [API Changes](#api-changes)
   - [Files Changed](#files-changed)
+  - [Removed Files](#removed-files)
+  - [Configuration Changes](#configuration-changes)
   - [Documentation Notes](#documentation-notes)
-- [\[0.5.0\] - 29/12/2024](#050---29122024)
+  - [Architecture Notes](#architecture-notes)
+- [\[0.5.1\] - 29/12/2024](#051---29122024)
   - [Summary](#summary-1)
   - [Breaking Changes](#breaking-changes-1)
   - [Database Migrations](#database-migrations-1)
   - [API Changes](#api-changes-1)
   - [Files Changed](#files-changed-1)
-  - [Architecture Notes](#architecture-notes)
-- [\[0.4.0\] - 29/12/2024](#040---29122024)
+  - [Documentation Notes](#documentation-notes-1)
+- [\[0.5.0\] - 29/12/2024](#050---29122024)
   - [Summary](#summary-2)
   - [Breaking Changes](#breaking-changes-2)
   - [Database Migrations](#database-migrations-2)
   - [API Changes](#api-changes-2)
   - [Files Changed](#files-changed-2)
-  - [Performance Notes](#performance-notes)
-- [\[0.3.0\] - 29/12/2024](#030---29122024)
+  - [Architecture Notes](#architecture-notes-1)
+- [\[0.4.0\] - 29/12/2024](#040---29122024)
   - [Summary](#summary-3)
   - [Breaking Changes](#breaking-changes-3)
   - [Database Migrations](#database-migrations-3)
   - [API Changes](#api-changes-3)
   - [Files Changed](#files-changed-3)
-  - [Configuration Changes](#configuration-changes)
-- [\[0.2.1\] - 29/12/2024](#021---29122024)
+  - [Performance Notes](#performance-notes)
+- [\[0.3.0\] - 29/12/2024](#030---29122024)
   - [Summary](#summary-4)
   - [Breaking Changes](#breaking-changes-4)
   - [Database Migrations](#database-migrations-4)
   - [API Changes](#api-changes-4)
   - [Files Changed](#files-changed-4)
-  - [Dependencies Updated](#dependencies-updated)
-- [\[0.2.0\] - 29/12/2024](#020---29122024)
+  - [Configuration Changes](#configuration-changes-1)
+- [\[0.2.1\] - 29/12/2024](#021---29122024)
   - [Summary](#summary-5)
   - [Breaking Changes](#breaking-changes-5)
   - [Database Migrations](#database-migrations-5)
   - [API Changes](#api-changes-5)
   - [Files Changed](#files-changed-5)
-  - [Documentation Notes](#documentation-notes-1)
-- [\[0.1.1\] - 29/12/2024](#011---29122024)
+  - [Dependencies Updated](#dependencies-updated)
+- [\[0.2.0\] - 29/12/2024](#020---29122024)
   - [Summary](#summary-6)
   - [Breaking Changes](#breaking-changes-6)
   - [Database Migrations](#database-migrations-6)
   - [API Changes](#api-changes-6)
   - [Files Changed](#files-changed-6)
-  - [Configuration Changes](#configuration-changes-1)
-- [\[0.1.0\] - 29/12/2024](#010---29122024)
+  - [Documentation Notes](#documentation-notes-2)
+- [\[0.1.1\] - 29/12/2024](#011---29122024)
   - [Summary](#summary-7)
   - [Breaking Changes](#breaking-changes-7)
   - [Database Migrations](#database-migrations-7)
   - [API Changes](#api-changes-7)
   - [Files Changed](#files-changed-7)
-  - [Dependencies Updated](#dependencies-updated-1)
   - [Configuration Changes](#configuration-changes-2)
+- [\[0.1.0\] - 29/12/2024](#010---29122024)
+  - [Summary](#summary-8)
+  - [Breaking Changes](#breaking-changes-8)
+  - [Database Migrations](#database-migrations-8)
+  - [API Changes](#api-changes-8)
+  - [Files Changed](#files-changed-8)
+  - [Dependencies Updated](#dependencies-updated-1)
+  - [Configuration Changes](#configuration-changes-3)
   - [Performance Notes](#performance-notes-1)
   - [Security Notes](#security-notes)
-  - [Architecture Notes](#architecture-notes-1)
+  - [Architecture Notes](#architecture-notes-2)
 
 ---
 
@@ -81,6 +91,78 @@
 ### Technical Changes
 
 - Nothing yet
+
+---
+
+## [0.6.0] - 01/01/2026
+
+### Summary
+
+Added ClickUp project management integration with bidirectional GitHub synchronisation, comprehensive sprint planning documentation, and project management infrastructure.
+
+### Breaking Changes
+
+None - all changes are backwards compatible.
+
+### Database Migrations
+
+Not applicable - library project.
+
+### API Changes
+
+None - infrastructure and documentation only.
+
+### Files Changed
+
+| File                                     | Changes                                                                          |
+| ---------------------------------------- | -------------------------------------------------------------------------------- |
+| `.github/workflows/clickup-sync.yml`     | Added GitHub Actions workflow for ClickUp synchronisation                        |
+| `.env.example`                           | Added environment variable template for ClickUp API                              |
+| `.vscode/extensions.json`                | Added recommended VS Code extensions                                             |
+| `.vscode/settings.json`                  | Added VS Code workspace settings                                                 |
+| `config/clickup.json`                    | Added ClickUp API configuration                                                  |
+| `config/pm-status-mapping.json`          | Added PM status mapping for workflow automation                                  |
+| `scripts/pm/`                            | Added PM integration scripts for manual task management                          |
+| `scripts/env/`                           | Moved environment scripts from root (dev.sh, staging.sh, production.sh, test.sh) |
+| `docs/PM-INTEGRATION/README.md`          | Added PM integration overview                                                    |
+| `docs/PM-INTEGRATION/SETUP.md`           | Added PM setup guide                                                             |
+| `docs/PM-INTEGRATION/TROUBLESHOOTING.md` | Added PM troubleshooting guide                                                   |
+| `docs/SPRINTS/`                          | Added 23 sprint planning documents + index                                       |
+| `docs/STORIES/`                          | Added 39 user story definitions + delivery plan                                  |
+| `.claude/CLAUDE.md`                      | Updated with PM integration documentation                                        |
+| `.gitignore`                             | Updated to exclude environment files                                             |
+| `DOCUMENTATION-INDEX.md`                 | Updated with PM documentation links                                              |
+| `README.md`                              | Updated with PM integration section                                              |
+
+### Removed Files
+
+| File            | Reason                                                       |
+| --------------- | ------------------------------------------------------------ |
+| `dev.sh`        | Moved to `scripts/env/dev.sh` for better organisation        |
+| `staging.sh`    | Moved to `scripts/env/staging.sh` for better organisation    |
+| `production.sh` | Moved to `scripts/env/production.sh` for better organisation |
+| `test.sh`       | Moved to `scripts/env/test.sh` for better organisation       |
+
+### Configuration Changes
+
+| File                                 | Key                    | Change                                             |
+| ------------------------------------ | ---------------------- | -------------------------------------------------- |
+| `config/clickup.json`                | `api_base_url`         | Set to ClickUp API v2 endpoint                     |
+| `config/pm-status-mapping.json`      | `status_mapping`       | Configured branch/PR to ClickUp status transitions |
+| `.github/workflows/clickup-sync.yml` | `on.push/pull_request` | Configured triggers for automatic sync             |
+
+### Documentation Notes
+
+- Comprehensive sprint planning with 23 sprint documents
+- 39 user stories defined with acceptance criteria
+- PM integration guides for setup and troubleshooting
+- Bidirectional sync documentation for GitHub ↔ ClickUp
+
+### Architecture Notes
+
+- GitHub Actions workflow enables automatic ClickUp status updates
+- Branch naming convention (`us###/description`) links to ClickUp tasks
+- Status mapping: Branch push → In Progress, PR opened → In Review, PR merged → Accepted
 
 ---
 

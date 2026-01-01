@@ -376,6 +376,45 @@ create_subtask() {
   fi
 }
 
+# Add a task to an additional list (Tasks in Multiple Lists feature)
+# This links the task to the sprint list while keeping it in the backlog
+add_task_to_list() {
+  local task_id="$1"
+  local list_id="$2"
+
+  # SECURITY: Validate IDs
+  if ! validate_id "$task_id" "task_id"; then
+    return 1
+  fi
+  if ! validate_id "$list_id" "list_id"; then
+    return 1
+  fi
+
+  if $DRY_RUN; then
+    echo -e "  ${BLUE}[DRY RUN] Would link task to sprint list${NC}"
+    return 0
+  fi
+
+  # Use the Add Task To List endpoint to link task to additional list
+  local response=$(curl -s -w "\n%{http_code}" -X POST \
+    "https://api.clickup.com/api/v2/list/$list_id/task/$task_id" \
+    -H "Authorization: $CLICKUP_API_KEY" \
+    -H "Content-Type: application/json")
+
+  local http_code=$(echo "$response" | tail -n1)
+
+  if [[ "$http_code" -lt 400 ]]; then
+    echo -e "  ${GREEN}✓ Linked to sprint list${NC}"
+    return 0
+  else
+    echo -e "  ${YELLOW}⚠ Could not link to sprint list${NC}"
+    return 1
+  fi
+}
+
+# Associative array to store sprint list IDs (sprint number -> list ID)
+declare -A SPRINT_LIST_IDS
+
 # Create a list (for sprints) in ClickUp
 create_list() {
   local folder_id="$1"
@@ -441,6 +480,7 @@ parse_user_stories() {
     local story_priority="Medium"
     local story_points="5"
     local story_status="Open"
+    local story_sprint=""
     local tasks=()
     local in_tasks_section=false
 
@@ -482,6 +522,11 @@ parse_user_stories() {
         story_status="${BASH_REMATCH[1]}"
       fi
 
+      # Parse Sprint assignment (e.g., "**Sprint:** Sprint 01" or "**Sprint:** Sprint 12")
+      if [[ "$line" =~ ^\*\*Sprint:\*\*[[:space:]]+Sprint[[:space:]]+([0-9]+) ]]; then
+        story_sprint="${BASH_REMATCH[1]}"
+      fi
+
       # Collect tasks (lines starting with - [ ])
       if $in_tasks_section && [[ "$line" =~ ^-[[:space:]]\[[[:space:]x]\][[:space:]]+(.+)$ ]]; then
         tasks+=("${BASH_REMATCH[1]}")
@@ -518,6 +563,18 @@ parse_user_stories() {
           done
         fi
 
+        # Link task to sprint list if sprint is specified
+        if [[ -n "$task_id" && -n "$story_sprint" ]]; then
+          # Remove leading zeros for array lookup (e.g., "01" -> "1")
+          local sprint_key=$(echo "$story_sprint" | sed 's/^0*//')
+          local sprint_list_id="${SPRINT_LIST_IDS[$sprint_key]}"
+          if [[ -n "$sprint_list_id" ]]; then
+            add_task_to_list "$task_id" "$sprint_list_id"
+          else
+            echo -e "  ${YELLOW}⚠ Sprint $story_sprint list not found${NC}"
+          fi
+        fi
+
         story_count=$((story_count + 1))
       else
         echo -e "${YELLOW}Skipping invalid story ID: $story_id${NC}"
@@ -528,9 +585,9 @@ parse_user_stories() {
   echo -e "\n${GREEN}Processed $story_count user stories${NC}"
 }
 
-# Parse sprints and create lists
+# Parse sprints and create lists, storing IDs for later linking
 parse_sprints() {
-  echo -e "\n${BLUE}=== Parsing Sprints ===${NC}\n"
+  echo -e "\n${BLUE}=== Creating Sprint Lists ===${NC}\n"
 
   if [[ ! -d "$SPRINTS_DIR" ]]; then
     echo -e "${RED}Error: Sprints directory not found: $SPRINTS_DIR${NC}"
@@ -546,6 +603,14 @@ parse_sprints() {
 
     local filename=$(basename "$sprint_file")
     local sprint_title=""
+    local sprint_number=""
+
+    # Extract sprint number from filename (e.g., SPRINT-01.md -> 1)
+    if [[ "$filename" =~ SPRINT-([0-9]+)\.md ]]; then
+      sprint_number="${BASH_REMATCH[1]}"
+      # Remove leading zeros
+      sprint_number=$(echo "$sprint_number" | sed 's/^0*//')
+    fi
 
     # Parse sprint file
     while IFS= read -r line; do
@@ -555,27 +620,26 @@ parse_sprints() {
       fi
     done < "$sprint_file"
 
-    if [[ -n "$sprint_title" ]]; then
-      echo -e "\n${YELLOW}Processing: $sprint_title${NC}"
+    if [[ -n "$sprint_title" && -n "$sprint_number" ]]; then
+      echo -e "${YELLOW}Creating: $sprint_title${NC}"
 
-      # Create the sprint list
-      list_id=$(create_list "$CLICKUP_SPRINT_FOLDER_ID" "$sprint_title" 2>&1 | tail -1)
+      # Create the sprint list and capture the ID
+      local list_output=$(create_list "$CLICKUP_SPRINT_FOLDER_ID" "$sprint_title" 2>&1)
+      local list_id=$(echo "$list_output" | grep -E '^[0-9]+$' | tail -1)
 
       if [[ -n "$list_id" && "$list_id" != "0" ]]; then
-        # Find story references in the sprint
-        while IFS= read -r line; do
-          # Find story references (e.g., "[US-001]" or "| US-001 |")
-          if [[ "$line" =~ \[?(US-[0-9]{3})\]? ]]; then
-            echo "  - Found reference to ${BASH_REMATCH[1]}"
-          fi
-        done < "$sprint_file"
+        # Store the list ID for later linking
+        SPRINT_LIST_IDS[$sprint_number]="$list_id"
+        echo -e "  ${GREEN}✓ Sprint $sprint_number list ID: $list_id${NC}"
+      else
+        echo -e "  ${YELLOW}⚠ Could not create sprint list${NC}"
       fi
 
       sprint_count=$((sprint_count + 1))
     fi
   done
 
-  echo -e "\n${GREEN}Processed $sprint_count sprints${NC}"
+  echo -e "\n${GREEN}Created $sprint_count sprint lists${NC}"
 }
 
 # Main execution
@@ -606,12 +670,13 @@ main() {
   echo -e "${GREEN}✓ Using backlog list ID: $BACKLOG_LIST_ID${NC}"
   echo ""
 
-  if ! $SPRINTS_ONLY; then
-    parse_user_stories
-  fi
-
+  # Create sprints FIRST so we have their IDs for linking stories
   if ! $STORIES_ONLY; then
     parse_sprints
+  fi
+
+  if ! $SPRINTS_ONLY; then
+    parse_user_stories
   fi
 
   echo -e "\n${GREEN}=== Import Complete ===${NC}\n"
