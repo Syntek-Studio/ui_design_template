@@ -49,7 +49,7 @@ the community in public spaces.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported to the community leaders
-responsible for enforcement at [sam.bailey@syntekstudio.com].
+responsible for enforcement at <sam.bailey@syntekstudio.com>.
 
 All complaints will be reviewed and investigated promptly and fairly.
 

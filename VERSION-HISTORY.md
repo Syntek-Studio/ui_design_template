@@ -13,7 +13,7 @@
 - [Table of Contents](#table-of-contents)
 - [Unreleased](#unreleased)
   - [Technical Changes](#technical-changes)
-- [\[0.7.1\] - 02/01/2026](#071---02012026)
+- [0.7.1 - 02/01/2026](#071---02012026)
   - [Summary](#summary)
   - [Breaking Changes](#breaking-changes)
   - [Database Migrations](#database-migrations)
@@ -835,7 +835,8 @@ Not applicable - initial release.
 **Note:** This project is in pre-MVP (0.x.x) versioning. Breaking changes may occur between minor versions until 1.0.0
 is released.
 
-[unreleased]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.0...HEAD
+[unreleased]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.1...HEAD
+[0.7.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.5.0...v0.5.1

@@ -22,6 +22,10 @@ engines:
     enabled: false
   csslint:
     enabled: false
+  # Disable remark-lint - conflicts with GFM and Keep a Changelog format
+  # See docs/BUGS/BUG-001-CODACY-REMARK-LINT-FALSE-POSITIVES.md for details
+  remark-lint:
+    enabled: false
   semgrep:
     exclude_paths:
       # Ignore SHA pinning warning for njsscan-action - we accept the risk
