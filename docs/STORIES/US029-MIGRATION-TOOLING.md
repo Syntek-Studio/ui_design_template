@@ -1,6 +1,7 @@
 # US029: Migration Tooling and Version Upgrades
 
 **Status:** To Do
+**ClickUp ID:** [86c7a9994](https://app.clickup.com/t/86c7a9994)
 **Priority:** Could Have
 **Story Points:** 8
 **Sprint:** Sprint 23
@@ -14,6 +15,7 @@ so that I can easily adopt new versions without manual refactoring.
 ## Acceptance Criteria
 
 ### Scenario 1: Migration Guide Generation
+
 - **Given** a new major version is released
 - **When** consumer reads migration guide
 - **Then** it lists breaking changes with clear explanations
@@ -22,6 +24,7 @@ so that I can easily adopt new versions without manual refactoring.
 - **And** it links to detailed API documentation
 
 ### Scenario 2: Automated Codemods
+
 - **Given** breaking changes require code updates
 - **When** consumer runs migration codemods
 - **Then** component names are updated automatically
@@ -30,6 +33,7 @@ so that I can easily adopt new versions without manual refactoring.
 - **And** manual review is still required for complex changes
 
 ### Scenario 3: Backwards Compatibility Layer
+
 - **Given** a major version upgrade is available
 - **When** old code uses deprecated APIs
 - **Then** deprecation warnings are shown

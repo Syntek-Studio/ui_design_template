@@ -1,6 +1,7 @@
 # US026: Bundle Size Optimisation
 
 **Status:** To Do
+**ClickUp ID:** [86c7a9928](https://app.clickup.com/t/86c7a9928)
 **Priority:** Could Have
 **Story Points:** 5
 **Sprint:** Sprint 16
@@ -14,6 +15,7 @@ so that applications using the library don't have unnecessary bloat.
 ## Acceptance Criteria
 
 ### Scenario 1: Tree-Shaking
+
 - **Given** a component is imported
 - **When** the application is built
 - **Then** unused components are removed from bundle
@@ -21,6 +23,7 @@ so that applications using the library don't have unnecessary bloat.
 - **And** unused modules are not included
 
 ### Scenario 2: Code Splitting
+
 - **Given** many components are defined
 - **When** the library is bundled
 - **Then** each component can be imported separately
@@ -28,6 +31,7 @@ so that applications using the library don't have unnecessary bloat.
 - **And** bundle size scales appropriately with used components
 
 ### Scenario 3: Build Analysis
+
 - **Given** the library is built
 - **When** analysis is run
 - **Then** bundle size report is generated

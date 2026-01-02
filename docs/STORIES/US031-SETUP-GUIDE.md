@@ -1,6 +1,7 @@
 # US031: Comprehensive Setup Guide Documentation
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99dw](https://app.clickup.com/t/86c7a99dw)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 10
@@ -14,6 +15,7 @@ so that I can quickly get the design system working in my project.
 ## Acceptance Criteria
 
 ### Scenario 1: Installation Guide
+
 - **Given** developer wants to use the library
 - **When** they read docs/SETUP/INSTALLATION.md
 - **Then** instructions cover npm/yarn installation
@@ -22,6 +24,7 @@ so that I can quickly get the design system working in my project.
 - **And** troubleshooting section covers common issues
 
 ### Scenario 2: Template Initialisation Guide
+
 - **Given** developer wants to create a new design system
 - **When** they follow docs/SETUP/TEMPLATE-INIT.md
 - **Then** step-by-step instructions are provided
@@ -30,6 +33,7 @@ so that I can quickly get the design system working in my project.
 - **And** post-init verification steps are included
 
 ### Scenario 3: Configuration Reference
+
 - **Given** developer needs to configure the library
 - **When** they access docs/SETUP/CONFIGURATION.md
 - **Then** all configuration options are documented

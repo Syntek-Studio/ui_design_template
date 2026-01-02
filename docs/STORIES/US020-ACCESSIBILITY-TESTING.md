@@ -1,6 +1,7 @@
 # US020: Accessibility Testing with jest-axe
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98me](https://app.clickup.com/t/86c7a98me)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 14
@@ -14,6 +15,7 @@ so that all components meet WCAG standards and are accessible to users with disa
 ## Acceptance Criteria
 
 ### Scenario 1: jest-axe Integration
+
 - **Given** a test file imports testing utilities
 - **When** a component test uses checkA11y() function
 - **Then** axe accessibility checks are run against rendered component
@@ -21,6 +23,7 @@ so that all components meet WCAG standards and are accessible to users with disa
 - **And** test fails if critical violations are found
 
 ### Scenario 2: Accessibility Rules
+
 - **Given** components are tested with jest-axe
 - **When** tests run
 - **Then** checks include: colour contrast, ARIA attributes, semantic HTML
@@ -29,6 +32,7 @@ so that all components meet WCAG standards and are accessible to users with disa
 - **And** keyboard navigation issues are identified
 
 ### Scenario 3: Accessibility Reporting
+
 - **Given** accessibility tests run
 - **When** violations are found
 - **Then** violation details are logged with: rule name, description, fix suggestion

@@ -1,6 +1,7 @@
 # US027: Design Token Versioning and Tracking
 
 **Status:** To Do
+**ClickUp ID:** [86c7a993q](https://app.clickup.com/t/86c7a993q)
 **Priority:** Could Have
 **Story Points:** 5
 **Sprint:** Sprint 17
@@ -14,6 +15,7 @@ so that I can manage token evolution and communicate breaking changes to users.
 ## Acceptance Criteria
 
 ### Scenario 1: Token Version Tracking
+
 - **Given** design tokens are updated
 - **When** tokens are generated
 - **Then** version number is recorded in token files
@@ -21,6 +23,7 @@ so that I can manage token evolution and communicate breaking changes to users.
 - **And** token changelog is maintained
 
 ### Scenario 2: Breaking Changes Detection
+
 - **Given** tokens are updated
 - **When** generation runs
 - **Then** removed or renamed tokens are identified
@@ -28,6 +31,7 @@ so that I can manage token evolution and communicate breaking changes to users.
 - **And** migration guide is provided for breaking changes
 
 ### Scenario 3: Token Migration Tools
+
 - **Given** tokens have breaking changes
 - **When** consumers want to upgrade
 - **Then** migration scripts are provided

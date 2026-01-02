@@ -1,7 +1,7 @@
 # Web Storybook Configuration
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -42,11 +42,11 @@ Web Storybook runs in the browser using Webpack 5 and supports:
 
 ## File Structure
 
-| File | Purpose |
-|------|---------|
-| `main.ts` | Webpack config, story discovery, and addons |
+| File          | Purpose                                            |
+| ------------- | -------------------------------------------------- |
+| `main.ts`     | Webpack config, story discovery, and addons        |
 | `preview.tsx` | Global decorators, parameters, and Tailwind import |
-| `README.md` | This documentation |
+| `README.md`   | This documentation                                 |
 
 ## Commands
 
@@ -63,6 +63,7 @@ npm run storybook:web:build
 ### Story Discovery
 
 Stories are discovered from:
+
 ```
 src/**/*.stories.@(js|jsx|ts|tsx|mdx)
 ```
@@ -71,8 +72,8 @@ This includes both web-only stories (`.stories.tsx`) and any MDX documentation.
 
 ### Addons
 
-| Addon | Purpose |
-|-------|---------|
+| Addon                    | Purpose                    |
+| ------------------------ | -------------------------- |
 | `@storybook/addon-links` | Navigation between stories |
 
 Note: In Storybook 10, essentials (controls, actions, docs, viewport, backgrounds) are built-in.

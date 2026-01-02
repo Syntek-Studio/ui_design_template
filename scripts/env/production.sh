@@ -3,7 +3,7 @@ set -e
 
 echo "Building for production..."
 
-read -p "Are you sure you want to build for PRODUCTION? (yes/no): " confirm
+read -r -p "Are you sure you want to build for PRODUCTION? (yes/no): " confirm
 if [ "$confirm" != "yes" ]; then
     echo "Build cancelled."
     exit 1

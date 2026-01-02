@@ -1,6 +1,7 @@
 # US036: Implement Modal/Dialog Component
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99v4](https://app.clickup.com/t/86c7a99v4)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 16
@@ -14,6 +15,7 @@ so that I can display overlays for important user interactions.
 ## Acceptance Criteria
 
 ### Scenario 1: Modal Component
+
 - **Given** developer imports Modal component
 - **When** it renders with isOpen prop
 - **Then** modal appears as overlay
@@ -22,6 +24,7 @@ so that I can display overlays for important user interactions.
 - **And** scroll on body is prevented when open
 
 ### Scenario 2: Accessibility
+
 - **Given** modal is displayed
 - **When** accessibility checks run
 - **Then** focus is trapped within modal
@@ -30,6 +33,7 @@ so that I can display overlays for important user interactions.
 - **And** modal role is "dialog" or "alertdialog"
 
 ### Scenario 3: Mobile Responsiveness
+
 - **Given** modal is displayed on mobile
 - **When** screen size is small
 - **Then** modal takes appropriate width/height

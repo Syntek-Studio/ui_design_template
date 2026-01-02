@@ -1,6 +1,7 @@
 # US034: Testing Guide and Best Practices
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99nv](https://app.clickup.com/t/86c7a99nv)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 15
@@ -14,6 +15,7 @@ so that I can write effective tests that ensure code quality.
 ## Acceptance Criteria
 
 ### Scenario 1: Testing Setup Guide
+
 - **Given** developer wants to write tests
 - **When** they read docs/GUIDES/TESTING.md
 - **Then** testing framework setup is documented
@@ -22,6 +24,7 @@ so that I can write effective tests that ensure code quality.
 - **And** debugging tests is documented
 
 ### Scenario 2: Component Testing Examples
+
 - **Given** developer needs to test a component
 - **When** they review component testing examples
 - **Then** unit test examples are provided
@@ -30,6 +33,7 @@ so that I can write effective tests that ensure code quality.
 - **And** mocking patterns are documented
 
 ### Scenario 3: Testing Best Practices
+
 - **Given** tests are written
 - **When** they are reviewed
 - **Then** best practices are followed:

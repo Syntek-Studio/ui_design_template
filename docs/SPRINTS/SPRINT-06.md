@@ -1,16 +1,17 @@
 # Sprint 06: Dark Mode & Theme Switching
 
 **Sprint Goal:** Enable dark mode support and runtime theme switching
+**ClickUp List ID:** [901519283755](https://app.clickup.com/90151635198/v/l/li/901519283755)
 **Total Points:** 11
 **Priority Focus:** Must Have
 **Phase:** Phase 3 - Component Theming Integration
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US011 | Dark Mode Support in Design System | 8 | Must Have | Phase 3 |
-| US030 | Architecture Decision Records (ADRs) | 3 | Should Have | Phase 5 |
+| ID    | Title                                | Points | Priority    | Phase   |
+| ----- | ------------------------------------ | ------ | ----------- | ------- |
+| US011 | Dark Mode Support in Design System   | 8      | Must Have   | Phase 3 |
+| US030 | Architecture Decision Records (ADRs) | 3      | Should Have | Phase 5 |
 
 **Sprint Total: 11 points**
 
@@ -42,17 +43,17 @@ Dark mode is a critical feature for modern design systems. The implementation mu
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US011 | ❌ | ✅ | ✅ | ✅ (tokens/) |
-| US030 | ❌ | ❌ | ❌ | ✅ (docs/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI    |
+| -------- | ------- | ------------ | --------------- | ------------ |
+| US011    | ❌      | ✅           | ✅              | ✅ (tokens/) |
+| US030    | ❌      | ❌           | ❌              | ✅ (docs/)   |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Platform dark mode differences | Medium | Medium | Test on both iOS and Android |
-| Token contrast issues | Medium | High | Automated accessibility validation |
+| Risk                           | Likelihood | Impact | Mitigation                         |
+| ------------------------------ | ---------- | ------ | ---------------------------------- |
+| Platform dark mode differences | Medium     | Medium | Test on both iOS and Android       |
+| Token contrast issues          | Medium     | High   | Automated accessibility validation |
 
 ---
 
