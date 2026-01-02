@@ -37,8 +37,6 @@
   - [2. Use `/syntek-dev-suite:qa-tester` Before Merging](#2-use-syntek-dev-suiteqa-tester-before-merging)
   - [3. Keep CLAUDE.md Updated](#3-keep-claudemd-updated)
   - [4. Let Agents Read Files](#4-let-agents-read-files)
-- [Environment Commands](#environment-commands)
-- [Getting Help](#getting-help)
 
 ---
 

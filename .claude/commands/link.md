@@ -15,7 +15,7 @@ npm link
 
 # In consuming app:
 
-npm link @template/ui
+npm link @syntek-studio/ui
 ```text
 
 **Using yalc (recommended):**
@@ -27,7 +27,7 @@ yalc push
 
 # In consuming app:
 
-yalc add @template/ui
+yalc add @syntek-studio/ui
 ```text
 
 **After changes:**

@@ -10,32 +10,31 @@
 
 ## Table of Contents
 
-- [.claude/](#claude)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Directory Tree](#directory-tree)
-  - [Files](#files)
-  - [CLAUDE.md](#claudemd)
-    - [Project Overview](#project-overview)
-    - [Available Commands](#available-commands)
-    - [Architecture](#architecture)
-    - [Import Patterns](#import-patterns)
-    - [Platform Differences](#platform-differences)
-    - [Commit Convention](#commit-convention)
-    - [PR Workflow](#pr-workflow)
-    - [Dev Team Agents](#dev-team-agents)
-    - [Recommended Workflow](#recommended-workflow)
-  - [Commands](#commands)
-    - [Using Claude Code](#using-claude-code)
-  - [Metrics System](#metrics-system)
-  - [Project Guidelines](#project-guidelines)
-  - [Related Sections](#related-sections)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Directory Tree](#directory-tree)
+- [Files](#files)
+- [CLAUDE.md](#claudemd)
+  - [Project Overview](#project-overview)
+  - [Available Commands](#available-commands)
+  - [Architecture](#architecture)
+  - [Import Patterns](#import-patterns)
+  - [Platform Differences](#platform-differences)
+  - [Commit Convention](#commit-convention)
+  - [PR Workflow](#pr-workflow)
+  - [Dev Team Agents](#dev-team-agents)
+  - [Recommended Workflow](#recommended-workflow)
+- [Commands](#commands)
+  - [Using Claude Code](#using-claude-code)
+- [Metrics System](#metrics-system)
+- [Project Guidelines](#project-guidelines)
+- [Related Sections](#related-sections)
 
 ---
 
 ## Overview
 
-The `.claude/` folder contains Claude Code configuration files and self-learning metrics for the @template/ui project.
+The `.claude/` folder contains Claude Code configuration files and self-learning metrics for the @syntek-studio/ui project.
 This configuration helps Claude understand the project structure, conventions, and provides guidance for development
 tasks.
 
@@ -67,7 +66,7 @@ The `CLAUDE.md` file provides essential information about the project:
 
 Defines what the project is:
 
-- Name: @template/ui
+- Name: @syntek-studio/ui
 
 - Type: Shared UI component library
 
@@ -110,10 +109,10 @@ Shows how to import components:
 
 ```typescript
 // Web components (default exports)
-import { Button } from '@template/ui';
+import { Button } from '@syntek-studio/ui';
 
 // Mobile components (namespaced)
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 <Mobile.Button ... />
 ```
 
