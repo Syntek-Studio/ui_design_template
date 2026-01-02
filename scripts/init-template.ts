@@ -291,7 +291,40 @@ export async function verifyReplacements(): Promise<boolean> {
  * // ✓ Initialization complete!
  */
 export async function main(): Promise<void> {
-  throw new Error('Not implemented')
+  // Import the prompt functions we just implemented
+  const { displayWelcomeMessage, promptUserInputs, confirmInputs } = await import('./lib/prompts')
+
+  // Display welcome message
+  displayWelcomeMessage()
+
+  // Prompt for user inputs (will loop until confirmed)
+  let answers: UserAnswers
+  let confirmed = false
+
+  while (!confirmed) {
+    answers = await promptUserInputs()
+    confirmed = await confirmInputs(answers)
+
+    if (!confirmed) {
+      console.log('\n')
+      console.log("Let's try again...\n")
+    }
+  }
+
+  // For Phase 1, we just display what would happen
+  // The actual file operations will be implemented in Phase 2
+  console.log('\n')
+  console.log('Phase 1 Complete: Validation and prompts are working!')
+  console.log('\n')
+  console.log('In Phase 2, the following files would be modified:')
+  console.log('  - package.json')
+  console.log('  - README.md')
+  console.log('  - .claude/CLAUDE.md')
+  console.log('  - src/index.ts')
+  console.log('\n')
+  console.log('Your answers:')
+  console.log(JSON.stringify(answers!, null, 2))
+  console.log('\n')
 }
 
 /**

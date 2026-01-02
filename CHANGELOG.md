@@ -1,7 +1,7 @@
 # Changelog
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.2
+**Version**: 0.8.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -24,6 +24,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More comprehensive design tokens documentation
 
 - Accessibility testing and ARIA enhancements
+
+---
+
+## [0.8.0] - 02/01/2026
+
+### Added
+
+- Interactive CLI for template initialisation (Phase 1 - Core Infrastructure)
+  - Welcome message with project branding
+  - Interactive prompts for package name, scope, description, client name, and primary colour
+  - Comprehensive input validation for all fields
+  - Confirmation workflow to review inputs before proceeding
+  - Success message with next steps
+  - npm script: `npm run init-template`
+
+- Input validation functions
+  - `validatePackageName()` - npm package naming rules
+  - `validateHexColour()` - 3 or 6 digit hex colour validation
+  - `validateDescription()` - length validation (10-200 characters)
+  - `validateClientName()` - length validation (2-100 characters)
+
+- CLI prompt functions
+  - `displayWelcomeMessage()` - branded welcome screen
+  - `promptUserInputs()` - interactive input collection with defaults
+  - `confirmInputs()` - review summary before proceeding
+  - `displaySuccessMessage()` - completion confirmation
+
+- Dependencies
+  - inquirer@^13.1.0 - interactive CLI prompts
+  - @types/inquirer@^9.0.9 - TypeScript type definitions
+  - tsx@^4.21.0 - TypeScript execution
+
+### Changed
+
+- Updated `scripts/init-template.ts` main function for Phase 1 workflow
+- Updated documentation with Phase 1 completion status
 
 ---
 

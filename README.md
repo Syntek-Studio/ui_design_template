@@ -1,7 +1,7 @@
 # @syntek-studio/ui
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.2
+**Version**: 0.8.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London

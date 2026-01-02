@@ -16,7 +16,15 @@
  * @created 2026-01-02
  */
 
+import inquirer from 'inquirer'
+import chalk from 'chalk'
 import type { UserAnswers } from './replacements'
+import {
+  validateClientName,
+  validatePackageName,
+  validateDescription,
+  validateHexColour,
+} from './validators'
 
 /**
  * Prompts the user for initialization inputs using interactive inquirer prompts.
@@ -56,7 +64,50 @@ import type { UserAnswers } from './replacements'
  * // }
  */
 export async function promptUserInputs(): Promise<UserAnswers> {
-  throw new Error('Not implemented')
+  const answers = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'clientName',
+      message: 'What is your client/company name?',
+      default: 'Acme Corporation',
+      validate: (input: string) => {
+        const result = validateClientName(input)
+        return result === true ? true : result
+      },
+    },
+    {
+      type: 'input',
+      name: 'packageName',
+      message: 'What is your npm package name?',
+      default: '@acme/ui',
+      validate: (input: string) => {
+        const result = validatePackageName(input)
+        return result === true ? true : result
+      },
+    },
+    {
+      type: 'input',
+      name: 'description',
+      message: 'Provide a project description:',
+      default: 'A shared UI component library for web and mobile applications',
+      validate: (input: string) => {
+        const result = validateDescription(input)
+        return result === true ? true : result
+      },
+    },
+    {
+      type: 'input',
+      name: 'primaryColour',
+      message: 'What is your primary brand colour? (hex code)',
+      default: '#3b82f6',
+      validate: (input: string) => {
+        const result = validateHexColour(input)
+        return result === true ? true : result
+      },
+    },
+  ])
+
+  return answers as UserAnswers
 }
 
 /**
@@ -91,8 +142,26 @@ export async function promptUserInputs(): Promise<UserAnswers> {
  *   await performReplacements(answers);
  * }
  */
-export async function confirmInputs(_answers: UserAnswers): Promise<boolean> {
-  throw new Error('Not implemented')
+export async function confirmInputs(answers: UserAnswers): Promise<boolean> {
+  console.log('\n')
+  console.log(chalk.bold.white('Please confirm your inputs:'))
+  console.log('\n')
+  console.log(chalk.cyan('  Client Name:    ') + chalk.white(answers.clientName))
+  console.log(chalk.cyan('  Package Name:   ') + chalk.white(answers.packageName))
+  console.log(chalk.cyan('  Description:    ') + chalk.white(answers.description))
+  console.log(chalk.cyan('  Primary Colour: ') + chalk.white(answers.primaryColour))
+  console.log('\n')
+
+  const confirmation = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'proceed',
+      message: 'Do you want to proceed with these values?',
+      default: true,
+    },
+  ])
+
+  return confirmation.proceed
 }
 
 /**
@@ -114,7 +183,27 @@ export async function confirmInputs(_answers: UserAnswers): Promise<boolean> {
  * const answers = await promptUserInputs();
  */
 export function displayWelcomeMessage(): void {
-  throw new Error('Not implemented')
+  console.log('\n')
+  console.log(chalk.bold.cyan('╔════════════════════════════════════════════════════════════════╗'))
+  console.log(chalk.bold.cyan('║                                                                ║'))
+  console.log(
+    chalk.bold.cyan('║         ') +
+      chalk.bold.white('Template Initialisation CLI') +
+      chalk.bold.cyan('                       ║')
+  )
+  console.log(chalk.bold.cyan('║                                                                ║'))
+  console.log(chalk.bold.cyan('╚════════════════════════════════════════════════════════════════╝'))
+  console.log('\n')
+  console.log(chalk.white('Welcome to the template initialisation wizard!'))
+  console.log('\n')
+  console.log(chalk.gray('This CLI will help you customise this template for your project by:'))
+  console.log(chalk.gray('  • Setting your client/company name'))
+  console.log(chalk.gray('  • Configuring your npm package name'))
+  console.log(chalk.gray('  • Customising your project description'))
+  console.log(chalk.gray('  • Defining your primary brand colour'))
+  console.log('\n')
+  console.log(chalk.yellow('All template placeholders will be replaced with your values.'))
+  console.log('\n')
 }
 
 /**
@@ -151,6 +240,37 @@ export function displayWelcomeMessage(): void {
  * // - .claude/CLAUDE.md
  * // - src/index.ts
  */
-export function displaySuccessMessage(_answers: UserAnswers, _results: any[]): void {
-  throw new Error('Not implemented')
+export function displaySuccessMessage(answers: UserAnswers, results: any[]): void {
+  console.log('\n')
+  console.log(chalk.bold.green('✓ Initialisation completed successfully!'))
+  console.log('\n')
+  console.log(chalk.white('Your template has been customised with:'))
+  console.log('\n')
+  console.log(chalk.cyan('  Package:        ') + chalk.white(answers.packageName))
+  console.log(chalk.cyan('  Client:         ') + chalk.white(answers.clientName))
+  console.log(chalk.cyan('  Description:    ') + chalk.white(answers.description))
+  console.log(chalk.cyan('  Primary Colour: ') + chalk.white(answers.primaryColour))
+  console.log('\n')
+
+  const modifiedFiles = results.filter((r) => r.modified)
+  console.log(chalk.white(`Files modified: ${modifiedFiles.length}`))
+  console.log('\n')
+
+  modifiedFiles.forEach((result) => {
+    console.log(chalk.green('  ✓ ') + chalk.gray(result.file))
+  })
+
+  console.log('\n')
+  console.log(chalk.bold.yellow('Next steps:'))
+  console.log(chalk.gray('  1. Review the modified files'))
+  console.log(
+    chalk.gray('  2. Run ') + chalk.white('npm run build') + chalk.gray(' to build your library')
+  )
+  console.log(
+    chalk.gray('  3. Run ') +
+      chalk.white('npm run storybook:web') +
+      chalk.gray(' to view your components')
+  )
+  console.log(chalk.gray('  4. Commit your changes to version control'))
+  console.log('\n')
 }

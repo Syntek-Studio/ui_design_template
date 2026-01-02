@@ -1,7 +1,7 @@
 # Release Notes
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.2
+**Version**: 0.8.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -49,6 +49,34 @@
 ---
 
 ## Latest Release
+
+### Version 0.8.0 - 02 January 2026
+
+**Interactive Template Initialisation CLI**
+
+We've implemented the first phase of an interactive command-line tool to help you quickly set up client-specific UI component libraries.
+
+#### What's New
+
+- **Interactive Setup Wizard**: Run `npm run init-template` to start an interactive setup process that guides you through configuring your new component library with prompts for package name, scope, description, client name, and primary brand colour.
+
+- **Smart Validation**: The CLI validates all your inputs in real-time, ensuring package names follow npm conventions, colour codes are valid hex values, and descriptions meet length requirements.
+
+- **User-Friendly Experience**: Features a welcoming branded interface with clear instructions, helpful error messages, and a confirmation step to review your choices before proceeding.
+
+- **TypeScript-Powered**: Built with TypeScript for robust type safety and comprehensive JSDoc documentation for all functions.
+
+#### For Developers
+
+- This is Phase 1 (Core CLI Infrastructure) of a 4-phase implementation
+- All input validation functions are fully tested and documented
+- The CLI uses inquirer.js for professional interactive prompts
+- Future phases will add file replacement, conflict detection, and comprehensive testing
+- No changes to the component library itself - this is a development tool for template initialisation
+
+---
+
+## Previous Releases
 
 ### Version 0.7.2 - 02 January 2026
 

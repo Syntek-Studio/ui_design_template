@@ -40,8 +40,62 @@
  * validatePackageName('@/ui')                  // returns error message
  * validatePackageName('@company/')             // returns error message
  */
-export function validatePackageName(_name: string): boolean | string {
-  throw new Error('Not implemented')
+export function validatePackageName(name: string): boolean | string {
+  // Check if empty
+  if (!name || name.trim().length === 0) {
+    return 'Package name cannot be empty'
+  }
+
+  // Check length (npm maximum is 214 characters)
+  if (name.length > 214) {
+    return 'Package name must be 214 characters or less'
+  }
+
+  // Check if lowercase only
+  if (name !== name.toLowerCase()) {
+    return 'Package name must be lowercase (no uppercase letters allowed)'
+  }
+
+  // Check if starts with dot or underscore
+  if (name.startsWith('.') || name.startsWith('_')) {
+    return 'Package name cannot start with a dot or underscore'
+  }
+
+  // Check for scoped package format
+  if (name.startsWith('@')) {
+    const scopeMatch = name.match(/^@([^/]+)\/(.+)$/)
+    if (!scopeMatch) {
+      return 'Scoped package must follow format: @scope/package-name'
+    }
+
+    const [, scope, packagePart] = scopeMatch
+
+    if (!scope || scope.length === 0) {
+      return 'Scoped package must have a non-empty scope'
+    }
+
+    if (!packagePart || packagePart.length === 0) {
+      return 'Scoped package must have a non-empty package name after the slash'
+    }
+
+    // Validate that scope and package name don't start with dot or underscore
+    if (scope.startsWith('.') || scope.startsWith('_')) {
+      return 'Scope cannot start with a dot or underscore'
+    }
+
+    if (packagePart.startsWith('.') || packagePart.startsWith('_')) {
+      return 'Package name part cannot start with a dot or underscore'
+    }
+  }
+
+  // Check for valid characters (lowercase letters, digits, hyphens, dots, underscores, tildes)
+  // For scoped packages, @ and / are also allowed
+  const validPattern = /^(@[a-z0-9-_.~]+\/)?[a-z0-9-_.~]+$/
+  if (!validPattern.test(name)) {
+    return 'Package name can only contain lowercase letters, digits, hyphens, dots, underscores, and tildes'
+  }
+
+  return true
 }
 
 /**
@@ -71,8 +125,35 @@ export function validatePackageName(_name: string): boolean | string {
  * validateHexColour('#gggggg')     // returns 'Colour must be a valid hex code...'
  * validateHexColour('#3b82f')      // returns 'Colour must be a valid hex code...'
  */
-export function validateHexColour(_colour: string): boolean | string {
-  throw new Error('Not implemented')
+export function validateHexColour(colour: string): boolean | string {
+  // Check if empty
+  if (!colour || colour.trim().length === 0) {
+    return 'Colour cannot be empty'
+  }
+
+  // Trim whitespace
+  const trimmedColour = colour.trim()
+
+  // Check if starts with hash
+  if (!trimmedColour.startsWith('#')) {
+    return 'Colour must be a valid hex code starting with # (e.g., #3b82f6 or #fff)'
+  }
+
+  // Extract hex part (without the #)
+  const hexPart = trimmedColour.slice(1)
+
+  // Check length (must be 3 or 6 characters)
+  if (hexPart.length !== 3 && hexPart.length !== 6) {
+    return 'Colour must be a valid hex code with 3 or 6 digits (e.g., #3b82f6 or #fff)'
+  }
+
+  // Check if all characters are valid hex digits (0-9, a-f, A-F)
+  const validHexPattern = /^[0-9a-fA-F]+$/
+  if (!validHexPattern.test(hexPart)) {
+    return 'Colour must be a valid hex code with only hex digits (0-9, a-f, A-F)'
+  }
+
+  return true
 }
 
 /**
@@ -97,8 +178,21 @@ export function validateHexColour(_colour: string): boolean | string {
  * validateDescription('   ')                                                // returns 'Description cannot be empty'
  * validateDescription('a'.repeat(501))                                      // returns 'Description must be 500 characters or less'
  */
-export function validateDescription(_description: string): boolean | string {
-  throw new Error('Not implemented')
+export function validateDescription(description: string): boolean | string {
+  // Trim leading and trailing whitespace
+  const trimmed = description.trim()
+
+  // Check if empty or whitespace-only
+  if (trimmed.length === 0) {
+    return 'Description cannot be empty'
+  }
+
+  // Check maximum length
+  if (trimmed.length > 500) {
+    return 'Description must be 500 characters or less'
+  }
+
+  return true
 }
 
 /**
@@ -126,6 +220,19 @@ export function validateDescription(_description: string): boolean | string {
  * validateClientName('   ')                           // returns 'Client name cannot be empty'
  * validateClientName('A'.repeat(101))                 // returns 'Client name must be 100 characters or less'
  */
-export function validateClientName(_name: string): boolean | string {
-  throw new Error('Not implemented')
+export function validateClientName(name: string): boolean | string {
+  // Trim leading and trailing whitespace
+  const trimmed = name.trim()
+
+  // Check if empty or whitespace-only
+  if (trimmed.length === 0) {
+    return 'Client name cannot be empty'
+  }
+
+  // Check maximum length
+  if (trimmed.length > 100) {
+    return 'Client name must be 100 characters or less'
+  }
+
+  return true
 }

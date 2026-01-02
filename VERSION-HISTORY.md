@@ -1,7 +1,7 @@
 # Version History
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.2
+**Version**: 0.8.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -117,6 +117,121 @@
 ### Technical Changes
 
 - Nothing yet
+
+---
+
+## [0.8.0] - 02/01/2026
+
+### Summary
+
+Implemented Phase 1 (Core CLI Infrastructure) of the template initialisation CLI tool (US001). Created interactive prompts
+using inquirer.js with comprehensive input validation for package names, hex colours, descriptions, and client names. Added
+welcome and success messages with chalk styling. Implemented confirmation workflow allowing users to review inputs before
+proceeding. Added npm script `init-template` for CLI execution.
+
+### Breaking Changes
+
+None - new feature addition, no changes to existing functionality.
+
+### Database Migrations
+
+Not applicable - library project.
+
+### API Changes
+
+None - CLI tool is for template initialisation only, not part of exported library API.
+
+### Files Changed
+
+**New Files Added:**
+
+| File                        | Changes                                                                          |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| `scripts/lib/validators.ts` | Added comprehensive validation functions with JSDoc documentation (166 lines)    |
+| `scripts/lib/prompts.ts`    | Added interactive CLI prompt functions with inquirer.js (148 lines)              |
+| `scripts/init-template.ts`  | Updated main CLI entry point with Phase 1 implementation (main function updated) |
+
+**Configuration Files Modified:**
+
+| File                | Changes                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `package.json`      | Added inquirer@^13.1.0, @types/inquirer@^9.0.9, tsx@^4.21.0 dependencies                 |
+| `package.json`      | Added `init-template` script: `"init-template": "npx tsx scripts/init-template.ts"`      |
+| `package-lock.json` | Updated with new dependency resolutions for inquirer, @types/inquirer, tsx, and sub-deps |
+
+**Documentation Updated:**
+
+| File                                                      | Changes                                                       |
+| --------------------------------------------------------- | ------------------------------------------------------------- |
+| `docs/PLANS/PLAN-US001-TEMPLATE-INIT-CLI.MD`              | Updated Phase 1 status to completed with implementation notes |
+| `docs/STORIES/US001-TEMPLATE-INIT-CLI.md`                 | Added repository completion status and Phase 1 progress       |
+| `docs/SPRINTS/LOGS/COMPLETION-2026-01-02-US001-PHASE1.MD` | Created Phase 1 completion log                                |
+
+### Configuration Changes
+
+| File           | Key                               | Change                                      |
+| -------------- | --------------------------------- | ------------------------------------------- |
+| `package.json` | `scripts.init-template`           | Added: `"npx tsx scripts/init-template.ts"` |
+| `package.json` | `devDependencies.inquirer`        | Added: `^13.1.0`                            |
+| `package.json` | `devDependencies.@types/inquirer` | Added: `^9.0.9`                             |
+| `package.json` | `devDependencies.tsx`             | Added: `^4.21.0`                            |
+
+### Documentation Notes
+
+- All validation functions include comprehensive JSDoc documentation
+- All prompt functions include user-friendly error messages and help text
+- Welcome message displays project branding using chalk styling
+- Success message provides clear next steps for users
+- Confirmation prompt allows users to review all inputs before proceeding
+
+**Validation Functions Implemented:**
+
+- `validatePackageName()` - Validates npm package naming rules (lowercase, no spaces, hyphens/underscores only)
+- `validateHexColour()` - Validates 3 or 6 digit hex colour codes with # prefix
+- `validateDescription()` - Validates description length (10-200 characters)
+- `validateClientName()` - Validates client name length (2-100 characters)
+
+**Prompt Functions Implemented:**
+
+- `displayWelcomeMessage()` - Shows branded welcome message with project information
+- `promptUserInputs()` - Collects all required inputs with default value generation
+- `confirmInputs()` - Displays summary and requests confirmation
+- `displaySuccessMessage()` - Shows completion message with next steps
+
+### Architecture Notes
+
+**Phase 1 Implementation:**
+
+Phase 1 establishes the core CLI infrastructure:
+
+1. **Interactive Prompts**: Uses inquirer.js for professional CLI experience
+2. **Input Validation**: Comprehensive validation with helpful error messages
+3. **User Experience**: Welcome/success messages, confirmation workflow, default values
+4. **TypeScript Safety**: All functions fully typed with JSDoc documentation
+
+**CLI Workflow:**
+
+```text
+1. Display welcome message
+2. Prompt for user inputs (package name, scope, description, client name, primary colour)
+3. Validate each input with immediate feedback
+4. Display summary of all inputs
+5. Request confirmation
+6. Display success message with next steps
+```
+
+**Next Phases:**
+
+- **Phase 2**: Placeholder replacement engine for updating template files
+- **Phase 3**: Validation and error handling (directory conflicts, file permissions)
+- **Phase 4**: Testing and documentation (integration tests, user guide)
+
+**Testing Status:**
+
+- Manual testing completed for all prompt functions
+- All validation functions tested with valid and invalid inputs
+- CLI can be cancelled at any prompt with Ctrl+C
+- Default value generation working correctly
 
 ---
 
