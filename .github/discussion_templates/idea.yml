@@ -1,30 +1,56 @@
-title: "Idea: Your Feature Suggestion"
-labels: ["idea"]
+# GitHub Discussion Template: Feature Ideas
+#
+# This template guides contributors when sharing feature ideas and suggestions
+# for @syntek-studio/ui in GitHub Discussions. It ensures ideas are well-documented
+# and actionable, making it easier for maintainers to evaluate and prioritise.
+#
+# Purpose:
+#   - Structured format for feature suggestions
+#   - Platform-aware design (web and/or mobile)
+#   - Encourages accessibility considerations
+#   - Gathers examples and implementation details
+#
+# When to Use:
+#   - Proposing new components
+#   - Suggesting enhancements to existing components
+#   - Discussing cross-platform implementation strategies
+#   - Brainstorming with the community
+#
+# Tip: Search existing discussions first to avoid duplicates!
+
+title: 'Idea: Your Feature Suggestion'
+labels: ['idea']
 body:
+  # Welcome message
   - type: markdown
     attributes:
       value: |
-        Thank you for your suggestion! We value community input on how to improve @template/ui.
+        Thank you for your suggestion! We value community input on how to improve @syntek-studio/ui.
 
+  # Problem/use case section
+  # This helps maintainers understand the "why" behind the suggestion
   - type: textarea
     id: problem
     attributes:
       label: Problem or Use Case
-      description: What problem does this idea solve? What's the use case?
+      description: What problem does this idea solve? What's the real-world use case?
       placeholder: |
         Example: Currently, there's no way to create an accessible tabs component.
-        I need a Tabs component that supports keyboard navigation and ARIA attributes.
+        I need a Tabs component that supports keyboard navigation and ARIA attributes
+        for my admin dashboard.
     validations:
       required: true
 
+  # Proposed solution/API design
+  # Code examples make ideas concrete and discussable
   - type: textarea
     id: solution
     attributes:
       label: Proposed Solution
-      description: How would you like this to work? Describe the API or interface.
+      description: How would you like this to work? Describe the API or interface design.
       placeholder: |
         ```typescript
-        import { Tabs } from '@template/ui';
+        import { Tabs } from '@syntek-studio/ui';
 
         export function MyTabs() {
           return (
@@ -43,42 +69,53 @@ body:
     validations:
       required: true
 
+  # Alternatives section
+  # Shows the contributor has explored options
   - type: textarea
     id: alternatives
     attributes:
       label: Alternatives Considered
-      description: What other approaches have you considered?
+      description: What other approaches have you considered and why they didn't work?
       placeholder: |
-        - Using Headless UI (not web + mobile)
-        - Custom implementation (too much boilerplate)
+        - Using Headless UI (not web + mobile compatible)
+        - Custom implementation (too much boilerplate for every project)
+        - Using HTML <details> element (limited styling and keyboard control)
 
+  # Platform consideration
+  # Important for this cross-platform component library
   - type: dropdown
     id: platforms
     attributes:
       label: Platforms
-      description: Which platforms would benefit from this feature?
+      description: Which platforms should this feature support?
       options:
-        - Web
+        - Web (React)
         - Mobile (React Native)
-        - Both
+        - Both (web and mobile)
     validations:
       required: true
 
+  # Additional context
+  # Links, mockups, and inspiration
   - type: textarea
     id: context
     attributes:
       label: Additional Context
-      description: Any other information, examples, or mockups?
+      description: Any other information, examples, mockups, or references?
       placeholder: |
-        - Links to similar components in other libraries
-        - Screenshots or design mockups
-        - User feedback or requests
+        - Links to similar components in Radix UI, shadcn/ui, or Material Design
+        - Screenshots or Figma designs
+        - Known implementations or use cases
+        - Accessibility reference links (WAI-ARIA, etc.)
 
+  # Pre-submission checklist
+  # Encourages contributors to do due diligence
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: I've searched for similar ideas
+        - label: I've searched existing discussions for similar ideas
         - label: I've provided example code or mockups
-        - label: I've considered accessibility implications
+        - label: I've considered accessibility implications (keyboard, screen readers)
+        - label: I've considered both web and mobile use cases (if applicable)

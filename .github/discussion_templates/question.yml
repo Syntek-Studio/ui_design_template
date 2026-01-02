@@ -1,21 +1,48 @@
-title: "Your Question Here"
-labels: ["question"]
+# GitHub Discussion Template: Questions
+#
+# This template guides community members when asking questions about @syntek-studio/ui
+# in GitHub Discussions. It ensures questions include necessary context and examples,
+# helping maintainers and community members provide better answers quickly.
+#
+# Purpose:
+#   - Structured format for asking questions
+#   - Component and platform specific information
+#   - Environment details for debugging
+#   - Minimal reproducible examples
+#
+# When to Use:
+#   - How do I use a specific component?
+#   - How do I style a component in a certain way?
+#   - Why isn't something working as expected?
+#   - What's the best way to implement X?
+#
+# Tip: Search the documentation and existing discussions first!
+# Your question might already be answered.
+
+title: 'Your Question Here'
+labels: ['question']
 body:
+  # Welcome message
   - type: markdown
     attributes:
       value: |
         Thank you for your question! Please provide as much detail as possible to help us assist you.
 
+  # Main question
+  # Be specific and clear about what you need help with
   - type: textarea
     id: question
     attributes:
       label: Question
-      description: What is your question?
+      description: What is your question? Be specific and clear.
       placeholder: |
-        Example: How do I customise the Button component's colour?
+        Example: How do I customise the Button component's colour to use my brand colours?
+        I tried adding a custom className but the component's default styles override it.
     validations:
       required: true
 
+  # Component selection
+  # Helps maintain filter and search discussions by component
   - type: dropdown
     id: component
     attributes:
@@ -32,25 +59,29 @@ body:
         - Icon
         - Other
 
+  # Platform detection
+  # Answers may differ between web and mobile
   - type: dropdown
     id: platform
     attributes:
       label: Platform
       description: Which platform are you developing for?
       options:
-        - Web
+        - Web (React)
         - Mobile (React Native)
         - Both
         - Not Sure
 
+  # Code example
+  # A minimal reproducible example dramatically improves response time
   - type: textarea
     id: code
     attributes:
       label: Code Example
-      description: If applicable, please provide a minimal code example that demonstrates your question.
+      description: Please provide a minimal code example that demonstrates your question.
       placeholder: |
         ```typescript
-        import { Button } from '@template/ui';
+        import { Button } from '@syntek-studio/ui';
 
         export function MyComponent() {
           return <Button onClick={() => {}}>Click me</Button>;
@@ -58,22 +89,29 @@ body:
         ```
       render: typescript
 
+  # Environment and context information
+  # Helps diagnose version-specific or environment-specific issues
   - type: textarea
     id: context
     attributes:
       label: Additional Context
-      description: Any other context or information that might help us understand your question?
+      description: Environment details and any other information that might help us understand your question.
       placeholder: |
         - Package version: 0.7.0
         - React version: 18.2.0
-        - Browser: Chrome 120
-        - Error messages: (if any)
+        - Node version: 20.10.0
+        - Browser: Chrome 120 (or N/A if mobile)
+        - Error messages: (copy-paste from console if any)
+        - Related documentation: (links to docs you've read)
 
+  # Pre-submission checklist
+  # Encourages users to do their homework first
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: I've read the documentation
-        - label: I've searched existing discussions
+        - label: I've read the relevant documentation
+        - label: I've searched existing discussions and issues
         - label: I've provided a minimal code example
+        - label: I've included my environment details (versions, browser, etc.)

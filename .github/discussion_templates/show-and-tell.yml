@@ -1,11 +1,35 @@
-title: "Showcase: Project Name"
-labels: ["show-and-tell"]
+# GitHub Discussion Template: Show and Tell
+#
+# This template invites community members to showcase projects built with @syntek-studio/ui.
+# It's a celebration space for creative applications of the library and helps the
+# maintainers and community learn from real-world usage patterns.
+#
+# Purpose:
+#   - Showcase projects built with @syntek-studio/ui
+#   - Share real-world usage patterns and solutions
+#   - Build community and demonstrate library versatility
+#   - Inspire other developers with creative implementations
+#   - Gather feedback on component design and API
+#
+# When to Use:
+#   - You've built something cool with @syntek-studio/ui
+#   - You want to share your implementation approach
+#   - You want feedback or suggestions from the community
+#   - You've solved an interesting problem using components
+#
+# Share freely and have fun! We love seeing what the community builds.
+
+title: 'Showcase: Project Name'
+labels: ['show-and-tell']
 body:
+  # Welcome message
   - type: markdown
     attributes:
       value: |
-        Excited to share your project? We'd love to see what you've built with @template/ui!
+        Excited to share your project? We'd love to see what you've built with @syntek-studio/ui!
 
+  # Project overview
+  # Give context about what the project does
   - type: textarea
     id: project
     attributes:
@@ -13,76 +37,96 @@ body:
       description: What is your project called and what does it do?
       placeholder: |
         Example: MyStore Admin Dashboard
-        A modern admin dashboard for managing e-commerce inventory with real-time updates.
+        A modern admin dashboard for managing e-commerce inventory with real-time updates
+        and multi-user collaboration features.
     validations:
       required: true
 
+  # Component usage
+  # Shows how developers are actually using the library
   - type: textarea
     id: usage
     attributes:
-      label: How You're Using @template/ui
-      description: Which components from @template/ui are you using and how?
+      label: How You're Using @syntek-studio/ui
+      description: Which components from @syntek-studio/ui are you using and in what ways?
       placeholder: |
-        - Button for all interactive elements
-        - Card for inventory item cards
-        - Input and Select for forms
-        - Icon for navigation and status indicators
+        - Button for all interactive elements and toolbar actions
+        - Card for inventory item grid layout
+        - Input and Select for advanced filtering and search
+        - Icon for navigation menu and status indicators
+        - Custom composition of Card + Input for product edit forms
     validations:
       required: true
 
+  # Project links
+  # Make it easy for others to explore the project
   - type: textarea
     id: links
     attributes:
       label: Links
-      description: Share links to your project (GitHub repo, live site, etc.)
+      description: Share links to your project so others can explore it.
       placeholder: |
         - GitHub: https://github.com/yourname/project
         - Live Demo: https://mystore-admin.example.com
         - Blog Post: https://example.com/blog/...
+        - Documentation: (if applicable)
     validations:
       required: true
 
+  # Project categorisation
+  # Helps others find similar projects
   - type: dropdown
     id: type
     attributes:
       label: Project Type
+      description: What kind of project is this?
       options:
         - Open Source Project
         - Commercial Product
         - Design System/Component Wrapper
-        - Learning Project
+        - Learning/Tutorial Project
+        - Proof of Concept
         - Other
 
+  # Platform information
+  # Shows @syntek-studio/ui usage across platforms
   - type: dropdown
     id: platforms
     attributes:
       label: Platforms Used
       description: Which platforms does your project target?
       options:
-        - Web Only
-        - Mobile (React Native) Only
+        - Web Only (React)
+        - Mobile Only (React Native)
         - Both Web and Mobile
         - Web Components in Native App
     validations:
       required: true
 
+  # Additional project details
+  # Helps others understand the implementation
   - type: textarea
     id: details
     attributes:
       label: Additional Details
-      description: Tell us more about your project!
+      description: Tell us more about your project and experience!
       placeholder: |
         - Team size, if applicable
         - How long it took to build
-        - Lessons learned using @template/ui
-        - What customisations you made
-        - (Optional) Screenshots or demo GIFs
+        - Lessons learned using @syntek-studio/ui
+        - Challenges you overcame
+        - Custom component extensions built on top of @syntek-studio/ui
+        - Performance insights or optimisations
+        - (Optional) Screenshots, demo GIFs, or demo videos
 
+  # Pre-submission checklist
+  # Ensures showcases are high-quality and useful
   - type: checkboxes
     id: checklist
     attributes:
       label: Checklist
       options:
-        - label: I've included working links
+        - label: I've included working links to the project
         - label: I've included screenshots or demos (if applicable)
-        - label: I've credited the @template/ui library
+        - label: I've credited the @syntek-studio/ui library
+        - label: The project is ready to be shared publicly
