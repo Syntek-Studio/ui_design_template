@@ -10,33 +10,19 @@
 
 ## Table of Contents
 
-- [src/web/](#srcweb)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Directory Tree](#directory-tree)
-  - [Files](#files)
-  - [Component Pattern](#component-pattern)
-    - [Component Folder Structure](#component-folder-structure)
-    - [Component Implementation (`ComponentName.tsx`)](#component-implementation-componentnametsx)
-    - [Storybook Stories (`ComponentName.stories.tsx`)](#storybook-stories-componentnamestoriestsx)
-    - [Re-export (`index.ts`)](#re-export-indexts)
-  - [Platform Details](#platform-details)
-    - [HTML Elements](#html-elements)
-    - [Event Handlers](#event-handlers)
-    - [CSS Classes](#css-classes)
-    - [Focus \& Accessibility](#focus--accessibility)
-  - [Creating Components](#creating-components)
-    - [Step 1: Create Component Folder](#step-1-create-component-folder)
-    - [Step 2: Implement Component](#step-2-implement-component)
-    - [Step 3: Create Stories](#step-3-create-stories)
-    - [Step 4: Create Re-export](#step-4-create-re-export)
-    - [Step 5: Update Components Index](#step-5-update-components-index)
-  - [Styling Guidelines](#styling-guidelines)
-    - [Using Tailwind CSS](#using-tailwind-css)
-    - [Design Tokens](#design-tokens)
-    - [Responsive Design](#responsive-design)
-  - [Testing](#testing)
-  - [Related Sections](#related-sections)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Directory Tree](#directory-tree)
+- [Files](#files)
+- [Component Pattern](#component-pattern)
+  - [Component Folder Structure](#component-folder-structure)
+  - [Component Implementation (`ComponentName.tsx`)](#component-implementation-componentnametsx)
+  - [Storybook Stories (`ComponentName.stories.tsx`)](#storybook-stories-componentnamestoriestsx)
+  - [Re-export (`index.ts`)](#re-export-indexts)
+- [Platform Details](#platform-details)
+  - [HTML Elements](#html-elements)
+  - [Event Handlers](#event-handlers)
+  - [CSS Classes](#css-classes)
 
 ---
 
@@ -246,7 +232,7 @@ All styling uses Tailwind CSS utility classes:
 
 // Responsive
 'md:px-6 lg:px-8' // Responsive classes
-```markdown
+```
 
 ### Focus & Accessibility
 
@@ -254,7 +240,7 @@ Web components should include focus states for accessibility:
 
 ```typescript
 className = 'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
-```markdown
+```
 
 ---
 
@@ -264,7 +250,7 @@ className = 'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offs
 
 ```bash
 mkdir -p src/web/components/MyComponent
-````
+```
 
 ### Step 2: Implement Component
 
@@ -318,10 +304,10 @@ export { MyComponent, type MyComponentProps } from './MyComponent'
 
 Update `src/web/components/index.ts`:
 
-````typescript
-export *from './Button'
-export* from './MyComponent' // Add this line
-```markdown
+```typescript
+export * from './Button'
+export * from './MyComponent' // Add this line
+```
 
 ---
 
@@ -337,18 +323,18 @@ className = 'px-4 py-2 rounded bg-blue-500 text-white hover:opacity-90'
 
 // Avoid
 className = 'custom-button' // with custom CSS
-````
+```
 
 ### Design Tokens
 
 Use design tokens from `src/tokens/` for consistency:
 
-````typescript
-import { colours, spacing } from '@template/ui'
+```typescript
+import { colours, spacing } from '@syntek-studio/ui'
 
 // In component styling
 const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500]
-```markdown
+```
 
 ### Responsive Design
 
@@ -358,7 +344,7 @@ Use responsive Tailwind classes:
 className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
 className = 'text-base md:text-lg' // Responsive font sizes
 className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3' // Responsive grids
-```markdown
+```
 
 ---
 
@@ -376,7 +362,7 @@ Run Storybook to view and test components:
 
 ```bash
 npm run storybook:web
-````
+```
 
 ---
 
@@ -394,4 +380,5 @@ npm run storybook:web
 
 ---
 
-**Last Updated:** 22 December 2025
+**Last Updated:** 02/01/2026
+````

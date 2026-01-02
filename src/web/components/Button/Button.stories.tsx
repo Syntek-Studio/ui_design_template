@@ -1,26 +1,69 @@
+/**
+ * @fileoverview Button Component Storybook Stories
+ *
+ * Comprehensive Storybook stories for the Button component, demonstrating
+ * all available variants, sizes, states, and accessibility features.
+ *
+ * These stories serve multiple purposes:
+ * 1. **Visual Documentation**: Show how buttons look with different configurations
+ * 2. **Interactive Testing**: Test button behaviour in Storybook's interactive UI
+ * 3. **Accessibility Testing**: Verify keyboard and screen reader support
+ * 4. **Developer Reference**: Quick reference for available props and patterns
+ * 5. **Design System**: Reference for design consistency across the application
+ *
+ * ## Story Organisation
+ *
+ * Stories are grouped by category:
+ * - **Variants**: All visual style variants (primary, secondary, etc.)
+ * - **Sizes**: All available size options
+ * - **States**: Different button states (disabled, loading, etc.)
+ * - **Icons**: Icon usage patterns (left, right, icon-only)
+ * - **Radius**: Border radius variations (square, rounded, pill)
+ * - **Combined**: Complex combinations demonstrating real-world usage
+ *
+ * ## Accessibility in Stories
+ *
+ * All stories include appropriate ARIA attributes:
+ * - Icon-only buttons have aria-label
+ * - Toggle buttons have aria-pressed
+ * - Menu buttons have aria-expanded and aria-haspopup
+ * - Loading buttons have aria-busy
+ *
+ * Run Storybook and use:
+ * - Keyboard (Tab) to navigate
+ * - Keyboard (Enter/Space) to activate
+ * - Screen reader to verify announcements
+ * - axe accessibility checker (Storybook addon)
+ *
+ * ## Interactive Testing
+ *
+ * Use Storybook's Controls panel to:
+ * - Change variant and size
+ * - Toggle disabled and loading states
+ * - See real-time prop changes
+ * - Test different combinations
+ *
+ * ## Browser Testing
+ *
+ * Test these stories in:
+ * - Chrome/Edge (latest)
+ * - Firefox (latest)
+ * - Safari (latest)
+ * - Mobile browsers (iOS Safari, Chrome Android)
+ */
+
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from './Button'
 
 /**
- * The Button component provides a comprehensive set of button variants
- * for different use cases across your web application.
+ * Storybook metadata for the Button component
  *
- * ## Features
- * - 9 visual variants (primary, secondary, tertiary, outline, ghost, link, destructive, success, warning)
- * - 5 sizes (xs, sm, md, lg, xl)
- * - Loading states with spinner
- * - Icon support (left, right, icon-only)
- * - Full width option
- * - Complete ARIA accessibility support
- * - Responsive design with design tokens
- *
- * ## Accessibility
- * - Keyboard navigation (Enter/Space)
- * - Focus visible states
- * - ARIA labels for icon-only buttons
- * - ARIA pressed for toggle buttons
- * - ARIA busy for loading states
- * - ARIA expanded/haspopup for menu buttons
+ * Configures:
+ * - Component title and path
+ * - Auto-generated documentation
+ * - Default layout and parameters
+ * - Control types for interactive testing
+ * - Accessibility checker configuration
  */
 const meta = {
   title: 'Components/Button',
@@ -28,8 +71,28 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component:
+          'A comprehensive, accessible button component with support for multiple variants, sizes, and states. Built with TypeScript, React, and Tailwind CSS 4. Implements WCAG 2.1 AA accessibility standards.',
+      },
+    },
   },
   argTypes: {
+    /**
+     * Visual style variant control
+     *
+     * Allows selecting different button variants in Storybook:
+     * - primary: Main call-to-action
+     * - secondary: Alternative action
+     * - tertiary: Subtle action
+     * - ghost: Minimal styling
+     * - link: Text link style
+     * - outline: Bordered button
+     * - destructive: Delete/remove action
+     * - success: Positive confirmation
+     * - warning: Cautionary action
+     */
     variant: {
       control: 'select',
       options: [
@@ -45,31 +108,75 @@ const meta = {
       ],
       description: 'Visual style variant of the button',
     },
+    /**
+     * Size control for button dimensions
+     *
+     * Options:
+     * - xs: 20px (extra small)
+     * - sm: 32px (small)
+     * - md: 40px (medium, default)
+     * - lg: 48px (large)
+     * - xl: 56px (extra large)
+     */
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      description: 'Size of the button',
+      description: 'Size of the button (height and padding)',
     },
+    /**
+     * Border radius control
+     *
+     * Options control corner rounding:
+     * - none: Square corners (sharp)
+     * - sm to 3xl: Increasing roundness
+     * - full: Pill-shaped (9999px)
+     */
     rounded: {
       control: 'select',
       options: ['none', 'sm', 'base', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
       description: 'Border radius of the button',
     },
+    /**
+     * Disabled state control
+     *
+     * Prevents interaction and shows visual indication (50% opacity).
+     * Screen readers announce disabled state.
+     */
     disabled: {
       control: 'boolean',
-      description: 'Whether the button is disabled',
+      description: 'Whether the button is disabled and cannot be interacted with',
     },
+    /**
+     * Loading state control
+     *
+     * Shows animated spinner and prevents interaction.
+     * Use during async operations (form submission, API calls).
+     * Screen readers announce aria-busy state.
+     */
     loading: {
       control: 'boolean',
-      description: 'Whether the button is in loading state',
+      description: 'Whether the button is in loading state with spinner',
     },
+    /**
+     * Full width control
+     *
+     * Makes button take 100% of container width.
+     * Useful for mobile layouts and full-width forms.
+     */
     fullWidth: {
       control: 'boolean',
-      description: 'Whether the button takes full width',
+      description: 'Whether the button takes full width of container',
     },
+    /**
+     * Icon-only mode control
+     *
+     * Removes text display and uses icon-only sizing.
+     * REQUIRES aria-label for accessibility.
+     * Component warns if iconOnly=true without aria-label.
+     */
     iconOnly: {
       control: 'boolean',
-      description: 'Whether the button is icon-only',
+      description: 'Whether the button is icon-only (no text)',
     },
   },
 } satisfies Meta<typeof Button>
@@ -77,19 +184,38 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-// Icon components for examples
+/**
+ * Icon components for Storybook examples
+ *
+ * These are example SVG icons used in button stories to demonstrate
+ * icon usage patterns (iconLeft, iconRight, iconOnly).
+ * In real applications, use proper icon libraries (e.g., react-icons, heroicons).
+ */
+
+/**
+ * Save/disk icon for demonstrating iconLeft/iconRight usage
+ * Common action icon for "Save" buttons
+ */
 const SaveIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
     <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
   </svg>
 )
 
+/**
+ * Plus/add icon for demonstrating icon-only buttons
+ * Common action icon for "Add" or "Create" buttons
+ */
 const PlusIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
   </svg>
 )
 
+/**
+ * Trash/delete icon for demonstrating destructive icon-only buttons
+ * Common action icon for "Delete" buttons
+ */
 const TrashIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
@@ -100,6 +226,10 @@ const TrashIcon = () => (
   </svg>
 )
 
+/**
+ * Chevron down icon for demonstrating iconRight with menu buttons
+ * Common action icon for "More options" or dropdown buttons
+ */
 const ChevronDownIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
     <path
@@ -110,8 +240,22 @@ const ChevronDownIcon = () => (
 )
 
 /**
- * Primary buttons are the main call-to-action. Use for the most important
- * action on a page or in a section.
+ * Primary button - Main call-to-action
+ *
+ * Use for the most important action on a page, form, or section.
+ * Primary buttons have the highest visual weight and draw the user's attention.
+ * Typically used for actions like:
+ * - Submit form
+ * - Save changes
+ * - Continue
+ * - Create new item
+ *
+ * **Accessibility**: Uses `primary` variant which has sufficient colour
+ * contrast (WCAG AA 4.5:1) and clear focus indicators.
+ *
+ * **Keyboard**: Fully keyboard accessible - press Tab to focus, Enter/Space to activate.
+ *
+ * **Screen Reader**: Announces as "button" with text "Primary Button".
  */
 export const Primary: Story = {
   args: {
@@ -122,8 +266,22 @@ export const Primary: Story = {
 }
 
 /**
- * Secondary buttons are for secondary actions. Use alongside primary buttons
- * for alternative or less important actions.
+ * Secondary button - Alternative action
+ *
+ * Use alongside primary buttons for secondary or less important actions.
+ * Secondary buttons have less visual weight than primary buttons but more
+ * than tertiary or ghost buttons.
+ *
+ * Typical use cases:
+ * - Save as draft (when primary is "Publish")
+ * - Secondary form submission
+ * - Alternative action with less urgency
+ *
+ * **Design Pattern**: Often paired with primary button for form actions:
+ * - Primary: "Save"
+ * - Secondary: "Save Draft"
+ *
+ * **Accessibility**: Sufficient colour contrast and clear focus indicators.
  */
 export const Secondary: Story = {
   args: {

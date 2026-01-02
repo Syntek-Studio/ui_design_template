@@ -97,7 +97,7 @@ interface ButtonProps {
 **Import:**
 
 ```typescript
-import { Button } from '@template/ui'
+import { Button } from '@syntek-studio/ui'
 ```text
 
 **Example:**
@@ -158,7 +158,7 @@ export const Button: React.FC<ButtonProps>
 ### Basic Button
 
 ```typescript
-import { Button } from '@template/ui';
+import { Button } from '@syntek-studio/ui';
 
 <Button
   title="Click me"
@@ -201,7 +201,7 @@ import { Button } from '@template/ui';
 ```typescript
 <Button
   title="Custom"
-  className="bg-gradient-to-r from-blue-500 to-purple-600"
+  className="bg-linear-to-r from-blue-500 to-purple-600"
   onClick={() => {}}
 />
 ```markdown
@@ -209,7 +209,7 @@ import { Button } from '@template/ui';
 ### Form Integration
 
 ```typescript
-import { Button } from '@template/ui';
+import { Button } from '@syntek-studio/ui';
 import { useState } from 'react';
 
 export function LoginForm() {
@@ -242,7 +242,7 @@ export function LoginForm() {
 ### Loading State Pattern
 
 ```typescript
-import { Button } from '@template/ui';
+import { Button } from '@syntek-studio/ui';
 import { useState } from 'react';
 
 export function AsyncButton() {
@@ -280,7 +280,7 @@ Button/
 ├── Button.stories.tsx # Storybook documentation
 └── index.ts # TypeScript re-export
 
-````markdown
+`````markdown
 ### Button.tsx
 
 Implements the component logic and styling:
@@ -368,7 +368,9 @@ Re-exports the component for public API:
 ```typescript
 export { Button, type ButtonProps } from './Button'
 ````
-````
+`````
+
+`````
 
 ---
 
@@ -408,7 +410,7 @@ className = 'px-4 md:px-6 lg:px-8 text-sm md:text-base lg:text-lg'
 ### Design Tokens
 
 ```typescript
-import { colours } from '@template/ui'
+import { colours } from '@syntek-studio/ui'
 
 const bgColor = colours.primary[500] // #3b82f6
 const textColor = colours.white // #ffffff
@@ -448,7 +450,7 @@ describe('Button', () => {
     expect(onClick).toHaveBeenCalled();
   });
 });
-````
+`````
 
 ---
 
