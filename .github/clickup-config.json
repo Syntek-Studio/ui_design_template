@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "description": "ClickUp integration configuration for @template/ui",
+  "description": "ClickUp integration configuration for @syntek-studio/ui",
 
   "workspace": {
     "space_id": "${CLICKUP_SPACE_ID}",

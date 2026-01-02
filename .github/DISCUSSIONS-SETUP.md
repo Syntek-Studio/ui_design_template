@@ -6,7 +6,7 @@
 
 ---
 
-This guide provides instructions for setting up GitHub Discussions on the @template/ui repository. Discussions enable
+This guide provides instructions for setting up GitHub Discussions on the @syntek-studio/ui repository. Discussions enable
 the community to ask questions, share ideas, announce updates, and showcase their work without creating formal issues or
 pull requests.
 
@@ -39,9 +39,6 @@ pull requests.
     - [Create Each Category](#create-each-category)
   - [Step 3: Create Discussion Templates](#step-3-create-discussion-templates)
   - [Step 4: Pin Welcome Discussion](#step-4-pin-welcome-discussion)
-  - [Step 6: Set Up Notification Settings (Optional)](#step-6-set-up-notification-settings-optional)
-- [Maintenance Checklist](#maintenance-checklist)
-- [Related Documentation](#related-documentation)
 
 ---
 
@@ -53,7 +50,7 @@ GitHub Discussions provides a space for community conversations about:
 
 - **Ideas and feature requests**: Propose enhancements and discuss design decisions
 
-- **Showcasing work**: Share how you're using @template/ui in your projects
+- **Showcasing work**: Share how you're using @syntek-studio/ui in your projects
 
 - **Project announcements**: Share updates, releases, and important information
 
@@ -93,7 +90,7 @@ and feature work.
 **Description**:
 
 ```text
-Official announcements about @template/ui releases, breaking changes, and project updates.
+Official announcements about @syntek-studio/ui releases, breaking changes, and project updates.
 
 This category is for maintainer announcements only. For discussions about changes, please use the General category.
 ```
@@ -114,14 +111,14 @@ This category is for maintainer announcements only. For discussions about change
 
 **Emoji**: Question Mark (❓)
 
-**Purpose**: Ask and answer questions about using @template/ui, troubleshooting, and implementation guidance.
+**Purpose**: Ask and answer questions about using @syntek-studio/ui, troubleshooting, and implementation guidance.
 
 **Who can start discussions**: Everyone
 
 **Description**:
 
 ```text
-Ask questions about using @template/ui, troubleshooting issues, and implementation advice.
+Ask questions about using @syntek-studio/ui, troubleshooting issues, and implementation advice.
 
 Before posting:
 
@@ -157,7 +154,7 @@ Mark your question as answered once resolved!
 **Description**:
 
 ```text
-Suggest new components, features, or improvements to @template/ui.
+Suggest new components, features, or improvements to @syntek-studio/ui.
 
 Before posting:
 
@@ -188,14 +185,14 @@ Ideas that gain community interest may be converted to issues and added to the r
 
 **Emoji**: Party Popper (🎉)
 
-**Purpose**: Share your projects, components, extensions, or creative uses of @template/ui.
+**Purpose**: Share your projects, components, extensions, or creative uses of @syntek-studio/ui.
 
 **Who can start discussions**: Everyone
 
 **Description**:
 
 ```text
-Share your projects, applications, or creative uses of @template/ui.
+Share your projects, applications, or creative uses of @syntek-studio/ui.
 
 This is a space to celebrate the community and show what's being built with our components!
 
@@ -205,7 +202,7 @@ Please include:
 
 - Brief description of what you built
 
-- How you're using @template/ui
+- How you're using @syntek-studio/ui
 
 - (Optional) Screenshots or demo links
 ```
@@ -214,11 +211,11 @@ Please include:
 
 - Built an e-commerce dashboard with Button and Card components
 
-- Created a design system wrapper around @template/ui for our company
+- Created a design system wrapper around @syntek-studio/ui for our company
 
 - Contributions: I published my custom Tooltip variations as a package
 
-- Showcase: My open-source admin panel uses @template/ui
+- Showcase: My open-source admin panel uses @syntek-studio/ui
 
 ---
 
@@ -233,7 +230,7 @@ Please include:
 **Description**:
 
 ```text
-General conversation about @template/ui and related topics.
+General conversation about @syntek-studio/ui and related topics.
 
 Use this category for:
 
@@ -326,7 +323,7 @@ body:
       description: If applicable, please provide a minimal code example that demonstrates your question.
       placeholder: |
         ```typescript
-        import { Button } from '@template/ui';
+        import { Button } from '@syntek-studio/ui';
 
         export function MyComponent() {
           return <Button onClick={() => {}}>Click me</Button>;
@@ -375,7 +372,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for your suggestion! We value community input on how to improve @template/ui.
+        Thank you for your suggestion! We value community input on how to improve @syntek-studio/ui.
 
   - type: textarea
     id: problem
@@ -395,7 +392,7 @@ body:
       description: How would you like this to work? Describe the API or interface.
       placeholder: |
         ```typescript
-        import { Tabs } from '@template/ui';
+        import { Tabs } from '@syntek-studio/ui';
 
         export function MyTabs() {
           return (
@@ -475,7 +472,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Excited to share your project? We'd love to see what you've built with @template/ui!
+        Excited to share your project? We'd love to see what you've built with @syntek-studio/ui!
 
   - type: textarea
     id: project
@@ -491,8 +488,8 @@ body:
   - type: textarea
     id: usage
     attributes:
-      label: How You're Using @template/ui
-      description: Which components from @template/ui are you using and how?
+      label: How You're Using @syntek-studio/ui
+      description: Which components from @syntek-studio/ui are you using and how?
       placeholder: |
         - Button for all interactive elements
         - Card for inventory item cards
@@ -547,7 +544,7 @@ body:
       placeholder: |
         - Team size, if applicable
         - How long it took to build
-        - Lessons learned using @template/ui
+        - Lessons learned using @syntek-studio/ui
         - What customisations you made
         - (Optional) Screenshots or demo GIFs
     validations:
@@ -562,7 +559,7 @@ body:
           required: false
         - label: I've included screenshots or demos (if applicable)
           required: false
-        - label: I've credited the @template/ui library
+        - label: I've credited the @syntek-studio/ui library
           required: false
 ```
 
@@ -680,7 +677,7 @@ Navigate to `Discussions` tab, then click `New Category`:
 
 - Emoji: ❓ (question mark)
 
-- Description: Ask and answer questions about @template/ui
+- Description: Ask and answer questions about @syntek-studio/ui
 
 - Allow new discussions: Everyone
 
@@ -700,7 +697,7 @@ Navigate to `Discussions` tab, then click `New Category`:
 
 - Emoji: 🎉 (party popper)
 
-- Description: Share your projects and creative uses of @template/ui
+- Description: Share your projects and creative uses of @syntek-studio/ui
 
 - Allow new discussions: Everyone
 
@@ -729,14 +726,14 @@ Navigate to `Discussions` tab, then click `New Category`:
 
 Create a pinned discussion in General category:
 
-**Title**: Welcome to @template/ui Discussions!
+**Title**: Welcome to @syntek-studio/ui Discussions!
 
 **Content**:
 
-`````markdown
-# Welcome to @template/ui Discussions
+```````markdown
+# Welcome to @syntek-studio/ui Discussions
 
-This is a space for the community to ask questions, share ideas, and celebrate projects built with @template/ui.
+This is a space for the community to ask questions, share ideas, and celebrate projects built with @syntek-studio/ui.
 
 ## Getting Started
 
@@ -762,7 +759,7 @@ Please read our [Code of Conduct](../.github/CODE_OF_CONDUCT.md) and [Contributi
 
 Looking forward to your contributions!
 
-`````markdown
+``````markdown
 ### Step 5: Link to Discussions in Key Files
 
 Update the following files to link to Discussions:
@@ -793,8 +790,14 @@ Add at the end:
 Open a [discussion](../../discussions) for questions or ideas.
 ````
 `````
-`````
-`````
+``````
+```````
+
+````
+
+```
+
+```
 
 ```
 
@@ -848,3 +851,4 @@ Use this checklist to maintain healthy discussions:
 
 For questions about discussions setup, contact the maintainers or open a discussion!
 ```
+````

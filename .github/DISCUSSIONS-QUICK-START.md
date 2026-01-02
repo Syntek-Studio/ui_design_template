@@ -1,6 +1,6 @@
 # GitHub Discussions Quick Start Guide
 
-A quick reference for setting up and managing GitHub Discussions on @template/ui.
+A quick reference for setting up and managing GitHub Discussions on @syntek-studio/ui.
 
 ---
 
@@ -124,7 +124,7 @@ Feel free to add your thoughts to that conversation instead. Closing this as a d
 ### Off-Topic
 
 ```markdown
-Thanks for the message! This is a bit off-topic for discussions here. Let's keep this channel focused on @template/ui questions and ideas.
+Thanks for the message! This is a bit off-topic for discussions here. Let's keep this channel focused on @syntek-studio/ui questions and ideas.
 
 Feel free to continue this conversation in [General category] or open an issue if it's a bug.
 ```
