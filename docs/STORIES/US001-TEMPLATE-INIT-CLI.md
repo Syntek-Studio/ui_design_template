@@ -22,7 +22,7 @@ so that I can quickly scaffold a client-specific UI component library without ma
 
 -**Then**a new template is created with updated package.json, README, and token files
 
--**And**all references to "@template/ui" are replaced with the client-specific package name
+-**And**all references to "@syntek-studio/ui" are replaced with the client-specific package name
 
 -**And**the project is ready to build immediately without additional configuration
 

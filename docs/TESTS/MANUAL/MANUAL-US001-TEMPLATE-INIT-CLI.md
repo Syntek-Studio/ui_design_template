@@ -129,7 +129,7 @@ grep 'Test Corporation' README.md
 grep -r '@syntek-studio/ui' . --exclude-dir=node_modules
 # Should return no results (or only in .git history)
 
-grep -r '@template/ui' . --exclude-dir=node_modules
+grep -r '@syntek-studio/ui' . --exclude-dir=node_modules
 # Should return no results
 
 grep -r 'Syntek Studio' . --exclude-dir=node_modules --exclude=CHANGELOG.md

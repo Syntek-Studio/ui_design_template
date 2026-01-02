@@ -1,4 +1,4 @@
-# Delivery Plan - @template/ui Design System
+# Delivery Plan - @syntek-studio/ui Design System
 
 **Document Version:** 1.1
 **Created:** 01/01/2026
@@ -62,7 +62,7 @@
 
 ## Executive Summary
 
-This document outlines the complete delivery plan for the @template/ui component library - a comprehensive,
+This document outlines the complete delivery plan for the @syntek-studio/ui component library - a comprehensive,
 production-ready design system template. The plan spans 7 phases with 39 user stories organised into**23 sprints**,
 totalling 238 story points.
 

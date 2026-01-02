@@ -2,71 +2,69 @@
 
 ## Table of Contents
 
-- [Feature: Template Repository for Shared UI Design System](#feature-template-repository-for-shared-ui-design-system)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Requirements](#requirements)
-    - [Functional Requirements](#functional-requirements)
-    - [Non-Functional Requirements](#non-functional-requirements)
-  - [Technical Design](#technical-design)
-    - [1. Template Structure](#1-template-structure)
-    - [2. Theme Configuration System](#2-theme-configuration-system)
-      - [theme.config.ts Structure](#themeconfigts-structure)
-    - [3. Token Generation System](#3-token-generation-system)
-      - [scripts/generate-tokens.js](#scriptsgenerate-tokensjs)
-    - [4. Template Initialisation System](#4-template-initialisation-system)
-      - [scripts/init-template.js (Interactive CLI)](#scriptsinit-templatejs-interactive-cli)
-    - [5. Component Architecture](#5-component-architecture)
-      - [Base Component Pattern](#base-component-pattern)
-    - [6. Build System](#6-build-system)
-      - [Multi-Format Output](#multi-format-output)
-      - [Publishing Workflow](#publishing-workflow)
-    - [7. Testing Strategy](#7-testing-strategy)
-      - [Unit Tests (Vitest)](#unit-tests-vitest)
-      - [Accessibility Tests](#accessibility-tests)
-    - [8. Documentation System](#8-documentation-system)
-      - [Auto-Generated Component Docs](#auto-generated-component-docs)
-      - [Storybook Integration](#storybook-integration)
-    - [9. CI/CD Pipeline](#9-cicd-pipeline)
-      - [GitHub Actions Workflows](#github-actions-workflows)
-  - [Implementation Phases](#implementation-phases)
-    - [Phase 1: Template Infrastructure (Foundation)](#phase-1-template-infrastructure-foundation)
-      - [Tasks](#tasks)
-    - [Phase 2: Theme Configuration System (Design Tokens)](#phase-2-theme-configuration-system-design-tokens)
-      - [Tasks](#tasks-1)
-    - [Phase 3: Component Theming Integration (Dynamic Styling)](#phase-3-component-theming-integration-dynamic-styling)
-      - [Tasks](#tasks-2)
-    - [Phase 4: Build \& Publishing Pipeline (Deployment)](#phase-4-build--publishing-pipeline-deployment)
-      - [Tasks](#tasks-3)
-    - [Phase 5: Documentation \& Storybook (Developer Experience)](#phase-5-documentation--storybook-developer-experience)
-      - [Tasks](#tasks-4)
-    - [Phase 6: Testing Framework (Quality Assurance)](#phase-6-testing-framework-quality-assurance)
-      - [Tasks](#tasks-5)
-    - [Phase 7: Advanced Features \& Polish (Enhancement)](#phase-7-advanced-features--polish-enhancement)
-      - [Tasks](#tasks-6)
-  - [Risks \& Mitigations](#risks--mitigations)
-  - [Open Questions](#open-questions)
-    - [Critical (Need Answers Before Implementation)](#critical-need-answers-before-implementation)
-    - [Important (Nice to Clarify)](#important-nice-to-clarify)
-  - [Success Criteria](#success-criteria)
-    - [Must Have (Phase 1-4)](#must-have-phase-1-4)
-    - [Should Have (Phase 5-6)](#should-have-phase-5-6)
-    - [Nice to Have (Phase 7)](#nice-to-have-phase-7)
-  - [Dependencies \& Prerequisites](#dependencies--prerequisites)
-    - [External Dependencies](#external-dependencies)
-    - [Internal Dependencies](#internal-dependencies)
-    - [Technical Skills Required](#technical-skills-required)
-  - [Timeline Estimate](#timeline-estimate)
-  - [Next Steps](#next-steps)
-  - [Appendix](#appendix)
-    - [A. Example Theme Configurations](#a-example-theme-configurations)
-    - [B. Token Generation Algorithm (Colour Shades)](#b-token-generation-algorithm-colour-shades)
-    - [C. Placeholder Syntax](#c-placeholder-syntax)
-
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Requirements](#requirements)
+  - [Functional Requirements](#functional-requirements)
+  - [Non-Functional Requirements](#non-functional-requirements)
+- [Technical Design](#technical-design)
+  - [1. Template Structure](#1-template-structure)
+  - [2. Theme Configuration System](#2-theme-configuration-system)
+    - [theme.config.ts Structure](#themeconfigts-structure)
+  - [3. Token Generation System](#3-token-generation-system)
+    - [scripts/generate-tokens.js](#scriptsgenerate-tokensjs)
+  - [4. Template Initialisation System](#4-template-initialisation-system)
+    - [scripts/init-template.js (Interactive CLI)](#scriptsinit-templatejs-interactive-cli)
+  - [5. Component Architecture](#5-component-architecture)
+    - [Base Component Pattern](#base-component-pattern)
+  - [6. Build System](#6-build-system)
+    - [Multi-Format Output](#multi-format-output)
+    - [Publishing Workflow](#publishing-workflow)
+  - [7. Testing Strategy](#7-testing-strategy)
+    - [Unit Tests (Vitest)](#unit-tests-vitest)
+    - [Accessibility Tests](#accessibility-tests)
+  - [8. Documentation System](#8-documentation-system)
+    - [Auto-Generated Component Docs](#auto-generated-component-docs)
+    - [Storybook Integration](#storybook-integration)
+  - [9. CI/CD Pipeline](#9-cicd-pipeline)
+    - [GitHub Actions Workflows](#github-actions-workflows)
+- [Implementation Phases](#implementation-phases)
+  - [Phase 1: Template Infrastructure (Foundation)](#phase-1-template-infrastructure-foundation)
+    - [Tasks](#tasks)
+  - [Phase 2: Theme Configuration System (Design Tokens)](#phase-2-theme-configuration-system-design-tokens)
+    - [Tasks](#tasks-1)
+  - [Phase 3: Component Theming Integration (Dynamic Styling)](#phase-3-component-theming-integration-dynamic-styling)
+    - [Tasks](#tasks-2)
+  - [Phase 4: Build \& Publishing Pipeline (Deployment)](#phase-4-build--publishing-pipeline-deployment)
+    - [Tasks](#tasks-3)
+  - [Phase 5: Documentation \& Storybook (Developer Experience)](#phase-5-documentation--storybook-developer-experience)
+    - [Tasks](#tasks-4)
+  - [Phase 6: Testing Framework (Quality Assurance)](#phase-6-testing-framework-quality-assurance)
+    - [Tasks](#tasks-5)
+  - [Phase 7: Advanced Features \& Polish (Enhancement)](#phase-7-advanced-features--polish-enhancement)
+    - [Tasks](#tasks-6)
+- [Risks \& Mitigations](#risks--mitigations)
+- [Open Questions](#open-questions)
+  - [Critical (Need Answers Before Implementation)](#critical-need-answers-before-implementation)
+  - [Important (Nice to Clarify)](#important-nice-to-clarify)
+- [Success Criteria](#success-criteria)
+  - [Must Have (Phase 1-4)](#must-have-phase-1-4)
+  - [Should Have (Phase 5-6)](#should-have-phase-5-6)
+  - [Nice to Have (Phase 7)](#nice-to-have-phase-7)
+- [Dependencies \& Prerequisites](#dependencies--prerequisites)
+  - [External Dependencies](#external-dependencies)
+  - [Internal Dependencies](#internal-dependencies)
+  - [Technical Skills Required](#technical-skills-required)
+- [Timeline Estimate](#timeline-estimate)
+- [Next Steps](#next-steps)
+- [Appendix](#appendix)
+  - [A. Example Theme Configurations](#a-example-theme-configurations)
+  - [B. Token Generation Algorithm (Colour Shades)](#b-token-generation-algorithm-colour-shades)
+  - [C. Placeholder Syntax](#c-placeholder-syntax)
 
 ## Overview
 
-Transform the existing @template/ui library into a reusable template repository that enables rapid creation of client-specific UI design systems. This template will allow teams to clone, customise branding/theming, and deploy client-specific component libraries within hours rather than weeks.
+Transform the existing @syntek-studio/ui library into a reusable template repository that enables rapid creation of client-specific UI design systems. This template will allow teams to clone, customise branding/theming, and deploy client-specific component libraries within hours rather than weeks.
 
 ## Requirements
 
@@ -258,8 +256,8 @@ export const themeConfig = {
   // Brand identity
   brand: {
     primary: {
-      base: '#3b82f6',      // Auto-generates 50-900 shades
-      contrast: '#ffffff',   // Text colour on primary background
+      base: '#3b82f6', // Auto-generates 50-900 shades
+      contrast: '#ffffff', // Text colour on primary background
     },
     secondary: {
       base: '#a855f7',
@@ -283,7 +281,7 @@ export const themeConfig = {
       serif: ['Georgia', 'serif'],
       mono: ['Fira Code', 'monospace'],
     },
-    fontSizeScale: 'minor-third',  // or custom scale
+    fontSizeScale: 'minor-third', // or custom scale
     baseFontSize: 16,
     baseLineHeight: 1.5,
     fontWeights: {
@@ -298,7 +296,7 @@ export const themeConfig = {
 
   // Spacing system
   spacing: {
-    baseUnit: 4,              // 4px base
+    baseUnit: 4, // 4px base
     scale: [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96],
   },
 
@@ -317,7 +315,7 @@ export const themeConfig = {
   // Shadows
   shadows: {
     // Can be custom or use preset shadows
-    preset: 'tailwind',  // or 'material', 'custom'
+    preset: 'tailwind', // or 'material', 'custom'
   },
 
   // Breakpoints
@@ -349,7 +347,7 @@ export const themeConfig = {
     mobile: {
       // Mobile-specific adjustments
       typography: {
-        baseFontSize: 14,  // Smaller for mobile
+        baseFontSize: 14, // Smaller for mobile
       },
     },
   },
@@ -363,9 +361,9 @@ export const themeConfig = {
       },
     },
   },
-};
+}
 
-export type ThemeConfig = typeof themeConfig;
+export type ThemeConfig = typeof themeConfig
 ```
 
 ### 3. Token Generation System
@@ -381,6 +379,7 @@ export type ThemeConfig = typeof themeConfig;
 - Updates exports in `src/tokens/index.ts`
 
 **Features:**
+
 - Colour shade generation using tinycolor2 or similar
 - Modular scale calculation for typography
 - Spacing scale generation
@@ -398,6 +397,7 @@ npx @tempalte/create-ui-template
 ```
 
 **Workflow:**
+
 1. Prompt for client information:
    - Package name (e.g., `@acme/ui`)
    - Display name (e.g., `Acme UI`)
@@ -511,11 +511,13 @@ export const Button: React.FC<WebButtonProps> = ({
 #### Multi-Format Output
 
 **tsup.config.ts** generates:
+
 - CommonJS (`dist/index.js`)
 - ESM (`dist/index.mjs`)
 - TypeScript declarations (`dist/index.d.ts`)
 
 **Tree-shaking friendly:**
+
 - Named exports for all components
 - Side-effect free modules
 - Proper package.json `exports` field
@@ -577,6 +579,7 @@ it('has no accessibility violations', async () => {
 #### Auto-Generated Component Docs
 
 **scripts/generate-docs.js:**
+
 - Parse TypeScript types from component files
 - Extract JSDoc comments
 - Generate markdown documentation
@@ -595,18 +598,21 @@ it('has no accessibility violations', async () => {
 #### GitHub Actions Workflows
 
 **ci.yml:**
+
 - Runs on every push and PR
 - Lint, type-check, test
 - Build library
 - Comment test coverage on PR
 
 **release.yml:**
+
 - Triggered by version tag (e.g., `v1.2.3`)
 - Build and publish to npm
 - Create GitHub release
 - Generate changelog
 
 **storybook-deploy.yml:**
+
 - Deploy Storybook to GitHub Pages
 - Run visual regression tests (Chromatic)
 
@@ -654,6 +660,7 @@ it('has no accessibility violations', async () => {
 **Deliverable:** Template can be cloned and initialised with custom package name and basic metadata. Running `npm run init-template` creates a new project with correct naming throughout.
 
 **Testing:**
+
 - Manual: Clone template and run init script
 - Verify all placeholders are replaced
 - Verify git history is reset
@@ -714,6 +721,7 @@ it('has no accessibility violations', async () => {
 **Deliverable:** Developers can customise `theme.config.ts` and run `npm run generate-tokens` to automatically create all design token files. Tokens are type-safe and validated for accessibility.
 
 **Testing:**
+
 - Generate tokens from sample theme configs
 - Verify colour shades have proper contrast
 - Verify typography scales are mathematically correct
@@ -764,6 +772,7 @@ it('has no accessibility violations', async () => {
 **Deliverable:** Components automatically adapt to theme configuration. Changing brand colours in `theme.config.ts` updates all components. Dark mode toggle works across all components.
 
 **Testing:**
+
 - Change theme config and verify component appearance updates
 - Test dark mode variants render correctly
 - Verify platform-specific overrides apply on mobile
@@ -798,7 +807,7 @@ it('has no accessibility violations', async () => {
 
 - [ ] Setup GitHub Actions Release
   - [ ] `.github/workflows/release.yml`
-  - [ ] Trigger on version tags (v*)
+  - [ ] Trigger on version tags (v\*)
   - [ ] Build library
   - [ ] Publish to npm (with provenance)
   - [ ] Create GitHub release with changelog
@@ -825,6 +834,7 @@ it('has no accessibility violations', async () => {
 **Deliverable:** Pushing a version tag (e.g., `v1.0.0`) automatically builds, tests, publishes to npm, and creates a GitHub release. Pre-commit hooks ensure code quality.
 
 **Testing:**
+
 - Test version bumping script
 - Dry-run npm publish
 - Test CI pipeline with sample PR
@@ -888,6 +898,7 @@ it('has no accessibility violations', async () => {
 **Deliverable:** Developers have access to interactive Storybook with all components, comprehensive guides for all workflows, and auto-generated API documentation. Storybook is deployed and publicly accessible.
 
 **Testing:**
+
 - Generate docs from components and verify accuracy
 - Review all guide documentation for completeness
 - Test Storybook with all components
@@ -948,6 +959,7 @@ it('has no accessibility violations', async () => {
 **Deliverable:** All components have comprehensive unit tests with 80%+ coverage. Accessibility tests catch common issues. Visual regression tests prevent unintended UI changes. Testing guide helps developers write consistent tests.
 
 **Testing:**
+
 - Run full test suite and verify all pass
 - Check coverage reports meet thresholds
 - Run accessibility tests on all components
@@ -1011,6 +1023,7 @@ it('has no accessibility violations', async () => {
 **Deliverable:** Template includes advanced features like multi-theme support, component generators, and production-grade tooling. Template is optimized, secure, and ready for client projects.
 
 **Testing:**
+
 - Test component generator creates valid files
 - Verify multi-theme switching works
 - Run security scans and address findings
@@ -1020,18 +1033,18 @@ it('has no accessibility violations', async () => {
 
 ## Risks & Mitigations
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| **Token generation produces inaccessible colour combinations** | Medium | High | Add WCAG contrast validation in `validate-tokens.js`. Fail build if violations found. Provide suggested fixes. |
-| **Template initialization fails on certain systems** | Low | Medium | Test init script on Windows, macOS, Linux. Add error handling and clear error messages. Provide manual setup guide as fallback. |
-| **Generated tokens don't match client's exact brand colours** | High | Low | Allow overriding generated shades with custom values in theme config. Document shade generation algorithm for transparency. |
-| **Build pipeline breaks with new React Native versions** | Medium | Medium | Pin React Native peer dependency versions. Test against multiple RN versions in CI. Document supported versions clearly. |
-| **Components don't support client-specific requirements** | High | Medium | Design components with extension points (render props, slots). Provide composition utilities. Document customization patterns extensively. |
-| **Theme changes break existing client implementations** | Medium | High | Version design tokens separately. Use semantic versioning strictly. Provide migration guides for breaking changes. Offer deprecation warnings. |
-| **Storybook build fails in CI/CD** | Low | Low | Add Storybook build verification to CI. Cache Storybook dependencies. Provide troubleshooting guide. |
-| **TypeScript types are too complex for consuming projects** | Low | Medium | Keep type signatures simple. Use helper types. Provide comprehensive JSDoc. Test types with example projects. |
-| **Package size grows too large** | Medium | Medium | Monitor bundle size in CI with size-limit. Tree-shake aggressively. Make heavy dependencies optional. Document bundle optimization. |
-| **Documentation becomes outdated** | High | Medium | Auto-generate documentation from code where possible. Add docs checks to CI. Make docs updates part of PR requirements. |
+| Risk                                                           | Likelihood | Impact | Mitigation                                                                                                                                     |
+| -------------------------------------------------------------- | ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Token generation produces inaccessible colour combinations** | Medium     | High   | Add WCAG contrast validation in `validate-tokens.js`. Fail build if violations found. Provide suggested fixes.                                 |
+| **Template initialization fails on certain systems**           | Low        | Medium | Test init script on Windows, macOS, Linux. Add error handling and clear error messages. Provide manual setup guide as fallback.                |
+| **Generated tokens don't match client's exact brand colours**  | High       | Low    | Allow overriding generated shades with custom values in theme config. Document shade generation algorithm for transparency.                    |
+| **Build pipeline breaks with new React Native versions**       | Medium     | Medium | Pin React Native peer dependency versions. Test against multiple RN versions in CI. Document supported versions clearly.                       |
+| **Components don't support client-specific requirements**      | High       | Medium | Design components with extension points (render props, slots). Provide composition utilities. Document customization patterns extensively.     |
+| **Theme changes break existing client implementations**        | Medium     | High   | Version design tokens separately. Use semantic versioning strictly. Provide migration guides for breaking changes. Offer deprecation warnings. |
+| **Storybook build fails in CI/CD**                             | Low        | Low    | Add Storybook build verification to CI. Cache Storybook dependencies. Provide troubleshooting guide.                                           |
+| **TypeScript types are too complex for consuming projects**    | Low        | Medium | Keep type signatures simple. Use helper types. Provide comprehensive JSDoc. Test types with example projects.                                  |
+| **Package size grows too large**                               | Medium     | Medium | Monitor bundle size in CI with size-limit. Tree-shake aggressively. Make heavy dependencies optional. Document bundle optimization.            |
+| **Documentation becomes outdated**                             | High       | Medium | Auto-generate documentation from code where possible. Add docs checks to CI. Make docs updates part of PR requirements.                        |
 
 ---
 
@@ -1137,18 +1150,18 @@ it('has no accessibility violations', async () => {
 
 ## Timeline Estimate
 
-| Phase | Effort | Duration (1 developer) |
-|-------|--------|------------------------|
-| Phase 1: Template Infrastructure | High | 1-2 weeks |
-| Phase 2: Theme Configuration System | High | 1-2 weeks |
-| Phase 3: Component Theming Integration | Medium | 1 week |
-| Phase 4: Build & Publishing Pipeline | Medium | 1 week |
-| Phase 5: Documentation & Storybook | Medium | 1 week |
-| Phase 6: Testing Framework | Medium | 1 week |
-| Phase 7: Advanced Features | Low-Medium | 1-2 weeks |
-| **Total** | | **7-10 weeks** |
+| Phase                                  | Effort     | Duration (1 developer) |
+| -------------------------------------- | ---------- | ---------------------- |
+| Phase 1: Template Infrastructure       | High       | 1-2 weeks              |
+| Phase 2: Theme Configuration System    | High       | 1-2 weeks              |
+| Phase 3: Component Theming Integration | Medium     | 1 week                 |
+| Phase 4: Build & Publishing Pipeline   | Medium     | 1 week                 |
+| Phase 5: Documentation & Storybook     | Medium     | 1 week                 |
+| Phase 6: Testing Framework             | Medium     | 1 week                 |
+| Phase 7: Advanced Features             | Low-Medium | 1-2 weeks              |
+| **Total**                              |            | **7-10 weeks**         |
 
-*Note: Timeline assumes a single experienced developer working full-time. Can be parallelized with multiple developers.*
+_Note: Timeline assumes a single experienced developer working full-time. Can be parallelized with multiple developers._
 
 ---
 
@@ -1169,23 +1182,25 @@ After approval of this plan:
 ### A. Example Theme Configurations
 
 **Minimal Theme (Startup)**
+
 ```typescript
 export const themeConfig = {
   brand: {
-    primary: { base: '#6366f1' },  // Indigo
+    primary: { base: '#6366f1' }, // Indigo
   },
   typography: {
     fontFamilies: { sans: ['Inter'] },
   },
-};
+}
 ```
 
 **Enterprise Theme (Financial Services)**
+
 ```typescript
 export const themeConfig = {
   brand: {
-    primary: { base: '#1e3a8a' },    // Navy blue
-    secondary: { base: '#059669' },  // Green
+    primary: { base: '#1e3a8a' }, // Navy blue
+    secondary: { base: '#059669' }, // Green
   },
   typography: {
     fontFamilies: {
@@ -1195,9 +1210,9 @@ export const themeConfig = {
     baseFontSize: 16,
   },
   borderRadius: {
-    base: 2,  // More conservative, squared design
+    base: 2, // More conservative, squared design
   },
-};
+}
 ```
 
 ### B. Token Generation Algorithm (Colour Shades)

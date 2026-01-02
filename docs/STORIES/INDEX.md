@@ -44,7 +44,7 @@
 
 ## Overview
 
-This document provides an index and roadmap of all user stories for the @template/ui component library project. Stories
+This document provides an index and roadmap of all user stories for the @syntek-studio/ui component library project. Stories
 are organised by phase and priority, with each story assigned to a specific sprint targeting 11 story points per sprint.
 
 **Sprint Capacity:** 11 points per sprint (2 weeks)

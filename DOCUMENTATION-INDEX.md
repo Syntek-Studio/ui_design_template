@@ -8,7 +8,7 @@
 
 ---
 
-Complete guide to all documentation in the @template/ui project.
+Complete guide to all documentation in the @syntek-studio/ui project.
 
 ## Table of Contents
 

@@ -228,7 +228,7 @@ All tests are currently in the RED phase - implementation stubs throw "Not imple
 
 - Creates correct mapping from user answers
 - Maps `@syntek-studio/ui` → user package name
-- Maps `@template/ui` → user package name
+- Maps `@syntek-studio/ui` → user package name
 - Maps `Syntek Studio` → user client name
 - Maps default description → user description
 - Handles unscoped package names
@@ -415,7 +415,7 @@ All tests are currently in the RED phase - implementation stubs throw "Not imple
 - Returns false when placeholders remain
 - Checks all relevant files
 - Detects remaining `@syntek-studio/ui` placeholders
-- Detects remaining `@template/ui` placeholders
+- Detects remaining `@syntek-studio/ui` placeholders
 - Detects remaining "Syntek Studio" placeholders
 
 #### main Integration Tests

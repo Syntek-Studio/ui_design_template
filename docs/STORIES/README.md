@@ -9,13 +9,9 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-
 - [Overview](#overview)
-
 - [Quick Start](#quick-start)
-
 - [Story Structure](#story-structure)
-
 - [Project Phases](#project-phases)
   - [Phase 1: Template Infrastructure (Must Have)](#phase-1-template-infrastructure-must-have)
   - [Phase 2: Theme Configuration System (Must Have)](#phase-2-theme-configuration-system-must-have)
@@ -24,36 +20,25 @@
   - [Phase 5: Documentation \& Storybook (Should Have)](#phase-5-documentation--storybook-should-have)
   - [Phase 6: Testing Framework (Should Have)](#phase-6-testing-framework-should-have)
   - [Phase 7: Advanced Features (Could Have)](#phase-7-advanced-features-could-have)
-
 - [Sprint Assignments](#sprint-assignments)
-
 - [Priority Summary](#priority-summary)
-
 - [Key Files](#key-files)
-
 - [Story Status Workflow](#story-status-workflow)
-
 - [Using Stories for Sprint Planning](#using-stories-for-sprint-planning)
-
 - [Development Workflow](#development-workflow)
-
 - [Story Examples by Category](#story-examples-by-category)
   - [Infrastructure Stories](#infrastructure-stories)
   - [Component Stories](#component-stories)
   - [Documentation Stories](#documentation-stories)
   - [Testing Stories](#testing-stories)
-
 - [Adding New Stories](#adding-new-stories)
-
 - [Next Steps](#next-steps)
-
 - [Resources](#resources)
-
 - [Questions?](#questions)
 
 ## Overview
 
-This directory contains comprehensive user stories for the @template/ui component library project. These stories define
+This directory contains comprehensive user stories for the @syntek-studio/ui component library project. These stories define
 the work required to build a production-ready, enterprise-grade design system template.
 
 **Total Stories:** 39

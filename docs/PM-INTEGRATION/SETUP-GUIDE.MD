@@ -1,6 +1,6 @@
 # ClickUp Integration Setup Guide
 
-This guide walks you through setting up the ClickUp integration for @template/ui.
+This guide walks you through setting up the ClickUp integration for @syntek-studio/ui.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ This guide walks you through setting up the ClickUp integration for @template/ui
     - ["No task found for US-###"](#no-task-found-for-us-)
     - ["Invalid user story number format"](#invalid-user-story-number-format)
     - [Workflow not triggering](#workflow-not-triggering)
-    - [Local script fails with "CLICKUP\_API\_KEY is not set"](#local-script-fails-with-clickup_api_key-is-not-set)
+    - [Local script fails with "CLICKUP_API_KEY is not set"](#local-script-fails-with-clickup_api_key-is-not-set)
   - [Next Steps](#next-steps)
   - [Support](#support)
 
@@ -38,12 +38,12 @@ This guide walks you through setting up the ClickUp integration for @template/ui
 
 **GitHub Secrets** are already configured in your repository and are used automatically by GitHub Actions workflows. You do not need to set up local environment variables unless you want to run the PM scripts locally.
 
-| Scenario | What You Need |
-|----------|---------------|
-| GitHub Actions runs automatically | Nothing - secrets already configured |
-| Run scripts locally (e.g., `./scripts/pm/clickup-import.sh`) | Create `.env` file |
-| View workflow logs | Nothing - check Actions tab |
-| Manual workflow trigger | Nothing - use GitHub UI |
+| Scenario                                                     | What You Need                        |
+| ------------------------------------------------------------ | ------------------------------------ |
+| GitHub Actions runs automatically                            | Nothing - secrets already configured |
+| Run scripts locally (e.g., `./scripts/pm/clickup-import.sh`) | Create `.env` file                   |
+| View workflow logs                                           | Nothing - check Actions tab          |
+| Manual workflow trigger                                      | Nothing - use GitHub UI              |
 
 ## Step 1: Verify GitHub Secrets (Already Done)
 
@@ -96,6 +96,7 @@ Keep this key secure - it provides full access to your ClickUp workspace.
 ## Step 4: Create User Stories in ClickUp
 
 User stories must follow this naming convention:
+
 ```
 US-001: Button Component
 US-042: Dark Mode Support
@@ -117,6 +118,7 @@ git push -u origin us001/test-clickup-integration
 ```
 
 Check:
+
 1. GitHub → Actions → ClickUp Sync (should run automatically)
 2. ClickUp → Find task `US-001` (should now be "In Progress")
 
@@ -129,6 +131,7 @@ gh pr create --base testing --title "us001/test-clickup-integration"
 ```
 
 Check:
+
 1. GitHub Actions runs automatically
 2. ClickUp task `US-001` should now be "In Review"
 3. ClickUp task should have a comment with the PR link
@@ -157,12 +160,14 @@ source .env
 ## Step 6: Verify Workflow Responses
 
 Check GitHub Actions:
+
 1. Go to your repository → Actions
 2. Click on "ClickUp Sync"
 3. View the latest workflow run
 4. Check for successful API calls
 
 Expected output:
+
 ```
 Found user story: US-001
 Determined status: In Progress
@@ -188,6 +193,7 @@ Update the status names to match your ClickUp configuration.
 The GitHub Secret `CLICKUP_API_KEY` is invalid or expired.
 
 To fix:
+
 1. Generate a new API key in ClickUp (Settings → Apps)
 2. Update the GitHub Secret:
    - Go to Settings → Secrets and variables → Actions
@@ -196,6 +202,7 @@ To fix:
 ### "No task found for US-###"
 
 The task doesn't exist or the name format is wrong. Check:
+
 - Task name includes `US-###` (e.g., `US-001: Button Component`)
 - The number matches your branch (e.g., `us001/feature-name`)
 - The task is in the configured space
@@ -203,6 +210,7 @@ The task doesn't exist or the name format is wrong. Check:
 ### "Invalid user story number format"
 
 Your branch name must follow the pattern:
+
 ```
 us001/description  ✓ Correct
 us042/feature      ✓ Correct
@@ -214,6 +222,7 @@ us1/feature        ✗ Wrong (must be 3 digits)
 ### Workflow not triggering
 
 Check:
+
 1. The workflow file exists: `.github/workflows/clickup-sync.yml`
 2. GitHub Actions is enabled for your repository
 3. The branch name matches the pattern `us[0-9][0-9][0-9]/**`
@@ -239,6 +248,7 @@ source .env
 ## Support
 
 For issues with:
+
 - ClickUp API: https://docs.clickup.com/en/articles/1367130-getting-started-with-the-clickup-api
 - GitHub Actions: Check workflow logs in the Actions tab
 - This integration: See TROUBLESHOOTING.MD

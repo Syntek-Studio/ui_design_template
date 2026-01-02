@@ -1,4 +1,4 @@
-# Sprint Index - @template/ui Design System
+# Sprint Index - @syntek-studio/ui Design System
 
 **Document Version:** 1.0
 **Created:** 01/01/2026
@@ -61,7 +61,7 @@
 
 ## Overview
 
-This document provides a comprehensive index of all 23 sprints organised for the @template/ui component library project.
+This document provides a comprehensive index of all 23 sprints organised for the @syntek-studio/ui component library project.
 Each sprint contains exactly 11 story points (or as close as possible given the available story combinations).
 
 **Sprint Duration:** 2 weeks per sprint

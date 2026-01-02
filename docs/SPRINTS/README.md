@@ -1,4 +1,4 @@
-# Sprint Planning - @template/ui Design System
+# Sprint Planning - @syntek-studio/ui Design System
 
 **Last Updated:** 01/01/2026
 **Version:** 1.0
@@ -9,31 +9,30 @@
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Overview](#overview)
-
+  - [Key Metrics](#key-metrics)
 - [Quick Start](#quick-start)
-
 - [Sprint Structure](#sprint-structure)
-
 - [How to Use This Directory](#how-to-use-this-directory)
-
+  - [For Project Managers](#for-project-managers)
+  - [For Developers](#for-developers)
+  - [For Product Owners](#for-product-owners)
 - [Sprint Planning Principles](#sprint-planning-principles)
-
+  - [1. Point Allocation](#1-point-allocation)
+  - [2. MoSCoW Priority Order](#2-moscow-priority-order)
+  - [3. Dependency Respect](#3-dependency-respect)
+  - [4. Phase Progression](#4-phase-progression)
 - [Key Files](#key-files)
-
 - [Sprint Status Workflow](#sprint-status-workflow)
-
-- [Updating Sprint Progress](#updating-sprint-progress)
-
-- [Sprint Retrospectives](#sprint-retrospectives)
-
-- [Resources](#resources)
+  - [Status Definitions](#status-definitions)
+  - [Updating Status](#updating-status)
 
 ---
 
 ## Overview
 
-This directory contains the complete sprint plan for the @template/ui component library project. All 39 user stories
+This directory contains the complete sprint plan for the @syntek-studio/ui component library project. All 39 user stories
 (238 story points) have been organised into 23 balanced sprints, each targeting 11 story points per 2-week sprint.
 
 ### Key Metrics
@@ -241,7 +240,7 @@ Planned → In Progress → In Review → Completed
 
 Update the sprint file header when status changes:
 
-````markdown
+`````markdown
 **Status:** In Progress
 **Started:** 15/01/2026
 **Target Completion:** 28/01/2026
@@ -367,7 +366,9 @@ Add to the bottom of each completed sprint file:
 - Adjusted target: Z points
 ```
 ````
-````
+`````
+
+```
 
 ---
 
@@ -417,3 +418,4 @@ Add to the bottom of each completed sprint file:
 **Maintained By:** Development Team
 **Language:** British English (en_GB)
 **Timezone:** Europe/London
+```

@@ -1,5 +1,5 @@
 {
-  "description": "Status mapping between GitHub and ClickUp for @template/ui",
+  "description": "Status mapping between GitHub and ClickUp for @syntek-studio/ui",
   "clickup_statuses": {
     "open": "Open",
     "pending": "Pending",

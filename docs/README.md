@@ -10,30 +10,29 @@
 
 ## Table of Contents
 
-- [docs/](#docs)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Directory Tree](#directory-tree)
-  - [Documentation Files](#documentation-files)
-    - [CHANGELOG.md](#changelogmd)
-    - [GITGUIDE.md](#gitguidemd)
-    - [METRICS/](#metrics)
-  - [Metrics System](#metrics-system)
-    - [Key Components](#key-components)
-    - [Benefits](#benefits)
-    - [Usage](#usage)
-  - [Navigation Guide](#navigation-guide)
-    - [For Developers Starting Out](#for-developers-starting-out)
-    - [For Component Development](#for-component-development)
-    - [For Contributing](#for-contributing)
-    - [For Understanding Design System](#for-understanding-design-system)
-  - [Contributing to Docs](#contributing-to-docs)
-    - [Adding Documentation](#adding-documentation)
-    - [Updating CHANGELOG](#updating-changelog)
-    - [Section README Requirements](#section-readme-requirements)
-  - [Documentation Structure](#documentation-structure)
-  - [Best Practices](#best-practices)
-  - [Related Sections](#related-sections)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Directory Tree](#directory-tree)
+- [Documentation Files](#documentation-files)
+  - [CHANGELOG.md](#changelogmd)
+  - [GITGUIDE.md](#gitguidemd)
+  - [METRICS/](#metrics)
+- [Metrics System](#metrics-system)
+  - [Key Components](#key-components)
+  - [Benefits](#benefits)
+  - [Usage](#usage)
+- [Navigation Guide](#navigation-guide)
+  - [For Developers Starting Out](#for-developers-starting-out)
+  - [For Component Development](#for-component-development)
+  - [For Contributing](#for-contributing)
+  - [For Understanding Design System](#for-understanding-design-system)
+- [Contributing to Docs](#contributing-to-docs)
+  - [Adding Documentation](#adding-documentation)
+  - [Updating CHANGELOG](#updating-changelog)
+  - [Section README Requirements](#section-readme-requirements)
+- [Documentation Structure](#documentation-structure)
+- [Best Practices](#best-practices)
+- [Related Sections](#related-sections)
 
 ---
 
@@ -158,7 +157,7 @@ Self-learning metrics system for tracking agent performance and optimisations.
 
 - Store learnings for future work
 
-**See:**[METRICS/README.md](METRICS/README.md)
+**See:** [METRICS/README.md](METRICS/README.md)
 
 ---
 
@@ -384,4 +383,4 @@ Project Root
 
 ---
 
-**Last Updated:** 22 December 2025
+**Last Updated:** 02/01/2026

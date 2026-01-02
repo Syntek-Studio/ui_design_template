@@ -77,7 +77,7 @@ This is the foundation of the template system, enabling rapid deployment of cust
 
 3. **File Replacement**
    - Replace all instances of "@syntek-studio/ui" with client package name
-   - Replace all instances of "@template/ui" with client package name
+   - Replace all instances of "@syntek-studio/ui" with client package name
    - Update package.json with new metadata
    - Update README.md with new branding
    - Update CLAUDE.md with new package references
@@ -187,7 +187,7 @@ User runs: npm run init-template
 | Placeholder                                      | Replacement                     | Files Affected                                   |
 | ------------------------------------------------ | ------------------------------- | ------------------------------------------------ |
 | `@syntek-studio/ui`                              | User's package name             | package.json, README.md, CLAUDE.md, src/index.ts |
-| `@template/ui`                                   | User's package name             | README.md, examples, documentation               |
+| `@syntek-studio/ui`                              | User's package name             | README.md, examples, documentation               |
 | `Syntek Studio`                                  | User's client name              | README.md, package.json (author field)           |
 | `A shared UI component library...`               | User's description              | package.json, README.md                          |
 | `github-syntek:Syntek-Studio/ui_design_template` | User's repository (if provided) | package.json                                     |
@@ -462,7 +462,7 @@ async function promptUserInputs() {
 async function performReplacements(answers) {
   const replacementMap = {
     '@syntek-studio/ui': answers.packageName,
-    '@template/ui': answers.packageName,
+    '@syntek-studio/ui': answers.packageName,
     'Syntek Studio': answers.clientName,
     'A shared UI component library for React Web and React Native applications.':
       answers.description,
@@ -832,7 +832,7 @@ describe('createReplacementMap', () => {
     const map = createReplacementMap(answers)
 
     expect(map['@syntek-studio/ui']).toBe('@acme/ui')
-    expect(map['@template/ui']).toBe('@acme/ui')
+    expect(map['@syntek-studio/ui']).toBe('@acme/ui')
     expect(map['Syntek Studio']).toBe('Acme Corporation')
   })
 })
