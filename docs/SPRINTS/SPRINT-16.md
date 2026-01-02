@@ -22,22 +22,31 @@
 ## Sprint Deliverables
 
 - Modal/Dialog component for web and mobile
+
 - Bundle size optimisation implementation
+
 - Tree-shaking configuration
+
 - Code-splitting strategies
 
 ## Acceptance Criteria
 
 - [ ] Modal component implemented
+
 - [ ] Modal accessible (keyboard nav, focus trap)
+
 - [ ] Bundle size reduced by at least 20%
+
 - [ ] Tree-shaking functional
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-Modal requires careful accessibility implementation including focus management, keyboard navigation, and ARIA attributes. Bundle optimisation should use modern build tools.
+Modal requires careful accessibility implementation including focus management, keyboard navigation, and ARIA
+attributes. Bundle optimisation should use modern build tools.
 
 ## Repository Breakdown
 

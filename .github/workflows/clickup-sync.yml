@@ -98,11 +98,14 @@ jobs:
       - name: Determine Status Based on Event
         id: status
         if: steps.extract.outputs.skip != 'true' && steps.extract.outputs.manual != 'true'
+        env:
+          # SECURITY: Pass GitHub context via env vars to prevent shell injection
+          EVENT: ${{ github.event_name }}
+          ACTION: ${{ github.event.action }}
+          BASE_REF: ${{ github.base_ref }}
+          MERGED: ${{ github.event.pull_request.merged }}
         run: |
-          EVENT="${{ github.event_name }}"
-          ACTION="${{ github.event.action }}"
-          BASE_REF="${{ github.base_ref }}"
-          MERGED="${{ github.event.pull_request.merged }}"
+          # SECURITY: Variables are now passed via environment, not direct interpolation
 
           echo "Event: $EVENT, Action: $ACTION, Base: $BASE_REF, Merged: $MERGED"
 

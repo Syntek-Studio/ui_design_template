@@ -3,15 +3,18 @@
 **Document Version:** 1.1
 **Created:** 01/01/2026
 **Last Updated:** 01/01/2026
-**Language:** British English (en_GB)
+**Language:**British English (en_GB)
 
 ---
 
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+
 - [Executive Summary](#executive-summary)
+
 - [Sprint Overview](#sprint-overview)
+
 - [Phase-by-Phase Delivery Plan](#phase-by-phase-delivery-plan)
   - [Phase 1: Template Infrastructure (Sprints 01-03)](#phase-1-template-infrastructure-sprints-01-03)
   - [Phase 2: Theme Configuration System (Sprints 02-04)](#phase-2-theme-configuration-system-sprints-02-04)
@@ -20,7 +23,9 @@
   - [Phase 5: Documentation \& Storybook (Sprints 06-07, 11-13, 15)](#phase-5-documentation--storybook-sprints-06-07-11-13-15)
   - [Phase 6: Testing Framework (Sprints 13-15)](#phase-6-testing-framework-sprints-13-15)
   - [Phase 7: Advanced Features (Sprints 08, 15-23)](#phase-7-advanced-features-sprints-08-15-23)
+
 - [Delivery Timeline](#delivery-timeline)
+
 - [Milestone Gates](#milestone-gates)
   - [Milestone 1: Template Ready (After Sprint 02)](#milestone-1-template-ready-after-sprint-02)
   - [Milestone 2: Design System Ready (After Sprint 04)](#milestone-2-design-system-ready-after-sprint-04)
@@ -28,31 +33,41 @@
   - [Milestone 4: Publishing Ready (After Sprint 10)](#milestone-4-publishing-ready-after-sprint-10)
   - [Milestone 5: Documentation Complete (After Sprint 15)](#milestone-5-documentation-complete-after-sprint-15)
   - [Milestone 6: Feature Complete (After Sprint 23)](#milestone-6-feature-complete-after-sprint-23)
+
 - [Component Delivery Schedule](#component-delivery-schedule)
   - [Sprints 01-07: Built-in (No new components)](#sprints-01-07-built-in-no-new-components)
   - [Sprint 08: Card Component](#sprint-08-card-component)
   - [Sprints 15-19: Core Components](#sprints-15-19-core-components)
   - [Sprints 20-23: Advanced Features](#sprints-20-23-advanced-features)
+
 - [Risk Assessment and Mitigation](#risk-assessment-and-mitigation)
+
 - [Success Criteria](#success-criteria)
   - [Phase 1-4 (Must Have) - Sprints 01-10](#phase-1-4-must-have---sprints-01-10)
   - [Phase 5-6 (Should Have) - Sprints 06-07, 11-15](#phase-5-6-should-have---sprints-06-07-11-15)
   - [Phase 7 (Could Have) - Sprints 08, 15-23](#phase-7-could-have---sprints-08-15-23)
+
 - [Team Capacity Planning](#team-capacity-planning)
   - [Estimated Effort by Sprint Range](#estimated-effort-by-sprint-range)
+
 - [Tools and Infrastructure](#tools-and-infrastructure)
   - [Required Tools](#required-tools)
   - [Optional Tools](#optional-tools)
+
 - [Key Success Factors](#key-success-factors)
+
 - [Next Steps](#next-steps)
+
 - [Document Control](#document-control)
 
 ## Executive Summary
 
-This document outlines the complete delivery plan for the @template/ui component library - a comprehensive, production-ready design system template. The plan spans 7 phases with 39 user stories organised into **23 sprints**, totalling 238 story points.
+This document outlines the complete delivery plan for the @template/ui component library - a comprehensive,
+production-ready design system template. The plan spans 7 phases with 39 user stories organised into**23 sprints**,
+totalling 238 story points.
 
 **Sprint Capacity:** 11 points per sprint (2 weeks)
-**Total Timeline:** 23 sprints (~46 weeks / 11.5 months)
+**Total Timeline:**23 sprints (~46 weeks / 11.5 months)
 
 | Priority    | Stories | Points  |
 | ----------- | ------- | ------- |
@@ -213,7 +228,7 @@ This document outlines the complete delivery plan for the @template/ui component
 
 ## Delivery Timeline
 
-```
+```text
 Sprints 01-03 (Weeks 1-6)   │ Phase 1-2: Template & Theme Foundation
 Sprints 04-07 (Weeks 7-14)  │ Phase 2-3: Tokens & Component Integration
 Sprints 08-10 (Weeks 15-20) │ Phase 4: CI/CD & Publishing Pipeline
@@ -232,40 +247,55 @@ Sprints 16-23 (16 weeks): COULD HAVE - Advanced Features
 ### Milestone 1: Template Ready (After Sprint 02)
 
 - Template CLI functional
+
 - Template configuration documented
+
 - New projects can be scaffolded
 
 ### Milestone 2: Design System Ready (After Sprint 04)
 
 - Token system complete
+
 - Token generation automated
+
 - Accessibility validation in place
 
 ### Milestone 3: Components Themeable (After Sprint 07)
 
 - Button refactored with tokens
+
 - Dark mode working
+
 - Theme switching functional
 
 ### Milestone 4: Publishing Ready (After Sprint 10)
 
 - CI/CD pipeline working
+
 - Package publishable to npm
+
 - Versioning automated
+
 - Setup documentation complete
 
 ### Milestone 5: Documentation Complete (After Sprint 15)
 
 - Storybook deployed
+
 - All guides written
+
 - Testing framework integrated
+
 - Accessibility testing automated
 
 ### Milestone 6: Feature Complete (After Sprint 23)
 
 - All components built
+
 - Component generator available
+
 - Multi-theme support
+
 - Migration tooling available
 
 ---
@@ -283,16 +313,23 @@ Sprints 16-23 (16 weeks): COULD HAVE - Advanced Features
 ### Sprints 15-19: Core Components
 
 - Input/TextInput (5 pts) - Sprint 15
+
 - Modal/Dialog (5 pts) - Sprint 16
+
 - Form Components (8 pts) - Sprint 17
+
 - Navigation Components (8 pts) - Sprint 18
+
 - Utility Components (8 pts) - Sprint 19
 
 ### Sprints 20-23: Advanced Features
 
 - Component Generator - Sprint 20
+
 - Multi-Theme Support - Sprint 21
+
 - Internationalisation - Sprint 22
+
 - Migration Tooling - Sprint 23
 
 ---
@@ -314,26 +351,39 @@ Sprints 16-23 (16 weeks): COULD HAVE - Advanced Features
 ### Phase 1-4 (Must Have) - Sprints 01-10
 
 - [ ] CLI tool creates new projects successfully
+
 - [ ] Design token system is centralised and automated
+
 - [ ] Components use tokens and are themeable
+
 - [ ] CI/CD pipeline passes all checks
+
 - [ ] Package successfully publishes to npm
 
 ### Phase 5-6 (Should Have) - Sprints 06-07, 11-15
 
 - [ ] Storybook deployed and accessible
+
 - [ ] All documentation complete
+
 - [ ] 80% test coverage achieved
+
 - [ ] Accessibility testing in CI
+
 - [ ] Visual regression tracking enabled
 
 ### Phase 7 (Could Have) - Sprints 08, 15-23
 
 - [ ] All core components built
+
 - [ ] Component generator functional
+
 - [ ] Multi-theme support available
+
 - [ ] Bundle size optimised
+
 - [ ] Migration tooling available
+
 - [ ] i18n support documented
 
 ---
@@ -350,7 +400,7 @@ Sprints 16-23 (16 weeks): COULD HAVE - Advanced Features
 | 11-15   | Docs & Testing        | 9       | 51     | 10 weeks |
 | 16-23   | Advanced Features     | 12      | 81     | 16 weeks |
 
-**Velocity Assumption:** 11 points per 2-week sprint
+**Velocity Assumption:**11 points per 2-week sprint
 
 ---
 
@@ -359,39 +409,57 @@ Sprints 16-23 (16 weeks): COULD HAVE - Advanced Features
 ### Required Tools
 
 - GitHub (repository & actions)
+
 - npm (package registry)
+
 - ClickUp or Jira (project management)
+
 - Node.js 18+ (development)
+
 - TypeScript (type safety)
+
 - Tailwind CSS 4 (styling)
+
 - Vitest (testing)
+
 - Storybook (documentation)
 
 ### Optional Tools
 
 - Chromatic (visual regression)
+
 - Sentry (error tracking)
+
 - GitHub Pages (hosting)
 
 ---
 
 ## Key Success Factors
 
-1. **Follow prioritisation:** Deliver Must Have before Should/Could
-2. **Maintain quality:** Don't skip testing, documentation, accessibility
-3. **Respect dependencies:** Complete dependencies before dependent stories
-4. **Regular reviews:** Sprint retrospectives inform adjustments
-5. **Clear communication:** Status updates and blockers identified early
+1.**Follow prioritisation:**Deliver Must Have before Should/Could
+
+2.**Maintain quality:**Don't skip testing, documentation, accessibility
+
+3.**Respect dependencies:**Complete dependencies before dependent stories
+
+4.**Regular reviews:**Sprint retrospectives inform adjustments
+
+5.**Clear communication:** Status updates and blockers identified early
 
 ---
 
 ## Next Steps
 
 1. Review and approve delivery plan
+
 2. Assign Sprint 01 stories (US001, US002) to team
+
 3. Brief development team on roadmap
+
 4. Set up project management tool (ClickUp)
+
 5. Begin Sprint 01 implementation
+
 6. Bi-weekly sprint planning and reviews
 
 ---
@@ -406,4 +474,5 @@ Sprints 16-23 (16 weeks): COULD HAVE - Advanced Features
 
 ---
 
-**For questions or updates, refer to the individual user story files or the [SPRINT-INDEX.md](../SPRINTS/SPRINT-INDEX.md).**
+**For questions or updates, refer to the individual user story files or the
+[SPRINT-INDEX.md](../SPRINTS/SPRINT-INDEX.md).**

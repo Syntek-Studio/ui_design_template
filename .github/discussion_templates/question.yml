@@ -1,0 +1,79 @@
+title: "Your Question Here"
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your question! Please provide as much detail as possible to help us assist you.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What is your question?
+      placeholder: |
+        Example: How do I customise the Button component's colour?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component are you asking about? (if applicable)
+      options:
+        - Button
+        - Card
+        - Input
+        - Select
+        - Checkbox
+        - Radio
+        - Switch
+        - Icon
+        - Other
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Which platform are you developing for?
+      options:
+        - Web
+        - Mobile (React Native)
+        - Both
+        - Not Sure
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Example
+      description: If applicable, please provide a minimal code example that demonstrates your question.
+      placeholder: |
+        ```typescript
+        import { Button } from '@template/ui';
+
+        export function MyComponent() {
+          return <Button onClick={() => {}}>Click me</Button>;
+        }
+        ```
+      render: typescript
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other context or information that might help us understand your question?
+      placeholder: |
+        - Package version: 0.7.0
+        - React version: 18.2.0
+        - Browser: Chrome 120
+        - Error messages: (if any)
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've read the documentation
+        - label: I've searched existing discussions
+        - label: I've provided a minimal code example

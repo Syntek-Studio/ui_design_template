@@ -1,7 +1,7 @@
 # src/web/
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -44,10 +44,13 @@
 
 The `src/web/` folder contains all React web components built for browser environments. Components in this folder use:
 
-- **React 18/19** for component logic
-- **Tailwind CSS 4** for styling
-- **HTML elements** (`<button>`, `<div>`, etc.)
-- **Browser APIs** for interactions (onClick, focus, etc.)
+- **React 18/19**for component logic
+
+-**Tailwind CSS 4**for styling
+
+-**HTML elements**(`<button>`, `<div>`, etc.)
+
+-**Browser APIs** for interactions (onClick, focus, etc.)
 
 These components are exported as default exports from the main library entry point for easy importing.
 
@@ -55,16 +58,16 @@ These components are exported as default exports from the main library entry poi
 
 ## Directory Tree
 
-```
+```markdown
 src/web/
-├── README.md              # This file
+├── README.md # This file
 └── components/
-    ├── README.md
-    ├── Button/
-    │   ├── Button.tsx
-    │   ├── Button.stories.tsx
-    │   └── index.ts
-    └── index.ts
+├── README.md
+├── Button/
+│ ├── Button.tsx
+│ ├── Button.stories.tsx
+│ └── index.ts
+└── index.ts
 ```
 
 ---
@@ -84,36 +87,34 @@ Every web component follows a consistent structure:
 
 ### Component Folder Structure
 
-```
+```markdown
 ComponentName/
-├── ComponentName.tsx           # Main component file
-├── ComponentName.stories.tsx   # Storybook stories
-└── index.ts                    # Re-export
+├── ComponentName.tsx # Main component file
+├── ComponentName.stories.tsx # Storybook stories
+└── index.ts # Re-export
 ```
 
 ### Component Implementation (`ComponentName.tsx`)
 
 ```typescript
 /**
- * Button component for web
- *
- * @example
- * <Button title="Click me" variant="primary" onClick={() => {}} />
+ *Button component for web*
+ *@example* <Button title="Click me" variant="primary" onClick={() => {}} />
  */
 export interface ButtonProps {
-  /** The button text */
+  /**The button text*/
   title: string;
 
-  /** Click handler function */
+  /**Click handler function*/
   onClick?: () => void;
 
-  /** Visual variant of the button */
+  /**Visual variant of the button*/
   variant?: 'primary' | 'secondary';
 
-  /** Tailwind CSS classes for custom styling */
+  /**Tailwind CSS classes for custom styling*/
   className?: string;
 
-  /** Whether the button is disabled */
+  /**Whether the button is disabled*/
   disabled?: boolean;
 }
 
@@ -196,11 +197,17 @@ export { Button, type ButtonProps } from './Button'
 Web components use standard HTML elements:
 
 - `<button>` - Button interactions
+
 - `<div>` - Layout and containers
+
 - `<input>` - Form inputs
+
 - `<textarea>` - Multi-line text input
+
 - `<select>` - Dropdown selections
+
 - `<form>` - Form grouping
+
 - Semantic HTML elements for accessibility
 
 ### Event Handlers
@@ -221,7 +228,7 @@ Web components use React event handlers:
 
 All styling uses Tailwind CSS utility classes:
 
-```typescript
+````typescript
 // Spacing
 'px-4 py-2' // Padding
 
@@ -239,7 +246,7 @@ All styling uses Tailwind CSS utility classes:
 
 // Responsive
 'md:px-6 lg:px-8' // Responsive classes
-```
+```markdown
 
 ### Focus & Accessibility
 
@@ -247,7 +254,7 @@ Web components should include focus states for accessibility:
 
 ```typescript
 className = 'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
-```
+```markdown
 
 ---
 
@@ -257,7 +264,7 @@ className = 'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offs
 
 ```bash
 mkdir -p src/web/components/MyComponent
-```
+````
 
 ### Step 2: Implement Component
 
@@ -265,10 +272,9 @@ Create `src/web/components/MyComponent/MyComponent.tsx`:
 
 ```typescript
 /**
- * MyComponent description
- */
+ *MyComponent description*/
 export interface MyComponentProps {
-  /** Prop documentation */
+  /**Prop documentation*/
   title: string;
 }
 
@@ -312,10 +318,10 @@ export { MyComponent, type MyComponentProps } from './MyComponent'
 
 Update `src/web/components/index.ts`:
 
-```typescript
-export * from './Button'
-export * from './MyComponent' // Add this line
-```
+````typescript
+export *from './Button'
+export* from './MyComponent' // Add this line
+```markdown
 
 ---
 
@@ -331,18 +337,18 @@ className = 'px-4 py-2 rounded bg-blue-500 text-white hover:opacity-90'
 
 // Avoid
 className = 'custom-button' // with custom CSS
-```
+````
 
 ### Design Tokens
 
 Use design tokens from `src/tokens/` for consistency:
 
-```typescript
+````typescript
 import { colours, spacing } from '@template/ui'
 
 // In component styling
 const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500]
-```
+```markdown
 
 ### Responsive Design
 
@@ -352,7 +358,7 @@ Use responsive Tailwind classes:
 className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
 className = 'text-base md:text-lg' // Responsive font sizes
 className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3' // Responsive grids
-```
+```markdown
 
 ---
 
@@ -360,24 +366,30 @@ className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3' // Responsive grids
 
 Each component should have:
 
-1. **Storybook stories** for visual testing and documentation
-2. **Unit tests** (using Vitest) for functionality
-3. **Accessibility tests** for WCAG compliance
+1. **Storybook stories**for visual testing and documentation
+
+2.**Unit tests**(using Vitest) for functionality
+
+3.**Accessibility tests** for WCAG compliance
 
 Run Storybook to view and test components:
 
 ```bash
 npm run storybook:web
-```
+````
 
 ---
 
 ## Related Sections
 
 - [components/](components/) - All web component implementations
+
 - [../mobile/](../mobile/) - React Native mobile components
+
 - [../tokens/](../tokens/) - Design system tokens
+
 - [../../README.md](../../README.md) - Main project README
+
 - [../../docs/](../../docs/) - Project documentation
 
 ---

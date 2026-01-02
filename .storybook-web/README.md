@@ -1,7 +1,7 @@
 # Web Storybook Configuration
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -36,8 +36,11 @@ This folder contains the Storybook configuration for web components.
 Web Storybook runs in the browser using Webpack 5 and supports:
 
 - React components with TypeScript
+
 - Tailwind CSS 4 via PostCSS
+
 - React Native Web for cross-platform components
+
 - Path aliases (`@/` → `src/`)
 
 ## File Structure
@@ -50,13 +53,16 @@ Web Storybook runs in the browser using Webpack 5 and supports:
 
 ## Commands
 
-```bash
+````bash
+
 # Start development server
+
 npm run storybook:web
 
 # Build static Storybook
+
 npm run storybook:web:build
-```
+```markdown
 
 ## Configuration Details
 
@@ -64,9 +70,11 @@ npm run storybook:web:build
 
 Stories are discovered from:
 
-```
-src/**/*.stories.@(js|jsx|ts|tsx|mdx)
-```
+````
+
+src/\*_/_.stories.@(js|jsx|ts|tsx|mdx)
+
+````
 
 This includes both web-only stories (`.stories.tsx`) and any MDX documentation.
 
@@ -82,11 +90,15 @@ Note: In Storybook 10, essentials (controls, actions, docs, viewport, background
 
 The `webpackFinal` function in `main.ts` configures:
 
-1. **React Native Web aliasing** - `react-native` → `react-native-web`
-2. **Path aliases** - `@/` → `src/`
-3. **Web extensions priority** - `.web.tsx` before `.tsx`
-4. **Babel loader** - TypeScript and JSX transformation
-5. **PostCSS loader** - Tailwind CSS 4 processing
+1. **React Native Web aliasing**- `react-native` → `react-native-web`
+
+2.**Path aliases**- `@/` → `src/`
+
+3.**Web extensions priority**- `.web.tsx` before `.tsx`
+
+4.**Babel loader**- TypeScript and JSX transformation
+
+5.**PostCSS loader** - Tailwind CSS 4 processing
 
 ### Tailwind CSS
 
@@ -94,7 +106,7 @@ Tailwind styles are loaded in `preview.tsx`:
 
 ```typescript
 import '../src/tailwind.css'
-```
+````
 
 This ensures all Tailwind utilities are available in stories.
 
@@ -169,17 +181,23 @@ webpackFinal: async (config) => {
 ### Tailwind classes not working
 
 1. Ensure `src/tailwind.css` exists with `@import "tailwindcss"`
+
 2. Check `postcss.config.mjs` includes `@tailwindcss/postcss`
+
 3. Verify PostCSS loader is added in `main.ts`
 
 ### React Native components not rendering
 
 1. Check `react-native-web` is aliased correctly
+
 2. Ensure `.web.tsx` extensions are prioritised
+
 3. Verify the component doesn't use unsupported RN APIs
 
 ### TypeScript errors in stories
 
 1. Run `npm run type-check` to identify issues
+
 2. Ensure `tsconfig.json` includes story files
+
 3. Check Babel presets match TypeScript config

@@ -1,7 +1,7 @@
 # src/mobile/components/
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -52,19 +52,24 @@
 
 This folder contains all mobile component implementations for React Native. Each component is built with:
 
-- **React 18/19** for component logic
-- **React Native** for cross-platform mobile UI
-- **TypeScript** for type safety
-- **Nativewind 4** for Tailwind CSS styling
-- **Storybook** for documentation and testing
+- **React 18/19**for component logic
 
-Components are organised into individual folders, each containing the component implementation, Storybook stories, and exports.
+-**React Native**for cross-platform mobile UI
+
+-**TypeScript**for type safety
+
+-**Nativewind 4**for Tailwind CSS styling
+
+-**Storybook** for documentation and testing
+
+Components are organised into individual folders, each containing the component implementation, Storybook stories, and
+exports.
 
 ---
 
 ## Directory Tree
 
-```
+```typescript
 src/mobile/components/
 ├── README.md              # This file
 ├── index.ts               # Main export file
@@ -86,7 +91,7 @@ Versatile button component with multiple variants and states for React Native.
 
 **Props:**
 
-```typescript
+````typescript
 interface ButtonProps {
   title: string // Button text
   onPress?: () => void // Press handler
@@ -94,7 +99,7 @@ interface ButtonProps {
   disabled?: boolean // Disabled state
   className?: string // Custom Nativewind classes
 }
-```
+```text
 
 **Import:**
 
@@ -102,7 +107,7 @@ interface ButtonProps {
 import { Mobile } from '@template/ui';
 
 <Mobile.Button ... />
-```
+```text
 
 **Example:**
 
@@ -112,17 +117,20 @@ import { Mobile } from '@template/ui';
   variant="primary"
   onPress={() => console.log('Pressed')}
 />
-```
+```markdown
 
 **Variants:**
 
-- **primary** - Blue background, white text
-- **secondary** - Grey background, white text
+- **primary**- Blue background, white text
+
+-**secondary** - Grey background, white text
 
 **States:**
 
 - Normal - Interactive
+
 - Active/Pressed - Darker shade (active: class)
+
 - Disabled - 50% opacity, no interaction
 
 ---
@@ -135,24 +143,24 @@ import { Mobile } from '@template/ui';
 import { Pressable, Text } from 'react-native'
 
 export interface ButtonProps {
-  /** The button text content */
+  /**The button text content*/
   title: string
 
-  /** Callback function when button is pressed */
+  /**Callback function when button is pressed*/
   onPress?: () => void
 
-  /** Visual style of the button */
+  /**Visual style of the button*/
   variant?: 'primary' | 'secondary'
 
-  /** Whether the button is disabled and not interactive */
+  /**Whether the button is disabled and not interactive*/
   disabled?: boolean
 
-  /** Additional Nativewind CSS classes for customisation */
+  /**Additional Nativewind CSS classes for customisation*/
   className?: string
 }
 
 export const Button: React.FC<ButtonProps>
-```
+```markdown
 
 ---
 
@@ -167,7 +175,7 @@ import { Mobile } from '@template/ui';
   title="Press me"
   onPress={() => alert('Pressed!')}
 />
-```
+```markdown
 
 ### Primary Button
 
@@ -177,7 +185,7 @@ import { Mobile } from '@template/ui';
   variant="primary"
   onPress={handleSubmit}
 />
-```
+```markdown
 
 ### Secondary Button
 
@@ -187,7 +195,7 @@ import { Mobile } from '@template/ui';
   variant="secondary"
   onPress={handleCancel}
 />
-```
+```markdown
 
 ### Disabled Button
 
@@ -197,7 +205,7 @@ import { Mobile } from '@template/ui';
   disabled={true}
   onPress={handleSubmit}
 />
-```
+```markdown
 
 ### Custom Styling
 
@@ -207,7 +215,7 @@ import { Mobile } from '@template/ui';
   className="bg-gradient-to-r from-blue-500 to-purple-600"
   onPress={() => {}}
 />
-```
+```markdown
 
 ### Form Integration
 
@@ -239,7 +247,7 @@ export function LoginForm() {
     </View>
   );
 }
-```
+```markdown
 
 ### Loading State Pattern
 
@@ -273,7 +281,7 @@ export function AsyncButton() {
     />
   );
 }
-```
+```markdown
 
 ### Multiple Buttons Layout
 
@@ -301,7 +309,7 @@ export function ConfirmDialog() {
     </View>
   );
 }
-```
+```markdown
 
 ---
 
@@ -309,18 +317,19 @@ export function ConfirmDialog() {
 
 ### Button Component Example
 
-```
-Button/
-├── Button.tsx              # Component implementation
-├── Button.stories.tsx      # Storybook documentation
-└── index.ts                # TypeScript re-export
-```
+````
 
+Button/
+├── Button.tsx # Component implementation
+├── Button.stories.tsx # Storybook documentation
+└── index.ts # TypeScript re-export
+
+````markdown
 ### Button.tsx
 
 Implements the component logic and styling:
 
-```typescript
+````typescript
 import { Pressable, Text } from 'react-native';
 
 export interface ButtonProps {
@@ -355,7 +364,7 @@ export const Button = ({
     </Pressable>
   );
 };
-```
+```markdown
 
 ### Button.stories.tsx
 
@@ -396,7 +405,7 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
-```
+```markdown
 
 ### index.ts
 
@@ -404,18 +413,22 @@ Re-exports the component for public API:
 
 ```typescript
 export { Button, type ButtonProps } from './Button'
-```
+````
+````
 
 ---
 
 ## Adding New Components
 
 1. Create a folder: `src/mobile/components/ComponentName/`
+
 2. Create three files:
    - `ComponentName.tsx` - Implementation (uses React Native components)
    - `ComponentName.stories.tsx` - Storybook stories
    - `index.ts` - Re-export
+
 3. Update `src/mobile/components/index.ts` to export the new component
+
 4. Also create the web equivalent in `src/web/components/ComponentName/`
 
 ---
@@ -436,7 +449,7 @@ className = 'my-custom-button'
 
 Always wrap text in `<Text>` component:
 
-```typescript
+````typescript
 // Good
 <Pressable>
   <Text>Press me</Text>
@@ -446,7 +459,7 @@ Always wrap text in `<Text>` component:
 <Pressable>
   Press me
 </Pressable>
-```
+```markdown
 
 ### Responsive Design
 
@@ -455,7 +468,7 @@ Use responsive Tailwind classes (same as web):
 ```typescript
 className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
 className = 'text-sm md:text-base' // Responsive font sizes
-```
+```markdown
 
 ### Design Tokens
 
@@ -465,7 +478,7 @@ Use design tokens for dynamic values:
 import { colours } from '@template/ui'
 
 const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500]
-```
+```markdown
 
 ---
 
@@ -477,7 +490,7 @@ View and test components in Storybook:
 
 ```bash
 npm run storybook:mobile
-```
+````
 
 Note: Mobile Storybook requires configuration within your React Native project's `.ondevice/` setup.
 
@@ -520,10 +533,13 @@ describe('Button', () => {
 
 Most components work the same on both platforms, but be aware of:
 
-- **Safe area** - Use `<SafeAreaView>` for notches and status bars
-- **Gesture handling** - Different touch response on each platform
-- **Status bar** - Different heights on iOS (with notch) vs Android
-- **Keyboard** - Different keyboard appearance and handling
+- **Safe area**- Use `<SafeAreaView>` for notches and status bars
+
+-**Gesture handling**- Different touch response on each platform
+
+-**Status bar**- Different heights on iOS (with notch) vs Android
+
+-**Keyboard** - Different keyboard appearance and handling
 
 ### Accessibility
 
@@ -545,8 +561,11 @@ Mobile components should have proper accessibility attributes:
 ## Related Sections
 
 - [../](../) - Parent mobile folder
+
 - [../../web/components/](../../web/components/) - Web components
+
 - [../../tokens/](../../tokens/) - Design system tokens
+
 - [../../../README.md](../../../README.md) - Main project README
 
 ---

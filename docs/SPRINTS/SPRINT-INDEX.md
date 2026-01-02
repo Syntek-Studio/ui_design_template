@@ -13,8 +13,11 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+
 - [Overview](#overview)
+
 - [Sprint Summary](#sprint-summary)
+
 - [Sprint Details by Phase](#sprint-details-by-phase)
   - [Phase 1: Template Infrastructure (Sprints 1-3)](#phase-1-template-infrastructure-sprints-1-3)
   - [Phase 2: Theme Configuration System (Sprints 3-4)](#phase-2-theme-configuration-system-sprints-3-4)
@@ -23,34 +26,43 @@
   - [Phase 5: Documentation \& Storybook (Sprints 10-13)](#phase-5-documentation--storybook-sprints-10-13)
   - [Phase 6: Testing Framework (Sprints 13-15)](#phase-6-testing-framework-sprints-13-15)
   - [Phase 7: Advanced Features (Sprints 15-23)](#phase-7-advanced-features-sprints-15-23)
+
 - [MoSCoW Distribution](#moscow-distribution)
   - [Overall Project Distribution](#overall-project-distribution)
   - [Sprint-by-Sprint MoSCoW](#sprint-by-sprint-moscow)
+
 - [Points Distribution](#points-distribution)
   - [Points by Story Size](#points-by-story-size)
   - [Optimal Sprint Combinations](#optimal-sprint-combinations)
+
 - [Sprint Velocity Tracking](#sprint-velocity-tracking)
   - [Capacity Planning](#capacity-planning)
   - [Velocity Assumptions](#velocity-assumptions)
   - [Historical Velocity (To Be Updated)](#historical-velocity-to-be-updated)
+
 - [Key Dependencies](#key-dependencies)
   - [Critical Path](#critical-path)
   - [Parallel Work Opportunities](#parallel-work-opportunities)
+
 - [Risk Summary](#risk-summary)
   - [High-Risk Sprints](#high-risk-sprints)
   - [Risk Mitigation Strategies](#risk-mitigation-strategies)
+
 - [Next Steps](#next-steps)
   - [For Project Managers](#for-project-managers)
   - [For Development Team](#for-development-team)
   - [For Product Owners](#for-product-owners)
+
 - [Sprint File Quick Reference](#sprint-file-quick-reference)
+
 - [Document Maintenance](#document-maintenance)
 
 ---
 
 ## Overview
 
-This document provides a comprehensive index of all 23 sprints organised for the @template/ui component library project. Each sprint contains exactly 11 story points (or as close as possible given the available story combinations).
+This document provides a comprehensive index of all 23 sprints organised for the @template/ui component library project.
+Each sprint contains exactly 11 story points (or as close as possible given the available story combinations).
 
 **Sprint Duration:** 2 weeks per sprint
 **Total Timeline:** 46 weeks (approximately 11.5 months)
@@ -103,7 +115,7 @@ This document provides a comprehensive index of all 23 sprints organised for the
 | 02     | US003, US005        | 11     | Package.json, theme config |
 | 03     | US006, US004 (part) | 11     | Token generation, README   |
 
-**Phase Total:** 33 points | **Target:** 19 points | **Status:** Over by 14 points (includes Phase 2 start)
+**Phase Total:**33 points |**Target:**19 points |**Status:** Over by 14 points (includes Phase 2 start)
 
 ---
 
@@ -116,7 +128,7 @@ This document provides a comprehensive index of all 23 sprints organised for the
 | 03     | US006        | 8      | Token generation script        |
 | 04     | US007, US008 | 10     | Validation, component defaults |
 
-**Phase Total:** 18 points | **Target:** 21 points | **Status:** Covered (US005 in Sprint 2)
+**Phase Total:**18 points |**Target:**21 points |**Status:** Covered (US005 in Sprint 2)
 
 ---
 
@@ -131,7 +143,7 @@ This document provides a comprehensive index of all 23 sprints organised for the
 | 06     | US011        | 8      | Dark mode                           |
 | 07     | US012        | 5      | Theme hook                          |
 
-**Phase Total:** 28 points | **Target:** 28 points | **Status:** On target
+**Phase Total:**28 points |**Target:**28 points |**Status:** On target
 
 ---
 
@@ -145,7 +157,7 @@ This document provides a comprehensive index of all 23 sprints organised for the
 | 09     | US014        | 8      | Release pipeline        |
 | 10     | US015, US031 | 10     | Versioning, setup guide |
 
-**Phase Total:** 26 points | **Target:** 26 points | **Status:** On target
+**Phase Total:**26 points |**Target:**26 points |**Status:** On target
 
 ---
 
@@ -160,7 +172,7 @@ This document provides a comprehensive index of all 23 sprints organised for the
 | 12     | US016, US033 (part) | 11     | Auto docs                         |
 | 13     | US018               | 5      | Storybook deployment              |
 
-**Phase Total:** 34 points | **Target:** 40 points | **Status:** Some stories distributed
+**Phase Total:**34 points |**Target:**40 points |**Status:** Some stories distributed
 
 ---
 
@@ -174,7 +186,7 @@ This document provides a comprehensive index of all 23 sprints organised for the
 | 14     | US020, US021 | 10     | A11y & visual regression |
 | 15     | US034        | 5      | Testing guide            |
 
-**Phase Total:** 20 points | **Target:** 15 points | **Status:** Includes documentation (US034)
+**Phase Total:**20 points |**Target:**15 points |**Status:** Includes documentation (US034)
 
 ---
 
@@ -194,7 +206,7 @@ This document provides a comprehensive index of all 23 sprints organised for the
 | 22     | US028        | 8      | i18n support                      |
 | 23     | US029        | 8      | Migration tooling                 |
 
-**Phase Total:** 84 points | **Target:** 89 points | **Status:** Mostly covered
+**Phase Total:**84 points |**Target:**89 points |**Status:**Mostly covered
 
 ---
 
@@ -235,11 +247,14 @@ This document provides a comprehensive index of all 23 sprints organised for the
 
 To achieve exactly 11 points per sprint:
 
-- **8 + 3 = 11** (most common combination)
-- **5 + 3 + 3 = 11** (limited by 3-point story availability)
-- **5 + 5 + 1 = 11** (no 1-point stories available)
+-**8 + 3 = 11**(most common combination)
 
-**Note:** Some sprints total 10 or 13 points due to story availability constraints. This is acceptable variance (±2 points).
+-**5 + 3 + 3 = 11**(limited by 3-point story availability)
+
+-**5 + 5 + 1 = 11** (no 1-point stories available)
+
+**Note:**Some sprints total 10 or 13 points due to story availability constraints. This is acceptable variance (±2
+points).
 
 ---
 
@@ -257,10 +272,13 @@ To achieve exactly 11 points per sprint:
 
 ### Velocity Assumptions
 
-- **Team Size:** 1-2 developers
-- **Sprint Duration:** 2 weeks (10 working days)
-- **Points per Dev per Sprint:** 5-6 points
-- **Buffer:** 1-2 points per sprint for bugs/unexpected work
+-**Team Size:**1-2 developers
+
+-**Sprint Duration:**2 weeks (10 working days)
+
+-**Points per Dev per Sprint:**5-6 points
+
+-**Buffer:** 1-2 points per sprint for bugs/unexpected work
 
 ### Historical Velocity (To Be Updated)
 
@@ -280,7 +298,7 @@ To achieve exactly 11 points per sprint:
 
 The following dependencies form the critical path:
 
-```
+```text
 Sprint 01 (US001, US002)
   ↓
 Sprint 02 (US003, US005) — Requires US002
@@ -306,10 +324,13 @@ Sprint 10 (US015, US031) — Requires US014
 
 After Sprint 10, many stories can be worked in parallel:
 
-- **Documentation** (US016-018, US030-035) — Independent
-- **Testing** (US019-021, US034) — Independent
-- **Components** (US022-023, US036-039) — Mostly independent
-- **Advanced Features** (US024-029) — Independent
+- **Documentation**(US016-018, US030-035) — Independent
+
+-**Testing**(US019-021, US034) — Independent
+
+-**Components**(US022-023, US036-039) — Mostly independent
+
+-**Advanced Features**(US024-029) — Independent
 
 ---
 
@@ -330,10 +351,13 @@ After Sprint 10, many stories can be worked in parallel:
 
 ### Risk Mitigation Strategies
 
-1. **Technical Risks:** Prototype complex features early, seek peer review
-2. **Schedule Risks:** Build buffer into each sprint, prioritise ruthlessly
-3. **Quality Risks:** Enforce testing requirements, automated quality gates
-4. **Dependency Risks:** Identify blockers early, maintain dependency graph
+1.**Technical Risks:**Prototype complex features early, seek peer review
+
+2.**Schedule Risks:**Build buffer into each sprint, prioritise ruthlessly
+
+3.**Quality Risks:**Enforce testing requirements, automated quality gates
+
+4.**Dependency Risks:** Identify blockers early, maintain dependency graph
 
 ---
 
@@ -342,24 +366,35 @@ After Sprint 10, many stories can be worked in parallel:
 ### For Project Managers
 
 1. ✅ Review and approve sprint plan
+
 2. ⬜ Assign Sprint 01 stories to team
+
 3. ⬜ Set up project tracking in ClickUp
+
 4. ⬜ Schedule sprint planning meetings
+
 5. ⬜ Establish sprint review cadence
 
 ### For Development Team
 
 1. ⬜ Review Sprint 01 stories
+
 2. ⬜ Clarify acceptance criteria
+
 3. ⬜ Estimate effort within sprint
+
 4. ⬜ Identify technical unknowns
+
 5. ⬜ Begin Sprint 01 implementation
 
 ### For Product Owners
 
 1. ⬜ Validate sprint priorities
+
 2. ⬜ Confirm acceptance criteria
+
 3. ⬜ Prepare stakeholder updates
+
 4. ⬜ Track progress via sprint reviews
 
 ---
@@ -367,27 +402,49 @@ After Sprint 10, many stories can be worked in parallel:
 ## Sprint File Quick Reference
 
 - [Sprint 01: Template Foundation](SPRINT-01.md)
+
 - [Sprint 02: Template Completion](SPRINT-02.md)
+
 - [Sprint 03: Token Generation System](SPRINT-03.md)
+
 - [Sprint 04: Token Validation & Component Defaults](SPRINT-04.md)
+
 - [Sprint 05: Component Theming Integration](SPRINT-05.md)
+
 - [Sprint 06: Dark Mode & Theme Switching](SPRINT-06.md)
+
 - [Sprint 07: Theme Hook & CI Pipeline](SPRINT-07.md)
+
 - [Sprint 08: CI/CD Foundation](SPRINT-08.md)
+
 - [Sprint 09: Release Automation](SPRINT-09.md)
+
 - [Sprint 10: Versioning & Documentation Foundation](SPRINT-10.md)
+
 - [Sprint 11: Enhanced Storybook](SPRINT-11.md)
+
 - [Sprint 12: Automated Documentation](SPRINT-12.md)
+
 - [Sprint 13: Storybook Deployment & Testing Setup](SPRINT-13.md)
+
 - [Sprint 14: Comprehensive Testing Framework](SPRINT-14.md)
+
 - [Sprint 15: Testing Documentation & Input Component](SPRINT-15.md)
+
 - [Sprint 16: Modal & Bundle Optimisation](SPRINT-16.md)
+
 - [Sprint 17: Form & Token Versioning](SPRINT-17.md)
+
 - [Sprint 18: Navigation Components](SPRINT-18.md)
+
 - [Sprint 19: Utility Components](SPRINT-19.md)
+
 - [Sprint 20: Component Generator & Multi-Theme](SPRINT-20.md)
+
 - [Sprint 21: Multi-Theme Support](SPRINT-21.md)
+
 - [Sprint 22: Internationalisation Support](SPRINT-22.md)
+
 - [Sprint 23: Migration Tooling](SPRINT-23.md)
 
 ---
@@ -403,9 +460,13 @@ After Sprint 10, many stories can be worked in parallel:
 **Update Process:**
 
 1. Mark sprint status as "In Progress" when started
+
 2. Update velocity table as sprints complete
+
 3. Mark sprint status as "Completed" when done
+
 4. Adjust future sprints if velocity changes
+
 5. Document lessons learned in sprint retrospectives
 
 ---

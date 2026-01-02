@@ -1,7 +1,7 @@
 # src/
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -31,11 +31,14 @@
 
 ## Overview
 
-The `src/` folder is the main source directory containing all component implementations, design tokens, and the library's entry point. It's organised into three main sections:
+The `src/` folder is the main source directory containing all component implementations, design tokens, and the
+library's entry point. It's organised into three main sections:
 
-1. **Web components** - React components for web browsers
-2. **Mobile components** - React Native components
-3. **Design tokens** - Shared design system values
+1. **Web components**- React components for web browsers
+
+2.**Mobile components**- React Native components
+
+3.**Design tokens**- Shared design system values
 
 All exports are consolidated at `index.ts` for easy importing by consumers of the library.
 
@@ -43,38 +46,38 @@ All exports are consolidated at `index.ts` for easy importing by consumers of th
 
 ## Directory Tree
 
-```
+```markdown
 src/
-├── README.md                # This file
-├── index.ts                 # Main entry point
-├── tailwind.css             # Tailwind CSS entry
+├── README.md # This file
+├── index.ts # Main entry point
+├── tailwind.css # Tailwind CSS entry
 ├── web/
-│   ├── README.md
-│   └── components/
-│       ├── README.md
-│       ├── Button/
-│       │   ├── Button.tsx
-│       │   ├── Button.stories.tsx
-│       │   └── index.ts
-│       └── index.ts
+│ ├── README.md
+│ └── components/
+│ ├── README.md
+│ ├── Button/
+│ │ ├── Button.tsx
+│ │ ├── Button.stories.tsx
+│ │ └── index.ts
+│ └── index.ts
 ├── mobile/
-│   ├── README.md
-│   └── components/
-│       ├── README.md
-│       ├── Button/
-│       │   ├── Button.tsx
-│       │   ├── Button.stories.tsx
-│       │   └── index.ts
-│       └── index.ts
+│ ├── README.md
+│ └── components/
+│ ├── README.md
+│ ├── Button/
+│ │ ├── Button.tsx
+│ │ ├── Button.stories.tsx
+│ │ └── index.ts
+│ └── index.ts
 └── tokens/
-    ├── README.md
-    ├── index.ts
-    ├── colours.ts
-    ├── spacing.ts
-    ├── typography.ts
-    ├── breakpoints.ts
-    ├── shadows.ts
-    └── borders.ts
+├── README.md
+├── index.ts
+├── colours.ts
+├── spacing.ts
+├── typography.ts
+├── breakpoints.ts
+├── shadows.ts
+└── borders.ts
 ```
 
 ---
@@ -112,11 +115,11 @@ export * from './tokens'
 
 Located in `src/web/components/`, each component follows this pattern:
 
-```
+```markdown
 ComponentName/
-├── ComponentName.tsx           # Component implementation
-├── ComponentName.stories.tsx   # Storybook stories for testing and documentation
-└── index.ts                    # Re-exports
+├── ComponentName.tsx # Component implementation
+├── ComponentName.stories.tsx # Storybook stories for testing and documentation
+└── index.ts # Re-exports
 ```
 
 **Example:**
@@ -143,11 +146,11 @@ export const Button = ({ title, onClick, variant = 'primary' }: ButtonProps) => 
 
 Located in `src/mobile/components/`, follows the same pattern as web but uses React Native APIs:
 
-```
+```markdown
 ComponentName/
-├── ComponentName.tsx           # React Native implementation
-├── ComponentName.stories.tsx   # Storybook stories
-└── index.ts                    # Re-exports
+├── ComponentName.tsx # React Native implementation
+├── ComponentName.stories.tsx # Storybook stories
+└── index.ts # Re-exports
 ```
 
 **Example:**
@@ -176,12 +179,17 @@ export const Button = ({ title, onPress, variant = 'primary' }: ButtonProps) => 
 
 Centralised design system values that should be used across all components:
 
-- **colours.ts** - Colour palette (primary, secondary, semantic, neutral)
-- **spacing.ts** - Spacing scale (4px grid system, 0px to 384px)
-- **typography.ts** - Font families, sizes, and weights
-- **breakpoints.ts** - Responsive breakpoints (xs to 2xl)
-- **shadows.ts** - Shadow definitions for depth and elevation
-- **borders.ts** - Border radius and width values
+- **colours.ts**- Colour palette (primary, secondary, semantic, neutral)
+
+-**spacing.ts**- Spacing scale (4px grid system, 0px to 384px)
+
+-**typography.ts**- Font families, sizes, and weights
+
+-**breakpoints.ts**- Responsive breakpoints (xs to 2xl)
+
+-**shadows.ts**- Shadow definitions for depth and elevation
+
+-**borders.ts** - Border radius and width values
 
 ---
 
@@ -189,12 +197,12 @@ Centralised design system values that should be used across all components:
 
 ### Importing Web Components
 
-```typescript
+````typescript
 import { Button, Card, Input } from '@template/ui';
 
 // Use in your React component
 <Button title="Click me" variant="primary" onClick={() => {}} />
-```
+```markdown
 
 ### Importing Mobile Components
 
@@ -203,7 +211,7 @@ import { Mobile } from '@template/ui';
 
 // Use in your React Native component
 <Mobile.Button title="Click me" variant="primary" onPress={() => {}} />
-```
+```markdown
 
 ### Using Design Tokens
 
@@ -217,15 +225,20 @@ const fontSize = typography.fontSize.lg.size // 18
 const breakpoint = breakpoints.md // 768px
 const shadow = shadows.md // Box shadow string
 const radius = borders.radius.lg // 8px
-```
+````
 
 ### Creating New Components
 
 1. Create component folder in `src/web/components/ComponentName/`
+
 2. Implement `ComponentName.tsx` using Tailwind CSS classes
+
 3. Create `ComponentName.stories.tsx` for Storybook documentation
+
 4. Add `index.ts` with re-export
+
 5. Repeat process in `src/mobile/components/ComponentName/` for React Native
+
 6. Import tokens from `src/tokens/` for consistent styling
 
 ---
@@ -233,9 +246,13 @@ const radius = borders.radius.lg // 8px
 ## Related Sections
 
 - [web/](web/) - React web components
+
 - [mobile/](mobile/) - React Native components
+
 - [tokens/](tokens/) - Design system tokens
+
 - [../README.md](../README.md) - Main project README
+
 - [../docs/](../docs/) - Project documentation
 
 ---

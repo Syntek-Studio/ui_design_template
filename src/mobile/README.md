@@ -1,7 +1,7 @@
 # src/mobile/
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -45,12 +45,16 @@
 
 ## Overview
 
-The `src/mobile/` folder contains all React Native components built for iOS and Android platforms. Components in this folder use:
+The `src/mobile/` folder contains all React Native components built for iOS and Android platforms. Components in this
+folder use:
 
-- **React 18/19** for component logic
-- **React Native** for cross-platform mobile components
-- **Nativewind 4** for Tailwind CSS support on mobile
-- **Mobile APIs** for platform-specific interactions (onPress, gestures, etc.)
+- **React 18/19**for component logic
+
+-**React Native**for cross-platform mobile components
+
+-**Nativewind 4**for Tailwind CSS support on mobile
+
+-**Mobile APIs** for platform-specific interactions (onPress, gestures, etc.)
 
 These components are exported as a namespaced `Mobile` object from the main library entry point for easy importing.
 
@@ -58,16 +62,16 @@ These components are exported as a namespaced `Mobile` object from the main libr
 
 ## Directory Tree
 
-```
+```markdown
 src/mobile/
-├── README.md              # This file
+├── README.md # This file
 └── components/
-    ├── README.md
-    ├── Button/
-    │   ├── Button.tsx
-    │   ├── Button.stories.tsx
-    │   └── index.ts
-    └── index.ts
+├── README.md
+├── Button/
+│ ├── Button.tsx
+│ ├── Button.stories.tsx
+│ └── index.ts
+└── index.ts
 ```
 
 ---
@@ -87,38 +91,36 @@ Every mobile component follows a consistent structure:
 
 ### Component Folder Structure
 
-```
+```markdown
 ComponentName/
-├── ComponentName.tsx           # Main component file
-├── ComponentName.stories.tsx   # Storybook stories
-└── index.ts                    # Re-export
+├── ComponentName.tsx # Main component file
+├── ComponentName.stories.tsx # Storybook stories
+└── index.ts # Re-export
 ```
 
 ### Component Implementation (`ComponentName.tsx`)
 
 ```typescript
 /**
- * Button component for React Native
- *
- * @example
- * <Button title="Press me" variant="primary" onPress={() => {}} />
+ *Button component for React Native*
+ *@example* <Button title="Press me" variant="primary" onPress={() => {}} />
  */
 import { Pressable, Text } from 'react-native';
 
 export interface ButtonProps {
-  /** The button text */
+  /**The button text*/
   title: string;
 
-  /** Press handler function */
+  /**Press handler function*/
   onPress?: () => void;
 
-  /** Visual variant of the button */
+  /**Visual variant of the button*/
   variant?: 'primary' | 'secondary';
 
-  /** Tailwind CSS classes for custom styling */
+  /**Tailwind CSS classes for custom styling*/
   className?: string;
 
-  /** Whether the button is disabled */
+  /**Whether the button is disabled*/
   disabled?: boolean;
 }
 
@@ -243,7 +245,7 @@ Mobile components use React Native event handlers:
 
 Mobile components use Tailwind classes through Nativewind:
 
-```typescript
+````typescript
 // Spacing
 'px-4 py-2'                    // Padding (horizontal and vertical)
 
@@ -259,7 +261,7 @@ Mobile components use Tailwind classes through Nativewind:
 // NOT supported on mobile
 'hover:opacity-90'             // Hover not available
 ':active' pseudo-class         // Use active: class instead
-```
+```markdown
 
 ---
 
@@ -269,7 +271,7 @@ Mobile components use Tailwind classes through Nativewind:
 
 ```bash
 mkdir -p src/mobile/components/MyComponent
-```
+````
 
 ### Step 2: Implement Component
 
@@ -279,10 +281,9 @@ Create `src/mobile/components/MyComponent/MyComponent.tsx`:
 import { View, Text } from 'react-native';
 
 /**
- * MyComponent description
- */
+ *MyComponent description*/
 export interface MyComponentProps {
-  /** Prop documentation */
+  /**Prop documentation*/
   title: string;
 }
 
@@ -330,10 +331,10 @@ export { MyComponent, type MyComponentProps } from './MyComponent'
 
 Update `src/mobile/components/index.ts`:
 
-```typescript
-export * from './Button'
-export * from './MyComponent' // Add this line
-```
+````typescript
+export *from './Button'
+export* from './MyComponent' // Add this line
+```markdown
 
 ---
 
@@ -349,7 +350,7 @@ className = 'px-4 py-2 rounded bg-blue-500 text-white'
 
 // Avoid
 className = 'my-button' // with custom CSS/StyleSheet
-```
+````
 
 ### Design Tokens
 
@@ -367,7 +368,7 @@ const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary
 
 Always wrap text content in `<Text>` component:
 
-```typescript
+````typescript
 // Good
 <Pressable className="bg-blue-500">
   <Text className="text-white">Click me</Text>
@@ -377,7 +378,7 @@ Always wrap text content in `<Text>` component:
 <Pressable className="bg-blue-500">
   Click me
 </Pressable>
-```
+```markdown
 
 ### Responsive Design
 
@@ -387,7 +388,7 @@ Use responsive Tailwind classes (same as web):
 className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
 className = 'text-base md:text-lg' // Responsive font sizes
 className = 'flex-col md:flex-row' // Responsive direction
-```
+```markdown
 
 ---
 
@@ -395,15 +396,17 @@ className = 'flex-col md:flex-row' // Responsive direction
 
 Each component should have:
 
-1. **Storybook stories** for visual testing and documentation
-2. **Unit tests** (using Vitest) for functionality
-3. **Cross-platform testing** for iOS and Android
+1. **Storybook stories**for visual testing and documentation
+
+2.**Unit tests**(using Vitest) for functionality
+
+3.**Cross-platform testing** for iOS and Android
 
 Run Storybook to view and test components:
 
 ```bash
 npm run storybook:mobile
-```
+````
 
 Note: Mobile Storybook is configured within your React Native project's `.ondevice/` configuration.
 
@@ -415,15 +418,15 @@ Note: Mobile Storybook is configured within your React Native project's `.ondevi
 
 1. Install the library:
 
-```bash
+````bash
 npm install @template/ui
-```
+```text
 
 2. Install Nativewind and required dependencies:
 
 ```bash
 npm install nativewind react-native-reanimated
-```
+```text
 
 3. Configure tailwind.config.js (in your app):
 
@@ -435,7 +438,7 @@ module.exports = {
   },
   plugins: [],
 }
-```
+```text
 
 4. Use components:
 
@@ -450,16 +453,20 @@ export function App() {
     />
   );
 }
-```
+````
 
 ---
 
 ## Related Sections
 
 - [components/](components/) - All mobile component implementations
+
 - [../web/](../web/) - React web components
+
 - [../tokens/](../tokens/) - Design system tokens
+
 - [../../README.md](../../README.md) - Main project README
+
 - [../../docs/](../../docs/) - Project documentation
 
 ---

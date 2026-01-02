@@ -15,7 +15,9 @@ assignees: ''
 Steps to reproduce the behaviour:
 
 1. Go to '...'
+
 2. Click on '...'
+
 3. See error
 
 ## Expected Behaviour
@@ -33,8 +35,11 @@ Steps to reproduce the behaviour:
 ## Environment
 
 - OS: [e.g., macOS 14.0, Windows 11, Ubuntu 22.04]
+
 - Node version: [e.g., 20.10.0]
+
 - Package version: [e.g., 0.6.0]
+
 - Browser (if applicable): [e.g., Chrome 120]
 
 ## Additional Context

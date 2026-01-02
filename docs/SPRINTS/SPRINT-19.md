@@ -22,16 +22,23 @@
 ## Sprint Deliverables
 
 - Utility components (Badge, Avatar, Alert, Tooltip)
+
 - Template README documentation
 
 ## Acceptance Criteria
 
 - [ ] Badge component implemented
+
 - [ ] Avatar component implemented
+
 - [ ] Alert component implemented
+
 - [ ] Tooltip component implemented
+
 - [ ] Template README complete
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes

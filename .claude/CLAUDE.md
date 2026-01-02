@@ -1,7 +1,7 @@
 # CLAUDE.md
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -31,24 +31,31 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is @template/ui, a shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.
+This is @template/ui, a shared UI component library for React Web and React Native applications. Built with TypeScript,
+Tailwind CSS 4, and Nativewind 4.
 
 ## Commands
 
 ```bash
+
 # Build the library (outputs to dist/)
+
 npm run build
 
 # Watch mode for development
+
 npm run dev
 
 # Run Storybook for web components
+
 npm run storybook:web
 
 # Type checking
+
 npm run type-check
 
 # Linting
+
 npm run lint
 npm run lint:fix
 ```
@@ -58,28 +65,29 @@ npm run lint:fix
 ### Entry Point & Exports
 
 - [src/index.ts](src/index.ts) - Main entry point that re-exports all components
+
 - Build outputs CJS and ESM formats via tsup to `dist/`
 
 ### Component Structure
 
 **Web Components** live in `src/web/components/`:
 
-```
+```markdown
 src/web/components/
 └── ComponentName/
-    ├── ComponentName.tsx      # Component implementation
-    ├── ComponentName.stories.tsx  # Storybook stories
-    └── index.ts               # Re-exports
+├── ComponentName.tsx # Component implementation
+├── ComponentName.stories.tsx # Storybook stories
+└── index.ts # Re-exports
 ```
 
-**Mobile Components** live in `src/mobile/components/`:
+**Mobile Components**live in `src/mobile/components/`:
 
-```
+```markdown
 src/mobile/components/
 └── ComponentName/
-    ├── ComponentName.native.tsx         # React Native + Nativewind implementation
-    ├── ComponentName.stories.native.tsx # Storybook stories
-    └── index.ts                         # Re-exports
+├── ComponentName.native.tsx # React Native + Nativewind implementation
+├── ComponentName.stories.native.tsx # Storybook stories
+└── index.ts # Re-exports
 ```
 
 > **Note:** Mobile files use the `.native.tsx` extension for clarity, indicating they are React Native specific.
@@ -108,7 +116,9 @@ import { Mobile } from '@template/ui';
 ### Styling
 
 - Uses Tailwind CSS 4 with Nativewind for React Native compatibility
+
 - Tailwind classes applied directly via `className` prop
+
 - PostCSS config at `postcss.config.mjs`
 
 ### Path Aliases
@@ -118,22 +128,26 @@ import { Mobile } from '@template/ui';
 ### Storybook
 
 - Web Storybook config: `.storybook-web/`
+
 - Uses react-webpack5 with Babel for TypeScript
+
 - Stories auto-discovered from `src/**/*.stories.tsx`
 
 ## Commit Convention
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+```text
 type(scope): Description
 
 Body - What did you do?
 
 Files Changed:
+
 - list files
 
 Still to do:
+
 - remaining work
 ```
 
@@ -147,11 +161,15 @@ PR title format: `user-story-number/your-feature-name` (e.g., `US-123/add-loadin
 
 ## Project Management
 
-- **Tool:** ClickUp
-- **Integration:** Bidirectional sync with GitHub
-- **Branch Pattern:** `us###/description` (e.g., `us001/add-button-component`)
-- **Auto-sync:** Enabled via GitHub Actions (`.github/workflows/clickup-sync.yml`)
-- **Documentation:** See `docs/PM-INTEGRATION/` for setup and usage
+- **Tool:**ClickUp
+
+-**Integration:**Bidirectional sync with GitHub
+
+-**Branch Pattern:**`us###/description` (e.g., `us001/add-button-component`)
+
+-**Auto-sync:**Enabled via GitHub Actions (`.github/workflows/clickup-sync.yml`)
+
+-**Documentation:** See `docs/PM-INTEGRATION/` for setup and usage
 
 ### ClickUp Status Flow
 
@@ -162,7 +180,8 @@ PR title format: `user-story-number/your-feature-name` (e.g., `US-123/add-loadin
 | PR merged to `staging`          | Accepted          |
 | PR merged to `main`             | Accepted Customer |
 
-GitHub Secrets are configured for automatic workflow execution. Local `.env` file only needed for manual script execution.
+GitHub Secrets are configured for automatic workflow execution. Local `.env` file only needed for manual script
+execution.
 
 ## Dev Team Agents
 
@@ -182,11 +201,19 @@ Use these agents for specialized tasks:
 ### Recommended Workflow
 
 1. **Planning**: `/syntek-dev-suite:plan` - Design the component architecture
+
 2. **Implementation**: Write the component code
+
 3. **Syntax Check**: `/syntek-dev-suite:syntax` - Fix any syntax/linting errors
+
 4. **Testing**: `/syntek-dev-suite:test-writer` - Generate test cases
+
 5. **QA**: `/syntek-dev-suite:qa-tester` - Find bugs and edge cases
+
 6. **Review**: `/syntek-dev-suite:review` - Security and code quality check
+
 7. **Accessibility**: `/syntek-dev-suite:frontend` - UI/UX and a11y review
+
 8. **Refactor**: `/syntek-dev-suite:refactor` - Clean up code if needed
+
 9. **Documentation**: `/syntek-dev-suite:docs` - Add documentation

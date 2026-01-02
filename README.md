@@ -1,52 +1,32 @@
 # @syntek-studio/ui
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
 
 ---
 
-A shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.
+A shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and
+Nativewind 4.
 
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
 - [Installation](#installation)
-  - [Peer Dependencies](#peer-dependencies)
-- [Quick Start](#quick-start)
   - [Web Components](#web-components)
   - [Mobile Components](#mobile-components)
-  - [Design Tokens](#design-tokens)
-- [Architecture](#architecture)
-  - [Platform-Specific Implementation](#platform-specific-implementation)
-    - [Web Components](#web-components-1)
-    - [Mobile Components](#mobile-components-1)
   - [Import Patterns](#import-patterns)
   - [Platform Differences](#platform-differences)
 - [Components](#components)
   - [Button](#button)
-- [Design Tokens](#design-tokens-1)
+- [Design Tokens](#design-tokens)
   - [Colours](#colours)
-  - [Spacing](#spacing)
-  - [Typography](#typography)
-  - [Breakpoints](#breakpoints)
-  - [Shadows](#shadows)
-  - [Borders](#borders)
-- [Styling](#styling)
-  - [Tailwind CSS 4](#tailwind-css-4)
   - [Custom Styling](#custom-styling)
-  - [PostCSS Configuration](#postcss-configuration)
-- [Examples](#examples)
-  - [Creating a Login Form](#creating-a-login-form)
 - [Documentation](#documentation)
   - [Storybook](#storybook)
-- [Development](#development)
-  - [Prerequisites](#prerequisites)
-  - [Setup](#setup)
-  - [Available Commands](#available-commands)
   - [Project Structure](#project-structure)
   - [Creating New Components](#creating-new-components)
 - [Contributing](#contributing)
@@ -60,11 +40,17 @@ A shared UI component library for React Web and React Native applications. Built
 ## Features
 
 - **Cross-Platform**: Single codebase for both web and React Native
+
 - **TypeScript First**: Fully typed for excellent developer experience
+
 - **Design Tokens**: Comprehensive colour, spacing, typography, and shadow tokens
+
 - **Tailwind CSS 4**: Modern utility-first styling with Nativewind support
+
 - **Storybook**: Interactive component documentation and testing
+
 - **Responsive**: Built-in support for mobile and desktop layouts
+
 - **Accessible**: WCAG compliance with semantic HTML and ARIA attributes
 
 ---
@@ -73,15 +59,15 @@ A shared UI component library for React Web and React Native applications. Built
 
 Install the library using npm or yarn:
 
-```bash
+````bash
 npm install @template/ui
-```
+```text
 
 Or with yarn:
 
 ```bash
 yarn add @template/ui
-```
+```markdown
 
 ### Peer Dependencies
 
@@ -93,13 +79,13 @@ This library requires the following peer dependencies:
   "react-dom": "^18 || ^19",
   "nativewind": "^4.0.0"
 }
-```
+```text
 
 For React Native projects, also install:
 
 ```bash
 npm install react-native react-native-web nativewind
-```
+```markdown
 
 ---
 
@@ -113,7 +99,7 @@ import { Button } from '@template/ui'
 export function App() {
   return <Button title="Click me" variant="primary" onClick={() => console.log('Clicked!')} />
 }
-```
+```markdown
 
 ### Mobile Components
 
@@ -125,7 +111,7 @@ export function App() {
     <Mobile.Button title="Click me" variant="primary" onPress={() => console.log('Pressed!')} />
   )
 }
-```
+```markdown
 
 ### Design Tokens
 
@@ -147,7 +133,7 @@ const fontWeight = typography.fontWeight.semibold // 600
 // Breakpoints
 const mobileBreakpoint = breakpoints.sm // 640px
 const desktopBreakpoint = breakpoints.lg // 1024px
-```
+```markdown
 
 ---
 
@@ -157,20 +143,22 @@ const desktopBreakpoint = breakpoints.lg // 1024px
 
 The library maintains separate implementations for web and mobile platforms:
 
-```
+```text
 src/
 ├── web/components/        # React web components
 ├── mobile/components/     # React Native components
 ├── tokens/               # Shared design tokens
 └── index.ts             # Main entry point
-```
+````
 
 #### Web Components
 
 Located in `src/web/components/`, built with:
 
 - React 18/19
+
 - Tailwind CSS 4 utilities
+
 - HTML elements (`<button>`, `<div>`, etc.)
 
 #### Mobile Components
@@ -178,16 +166,18 @@ Located in `src/web/components/`, built with:
 Located in `src/mobile/components/`, built with:
 
 - React Native
+
 - Nativewind 4 for styling
+
 - React Native components (`<Pressable>`, `<Text>`, etc.)
 
 ### Import Patterns
 
 **Web (default exports):**
 
-```typescript
+````typescript
 import { Button, Card, Input } from '@template/ui'
-```
+```text
 
 **Mobile (namespaced):**
 
@@ -197,7 +187,7 @@ import { Mobile } from '@template/ui';
 <Mobile.Button />
 <Mobile.Card />
 <Mobile.Input />
-```
+````
 
 ### Platform Differences
 
@@ -220,11 +210,11 @@ Versatile button component supporting multiple variants and states.
 
 **Web:**
 
-```typescript
+````typescript
 import { Button } from '@template/ui'
 
 ;<Button title="Submit" variant="primary" onClick={() => {}} />
-```
+```text
 
 **Mobile:**
 
@@ -232,13 +222,16 @@ import { Button } from '@template/ui'
 import { Mobile } from '@template/ui'
 
 ;<Mobile.Button title="Submit" variant="primary" onPress={() => {}} disabled={false} />
-```
+````
 
 **Props:**
 
 - `title` (string) - Button text
+
 - `variant` ('primary' | 'secondary') - Visual style
+
 - `onClick`/`onPress` (function, optional) - Click handler
+
 - `disabled` (boolean, optional, mobile only) - Disable interaction
 
 For more components and detailed documentation, see [docs/COMPONENTS.md](docs/COMPONENTS.md).
@@ -251,7 +244,7 @@ The library includes comprehensive design tokens for consistent styling:
 
 ### Colours
 
-```typescript
+````typescript
 import { colours } from '@template/ui'
 
 colours.primary // 50-900 shades
@@ -263,7 +256,7 @@ colours.info // #3b82f6
 colours.grey // 50-900 shades
 colours.white // #ffffff
 colours.black // #000000
-```
+```markdown
 
 ### Spacing
 
@@ -276,7 +269,7 @@ spacing[2] // 8px
 spacing[4] // 16px
 spacing[6] // 24px
 // ... up to spacing[96] (384px)
-```
+```markdown
 
 ### Typography
 
@@ -297,7 +290,7 @@ typography.fontSize['2xl'] // { size: 24, lineHeight: 32 }
 typography.fontWeight.normal // 400
 typography.fontWeight.semibold // 600
 typography.fontWeight.bold // 700
-```
+```markdown
 
 ### Breakpoints
 
@@ -309,7 +302,7 @@ breakpoints.md // 768px
 breakpoints.lg // 1024px
 breakpoints.xl // 1280px
 breakpoints['2xl'] // 1536px
-```
+```markdown
 
 ### Shadows
 
@@ -322,7 +315,7 @@ shadows.base // Base shadow
 shadows.lg // Large shadow
 shadows.xl // Extra large shadow
 shadows.inner // Inset shadow
-```
+```markdown
 
 ### Borders
 
@@ -341,7 +334,7 @@ borders.width[0] // 0
 borders.width[1] // 1px
 borders.width[2] // 2px
 borders.width[4] // 4px
-```
+```markdown
 
 For detailed token documentation, see [docs/TOKENS.md](docs/TOKENS.md).
 
@@ -357,21 +350,21 @@ The library uses Tailwind CSS 4 for both web and mobile platforms through Native
 
 ```typescript
 <Button className="px-4 py-2 rounded bg-blue-500 text-white hover:opacity-90" />
-```
+```text
 
 **Mobile Example:**
 
 ```typescript
 <Mobile.Button className="px-4 py-2 rounded bg-blue-500 text-white" />
-```
+````
 
 ### Custom Styling
 
 Components accept a `className` prop for customisation:
 
-```typescript
+````typescript
 <Button title="Custom" className="bg-gradient-to-r from-blue-500 to-purple-600" />
-```
+```markdown
 
 ### PostCSS Configuration
 
@@ -415,7 +408,7 @@ export function LoginForm() {
     </form>
   )
 }
-```
+```text
 
 **Mobile:**
 
@@ -445,7 +438,7 @@ export function LoginForm() {
     </View>
   )
 }
-```
+````
 
 ---
 
@@ -454,19 +447,24 @@ export function LoginForm() {
 Comprehensive documentation is available in the [`docs/`](docs/) folder:
 
 - [Component Reference](docs/COMPONENTS.md) - Detailed component API documentation
+
 - [Design Tokens](docs/TOKENS.md) - Complete token reference
+
 - [Setup Guides](docs/SETUP/) - Installation and configuration
+
 - [Architecture Overview](docs/ARCHITECTURE.md) - System design and patterns
+
 - [Contributing Guide](docs/GUIDES/CONTRIBUTING.md) - Contribution guidelines
+
 - [Changelog](docs/CHANGELOG.md) - Version history and release notes
 
 ### Storybook
 
 View interactive component stories:
 
-```bash
+````bash
 npm run storybook:web
-```
+```bash
 
 This opens Storybook at [http://localhost:6006](http://localhost:6006) with component examples and documentation.
 
@@ -483,47 +481,59 @@ This opens Storybook at [http://localhost:6006](http://localhost:6006) with comp
 ### Setup
 
 ```bash
+
 # Clone the repository
+
 git clone git@github-syntek:Syntek-Studio/ui_design_template.git
 cd ui_design_template
 
 # Install dependencies
+
 npm install
 
 # Start development mode
+
 npm run dev
-```
+```markdown
 
 ### Available Commands
 
 ```bash
+
 # Build the library (outputs to dist/)
+
 npm run build
 
 # Watch mode for development
+
 npm run dev
 
 # Run Storybook for web components
+
 npm run storybook:web
 
 # Build Storybook static site
+
 npm run storybook:web:build
 
 # Type checking
+
 npm run type-check
 
 # Linting
+
 npm run lint
 npm run lint:fix
 
 # Running tests
+
 npm run test
 npm run test:coverage
-```
+````
 
 ### Project Structure
 
-```
+```text
 src/
 ├── index.ts                    # Main entry point
 ├── web/
@@ -555,9 +565,13 @@ src/
 Follow the component structure to add new components:
 
 1. Create a folder: `src/web/components/ComponentName/`
+
 2. Add implementation: `ComponentName.tsx`
+
 3. Add stories: `ComponentName.stories.tsx`
+
 4. Add export: `index.ts`
+
 5. Repeat for mobile in `src/mobile/components/ComponentName/`
 
 For detailed guidelines, see [CONTRIBUTING.md](docs/GUIDES/CONTRIBUTING.md).
@@ -569,24 +583,30 @@ For detailed guidelines, see [CONTRIBUTING.md](docs/GUIDES/CONTRIBUTING.md).
 We welcome contributions! Please read our [Contributing Guide](docs/GUIDES/CONTRIBUTING.md) for:
 
 - Code style guidelines
+
 - Commit conventions
+
 - Pull request process
+
 - Testing requirements
 
 ### Commit Convention
 
 We follow [Conventional Commits](https://www.conventionalcommits.org/) for clear, semantic commit history:
 
-```
+```text
 type(scope): description
 
 Body explaining what and why
 
 Files Changed:
+
 - src/web/components/Button.tsx
+
 - src/mobile/components/Button.tsx
 
 Still to do:
+
 - Add accessibility tests
 ```
 
@@ -596,15 +616,18 @@ Still to do:
 
 Branch structure:
 
-```
+```text
 feature/your-feature → testing → dev → staging → main
 ```
 
 Create PRs with clear descriptions and include:
 
 - What changed
+
 - Why it changed
+
 - Testing performed
+
 - Screenshots (if UI changes)
 
 ---
