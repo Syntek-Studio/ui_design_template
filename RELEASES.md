@@ -1,7 +1,7 @@
 # Release Notes
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.1
+**Version**: 0.7.2
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -12,10 +12,13 @@
 
 - [Table of Contents](#table-of-contents)
 - [Latest Release](#latest-release)
-  - [Version 0.7.1 - 02 January 2026](#version-071---02-january-2026)
+  - [Version 0.7.2 - 02 January 2026](#version-072---02-january-2026)
     - [What's New](#whats-new)
     - [For Developers](#for-developers)
 - [Previous Releases](#previous-releases)
+  - [Version 0.7.1 - 02 January 2026](#version-071---02-january-2026)
+    - [What's New](#whats-new-1)
+    - [For Developers](#for-developers-1)
   - [Version 0.7.0 - 01 January 2026](#version-070---01-january-2026)
     - [What's New](#whats-new-1)
     - [For Developers](#for-developers-1)
@@ -46,6 +49,33 @@
 ---
 
 ## Latest Release
+
+### Version 0.7.2 - 02 January 2026
+
+**Template Initialisation Testing Framework**
+
+We've begun implementing a template initialisation CLI tool using Test-Driven Development (TDD) methodology.
+
+#### What's New
+
+- **Comprehensive Test Suite**: Added 154 tests that define the expected behaviour for the template initialisation CLI
+  tool. These tests currently fail intentionally as part of the TDD RED phase.
+
+- **Test Documentation**: Created detailed test plans, manual testing guides, and architectural documentation to guide
+  the implementation process.
+
+- **Testing Framework**: Configured Vitest for running unit tests with comprehensive test coverage reporting.
+
+#### For Developers
+
+- Tests cover four key areas: input validation, string replacements, file operations, and end-to-end initialisation
+- Implementation stubs are in place, throwing "Not implemented" errors to ensure tests fail correctly
+- This follows TDD RED phase - next steps are GREEN (implementation) and REFACTOR phases
+- No changes to the library functionality - this is development infrastructure only
+
+---
+
+## Previous Releases
 
 ### Version 0.7.1 - 02 January 2026
 

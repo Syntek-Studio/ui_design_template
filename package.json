@@ -1,6 +1,6 @@
 {
   "name": "@syntek-studio/ui",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "private": false,
   "description": "A shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.",
   "main": "./dist/index.js",

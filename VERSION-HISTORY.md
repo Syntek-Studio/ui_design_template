@@ -1,7 +1,7 @@
 # Version History
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.1
+**Version**: 0.7.2
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -13,6 +13,15 @@
 - [Table of Contents](#table-of-contents)
 - [Unreleased](#unreleased)
   - [Technical Changes](#technical-changes)
+- [0.7.2 - 02/01/2026](#072---02012026)
+  - [Summary](#summary)
+  - [Breaking Changes](#breaking-changes)
+  - [Database Migrations](#database-migrations)
+  - [API Changes](#api-changes)
+  - [Files Changed](#files-changed)
+  - [Configuration Changes](#configuration-changes)
+  - [Documentation Notes](#documentation-notes)
+  - [Architecture Notes](#architecture-notes)
 - [0.7.1 - 02/01/2026](#071---02012026)
   - [Summary](#summary)
   - [Breaking Changes](#breaking-changes)
@@ -108,6 +117,122 @@
 ### Technical Changes
 
 - Nothing yet
+
+---
+
+## [0.7.2] - 02/01/2026
+
+### Summary
+
+Implemented TDD RED phase for template initialisation CLI tool (US001). Created comprehensive test suite with 154
+tests across 4 test files covering validators, string replacements, file operations, and end-to-end initialisation
+flow. Added implementation stubs that intentionally throw "Not implemented" errors to ensure tests fail correctly.
+Created extensive documentation including test plans, manual testing guides, architectural plans, and review documents.
+
+### Breaking Changes
+
+None - development infrastructure only.
+
+### Database Migrations
+
+Not applicable - library project.
+
+### API Changes
+
+None - no changes to exported library functions.
+
+### Files Changed
+
+**Test Files Added:**
+
+| File                                        | Changes                                                                |
+| ------------------------------------------- | ---------------------------------------------------------------------- |
+| `scripts/__tests__/validators.test.ts`      | Added 35 tests for input validation (package name, scope, description) |
+| `scripts/__tests__/replacements.test.ts`    | Added 30 tests for string replacement operations                       |
+| `scripts/__tests__/file-operations.test.ts` | Added 42 tests for file system operations                              |
+| `scripts/__tests__/init-template.test.ts`   | Added 47 tests for end-to-end initialisation workflow                  |
+
+**Implementation Stubs Added:**
+
+| File                             | Changes                                                       |
+| -------------------------------- | ------------------------------------------------------------- |
+| `scripts/lib/validators.ts`      | Added validation function stubs (throw "Not implemented")     |
+| `scripts/lib/replacements.ts`    | Added replacement function stubs (throw "Not implemented")    |
+| `scripts/lib/file-operations.ts` | Added file operation function stubs (throw "Not implemented") |
+| `scripts/lib/prompts.ts`         | Added prompt function stubs (throw "Not implemented")         |
+| `scripts/init-template.ts`       | Added main CLI entry point stub (throw "Not implemented")     |
+
+**Documentation Added:**
+
+| File                                                  | Changes                                              |
+| ----------------------------------------------------- | ---------------------------------------------------- |
+| `docs/PLANS/PLAN-US001-TEMPLATE-INIT-CLI.MD`          | Added comprehensive architectural plan (1,058 lines) |
+| `docs/TESTS/TEST-US001-TEMPLATE-INIT-CLI.md`          | Added detailed test plan (649 lines)                 |
+| `docs/TESTS/MANUAL/MANUAL-US001-TEMPLATE-INIT-CLI.md` | Added manual testing guide (660 lines)               |
+| `docs/REVIEWS/REVIEW-US001-TDD-SETUP-2026-01-02.MD`   | Added TDD setup review (406 lines)                   |
+| `docs/REVIEWS/REVIEW-TEST-COVERAGE-2026-01-02.MD`     | Added test coverage review (577 lines)               |
+
+**Configuration Files Modified:**
+
+| File               | Changes                                                                   |
+| ------------------ | ------------------------------------------------------------------------- |
+| `vitest.config.ts` | Added Vitest configuration for unit testing (globals, coverage reporting) |
+| `package.json`     | Updated with test scripts and dependencies                                |
+
+### Configuration Changes
+
+| File               | Key                 | Change                                |
+| ------------------ | ------------------- | ------------------------------------- |
+| `vitest.config.ts` | `test.globals`      | Set to true for global test functions |
+| `vitest.config.ts` | `test.environment`  | Set to node for Node.js environment   |
+| `vitest.config.ts` | `coverage.provider` | Set to v8 for code coverage           |
+| `vitest.config.ts` | `coverage.reporter` | Configured text, json, html reporters |
+| `package.json`     | `scripts.test`      | Updated to use vitest                 |
+
+### Documentation Notes
+
+- Comprehensive test plan defines expected behaviour for all CLI operations
+- Manual testing guide provides step-by-step validation procedures
+- Architectural plan outlines system design, component interactions, and error handling
+- TDD setup review validates RED phase implementation
+- Test coverage review analyses test completeness and identifies gaps
+
+**Test Coverage Breakdown:**
+
+- **Validators**: 35 tests covering package name, scope, description validation
+- **Replacements**: 30 tests covering placeholder replacement in various file types
+- **File Operations**: 42 tests covering file reading, writing, copying, deletion
+- **End-to-End**: 47 tests covering complete initialisation workflow
+
+### Architecture Notes
+
+**TDD Methodology:**
+
+- **RED Phase** (Current): Tests written first, all failing intentionally
+- **GREEN Phase** (Next): Implement functions to make tests pass
+- **REFACTOR Phase** (Future): Optimise and clean up implementation
+
+**Test Structure:**
+
+```text
+scripts/
+├── __tests__/
+│   ├── validators.test.ts       # Input validation tests
+│   ├── replacements.test.ts     # String replacement tests
+│   ├── file-operations.test.ts  # File system operation tests
+│   └── init-template.test.ts    # End-to-end workflow tests
+└── lib/
+    ├── validators.ts            # Validation function stubs
+    ├── replacements.ts          # Replacement function stubs
+    ├── file-operations.ts       # File operation stubs
+    └── prompts.ts               # User prompt stubs
+```
+
+**Implementation Approach:**
+
+- All functions return "Not implemented" errors to ensure tests fail correctly
+- Test suite validates expected behaviour before implementation exists
+- Documentation-driven development with comprehensive planning and review
 
 ---
 
@@ -835,7 +960,8 @@ Not applicable - initial release.
 **Note:** This project is in pre-MVP (0.x.x) versioning. Breaking changes may occur between minor versions until 1.0.0
 is released.
 
-[unreleased]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.1...HEAD
+[unreleased]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.2...HEAD
+[0.7.2]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.5.1...v0.6.0

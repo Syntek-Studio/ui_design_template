@@ -1,7 +1,7 @@
 # @syntek-studio/ui
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.1
+**Version**: 0.7.2
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -16,17 +16,38 @@ Nativewind 4.
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
 - [Installation](#installation)
+  - [Peer Dependencies](#peer-dependencies)
+- [Quick Start](#quick-start)
   - [Web Components](#web-components)
   - [Mobile Components](#mobile-components)
+  - [Design Tokens](#design-tokens)
+- [Architecture](#architecture)
+  - [Platform-Specific Implementation](#platform-specific-implementation)
+    - [Web Components](#web-components-1)
+    - [Mobile Components](#mobile-components-1)
   - [Import Patterns](#import-patterns)
   - [Platform Differences](#platform-differences)
 - [Components](#components)
   - [Button](#button)
-- [Design Tokens](#design-tokens)
+- [Design Tokens](#design-tokens-1)
   - [Colours](#colours)
+  - [Spacing](#spacing)
+  - [Typography](#typography)
+  - [Breakpoints](#breakpoints)
+  - [Shadows](#shadows)
+  - [Borders](#borders)
+- [Styling](#styling)
+  - [Tailwind CSS 4](#tailwind-css-4)
   - [Custom Styling](#custom-styling)
+  - [PostCSS Configuration](#postcss-configuration)
+- [Examples](#examples)
+  - [Creating a Login Form](#creating-a-login-form)
 - [Documentation](#documentation)
   - [Storybook](#storybook)
+- [Development](#development)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
+  - [Available Commands](#available-commands)
   - [Project Structure](#project-structure)
   - [Creating New Components](#creating-new-components)
 - [Contributing](#contributing)
@@ -59,15 +80,15 @@ Nativewind 4.
 
 Install the library using npm or yarn:
 
-````bash
-npm install @template/ui
-```text
+```bash
+npm install @syntek-studio/ui
+```
 
 Or with yarn:
 
 ```bash
-yarn add @template/ui
-```markdown
+yarn add @syntek-studio/ui
+```
 
 ### Peer Dependencies
 
@@ -79,13 +100,13 @@ This library requires the following peer dependencies:
   "react-dom": "^18 || ^19",
   "nativewind": "^4.0.0"
 }
-```text
+```
 
 For React Native projects, also install:
 
 ```bash
 npm install react-native react-native-web nativewind
-```markdown
+```
 
 ---
 
@@ -94,29 +115,29 @@ npm install react-native react-native-web nativewind
 ### Web Components
 
 ```typescript
-import { Button } from '@template/ui'
+import { Button } from '@syntek-studio/ui'
 
 export function App() {
   return <Button title="Click me" variant="primary" onClick={() => console.log('Clicked!')} />
 }
-```markdown
+```
 
 ### Mobile Components
 
 ```typescript
-import { Mobile } from '@template/ui'
+import { Mobile } from '@syntek-studio/ui'
 
 export function App() {
   return (
     <Mobile.Button title="Click me" variant="primary" onPress={() => console.log('Pressed!')} />
   )
 }
-```markdown
+```
 
 ### Design Tokens
 
 ```typescript
-import { colours, spacing, typography, breakpoints } from '@template/ui'
+import { colours, spacing, typography, breakpoints } from '@syntek-studio/ui'
 
 // Colours
 const primaryColor = colours.primary[500] // #3b82f6
@@ -133,7 +154,7 @@ const fontWeight = typography.fontWeight.semibold // 600
 // Breakpoints
 const mobileBreakpoint = breakpoints.sm // 640px
 const desktopBreakpoint = breakpoints.lg // 1024px
-```markdown
+```
 
 ---
 
@@ -149,7 +170,7 @@ src/
 ├── mobile/components/     # React Native components
 ├── tokens/               # Shared design tokens
 └── index.ts             # Main entry point
-````
+```
 
 #### Web Components
 
@@ -175,19 +196,19 @@ Located in `src/mobile/components/`, built with:
 
 **Web (default exports):**
 
-````typescript
-import { Button, Card, Input } from '@template/ui'
-```text
+```typescript
+import { Button, Card, Input } from '@syntek-studio/ui'
+```
 
 **Mobile (namespaced):**
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 
 <Mobile.Button />
 <Mobile.Card />
 <Mobile.Input />
-````
+```
 
 ### Platform Differences
 
@@ -210,19 +231,19 @@ Versatile button component supporting multiple variants and states.
 
 **Web:**
 
-````typescript
-import { Button } from '@template/ui'
+```typescript
+import { Button } from '@syntek-studio/ui'
 
-;<Button title="Submit" variant="primary" onClick={() => {}} />
-```text
+<Button title="Submit" variant="primary" onClick={() => {}} />
+```
 
 **Mobile:**
 
 ```typescript
-import { Mobile } from '@template/ui'
+import { Mobile } from '@syntek-studio/ui'
 
-;<Mobile.Button title="Submit" variant="primary" onPress={() => {}} disabled={false} />
-````
+<Mobile.Button title="Submit" variant="primary" onPress={() => {}} disabled={false} />
+```
 
 **Props:**
 
@@ -244,8 +265,8 @@ The library includes comprehensive design tokens for consistent styling:
 
 ### Colours
 
-````typescript
-import { colours } from '@template/ui'
+```typescript
+import { colours } from '@syntek-studio/ui'
 
 colours.primary // 50-900 shades
 colours.secondary // 50-900 shades
@@ -256,12 +277,12 @@ colours.info // #3b82f6
 colours.grey // 50-900 shades
 colours.white // #ffffff
 colours.black // #000000
-```markdown
+```
 
 ### Spacing
 
 ```typescript
-import { spacing } from '@template/ui'
+import { spacing } from '@syntek-studio/ui'
 
 spacing[0] // 0px
 spacing[1] // 4px
@@ -269,12 +290,12 @@ spacing[2] // 8px
 spacing[4] // 16px
 spacing[6] // 24px
 // ... up to spacing[96] (384px)
-```markdown
+```
 
 ### Typography
 
 ```typescript
-import { typography } from '@template/ui'
+import { typography } from '@syntek-studio/ui'
 
 // Font families
 typography.fontFamily.sans // Inter, system-ui, sans-serif
@@ -290,24 +311,24 @@ typography.fontSize['2xl'] // { size: 24, lineHeight: 32 }
 typography.fontWeight.normal // 400
 typography.fontWeight.semibold // 600
 typography.fontWeight.bold // 700
-```markdown
+```
 
 ### Breakpoints
 
 ```typescript
-import { breakpoints } from '@template/ui'
+import { breakpoints } from '@syntek-studio/ui'
 
 breakpoints.sm // 640px
 breakpoints.md // 768px
 breakpoints.lg // 1024px
 breakpoints.xl // 1280px
 breakpoints['2xl'] // 1536px
-```markdown
+```
 
 ### Shadows
 
 ```typescript
-import { shadows } from '@template/ui'
+import { shadows } from '@syntek-studio/ui'
 
 shadows.none // none
 shadows.sm // Small shadow
@@ -315,12 +336,12 @@ shadows.base // Base shadow
 shadows.lg // Large shadow
 shadows.xl // Extra large shadow
 shadows.inner // Inset shadow
-```markdown
+```
 
 ### Borders
 
 ```typescript
-import { borders } from '@template/ui'
+import { borders } from '@syntek-studio/ui'
 
 // Border radius
 borders.radius.none // 0
@@ -334,7 +355,7 @@ borders.width[0] // 0
 borders.width[1] // 1px
 borders.width[2] // 2px
 borders.width[4] // 4px
-```markdown
+```
 
 For detailed token documentation, see [docs/TOKENS.md](docs/TOKENS.md).
 
@@ -350,21 +371,21 @@ The library uses Tailwind CSS 4 for both web and mobile platforms through Native
 
 ```typescript
 <Button className="px-4 py-2 rounded bg-blue-500 text-white hover:opacity-90" />
-```text
+```
 
 **Mobile Example:**
 
 ```typescript
 <Mobile.Button className="px-4 py-2 rounded bg-blue-500 text-white" />
-````
+```
 
 ### Custom Styling
 
 Components accept a `className` prop for customisation:
 
-````typescript
-<Button title="Custom" className="bg-gradient-to-r from-blue-500 to-purple-600" />
-```markdown
+```typescript
+<Button title="Custom" className="bg-linear-to-r from-blue-500 to-purple-600" />
+```
 
 ### PostCSS Configuration
 
@@ -379,7 +400,7 @@ The library includes PostCSS configuration for processing Tailwind CSS. See [pos
 **Web:**
 
 ```typescript
-import { Button, Input } from '@template/ui'
+import { Button, Input } from '@syntek-studio/ui'
 import { useState } from 'react'
 
 export function LoginForm() {
@@ -408,12 +429,12 @@ export function LoginForm() {
     </form>
   )
 }
-```text
+```
 
 **Mobile:**
 
 ```typescript
-import { Mobile } from '@template/ui'
+import { Mobile } from '@syntek-studio/ui'
 import { View } from 'react-native'
 import { useState } from 'react'
 
@@ -438,7 +459,7 @@ export function LoginForm() {
     </View>
   )
 }
-````
+```
 
 ---
 
@@ -462,9 +483,9 @@ Comprehensive documentation is available in the [`docs/`](docs/) folder:
 
 View interactive component stories:
 
-````bash
-npm run storybook:web
 ```bash
+npm run storybook:web
+```
 
 This opens Storybook at [http://localhost:6006](http://localhost:6006) with component examples and documentation.
 
@@ -494,7 +515,7 @@ npm install
 # Start development mode
 
 npm run dev
-```markdown
+```
 
 ### Available Commands
 
@@ -529,7 +550,7 @@ npm run lint:fix
 
 npm run test
 npm run test:coverage
-````
+```
 
 ### Project Structure
 
@@ -644,4 +665,4 @@ For questions, issues, or feature requests, please open an issue on the reposito
 
 ---
 
-**Last Updated:** 22 December 2025
+**Last Updated:** 02/01/2026

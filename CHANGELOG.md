@@ -1,7 +1,7 @@
 # Changelog
 
 **Last Updated**: 02/01/2026
-**Version**: 0.7.1
+**Version**: 0.7.2
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -24,6 +24,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More comprehensive design tokens documentation
 
 - Accessibility testing and ARIA enhancements
+
+---
+
+## [0.7.2] - 02/01/2026
+
+### Added
+
+- TDD test suite for template initialisation CLI (US001) - RED phase
+  - Comprehensive test coverage across 4 test files (154 tests total)
+  - Validators test suite for input validation
+  - Replacements test suite for string replacement operations
+  - File operations test suite for file system interactions
+  - End-to-end initialisation test suite
+  - Implementation stubs that intentionally fail (TDD RED phase)
+
+- Test documentation and planning
+  - Detailed test plan (TEST-US001-TEMPLATE-INIT-CLI.md)
+  - Manual testing guide (MANUAL-US001-TEMPLATE-INIT-CLI.md)
+  - Architectural plan (PLAN-US001-TEMPLATE-INIT-CLI.MD)
+  - TDD setup review (REVIEW-US001-TDD-SETUP-2026-01-02.MD)
+  - Test coverage review (REVIEW-TEST-COVERAGE-2026-01-02.MD)
+
+- Vitest configuration for testing framework
+
+### Changed
+
+- Updated package.json with Vitest configuration
 
 ---
 
@@ -349,7 +376,8 @@ When adding entries to the changelog:
 
 ---
 
-[unreleased]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.1...HEAD
+[unreleased]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.2...HEAD
+[0.7.2]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.5.1...v0.6.0
