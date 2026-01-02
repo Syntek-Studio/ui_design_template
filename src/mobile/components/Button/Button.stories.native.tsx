@@ -1,26 +1,90 @@
+/**
+ * @fileoverview Storybook stories for the Button component
+ *
+ * This file provides interactive documentation and examples of the Button component
+ * for both design review and developer reference. Stories demonstrate all variants,
+ * sizes, states, and accessibility features.
+ *
+ * ## Story Organisation
+ *
+ * Stories are grouped by feature:
+ * - **Variants**: Primary, Secondary, Tertiary, Outline, Ghost, Link, Destructive, Success, Warning
+ * - **Sizes**: XS, SM, MD, LG, XL
+ * - **States**: Disabled, Loading
+ * - **Icons**: Left, Right, Icon-only
+ * - **Combinations**: All variants + sizes + rounded options
+ * - **Use Cases**: Form buttons, toggle buttons, menu buttons
+ *
+ * ## Testing Stories in Storybook
+ *
+ * 1. Run Storybook: `npm run storybook:mobile`
+ * 2. Navigate to "Mobile > Button" in the left sidebar
+ * 3. Select a story to view it
+ * 4. Use the controls panel (bottom) to try different prop combinations
+ * 5. Open the accessibility tab to verify WCAG compliance
+ *
+ * ## Mobile-Specific Notes
+ *
+ * - Stories use Pressable (not button) for iOS/Android compatibility
+ * - Text must be wrapped in React Native Text component
+ * - No hover states (mobile-only has active: state)
+ * - Touch targets must be minimum 44x44 points
+ * - Accessibility labels required for icon-only buttons
+ *
+ * @see {@link https://storybook.js.org/} Storybook documentation
+ * @see {@link https://reactnative.dev/docs/pressable} React Native Pressable
+ */
+
 import type { Meta, StoryObj } from '@storybook/react'
 import { View, Text as RNText } from 'react-native'
 import { Button } from './Button.native'
 
 /**
- * The Mobile Button component provides a comprehensive set of button variants
- * for React Native applications (iOS and Android).
+ * The Mobile Button component: A comprehensive, accessible button for React Native
  *
- * ## Features
- * - 9 visual variants (primary, secondary, tertiary, outline, ghost, link, destructive, success, warning)
- * - 5 sizes (xs, sm, md, lg, xl)
- * - Loading states with native ActivityIndicator
- * - Icon support (left, right, icon-only)
- * - Full width option
- * - Complete accessibility support for iOS and Android
- * - Minimum 44x44 touch targets (WCAG 2.5.5)
+ * This Storybook showcases all features, variants, sizes, states, and accessibility
+ * properties of the Button component. Use these stories as:
  *
- * ## Accessibility
- * - accessibilityRole="button"
- * - accessibilityLabel for icon-only buttons
- * - accessibilityHint for contextual information
- * - accessibilityState for toggle/expandable buttons
- * - Screen reader support (VoiceOver/TalkBack)
+ * - **Design Reference**: See all visual variants and combinations
+ * - **Developer Guide**: Copy examples for your own code
+ * - **Accessibility Test**: Verify WCAG 2.1 compliance with screen readers
+ * - **Interactive Testing**: Use the controls panel to test prop combinations
+ *
+ * ## Key Features Demonstrated
+ *
+ * - **9 Visual Variants**: primary, secondary, tertiary, outline, ghost, link,
+ *   destructive, success, warning
+ * - **5 Sizes**: xs, sm, md, lg, xl with consistent 44x44px minimum touch targets
+ * - **9 Border Radius Options**: none, sm, base, md, lg, xl, 2xl, 3xl, full
+ * - **Icon Support**: Left, right, and icon-only configurations
+ * - **Loading States**: Native ActivityIndicator spinner
+ * - **Disabled States**: Visual feedback and accessibility announcements
+ * - **Full Width Option**: Stretch to container width
+ * - **Custom Styling**: Extend with Nativewind classes via className prop
+ *
+ * ## Accessibility Compliance
+ *
+ * All stories are WCAG 2.1 AA compliant:
+ * - Minimum 44x44 point touch targets (Level AAA)
+ * - Semantic button role with accessibilityRole
+ * - Labels for icon-only buttons
+ * - Hints for additional context
+ * - State announcements for disabled/loading
+ * - Colour contrast ≥4.5:1 (WCAG AA)
+ *
+ * ## Navigation
+ *
+ * Use the left sidebar to browse stories:
+ * - **Variants**: See each variant individually
+ * - **Sizes**: See each size individually
+ * - **Rounded**: See each border-radius option
+ * - **Icons**: See different icon configurations
+ * - **States**: See disabled and loading states
+ * - **Combinations**: See multiple elements together
+ * - **Use Cases**: See real-world patterns (forms, toggles, etc.)
+ *
+ * @see {@link https://www.w3.org/WAI/WCAG21/quickref/} WCAG 2.1 Guidelines
+ * @see {@link https://reactnative.dev/docs/accessibility} React Native Accessibility
  */
 const meta: Meta<typeof Button> = {
   title: 'Mobile/Button',

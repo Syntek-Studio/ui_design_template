@@ -10,41 +10,40 @@
 
 ## Table of Contents
 
-- [src/mobile/components/](#srcmobilecomponents)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Directory Tree](#directory-tree)
-  - [Components](#components)
-    - [Button](#button)
-  - [Component API](#component-api)
-    - [Button Component](#button-component)
-  - [Usage Examples](#usage-examples)
-    - [Basic Button](#basic-button)
-    - [Primary Button](#primary-button)
-    - [Secondary Button](#secondary-button)
-    - [Disabled Button](#disabled-button)
-    - [Custom Styling](#custom-styling)
-    - [Form Integration](#form-integration)
-    - [Loading State Pattern](#loading-state-pattern)
-    - [Multiple Buttons Layout](#multiple-buttons-layout)
-  - [Component Structure](#component-structure)
-    - [Button Component Example](#button-component-example)
-    - [Button.tsx](#buttontsx)
-    - [Button.stories.tsx](#buttonstoriestsx)
-    - [index.ts](#indexts)
-  - [Adding New Components](#adding-new-components)
-  - [Styling Best Practices](#styling-best-practices)
-    - [Use Nativewind Classes](#use-nativewind-classes)
-    - [Text Component Requirement](#text-component-requirement)
-    - [Responsive Design](#responsive-design)
-    - [Design Tokens](#design-tokens)
-  - [Testing](#testing)
-    - [Storybook](#storybook)
-    - [Unit Tests](#unit-tests)
-  - [Platform-Specific Considerations](#platform-specific-considerations)
-    - [iOS vs Android](#ios-vs-android)
-    - [Accessibility](#accessibility)
-  - [Related Sections](#related-sections)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Directory Tree](#directory-tree)
+- [Components](#components)
+  - [Button](#button)
+- [Component API](#component-api)
+  - [Button Component](#button-component)
+- [Usage Examples](#usage-examples)
+  - [Basic Button](#basic-button)
+  - [Primary Button](#primary-button)
+  - [Secondary Button](#secondary-button)
+  - [Disabled Button](#disabled-button)
+  - [Custom Styling](#custom-styling)
+  - [Form Integration](#form-integration)
+  - [Loading State Pattern](#loading-state-pattern)
+  - [Multiple Buttons Layout](#multiple-buttons-layout)
+- [Component Structure](#component-structure)
+  - [Button Component Example](#button-component-example)
+  - [Button.tsx](#buttontsx)
+  - [Button.stories.tsx](#buttonstoriestsx)
+  - [index.ts](#indexts)
+- [Adding New Components](#adding-new-components)
+- [Styling Best Practices](#styling-best-practices)
+  - [Use Nativewind Classes](#use-nativewind-classes)
+  - [Text Component Requirement](#text-component-requirement)
+  - [Responsive Design](#responsive-design)
+  - [Design Tokens](#design-tokens)
+- [Testing](#testing)
+  - [Storybook](#storybook)
+  - [Unit Tests](#unit-tests)
+- [Platform-Specific Considerations](#platform-specific-considerations)
+  - [iOS vs Android](#ios-vs-android)
+  - [Accessibility](#accessibility)
+- [Related Sections](#related-sections)
 
 ---
 
@@ -91,7 +90,7 @@ Versatile button component with multiple variants and states for React Native.
 
 **Props:**
 
-````typescript
+```typescript
 interface ButtonProps {
   title: string // Button text
   onPress?: () => void // Press handler
@@ -99,12 +98,12 @@ interface ButtonProps {
   disabled?: boolean // Disabled state
   className?: string // Custom Nativewind classes
 }
-```text
+```
 
 **Import:**
 
-```typescript
-import { Mobile } from '@template/ui';
+````typescript
+import { Mobile } from '@syntek-studio/ui';
 
 <Mobile.Button ... />
 ```text
@@ -117,7 +116,7 @@ import { Mobile } from '@template/ui';
   variant="primary"
   onPress={() => console.log('Pressed')}
 />
-```markdown
+````
 
 **Variants:**
 
@@ -160,7 +159,7 @@ export interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps>
-```markdown
+```
 
 ---
 
@@ -169,13 +168,13 @@ export const Button: React.FC<ButtonProps>
 ### Basic Button
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 
 <Mobile.Button
   title="Press me"
   onPress={() => alert('Pressed!')}
 />
-```markdown
+```
 
 ### Primary Button
 
@@ -185,7 +184,7 @@ import { Mobile } from '@template/ui';
   variant="primary"
   onPress={handleSubmit}
 />
-```markdown
+```
 
 ### Secondary Button
 
@@ -195,7 +194,7 @@ import { Mobile } from '@template/ui';
   variant="secondary"
   onPress={handleCancel}
 />
-```markdown
+```
 
 ### Disabled Button
 
@@ -205,22 +204,22 @@ import { Mobile } from '@template/ui';
   disabled={true}
   onPress={handleSubmit}
 />
-```markdown
+```
 
 ### Custom Styling
 
 ```typescript
 <Mobile.Button
   title="Custom"
-  className="bg-gradient-to-r from-blue-500 to-purple-600"
+  className="bg-linear-to-r from-blue-500 to-purple-600"
   onPress={() => {}}
 />
-```markdown
+```
 
 ### Form Integration
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 import { View, TextInput } from 'react-native';
 import { useState } from 'react';
 
@@ -247,12 +246,12 @@ export function LoginForm() {
     </View>
   );
 }
-```markdown
+```
 
 ### Loading State Pattern
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 import { View, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 
@@ -281,12 +280,12 @@ export function AsyncButton() {
     />
   );
 }
-```markdown
+```
 
 ### Multiple Buttons Layout
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 import { View } from 'react-native';
 
 export function ConfirmDialog() {
@@ -309,7 +308,7 @@ export function ConfirmDialog() {
     </View>
   );
 }
-```markdown
+```
 
 ---
 
@@ -317,19 +316,18 @@ export function ConfirmDialog() {
 
 ### Button Component Example
 
-````
-
+```markdown
 Button/
 ├── Button.tsx # Component implementation
 ├── Button.stories.tsx # Storybook documentation
 └── index.ts # TypeScript re-export
+```
 
-````markdown
 ### Button.tsx
 
 Implements the component logic and styling:
 
-````typescript
+```typescript
 import { Pressable, Text } from 'react-native';
 
 export interface ButtonProps {
@@ -364,7 +362,7 @@ export const Button = ({
     </Pressable>
   );
 };
-```markdown
+```
 
 ### Button.stories.tsx
 
@@ -405,7 +403,7 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
-```markdown
+```
 
 ### index.ts
 
@@ -413,8 +411,7 @@ Re-exports the component for public API:
 
 ```typescript
 export { Button, type ButtonProps } from './Button'
-````
-````
+```
 
 ---
 
@@ -449,7 +446,7 @@ className = 'my-custom-button'
 
 Always wrap text in `<Text>` component:
 
-````typescript
+```typescript
 // Good
 <Pressable>
   <Text>Press me</Text>
@@ -459,7 +456,7 @@ Always wrap text in `<Text>` component:
 <Pressable>
   Press me
 </Pressable>
-```markdown
+```
 
 ### Responsive Design
 
@@ -468,17 +465,17 @@ Use responsive Tailwind classes (same as web):
 ```typescript
 className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
 className = 'text-sm md:text-base' // Responsive font sizes
-```markdown
+```
 
 ### Design Tokens
 
 Use design tokens for dynamic values:
 
 ```typescript
-import { colours } from '@template/ui'
+import { colours } from '@syntek-studio/ui'
 
 const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500]
-```markdown
+```
 
 ---
 
@@ -490,7 +487,7 @@ View and test components in Storybook:
 
 ```bash
 npm run storybook:mobile
-````
+```
 
 Note: Mobile Storybook requires configuration within your React Native project's `.ondevice/` setup.
 

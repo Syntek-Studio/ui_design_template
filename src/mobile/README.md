@@ -10,36 +10,35 @@
 
 ## Table of Contents
 
-- [src/mobile/](#srcmobile)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Directory Tree](#directory-tree)
-  - [Files](#files)
-  - [Component Pattern](#component-pattern)
-    - [Component Folder Structure](#component-folder-structure)
-    - [Component Implementation (`ComponentName.tsx`)](#component-implementation-componentnametsx)
-    - [Storybook Stories (`ComponentName.stories.tsx`)](#storybook-stories-componentnamestoriestsx)
-    - [Re-export (`index.ts`)](#re-export-indexts)
-  - [Platform Details](#platform-details)
-    - [React Native Components](#react-native-components)
-    - [Key Differences from Web](#key-differences-from-web)
-    - [Event Handlers](#event-handlers)
-    - [CSS Classes with Nativewind](#css-classes-with-nativewind)
-  - [Creating Components](#creating-components)
-    - [Step 1: Create Component Folder](#step-1-create-component-folder)
-    - [Step 2: Implement Component](#step-2-implement-component)
-    - [Step 3: Create Stories](#step-3-create-stories)
-    - [Step 4: Create Re-export](#step-4-create-re-export)
-    - [Step 5: Update Components Index](#step-5-update-components-index)
-  - [Styling Guidelines](#styling-guidelines)
-    - [Using Nativewind (Tailwind for Mobile)](#using-nativewind-tailwind-for-mobile)
-    - [Design Tokens](#design-tokens)
-    - [Text Component Requirement](#text-component-requirement)
-    - [Responsive Design](#responsive-design)
-  - [Testing](#testing)
-  - [Integration with React Native Projects](#integration-with-react-native-projects)
-    - [Setup in Your App](#setup-in-your-app)
-  - [Related Sections](#related-sections)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Directory Tree](#directory-tree)
+- [Files](#files)
+- [Component Pattern](#component-pattern)
+  - [Component Folder Structure](#component-folder-structure)
+  - [Component Implementation (`ComponentName.tsx`)](#component-implementation-componentnametsx)
+  - [Storybook Stories (`ComponentName.stories.tsx`)](#storybook-stories-componentnamestoriestsx)
+  - [Re-export (`index.ts`)](#re-export-indexts)
+- [Platform Details](#platform-details)
+  - [React Native Components](#react-native-components)
+  - [Key Differences from Web](#key-differences-from-web)
+  - [Event Handlers](#event-handlers)
+  - [CSS Classes with Nativewind](#css-classes-with-nativewind)
+- [Creating Components](#creating-components)
+  - [Step 1: Create Component Folder](#step-1-create-component-folder)
+  - [Step 2: Implement Component](#step-2-implement-component)
+  - [Step 3: Create Stories](#step-3-create-stories)
+  - [Step 4: Create Re-export](#step-4-create-re-export)
+  - [Step 5: Update Components Index](#step-5-update-components-index)
+- [Styling Guidelines](#styling-guidelines)
+  - [Using Nativewind (Tailwind for Mobile)](#using-nativewind-tailwind-for-mobile)
+  - [Design Tokens](#design-tokens)
+  - [Text Component Requirement](#text-component-requirement)
+  - [Responsive Design](#responsive-design)
+- [Testing](#testing)
+- [Integration with React Native Projects](#integration-with-react-native-projects)
+  - [Setup in Your App](#setup-in-your-app)
+- [Related Sections](#related-sections)
 
 ---
 
@@ -245,7 +244,7 @@ Mobile components use React Native event handlers:
 
 Mobile components use Tailwind classes through Nativewind:
 
-````typescript
+```typescript
 // Spacing
 'px-4 py-2'                    // Padding (horizontal and vertical)
 
@@ -261,7 +260,7 @@ Mobile components use Tailwind classes through Nativewind:
 // NOT supported on mobile
 'hover:opacity-90'             // Hover not available
 ':active' pseudo-class         // Use active: class instead
-```markdown
+```
 
 ---
 
@@ -271,7 +270,7 @@ Mobile components use Tailwind classes through Nativewind:
 
 ```bash
 mkdir -p src/mobile/components/MyComponent
-````
+```
 
 ### Step 2: Implement Component
 
@@ -331,10 +330,10 @@ export { MyComponent, type MyComponentProps } from './MyComponent'
 
 Update `src/mobile/components/index.ts`:
 
-````typescript
-export *from './Button'
-export* from './MyComponent' // Add this line
-```markdown
+```typescript
+export * from './Button'
+export * from './MyComponent' // Add this line
+```
 
 ---
 
@@ -350,14 +349,14 @@ className = 'px-4 py-2 rounded bg-blue-500 text-white'
 
 // Avoid
 className = 'my-button' // with custom CSS/StyleSheet
-````
+```
 
 ### Design Tokens
 
 Use design tokens from `src/tokens/` for consistency:
 
 ```typescript
-import { colours, spacing } from '@template/ui'
+import { colours, spacing } from '@syntek-studio/ui'
 
 // Note: Design tokens are JavaScript values, not CSS classes
 // Use them for logic-based styling or conditionals
@@ -368,7 +367,7 @@ const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary
 
 Always wrap text content in `<Text>` component:
 
-````typescript
+```typescript
 // Good
 <Pressable className="bg-blue-500">
   <Text className="text-white">Click me</Text>
@@ -378,7 +377,7 @@ Always wrap text content in `<Text>` component:
 <Pressable className="bg-blue-500">
   Click me
 </Pressable>
-```markdown
+```
 
 ### Responsive Design
 
@@ -388,7 +387,7 @@ Use responsive Tailwind classes (same as web):
 className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
 className = 'text-base md:text-lg' // Responsive font sizes
 className = 'flex-col md:flex-row' // Responsive direction
-```markdown
+```
 
 ---
 
@@ -406,7 +405,7 @@ Run Storybook to view and test components:
 
 ```bash
 npm run storybook:mobile
-````
+```
 
 Note: Mobile Storybook is configured within your React Native project's `.ondevice/` configuration.
 
@@ -418,32 +417,32 @@ Note: Mobile Storybook is configured within your React Native project's `.ondevi
 
 1. Install the library:
 
-````bash
-npm install @template/ui
-```text
+```bash
+npm install @syntek-studio/ui
+```
 
 2. Install Nativewind and required dependencies:
 
 ```bash
 npm install nativewind react-native-reanimated
-```text
+```
 
 3. Configure tailwind.config.js (in your app):
 
 ```javascript
 module.exports = {
-  content: ['node_modules/@template/ui/**/*.{js,ts,jsx,tsx}'],
+  content: ['node_modules/@syntek-studio/ui/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
   plugins: [],
 }
-```text
+```
 
 4. Use components:
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 
 export function App() {
   return (
@@ -453,7 +452,7 @@ export function App() {
     />
   );
 }
-````
+```
 
 ---
 
@@ -471,4 +470,4 @@ export function App() {
 
 ---
 
-**Last Updated:** 22 December 2025
+**Last Updated:** 02/01/2026
