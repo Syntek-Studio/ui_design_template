@@ -1,16 +1,17 @@
 # Sprint 22: Internationalisation Support
 
 **Sprint Goal:** Implement i18n support for the design system
+**ClickUp List ID:** [901519283781](https://app.clickup.com/90151635198/v/l/li/901519283781)
 **Total Points:** 11
 **Priority Focus:** Could Have
 **Phase:** Phase 7 - Advanced Features
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US028 | Internationalisation (i18n) Support | 8 | Could Have | Phase 7 |
-| US037 | Implement Form Component System (remainder from Sprint 17) | 3 | Could Have | Phase 7 |
+| ID    | Title                                                      | Points | Priority   | Phase   |
+| ----- | ---------------------------------------------------------- | ------ | ---------- | ------- |
+| US028 | Internationalisation (i18n) Support                        | 8      | Could Have | Phase 7 |
+| US037 | Implement Form Component System (remainder from Sprint 17) | 3      | Could Have | Phase 7 |
 
 **Sprint Total: 11 points**
 
@@ -41,17 +42,17 @@ i18n support should handle both LTR and RTL languages. Consider using react-i18n
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US028 | ❌ | ✅ | ✅ | ✅ (i18n/) |
-| US037 | ❌ | ✅ | ✅ | ✅ (components/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI        |
+| -------- | ------- | ------------ | --------------- | ---------------- |
+| US028    | ❌      | ✅           | ✅              | ✅ (i18n/)       |
+| US037    | ❌      | ✅           | ✅              | ✅ (components/) |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| RTL layout issues | High | High | Thorough RTL testing |
-| Translation management | Medium | Medium | Use translation management tools |
+| Risk                   | Likelihood | Impact | Mitigation                       |
+| ---------------------- | ---------- | ------ | -------------------------------- |
+| RTL layout issues      | High       | High   | Thorough RTL testing             |
+| Translation management | Medium     | Medium | Use translation management tools |
 
 ---
 

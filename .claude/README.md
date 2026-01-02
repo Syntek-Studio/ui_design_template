@@ -1,7 +1,7 @@
 # .claude/
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -51,8 +51,8 @@ The `.claude/` folder contains Claude Code configuration files and self-learning
 
 ## Files
 
-| File | Purpose |
-|------|---------|
+| File        | Purpose                                            |
+| ----------- | -------------------------------------------------- |
 | `CLAUDE.md` | Project guidance and configuration for Claude Code |
 
 ---
@@ -64,6 +64,7 @@ The `CLAUDE.md` file provides essential information about the project:
 ### Project Overview
 
 Defines what the project is:
+
 - Name: @template/ui
 - Type: Shared UI component library
 - Platforms: React Web and React Native
@@ -111,12 +112,12 @@ import { Mobile } from '@template/ui';
 
 Documents differences between web and mobile implementations:
 
-| Aspect | Web | Mobile |
-|--------|-----|--------|
-| Click handler | `onClick` | `onPress` |
-| Button element | `<button>` | `<Pressable>` |
-| Text wrapper | Not needed | Required `<Text>` |
-| Hover states | `hover:` | Not supported |
+| Aspect         | Web        | Mobile            |
+| -------------- | ---------- | ----------------- |
+| Click handler  | `onClick`  | `onPress`         |
+| Button element | `<button>` | `<Pressable>`     |
+| Text wrapper   | Not needed | Required `<Text>` |
+| Hover states   | `hover:`   | Not supported     |
 
 ### Commit Convention
 
@@ -201,6 +202,7 @@ The project includes a self-learning metrics system for tracking Claude's perfor
 **Location:** `docs/METRICS/`
 
 **Contents:**
+
 - `config.json` - Metrics configuration
 - `runs/` - Recorded agent runs and performance data
 - `feedback/` - User feedback on agent outputs
@@ -210,6 +212,7 @@ The project includes a self-learning metrics system for tracking Claude's perfor
 - `variants/` - A/B test variants for prompt optimisation
 
 This system helps improve the development workflow by:
+
 1. Recording what works well
 2. Identifying common patterns
 3. Optimising prompts for better results

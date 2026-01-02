@@ -1,7 +1,7 @@
 # Syntek Dev Suite - Plugin Usage Guide
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -142,8 +142,8 @@ git add . && git commit -m "feat(modal): add Modal component for web and mobile"
 
 All Syntek commands are prefixed with their type for clarity:
 
-| Prefix | Type | Description |
-|--------|------|-------------|
+| Prefix               | Type  | Description                   |
+| -------------------- | ----- | ----------------------------- |
 | `/syntek-dev-suite:` | Agent | Spawns a specialised AI agent |
 
 ---
@@ -152,67 +152,67 @@ All Syntek commands are prefixed with their type for clarity:
 
 ### Planning & Architecture
 
-| Command | Description |
-|---------|-------------|
-| `/syntek-dev-suite:plan` | Create architectural plans, break down features |
-| `/syntek-dev-suite:stories` | Generate user stories from requirements |
-| `/syntek-dev-suite:sprint` | Organise stories into balanced sprints |
-| `/syntek-dev-suite:completion` | Track story and sprint completion |
+| Command                        | Description                                     |
+| ------------------------------ | ----------------------------------------------- |
+| `/syntek-dev-suite:plan`       | Create architectural plans, break down features |
+| `/syntek-dev-suite:stories`    | Generate user stories from requirements         |
+| `/syntek-dev-suite:sprint`     | Organise stories into balanced sprints          |
+| `/syntek-dev-suite:completion` | Track story and sprint completion               |
 
 ### Development
 
-| Command | Description |
-|---------|-------------|
-| `/syntek-dev-suite:setup` | Project initialisation and configuration |
-| `/syntek-dev-suite:backend` | Backend development, APIs, database |
-| `/syntek-dev-suite:frontend` | UI/UX, components, accessibility |
+| Command                      | Description                               |
+| ---------------------------- | ----------------------------------------- |
+| `/syntek-dev-suite:setup`    | Project initialisation and configuration  |
+| `/syntek-dev-suite:backend`  | Backend development, APIs, database       |
+| `/syntek-dev-suite:frontend` | UI/UX, components, accessibility          |
 | `/syntek-dev-suite:database` | Database design, migrations, optimisation |
-| `/syntek-dev-suite:auth` | Authentication, MFA, session management |
+| `/syntek-dev-suite:auth`     | Authentication, MFA, session management   |
 
 ### Quality & Testing
 
-| Command | Description |
-|---------|-------------|
-| `/syntek-dev-suite:test-writer` | TDD test suites and stubs |
-| `/syntek-dev-suite:qa-tester` | Hostile QA, security, edge cases |
-| `/syntek-dev-suite:review` | Code review, SOLID, security |
-| `/syntek-dev-suite:debug` | Root cause analysis, debugging |
+| Command                         | Description                      |
+| ------------------------------- | -------------------------------- |
+| `/syntek-dev-suite:test-writer` | TDD test suites and stubs        |
+| `/syntek-dev-suite:qa-tester`   | Hostile QA, security, edge cases |
+| `/syntek-dev-suite:review`      | Code review, SOLID, security     |
+| `/syntek-dev-suite:debug`       | Root cause analysis, debugging   |
 
 ### Refactoring & Maintenance
 
-| Command | Description |
-|---------|-------------|
+| Command                      | Description                         |
+| ---------------------------- | ----------------------------------- |
 | `/syntek-dev-suite:refactor` | Code cleanup without changing logic |
-| `/syntek-dev-suite:syntax` | Fix syntax and linting errors |
-| `/syntek-dev-suite:docs` | Technical documentation |
+| `/syntek-dev-suite:syntax`   | Fix syntax and linting errors       |
+| `/syntek-dev-suite:docs`     | Technical documentation             |
 
 ### Infrastructure
 
-| Command | Description |
-|---------|-------------|
-| `/syntek-dev-suite:cicd` | CI/CD pipelines, deployments |
+| Command                      | Description                            |
+| ---------------------------- | -------------------------------------- |
+| `/syntek-dev-suite:cicd`     | CI/CD pipelines, deployments           |
 | `/syntek-dev-suite:security` | Access control, headers, rate limiting |
-| `/syntek-dev-suite:logging` | Logging, Sentry, audit trails |
-| `/syntek-dev-suite:git` | Branch management, versioning |
+| `/syntek-dev-suite:logging`  | Logging, Sentry, audit trails          |
+| `/syntek-dev-suite:git`      | Branch management, versioning          |
 
 ### Specialised
 
-| Command | Description |
-|---------|-------------|
-| `/syntek-dev-suite:gdpr` | GDPR compliance, data protection |
-| `/syntek-dev-suite:seo` | SEO, meta tags, structured data |
-| `/syntek-dev-suite:notifications` | Email, SMS, push notifications |
-| `/syntek-dev-suite:export` | PDF, Excel, CSV, JSON exports |
-| `/syntek-dev-suite:reporting` | Data queries, report services |
-| `/syntek-dev-suite:data` | Data analysis, Python, SQL |
-| `/syntek-dev-suite:support-articles` | Help documentation |
+| Command                              | Description                      |
+| ------------------------------------ | -------------------------------- |
+| `/syntek-dev-suite:gdpr`             | GDPR compliance, data protection |
+| `/syntek-dev-suite:seo`              | SEO, meta tags, structured data  |
+| `/syntek-dev-suite:notifications`    | Email, SMS, push notifications   |
+| `/syntek-dev-suite:export`           | PDF, Excel, CSV, JSON exports    |
+| `/syntek-dev-suite:reporting`        | Data queries, report services    |
+| `/syntek-dev-suite:data`             | Data analysis, Python, SQL       |
+| `/syntek-dev-suite:support-articles` | Help documentation               |
 
 ---
 
 ## Plugin Commands
 
-| Command | Description |
-|---------|-------------|
+| Command                  | Description                               |
+| ------------------------ | ----------------------------------------- |
 | `/syntek-dev-suite:init` | Initialise Syntek Dev Suite for a project |
 
 ---
@@ -221,15 +221,15 @@ All Syntek commands are prefixed with their type for clarity:
 
 The learning system helps agents improve over time based on your feedback.
 
-| Command | Description |
-|---------|-------------|
-| `/syntek-dev-suite:learning-feedback good` | Mark the last run as successful |
-| `/syntek-dev-suite:learning-feedback bad [comment]` | Mark as needing improvement |
-| `/syntek-dev-suite:learning-ab-test list` | List active A/B tests |
-| `/syntek-dev-suite:learning-ab-test status <agent>` | Show test results for an agent |
-| `/syntek-dev-suite:learning-optimise status` | Show optimisation system status |
-| `/syntek-dev-suite:learning-optimise analyse <agent>` | Analyse an agent's performance |
-| `/syntek-dev-suite:learning-optimise apply <id>` | Apply a pending optimisation |
+| Command                                               | Description                     |
+| ----------------------------------------------------- | ------------------------------- |
+| `/syntek-dev-suite:learning-feedback good`            | Mark the last run as successful |
+| `/syntek-dev-suite:learning-feedback bad [comment]`   | Mark as needing improvement     |
+| `/syntek-dev-suite:learning-ab-test list`             | List active A/B tests           |
+| `/syntek-dev-suite:learning-ab-test status <agent>`   | Show test results for an agent  |
+| `/syntek-dev-suite:learning-optimise status`          | Show optimisation system status |
+| `/syntek-dev-suite:learning-optimise analyse <agent>` | Analyse an agent's performance  |
+| `/syntek-dev-suite:learning-optimise apply <id>`      | Apply a pending optimisation    |
 
 ---
 
@@ -239,13 +239,14 @@ Skills are loaded automatically based on your project's `Skill Target` in `CLAUD
 
 ### Stack Skills
 
-| Skill | Target | Applied To |
-|-------|--------|------------|
+| Skill              | Target         | Applied To                  |
+| ------------------ | -------------- | --------------------------- |
 | `stack-shared-lib` | Shared Library | NPM packages for web/mobile |
 
 ### Global Skill
 
 The `global-workflow` skill is always loaded and provides:
+
 - British English localisation
 - Date format: DD/MM/YYYY
 - Time format: 24-hour clock (14:30)
@@ -358,12 +359,12 @@ Help agents improve by providing feedback:
 
 This project uses root-level scripts for different environments:
 
-| Script | Purpose | Command |
-|--------|---------|---------|
-| `./dev.sh` | Start development | Watch mode with tsup |
-| `./test.sh` | Run tests | Test suite + type check + lint |
-| `./staging.sh` | Staging build | Build + prerelease version |
-| `./production.sh` | Production build | Build for release |
+| Script            | Purpose           | Command                        |
+| ----------------- | ----------------- | ------------------------------ |
+| `./dev.sh`        | Start development | Watch mode with tsup           |
+| `./test.sh`       | Run tests         | Test suite + type check + lint |
+| `./staging.sh`    | Staging build     | Build + prerelease version     |
+| `./production.sh` | Production build  | Build for release              |
 
 ---
 

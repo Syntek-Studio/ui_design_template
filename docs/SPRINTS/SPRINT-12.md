@@ -1,16 +1,17 @@
 # Sprint 12: Automated Documentation
 
 **Sprint Goal:** Implement automated component documentation generation
+**ClickUp List ID:** [901519283765](https://app.clickup.com/90151635198/v/l/li/901519283765)
 **Total Points:** 11
 **Priority Focus:** Should Have
 **Phase:** Phase 5 - Documentation & Storybook
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US016 | Automated Component Documentation Generation | 8 | Should Have | Phase 5 |
-| US033 | Theming and Customisation Guide | 3 | Should Have | Phase 5 |
+| ID    | Title                                        | Points | Priority    | Phase   |
+| ----- | -------------------------------------------- | ------ | ----------- | ------- |
+| US016 | Automated Component Documentation Generation | 8      | Should Have | Phase 5 |
+| US033 | Theming and Customisation Guide              | 3      | Should Have | Phase 5 |
 
 **Sprint Total: 11 points**
 
@@ -40,17 +41,17 @@ Use tools like react-docgen-typescript to automatically generate component docum
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US016 | ❌ | ❌ | ❌ | ✅ (scripts/) |
-| US033 | ❌ | ❌ | ❌ | ✅ (docs/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI     |
+| -------- | ------- | ------------ | --------------- | ------------- |
+| US016    | ❌      | ❌           | ❌              | ✅ (scripts/) |
+| US033    | ❌      | ❌           | ❌              | ✅ (docs/)    |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Documentation quality | Medium | Medium | Enforce JSDoc standards |
-| Cross-platform documentation | Low | Low | Clear platform indicators |
+| Risk                         | Likelihood | Impact | Mitigation                |
+| ---------------------------- | ---------- | ------ | ------------------------- |
+| Documentation quality        | Medium     | Medium | Enforce JSDoc standards   |
+| Cross-platform documentation | Low        | Low    | Clear platform indicators |
 
 ---
 

@@ -1,6 +1,7 @@
 # US004: Template README with Client-Specific Customisation
 
 **Status:** To Do
+**ClickUp ID:** [86c7a97w2](https://app.clickup.com/t/86c7a97w2)
 **Priority:** Must Have
 **Story Points:** 5
 **Sprint:** Sprint 03
@@ -14,6 +15,7 @@ so that the scaffolded project has proper documentation out of the box.
 ## Acceptance Criteria
 
 ### Scenario 1: Template README Generation
+
 - **Given** the init CLI is run with client details
 - **When** README.template.md is processed
 - **Then** placeholders like {{clientName}}, {{packageName}}, {{description}} are replaced
@@ -21,6 +23,7 @@ so that the scaffolded project has proper documentation out of the box.
 - **And** it includes all standard sections: features, installation, quick start, commands
 
 ### Scenario 2: Documentation Structure
+
 - **Given** a generated README.md
 - **When** a developer reads it
 - **Then** it contains clear sections for: Overview, Installation, Quick Start, Development, Components
@@ -28,6 +31,7 @@ so that the scaffolded project has proper documentation out of the box.
 - **And** installation instructions use the client-specific package name
 
 ### Scenario 3: Customisation of Features
+
 - **Given** the template defines optional feature sections
 - **When** the init CLI prompts for features (e.g., "include testing setup?")
 - **Then** the README includes only the relevant feature sections

@@ -1,6 +1,7 @@
 # US008: Component Default Props Configuration
 
 **Status:** To Do
+**ClickUp ID:** [86c7a97zp](https://app.clickup.com/t/86c7a97zp)
 **Priority:** Must Have
 **Story Points:** 5
 **Sprint:** Sprint 04
@@ -14,6 +15,7 @@ so that components use consistent defaults across the entire system and client p
 ## Acceptance Criteria
 
 ### Scenario 1: Default Props Definition
+
 - **Given** src/config/component-defaults.ts is created
 - **When** it is loaded
 - **Then** it exports default props for every component (Button, Input, Card, etc.)
@@ -21,6 +23,7 @@ so that components use consistent defaults across the entire system and client p
 - **And** defaults are typed and match component prop interfaces
 
 ### Scenario 2: Component Configuration
+
 - **Given** a component uses defaults
 - **When** it is rendered without specific props
 - **Then** it applies the default values from component-defaults.ts
@@ -28,6 +31,7 @@ so that components use consistent defaults across the entire system and client p
 - **And** TypeScript ensures type safety for overrides
 
 ### Scenario 3: Client-Specific Overrides
+
 - **Given** a client project wants custom defaults
 - **When** they import components
 - **Then** they can create a custom defaults file and extend the base configuration

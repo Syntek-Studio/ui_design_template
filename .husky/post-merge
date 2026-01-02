@@ -1,0 +1,5 @@
+CHANGED=$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep -c "package-lock.json" || true)
+if [ "$CHANGED" -gt 0 ]; then
+  echo "Dependencies changed, running npm install..."
+  npm install
+fi

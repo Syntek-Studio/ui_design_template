@@ -1,7 +1,7 @@
 # docs/
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -35,7 +35,6 @@
   - [Best Practices](#best-practices)
   - [Related Sections](#related-sections)
 
-
 ---
 
 ## Overview
@@ -43,6 +42,7 @@
 The `docs/` folder contains comprehensive project documentation, guides, and the self-learning metrics system. All developer-facing documentation lives here, organised by category.
 
 This folder is the single source of truth for:
+
 - Developer guides and setup instructions
 - API and component documentation
 - Architecture and design system information
@@ -77,11 +77,13 @@ docs/
 Version history and release notes following [Keep a Changelog](https://keepachangelog.com/) format.
 
 **Purpose:**
+
 - Track all changes across versions
 - Document new features, fixes, and breaking changes
 - Provide release dates and version information
 
 **Structure:**
+
 ```
 [Unreleased]       # Planned features
 [0.2.0] - 22-12-2025    # Released version
@@ -89,6 +91,7 @@ Version history and release notes following [Keep a Changelog](https://keepachan
 ```
 
 **When to Update:**
+
 - After implementing new features
 - After fixing bugs
 - After deprecating functionality
@@ -101,18 +104,21 @@ Version history and release notes following [Keep a Changelog](https://keepachan
 Comprehensive Git workflow and commit conventions guide.
 
 **Purpose:**
+
 - Explain Conventional Commits format
 - Document PR workflow and branch strategy
 - Provide Git commands and best practices
 - Show commit and PR templates
 
 **Structure:**
+
 - Commit template and definitions
 - PR workflow (testing → dev → staging → main)
 - Useful Git commands
 - Pull request templates with examples
 
 **When to Use:**
+
 - Writing commit messages
 - Creating pull requests
 - Understanding branch strategy
@@ -125,6 +131,7 @@ Comprehensive Git workflow and commit conventions guide.
 Self-learning metrics system for tracking agent performance and optimisations.
 
 **Purpose:**
+
 - Record agent runs and performance data
 - Track improvements and optimisations
 - Manage A/B testing for prompts
@@ -159,6 +166,7 @@ The `METRICS/` folder implements a self-learning system:
 ### Usage
 
 The metrics system tracks:
+
 - Time taken for different tasks
 - Quality of outputs (rated by users)
 - Successful vs failed operations
@@ -219,18 +227,22 @@ When making changes:
 4. Link to PR/issue numbers if applicable
 
 Example:
+
 ```markdown
 ## [Unreleased]
 
 ### Added
+
 - New Input component for form handling
 - Button loading state support
 
 ### Changed
+
 - Updated colour palette for accessibility
 - Improved spacing tokens documentation
 
 ### Fixed
+
 - Card shadow not rendering on iOS
 ```
 

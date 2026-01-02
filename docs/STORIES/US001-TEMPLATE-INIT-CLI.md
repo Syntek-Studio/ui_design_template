@@ -1,6 +1,7 @@
 # US001: Template Initialisation CLI
 
 **Status:** To Do
+**ClickUp ID:** [86c7a97qj](https://app.clickup.com/t/86c7a97qj)
 **Priority:** Must Have
 **Story Points:** 8
 **Sprint:** Sprint 01
@@ -14,6 +15,7 @@ so that I can quickly scaffold a client-specific UI component library without ma
 ## Acceptance Criteria
 
 ### Scenario 1: Successful Template Initialisation
+
 - **Given** a developer runs `npm run init-template` in a new project directory
 - **When** they answer interactive prompts (client name, package name, primary colour, description)
 - **Then** a new template is created with updated package.json, README, and token files
@@ -21,12 +23,14 @@ so that I can quickly scaffold a client-specific UI component library without ma
 - **And** the project is ready to build immediately without additional configuration
 
 ### Scenario 2: Validation of User Input
+
 - **Given** a developer enters invalid package names (uppercase, spaces, special characters)
 - **When** the CLI validates the input
 - **Then** it shows an error message and prompts again for valid input
 - **And** valid package names (lowercase, hyphens allowed) are accepted
 
 ### Scenario 3: Directory Already Has Files
+
 - **Given** the target directory contains existing files
 - **When** the CLI detects this
 - **Then** it asks the user for confirmation to proceed

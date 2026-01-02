@@ -1,6 +1,6 @@
 {
-  "name": "@template/ui",
-  "version": "0.6.0",
+  "name": "@syntek-studio/ui",
+  "version": "0.7.0",
   "private": false,
   "description": "A shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.",
   "main": "./dist/index.js",
@@ -19,15 +19,23 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "lint:log": "eslint src --format json --output-file lint_results/eslint.json",
     "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "check": "npm run type-check && npm run lint",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
+    "test:verbose": "vitest --reporter=verbose",
+    "test:log": "vitest --reporter=json --outputFile=test_results/result.json",
+    "test:coverage:log": "vitest --coverage --reporter=json --outputFile=test_results/result_coverage.json",
+    "test:verbose:log": "vitest --reporter=verbose 2>&1 | tee test_results/result_verbose.txt",
     "storybook:web": "storybook dev -p 6006 -c .storybook-web",
     "storybook:web:build": "storybook build -c .storybook-web -o storybook-static-web",
     "storybook:mobile": "echo \"Note: React Native Storybook runs inside your RN app. Configure .ondevice/ in your React Native project.\"",
-    "storybook:mobile:build": "echo \"Note: Mobile Storybook is built within your React Native project.\""
+    "storybook:mobile:build": "echo \"Note: Mobile Storybook is built within your React Native project.\"",
+    "prepare": "husky"
   },
   "peerDependencies": {
     "nativewind": "^4.2.1",
@@ -75,14 +83,18 @@
     "autoprefixer": "^10.4.23",
     "babel-loader": "^10.0.0",
     "eslint": "^9.39.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "nativewind": "^4.2.1",
     "postcss": "^8.5.6",
     "postcss-loader": "^8.2.0",
+    "prettier": "^3.7.4",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-native-web": "^0.21.2",
     "storybook": "^10.1.11",
     "tailwindcss": "^4.1.18",
+    "tsc-files": "^1.1.4",
     "tslib": "^2.8.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
@@ -103,5 +115,15 @@
   ],
   "author": "Sam Bailey",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "tsc-files --noEmit",
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,json,md,css}": [
+      "prettier --write"
+    ]
+  }
 }

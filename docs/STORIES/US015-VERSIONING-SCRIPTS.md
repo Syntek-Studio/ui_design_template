@@ -1,6 +1,7 @@
 # US015: Versioning and Semantic Release Scripts
 
 **Status:** To Do
+**ClickUp ID:** [86c7a988u](https://app.clickup.com/t/86c7a988u)
 **Priority:** Must Have
 **Story Points:** 5
 **Sprint:** Sprint 10
@@ -14,6 +15,7 @@ so that version numbers and release notes are automatically managed.
 ## Acceptance Criteria
 
 ### Scenario 1: Semantic Version Bumping
+
 - **Given** `npm run version` is executed
 - **When** the script analyzes recent commits
 - **Then** it determines correct version bump (major/minor/patch)
@@ -22,6 +24,7 @@ so that version numbers and release notes are automatically managed.
 - **And** previous version is available for reference
 
 ### Scenario 2: CHANGELOG Generation
+
 - **Given** commits follow conventional commits format
 - **When** version script runs
 - **Then** CHANGELOG.md is automatically updated
@@ -30,6 +33,7 @@ so that version numbers and release notes are automatically managed.
 - **And** migration guides are included for breaking changes
 
 ### Scenario 3: Pre-Release Versions
+
 - **Given** a pre-release version is needed (alpha, beta, rc)
 - **When** version script is run with pre-release flag
 - **Then** version is updated to include pre-release identifier

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Pressable, Text, ActivityIndicator, View } from 'react-native';
+import React from 'react'
+import { Pressable, Text, ActivityIndicator, View } from 'react-native'
 import {
   type ComponentSize,
   type ComponentVariant,
@@ -12,81 +12,81 @@ import {
   textSizeClasses,
   spinnerColors,
   cn,
-} from '@/utils';
+} from '@/utils'
 
 /**
  * Size variants for Button components
  */
-export type ButtonSize = ComponentSize;
+export type ButtonSize = ComponentSize
 
 /**
  * Visual style variants for Button components
  */
-export type ButtonVariant = ComponentVariant;
+export type ButtonVariant = ComponentVariant
 
 /**
  * Border radius variants for Button components
  * Maps to the borders.radius design tokens
  */
-export type ButtonRounded = ComponentRounded;
+export type ButtonRounded = ComponentRounded
 
 /**
  * Props for the mobile Button component
  */
 export interface ButtonProps {
   /** The text or content displayed inside the button */
-  children: React.ReactNode;
+  children: React.ReactNode
 
   /** Callback function invoked when the button is pressed */
-  onPress?: () => void;
+  onPress?: () => void
 
   /** Visual style variant of the button */
-  variant?: ButtonVariant;
+  variant?: ButtonVariant
 
   /** Size of the button */
-  size?: ButtonSize;
+  size?: ButtonSize
 
   /** Border radius of the button - defaults to 'lg' (8px) */
-  rounded?: ButtonRounded;
+  rounded?: ButtonRounded
 
   /** Whether the button is disabled and should not respond to interactions */
-  disabled?: boolean;
+  disabled?: boolean
 
   /** Whether the button is in a loading state */
-  loading?: boolean;
+  loading?: boolean
 
   /** Whether the button should take the full width of its container */
-  fullWidth?: boolean;
+  fullWidth?: boolean
 
   /** Icon to display before the button text */
-  iconLeft?: React.ReactNode;
+  iconLeft?: React.ReactNode
 
   /** Icon to display after the button text */
-  iconRight?: React.ReactNode;
+  iconRight?: React.ReactNode
 
   /** Whether the button is icon-only (no text) */
-  iconOnly?: boolean;
+  iconOnly?: boolean
 
   /** Additional Nativewind CSS classes for custom styling */
-  className?: string;
+  className?: string
 
   /** Accessible label for screen readers (required for icon-only buttons) */
-  accessibilityLabel?: string;
+  accessibilityLabel?: string
 
   /** Accessibility hint providing context about the button's action */
-  accessibilityHint?: string;
+  accessibilityHint?: string
 
   /** Accessibility state for toggle buttons */
   accessibilityState?: {
-    disabled?: boolean;
-    selected?: boolean;
-    checked?: boolean | 'mixed';
-    busy?: boolean;
-    expanded?: boolean;
-  };
+    disabled?: boolean
+    selected?: boolean
+    checked?: boolean | 'mixed'
+    busy?: boolean
+    expanded?: boolean
+  }
 
   /** Test ID for automated testing */
-  testID?: string;
+  testID?: string
 }
 
 /**
@@ -166,7 +166,7 @@ export const Button = ({
   testID,
 }: ButtonProps) => {
   // Base styles applied to all buttons
-  const baseStyles = 'flex-row items-center justify-center min-h-[44px]';
+  const baseStyles = 'flex-row items-center justify-center min-h-[44px]'
 
   // Combine all button classes using the cn utility
   const buttonClasses = cn(
@@ -177,7 +177,7 @@ export const Button = ({
     fullWidth && 'w-full',
     (disabled || loading) && 'opacity-50',
     className
-  );
+  )
 
   // Combine text classes using the cn utility
   const textClasses = cn(
@@ -185,11 +185,11 @@ export const Button = ({
     textColorClasses[variant],
     'font-semibold',
     'text-center'
-  );
+  )
 
   // Icon-only buttons must have accessibilityLabel
   if (iconOnly && !accessibilityLabel) {
-    console.warn('Icon-only buttons must have an accessibilityLabel for accessibility');
+    console.warn('Icon-only buttons must have an accessibilityLabel for accessibility')
   }
 
   // Combine accessibility state with loading/disabled
@@ -197,7 +197,7 @@ export const Button = ({
     ...accessibilityState,
     disabled: disabled || loading,
     busy: accessibilityState?.busy ?? loading,
-  };
+  }
 
   return (
     <Pressable
@@ -221,5 +221,5 @@ export const Button = ({
       {iconOnly && children}
       {!loading && iconRight && <View className="inline-flex">{iconRight}</View>}
     </Pressable>
-  );
-};
+  )
+}

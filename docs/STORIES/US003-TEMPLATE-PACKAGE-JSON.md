@@ -1,6 +1,7 @@
 # US003: Template Package.json Configuration
 
 **Status:** To Do
+**ClickUp ID:** [86c7a97v7](https://app.clickup.com/t/86c7a97v7)
 **Priority:** Must Have
 **Story Points:** 3
 **Sprint:** Sprint 02
@@ -14,6 +15,7 @@ so that the scaffolded project has the correct package name and metadata.
 ## Acceptance Criteria
 
 ### Scenario 1: Template Package.json Creation
+
 - **Given** the template init CLI is run
 - **When** a new project is being created
 - **Then** package.template.json is copied and processed
@@ -21,12 +23,14 @@ so that the scaffolded project has the correct package name and metadata.
 - **And** the final package.json is valid and ready to use
 
 ### Scenario 2: Scripts Configuration
+
 - **Given** package.template.json defines build scripts
 - **When** replacement occurs
 - **Then** all scripts remain intact and functional
 - **And** scripts reference local paths correctly (not template paths)
 
 ### Scenario 3: Peer Dependencies
+
 - **Given** package.template.json defines peer dependencies
 - **When** the template is initialised
 - **Then** peer dependencies are preserved in the output package.json
