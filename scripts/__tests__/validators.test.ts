@@ -1,3 +1,24 @@
+/**
+ * Test suite for validators module
+ *
+ * Tests all input validation functions used during template initialisation.
+ * These validators ensure user input is valid before proceeding with replacements.
+ *
+ * Validators:
+ * - validatePackageName: Ensures valid npm package name format
+ * - validateHexColour: Ensures valid hex colour code (#RGB or #RRGGBB)
+ * - validateDescription: Ensures description is non-empty and not too long
+ * - validateClientName: Ensures client name is non-empty and not too long
+ *
+ * Each validator returns:
+ * - true if input is valid
+ * - Error message string (truthy) if input is invalid
+ *
+ * This allows the prompts to display specific error messages to the user.
+ *
+ * @module scripts/__tests__/validators.test
+ */
+
 import { describe, it, expect } from 'vitest'
 import {
   validatePackageName,
@@ -6,6 +27,31 @@ import {
   validateClientName,
 } from '../lib/validators'
 
+/**
+ * Test group: validatePackageName function
+ *
+ * Verifies that validatePackageName correctly validates npm package names.
+ *
+ * Valid package names:
+ * - Scoped: @scope/package (lowercase letters, hyphens, underscores, dots, tildes, numbers)
+ * - Unscoped: package (same character rules)
+ * - Max 214 characters total
+ *
+ * Invalid package names:
+ * - Uppercase letters (must be lowercase)
+ * - Spaces
+ * - Special characters except - . _ ~ (and @ for scopes)
+ * - Starting with dot or underscore
+ * - Too long (> 214 characters)
+ * - Malformed scopes (@/ or @scope without package)
+ * - Scopes without slash (@scopepackage)
+ * - Empty string
+ *
+ * Tests organised by category:
+ * - Valid Package Names: Common valid formats
+ * - Invalid Package Names: Common invalid inputs
+ * - Edge Cases: Boundary conditions and special scenarios
+ */
 describe('validatePackageName', () => {
   describe('Valid Package Names', () => {
     it('should accept valid scoped package names with lowercase letters', () => {
@@ -142,6 +188,31 @@ describe('validatePackageName', () => {
   })
 })
 
+/**
+ * Test group: validateHexColour function
+ *
+ * Verifies that validateHexColour correctly validates hex colour codes.
+ *
+ * Valid hex colours:
+ * - 6-digit format: #RRGGBB (e.g. #3b82f6, #ffffff)
+ * - 3-digit format: #RGB (shorthand, e.g. #fff, #000)
+ * - Case-insensitive (accepts uppercase, lowercase, mixed)
+ * - Must start with # symbol
+ *
+ * Invalid hex colours:
+ * - Missing # symbol
+ * - Wrong length (1, 2, 4, 5, 7+ digits are all invalid)
+ * - Non-hexadecimal digits (G-Z are invalid)
+ * - Special characters (@, !, $, etc.)
+ * - Spaces or whitespace
+ * - Empty string
+ * - Multiple # symbols
+ *
+ * Tests organised by category:
+ * - Valid Hex Colours: Common valid formats
+ * - Invalid Hex Colours: Common invalid inputs
+ * - Edge Cases: Boundary conditions
+ */
 describe('validateHexColour', () => {
   describe('Valid Hex Colours', () => {
     it('should accept valid 6-digit hex colours (lowercase)', () => {
@@ -271,6 +342,32 @@ describe('validateHexColour', () => {
   })
 })
 
+/**
+ * Test group: validateDescription function
+ *
+ * Verifies that validateDescription correctly validates project descriptions.
+ *
+ * Valid descriptions:
+ * - Non-empty (at least 1 character)
+ * - Max 500 characters
+ * - Accepts any characters: letters, numbers, punctuation, emojis, unicode
+ * - Can contain newlines and special characters
+ * - Whitespace trimmed before validation
+ *
+ * Invalid descriptions:
+ * - Empty string
+ * - Whitespace-only (spaces, tabs, newlines)
+ * - Over 500 characters
+ *
+ * Constraints:
+ * - Minimum length: 1 character
+ * - Maximum length: 500 characters
+ *
+ * Tests organised by category:
+ * - Valid Descriptions: Typical acceptable inputs
+ * - Invalid Descriptions: Unacceptable inputs
+ * - Edge Cases: Boundary conditions (0, 1, 500, 501 characters)
+ */
 describe('validateDescription', () => {
   describe('Valid Descriptions', () => {
     it('should accept a simple description', () => {
@@ -357,6 +454,33 @@ describe('validateDescription', () => {
   })
 })
 
+/**
+ * Test group: validateClientName function
+ *
+ * Verifies that validateClientName correctly validates client/company names.
+ *
+ * Valid client names:
+ * - Non-empty (at least 1 character)
+ * - Max 100 characters
+ * - Accepts letters, numbers, spaces, punctuation
+ * - Supports special characters: apostrophes, ampersands, hyphens, dots
+ * - Examples: "Acme Corp", "O'Reilly Media", "AT&T"
+ * - Whitespace trimmed before validation
+ *
+ * Invalid client names:
+ * - Empty string
+ * - Whitespace-only (spaces, tabs, newlines only)
+ * - Over 100 characters
+ *
+ * Constraints:
+ * - Minimum length: 1 character
+ * - Maximum length: 100 characters
+ *
+ * Tests organised by category:
+ * - Valid Client Names: Typical company names
+ * - Invalid Client Names: Unacceptable inputs
+ * - Edge Cases: Boundary conditions (1, 100, 101 characters)
+ */
 describe('validateClientName', () => {
   describe('Valid Client Names', () => {
     it('should accept simple client names', () => {

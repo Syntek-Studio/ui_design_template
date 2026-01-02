@@ -1,11 +1,52 @@
-import { describe, it, expect } from 'vitest'
+/**
+ * Test suite for the replacements module
+ *
+ * Tests the string replacement logic used to convert the template from
+ * @syntek-studio/ui to a custom client package.
+ *
+ * Key functions:
+ * - createReplacementMap: Builds a map of old/new values from user input
+ * - getFilesToModify: Identifies which files need updating
+ * - escapeRegExp: Safely escapes special regex characters
+ * - applyReplacements: Performs actual text replacements in content
+ *
+ * This module is critical for ensuring clean, complete template customisation.
+ * All tests verify that replacements are accurate and don't break file structure.
+ *
+ * @module scripts/__tests__/replacements.test
+ */
+
+import { describe, expect, it } from 'vitest'
 import {
-  createReplacementMap,
-  getFilesToModify,
-  escapeRegExp,
   applyReplacements,
+  createReplacementMap,
+  escapeRegExp,
+  getFilesToModify,
 } from '../lib/replacements'
 
+/**
+ * Test group: createReplacementMap function
+ *
+ * Verifies that createReplacementMap correctly generates a mapping from
+ * template placeholders to user-provided values.
+ *
+ * The replacement map determines what text gets replaced in all files.
+ * This must be generated correctly from user input before replacements begin.
+ *
+ * Placeholders created:
+ * - @syntek-studio/ui → packageName
+ * - @syntek-studio/ui → packageName (alternate)
+ * - Syntek Studio → clientName
+ * - Default description text → description
+ * - Hex colour placeholder → primaryColour
+ *
+ * Tests cover:
+ * - Creates correct map structure from answers
+ * - Handles scoped and unscoped package names
+ * - Replaces description placeholder
+ * - Handles special characters in client names (apostrophes, ampersands)
+ * - Returns complete replacement object
+ */
 describe('createReplacementMap', () => {
   it('should create correct replacement map from user answers', () => {
     const answers = {
@@ -18,7 +59,7 @@ describe('createReplacementMap', () => {
     const map = createReplacementMap(answers)
 
     expect(map).toHaveProperty('@syntek-studio/ui', '@acme/ui')
-    expect(map).toHaveProperty('@template/ui', '@acme/ui')
+    expect(map).toHaveProperty('@syntek-studio/ui', '@acme/ui')
     expect(map).toHaveProperty('Syntek Studio', 'Acme Corporation')
   })
 
@@ -33,7 +74,7 @@ describe('createReplacementMap', () => {
     const map = createReplacementMap(answers)
 
     expect(map['@syntek-studio/ui']).toBe('acme-ui')
-    expect(map['@template/ui']).toBe('acme-ui')
+    expect(map['@syntek-studio/ui']).toBe('acme-ui')
   })
 
   it('should replace default description placeholder', () => {
@@ -76,12 +117,32 @@ describe('createReplacementMap', () => {
     const map = createReplacementMap(answers)
 
     expect(map).toHaveProperty('@syntek-studio/ui')
-    expect(map).toHaveProperty('@template/ui')
+    expect(map).toHaveProperty('@syntek-studio/ui')
     expect(map).toHaveProperty('Syntek Studio')
     expect(Object.keys(map).length).toBeGreaterThanOrEqual(3)
   })
 })
 
+/**
+ * Test group: getFilesToModify function
+ *
+ * Verifies that getFilesToModify correctly identifies all files that need
+ * to be updated during template initialisation.
+ *
+ * Target files include:
+ * - package.json (name, version, description, author)
+ * - README.md (title, description, references)
+ * - .claude/CLAUDE.md (references to original template)
+ * - src/index.ts (import documentation, comments)
+ * - Other files matching project patterns
+ *
+ * Tests cover:
+ * - Returns non-empty array of files
+ * - Includes all critical files (package.json, README.md, etc)
+ * - Returns relative paths (not absolute)
+ * - No duplicate paths
+ * - Matches expected file patterns
+ */
 describe('getFilesToModify', () => {
   it('should return array of file paths to modify', () => {
     const files = getFilesToModify()
@@ -131,6 +192,28 @@ describe('getFilesToModify', () => {
   })
 })
 
+/**
+ * Test group: escapeRegExp function
+ *
+ * Verifies that escapeRegExp correctly escapes all special regex metacharacters.
+ *
+ * This is critical for safe string replacement. Without proper escaping,
+ * special characters in search strings could be interpreted as regex syntax,
+ * causing unexpected replacements or errors.
+ *
+ * Special characters that must be escaped:
+ * - @ . ^ $ | \ / ( ) [ ] { } + * ? -
+ *
+ * Example: @syntek-studio/ui contains @ / - which must be escaped as
+ * \@syntek\-studio\/ui before use in RegExp constructor.
+ *
+ * Tests cover:
+ * - All individual special regex characters
+ * - Character combinations
+ * - Empty strings (edge case)
+ * - Strings with no special characters
+ * - Resulting escaped string can be used safely in RegExp
+ */
 describe('escapeRegExp', () => {
   it('should escape special regex characters', () => {
     const input = '@syntek-studio/ui'
@@ -215,6 +298,35 @@ describe('escapeRegExp', () => {
   })
 })
 
+/**
+ * Test group: applyReplacements function
+ *
+ * Verifies that applyReplacements correctly performs all text replacements
+ * in file content.
+ *
+ * The function takes file content and a replacement map, then replaces all
+ * occurrences of each key with its corresponding value.
+ *
+ * Important characteristics:
+ * - Replaces ALL occurrences (not just first match)
+ * - Performs multiple replacements in sequence
+ * - Preserves formatting (line breaks, indentation)
+ * - Case-sensitive matching
+ * - Does not match partial strings
+ * - Handles special characters in both search and replacement text
+ * - Returns original content if no matches found
+ *
+ * Tests cover:
+ * - Single and multiple replacements
+ * - All occurrences replaced (not just first)
+ * - Content with no placeholders (returned unchanged)
+ * - Empty content (returned unchanged)
+ * - Empty replacement map (no changes)
+ * - Line breaks and formatting preserved
+ * - Special characters in replacement text
+ * - Multiline content (JSON, markdown)
+ * - Case sensitivity
+ */
 describe('applyReplacements', () => {
   it('should replace all occurrences of placeholders', () => {
     const content = 'Use @syntek-studio/ui in your project. Install @syntek-studio/ui from npm.'

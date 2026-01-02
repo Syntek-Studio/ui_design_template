@@ -1,14 +1,49 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+/**
+ * Integration tests for the init-template module
+ *
+ * This test suite validates the entire template initialisation workflow:
+ * - Detecting if a template has already been initialised
+ * - Creating the template configuration file
+ * - Performing placeholder replacements across multiple files
+ * - Verifying that all placeholders have been replaced
+ * - End-to-end initialisation flow
+ *
+ * Test setup: Each test creates a temporary directory (__test-temp-integration__)
+ * that simulates a template project. This directory is cleaned up after each test.
+ *
+ * Important: Tests that modify the working directory use process.chdir() and
+ * restore it in afterEach hooks to avoid interfering with other tests.
+ *
+ * @module scripts/__tests__/init-template.test
+ */
+
 import { promises as fs } from 'fs'
 import path from 'path'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   checkDirectoryConflict,
   createTemplateConfig,
+  main,
   performReplacements,
   verifyReplacements,
-  main,
 } from '../init-template'
 
+/**
+ * Test group: checkDirectoryConflict function
+ *
+ * Verifies that checkDirectoryConflict correctly detects whether a template
+ * has already been initialised by checking template.config.json.
+ *
+ * The template can only be initialised once. Subsequent initialisation attempts
+ * should be rejected unless the user explicitly re-initialises.
+ *
+ * Tests cover:
+ * - No conflict when config file doesn't exist (fresh template)
+ * - Conflict detected when config exists and initialized is true
+ * - No conflict when config exists but initialized is false
+ * - Graceful handling of corrupted/invalid JSON
+ * - Returning full conflict details (package name, client name, timestamp)
+ */
 describe('checkDirectoryConflict', () => {
   const testDir = path.join(process.cwd(), '__test-temp-integration__')
   const configPath = path.join(testDir, 'template.config.json')
@@ -86,6 +121,26 @@ describe('checkDirectoryConflict', () => {
   })
 })
 
+/**
+ * Test group: createTemplateConfig function
+ *
+ * Verifies that createTemplateConfig correctly generates template.config.json
+ * with all required metadata about the initialisation.
+ *
+ * The config file serves as:
+ * - Proof of initialisation (initialized: true)
+ * - Record of when initialisation occurred (initializedAt timestamp)
+ * - Documentation of original template source (@syntek-studio/ui)
+ * - Reference to template version used
+ * - Store of user choices (packageName, clientName, description, colours)
+ *
+ * Tests cover:
+ * - Creates valid JSON with correct structure
+ * - Includes initialisation timestamp within correct range
+ * - Includes original template information and version
+ * - Formats JSON with 2-space indentation
+ * - Overwrites existing config if re-initialising
+ */
 describe('createTemplateConfig', () => {
   const testDir = path.join(process.cwd(), '__test-temp-integration__')
   const configPath = path.join(testDir, 'template.config.json')
@@ -205,6 +260,33 @@ describe('createTemplateConfig', () => {
   })
 })
 
+/**
+ * Test group: performReplacements function
+ *
+ * Verifies that performReplacements correctly updates all template files
+ * with user-provided values.
+ *
+ * Replacements made:
+ * - @syntek-studio/ui → user's package name
+ * - @syntek-studio/ui → user's package name (alternate placeholder)
+ * - Syntek Studio → user's client name
+ * - Default description → user's custom description
+ * - Primary colour hex → user's chosen colour
+ *
+ * Target files (in project root and subdirectories):
+ * - package.json (name and author fields)
+ * - README.md (title and references)
+ * - .claude/CLAUDE.md (references to original template)
+ * - src/index.ts (comments and documentation)
+ * - Any other files that match patterns
+ *
+ * Tests cover:
+ * - All specified files are updated correctly
+ * - Returns array with file paths and modification status
+ * - Only marks files as modified if changes were actually made
+ * - Handles multiple occurrences of same placeholder
+ * - Preserves file formatting and structure (JSON indentation, etc)
+ */
 describe('performReplacements', () => {
   const testDir = path.join(process.cwd(), '__test-temp-integration__')
 
@@ -341,6 +423,28 @@ describe('performReplacements', () => {
   })
 })
 
+/**
+ * Test group: verifyReplacements function
+ *
+ * Verifies that all template placeholders have been correctly replaced.
+ * This is a quality assurance step to prevent accidentally publishing a
+ * template with references to the original template.
+ *
+ * Checks for any remaining instances of:
+ * - @syntek-studio/ui (original package name)
+ * - @syntek-studio/ui (alternate original package name)
+ * - Syntek Studio (original company name)
+ * - Default description (original default text)
+ *
+ * If any of these are found, initialisation is considered incomplete and
+ * the process should be stopped before publishing.
+ *
+ * Tests cover:
+ * - Returns true when all placeholders are replaced
+ * - Returns false when any placeholder remains
+ * - Checks all relevant files (package.json, README.md, .claude/CLAUDE.md, src/index.ts)
+ * - Detects remaining placeholders in various file types
+ */
 describe('verifyReplacements', () => {
   const testDir = path.join(process.cwd(), '__test-temp-integration__')
 
@@ -411,8 +515,12 @@ describe('verifyReplacements', () => {
     expect(verified).toBe(false)
   })
 
-  it('should detect remaining @template/ui placeholders', async () => {
-    await fs.writeFile(path.join(testDir, 'README.md'), 'Use @template/ui in your project', 'utf-8')
+  it('should detect remaining @syntek-studio/ui placeholders', async () => {
+    await fs.writeFile(
+      path.join(testDir, 'README.md'),
+      'Use @syntek-studio/ui in your project',
+      'utf-8'
+    )
 
     const verified = await verifyReplacements()
 
@@ -428,6 +536,27 @@ describe('verifyReplacements', () => {
   })
 })
 
+/**
+ * Test group: main function (End-to-End Integration Test)
+ *
+ * Tests the complete initialisation workflow from start to finish.
+ * The main() function orchestrates:
+ *
+ * 1. Check for existing initialisation (prevent re-initialisation)
+ * 2. Prompt user for required information (mocked in tests)
+ * 3. Perform all placeholder replacements
+ * 4. Create template.config.json
+ * 5. Verify all replacements completed successfully
+ *
+ * These tests verify the entire workflow, including:
+ * - Handling fresh templates (no prior initialisation)
+ * - Detecting and rejecting re-initialisation attempts
+ * - Creating all expected output files and metadata
+ * - Preserving template structure and formatting
+ *
+ * Note: In real usage, main() prompts the user with inquirer.js
+ * In tests, these prompts are mocked to provide predefined answers.
+ */
 describe('main (Integration Test)', () => {
   const testDir = path.join(process.cwd(), '__test-temp-integration__')
 

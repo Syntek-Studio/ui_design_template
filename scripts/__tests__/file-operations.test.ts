@@ -1,3 +1,20 @@
+/**
+ * Test suite for file-operations module
+ *
+ * Tests all file system operations used by the template initialisation script:
+ * - fileExists: Check if a file or directory exists
+ * - readFile: Read file content as UTF-8 string
+ * - writeFile: Write content to a file (creates if missing)
+ * - replaceInFile: Replace multiple placeholders in a file
+ * - createBackup: Create a .backup copy of a file
+ * - restoreFromBackup: Restore a file from its backup
+ *
+ * Each test group uses a temporary directory (__test-temp__) that is cleaned up
+ * after the tests complete to avoid polluting the file system.
+ *
+ * @module scripts/__tests__/file-operations.test
+ */
+
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { promises as fs } from 'fs'
 import path from 'path'
@@ -10,6 +27,19 @@ import {
   restoreFromBackup,
 } from '../lib/file-operations'
 
+/**
+ * Test group: fileExists function
+ *
+ * Verifies that fileExists correctly detects whether files and directories
+ * exist, handling both absolute and relative paths.
+ *
+ * Edge cases covered:
+ * - Existing files (returns true)
+ * - Non-existent files (returns false)
+ * - Directories (returns true)
+ * - Absolute paths (correct handling)
+ * - Relative paths (correct handling)
+ */
 describe('fileExists', () => {
   const testDir = path.join(process.cwd(), '__test-temp__')
   const testFile = path.join(testDir, 'test-file.txt')
@@ -62,6 +92,21 @@ describe('fileExists', () => {
   })
 })
 
+/**
+ * Test group: readFile function
+ *
+ * Verifies that readFile correctly reads file content as UTF-8 strings.
+ * Tests include handling of:
+ * - Simple single-line content
+ * - Multiline files with line breaks
+ * - JSON content (as string, not parsed)
+ * - Empty files
+ * - Special characters and unicode (café, 日本語, emojis)
+ * - Error handling for non-existent files
+ *
+ * Important: This function returns raw file content as a string.
+ * JSON parsing (if needed) must be done by the caller.
+ */
 describe('readFile', () => {
   const testDir = path.join(process.cwd(), '__test-temp__')
   const testFile = path.join(testDir, 'read-test.txt')
@@ -134,6 +179,21 @@ describe('readFile', () => {
   })
 })
 
+/**
+ * Test group: writeFile function
+ *
+ * Verifies that writeFile correctly writes content to files.
+ * Tests cover:
+ * - Writing new content to existing files (overwrites)
+ * - Creating new files if they don't exist
+ * - Handling multiline content
+ * - Writing empty files
+ * - Writing JSON content with formatting preservation
+ * - Unicode and special character handling
+ *
+ * Note: writeFile will overwrite existing files without warning.
+ * Always create backups before modifying important files.
+ */
 describe('writeFile', () => {
   const testDir = path.join(process.cwd(), '__test-temp__')
   const testFile = path.join(testDir, 'write-test.txt')
@@ -224,6 +284,27 @@ describe('writeFile', () => {
   })
 })
 
+/**
+ * Test group: replaceInFile function
+ *
+ * Verifies that replaceInFile correctly replaces multiple placeholders in files.
+ * This is critical for the template initialisation process where we replace:
+ * - @syntek-studio/ui → custom package name
+ * - Syntek Studio → client name
+ * - Default description → custom description
+ * - Primary colour placeholder → user's chosen colour
+ *
+ * Tests cover:
+ * - Single and multiple replacements in one call
+ * - All occurrences replaced (not just first match)
+ * - Formatting and line breaks preserved
+ * - Return value: true if modified, false if no changes
+ * - Special regex characters handled safely
+ * - Empty replacement map (no changes)
+ * - Error handling for non-existent files
+ *
+ * Returns: boolean indicating whether file was modified
+ */
 describe('replaceInFile', () => {
   const testDir = path.join(process.cwd(), '__test-temp__')
   const testFile = path.join(testDir, 'replace-test.txt')
@@ -356,6 +437,23 @@ describe('replaceInFile', () => {
   })
 })
 
+/**
+ * Test group: createBackup function
+ *
+ * Verifies that createBackup correctly creates .backup copies of files.
+ * Used as a safety mechanism before performing file replacements.
+ *
+ * Tests cover:
+ * - Creates file with .backup extension
+ * - Preserves original content exactly
+ * - Does not modify the original file
+ * - Overwrites existing backups (latest backup only)
+ * - Error handling for non-existent files
+ *
+ * Return value: Path to the created backup file (filepath + .backup)
+ *
+ * Usage: Always create a backup before calling replaceInFile to enable rollback.
+ */
 describe('createBackup', () => {
   const testDir = path.join(process.cwd(), '__test-temp__')
   const testFile = path.join(testDir, 'backup-test.txt')
@@ -421,6 +519,27 @@ describe('createBackup', () => {
   })
 })
 
+/**
+ * Test group: restoreFromBackup function
+ *
+ * Verifies that restoreFromBackup correctly restores files from .backup copies.
+ * Provides rollback capability if template initialisation fails.
+ *
+ * Workflow:
+ * 1. Create original file
+ * 2. Call createBackup to create filename.backup
+ * 3. Modify the original file
+ * 4. Call restoreFromBackup to restore original content
+ *
+ * Tests cover:
+ * - Restores exact original content
+ * - Removes backup file after restoration
+ * - Error handling if backup doesn't exist
+ * - Creates original file if it's missing but backup exists
+ *
+ * Important: The backup file is deleted after restoration.
+ * There is no second backup, so plan accordingly.
+ */
 describe('restoreFromBackup', () => {
   const testDir = path.join(process.cwd(), '__test-temp__')
   const testFile = path.join(testDir, 'restore-test.txt')
