@@ -1,6 +1,7 @@
 # US023: Implement Card/Container Component
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98v1](https://app.clickup.com/t/86c7a98v1)
 **Priority:** Should Have
 **Story Points:** 3
 **Sprint:** Sprint 08
@@ -14,6 +15,7 @@ so that I can easily create layouts with visual separation and depth.
 ## Acceptance Criteria
 
 ### Scenario 1: Card Component Structure
+
 - **Given** an application imports Card component
 - **When** it renders content inside Card
 - **Then** content is wrapped with consistent padding and styling
@@ -21,6 +23,7 @@ so that I can easily create layouts with visual separation and depth.
 - **And** card respects design tokens for spacing and colours
 
 ### Scenario 2: Card Variants
+
 - **Given** a Card is rendered with different props
 - **When** variant prop is specified (elevated, outlined, flat)
 - **Then** appropriate styling is applied:
@@ -30,6 +33,7 @@ so that I can easily create layouts with visual separation and depth.
 - **And** all variants maintain proper contrast
 
 ### Scenario 3: Responsive Behaviour
+
 - **Given** a Card is rendered on different screen sizes
 - **When** viewport changes
 - **Then** card adapts padding and font sizes for mobile

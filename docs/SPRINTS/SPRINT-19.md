@@ -1,16 +1,17 @@
 # Sprint 19: Utility Components
 
 **Sprint Goal:** Implement utility component system
+**ClickUp List ID:** [901519283775](https://app.clickup.com/90151635198/v/l/li/901519283775)
 **Total Points:** 11
 **Priority Focus:** Could Have
 **Phase:** Phase 7 - Advanced Features
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US039 | Implement Utility Components | 8 | Could Have | Phase 7 |
-| US004 | Template README with Client-Specific Customisation | 5 | Must Have | Phase 1 |
+| ID    | Title                                              | Points | Priority   | Phase   |
+| ----- | -------------------------------------------------- | ------ | ---------- | ------- |
+| US039 | Implement Utility Components                       | 8      | Could Have | Phase 7 |
+| US004 | Template README with Client-Specific Customisation | 5      | Must Have  | Phase 1 |
 
 **Sprint Total: 11 points** (Note: 13 points - needs adjustment)
 
@@ -39,17 +40,17 @@ Utility components are small, reusable UI elements that enhance the component li
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US039 | ❌ | ✅ | ✅ | ✅ (components/) |
-| US004 | ❌ | ❌ | ❌ | ✅ (docs/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI        |
+| -------- | ------- | ------------ | --------------- | ---------------- |
+| US039    | ❌      | ✅           | ✅              | ✅ (components/) |
+| US004    | ❌      | ❌           | ❌              | ✅ (docs/)       |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Tooltip positioning | Medium | Medium | Use established positioning libraries |
-| Avatar image handling | Low | Low | Support both images and initials |
+| Risk                  | Likelihood | Impact | Mitigation                            |
+| --------------------- | ---------- | ------ | ------------------------------------- |
+| Tooltip positioning   | Medium     | Medium | Use established positioning libraries |
+| Avatar image handling | Low        | Low    | Support both images and initials      |
 
 ---
 

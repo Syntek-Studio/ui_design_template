@@ -1,7 +1,7 @@
 # Release Notes
 
 **Last Updated**: 01/01/2026
-**Version**: 0.6.0
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -12,24 +12,29 @@
 
 - [Table of Contents](#table-of-contents)
 - [Latest Release](#latest-release)
-  - [Version 0.6.0 - 01 January 2026](#version-060---01-january-2026)
+  - [Version 0.7.0 - 01 January 2026](#version-070---01-january-2026)
     - [What's New](#whats-new)
-    - [Workflow Automation](#workflow-automation)
+    - [For Developers](#for-developers)
+    - [Migration Note](#migration-note)
 - [Previous Releases](#previous-releases)
-  - [Version 0.5.1 - 29 December 2024](#version-051---29-december-2024)
+  - [Version 0.6.0 - 01 January 2026](#version-060---01-january-2026)
     - [What's New](#whats-new-1)
-  - [Version 0.5.0 - 29 December 2024](#version-050---29-december-2024)
+    - [Workflow Automation](#workflow-automation)
+- [Previous Releases](#previous-releases-1)
+  - [Version 0.5.1 - 29 December 2024](#version-051---29-december-2024)
     - [What's New](#whats-new-2)
-  - [Version 0.4.0 - 29 December 2024](#version-040---29-december-2024)
+  - [Version 0.5.0 - 29 December 2024](#version-050---29-december-2024)
     - [What's New](#whats-new-3)
-  - [Version 0.3.0 - 29 December 2024](#version-030---29-december-2024)
+  - [Version 0.4.0 - 29 December 2024](#version-040---29-december-2024)
     - [What's New](#whats-new-4)
-  - [Version 0.2.1 - 29 December 2024](#version-021---29-december-2024)
+  - [Version 0.3.0 - 29 December 2024](#version-030---29-december-2024)
     - [What's New](#whats-new-5)
-  - [Version 0.2.0 - 29 December 2024](#version-020---29-december-2024)
+  - [Version 0.2.1 - 29 December 2024](#version-021---29-december-2024)
     - [What's New](#whats-new-6)
-  - [Version 0.1.1 - 29 December 2024](#version-011---29-december-2024)
+  - [Version 0.2.0 - 29 December 2024](#version-020---29-december-2024)
     - [What's New](#whats-new-7)
+  - [Version 0.1.1 - 29 December 2024](#version-011---29-december-2024)
+    - [What's New](#whats-new-8)
   - [Version 0.1.0 - 29 December 2024](#version-010---29-december-2024)
     - [What's Included](#whats-included)
 - [Coming Soon](#coming-soon)
@@ -38,6 +43,73 @@
 ---
 
 ## Latest Release
+
+### Version 0.7.0 - 01 January 2026
+
+**Enhanced Developer Experience & Security**
+
+We've significantly improved the development workflow with comprehensive CI/CD infrastructure, automated security scanning, and quality assurance tooling.
+
+#### What's New
+
+**Automated Quality Checks**
+Every code change now goes through automatic validation:
+
+- Code formatting and style checks
+- TypeScript type validation
+- Automated testing
+- Build verification
+
+**Security First**
+Your code is now protected by multiple layers of security scanning:
+
+- Automatic vulnerability detection in dependencies
+- Weekly security updates via Dependabot
+- Static code analysis for security issues
+- Pre-commit hooks prevent common mistakes
+
+**Streamlined Contributions**
+Contributing to the project is now easier than ever:
+
+- Clear contributing guidelines
+- Issue templates for bugs and features
+- Pull request templates for consistent reviews
+- Code of Conduct for a welcoming community
+
+**Package Update**
+The package has been renamed from `@template/ui` to `@syntek-studio/ui` to better reflect the project identity.
+
+#### For Developers
+
+**Pre-Commit Hooks**
+Your local commits now automatically check:
+
+- TypeScript compilation
+- ESLint rules
+- Prettier formatting
+
+**VS Code Integration**
+Enhanced editor settings provide:
+
+- Automatic formatting on save
+- Consistent TypeScript configuration
+- Better IntelliSense support
+
+#### Migration Note
+
+If you're using this library, update your imports:
+
+```typescript
+// Old
+import { Button } from '@template/ui'
+
+// New
+import { Button } from '@syntek-studio/ui'
+```
+
+---
+
+## Previous Releases
 
 ### Version 0.6.0 - 01 January 2026
 

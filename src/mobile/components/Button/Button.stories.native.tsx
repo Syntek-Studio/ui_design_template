@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { View, Text as RNText } from 'react-native';
-import { Button } from './Button.native';
+import type { Meta, StoryObj } from '@storybook/react'
+import { View, Text as RNText } from 'react-native'
+import { Button } from './Button.native'
 
 /**
  * The Mobile Button component provides a comprehensive set of button variants
@@ -32,7 +32,17 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'outline', 'ghost', 'link', 'destructive', 'success', 'warning'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'outline',
+        'ghost',
+        'link',
+        'destructive',
+        'success',
+        'warning',
+      ],
       description: 'Visual style variant of the button',
     },
     size: {
@@ -62,35 +72,35 @@ const meta: Meta<typeof Button> = {
       description: 'Whether the button is icon-only',
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof Button>;
+export default meta
+type Story = StoryObj<typeof Button>
 
 // Icon components for examples (using View + Text as placeholder icons)
 const SaveIcon = () => (
   <View className="w-4 h-4 items-center justify-center">
     <RNText>💾</RNText>
   </View>
-);
+)
 
 const PlusIcon = () => (
   <View className="w-4 h-4 items-center justify-center">
     <RNText>➕</RNText>
   </View>
-);
+)
 
 const TrashIcon = () => (
   <View className="w-4 h-4 items-center justify-center">
     <RNText>🗑️</RNText>
   </View>
-);
+)
 
 const ChevronDownIcon = () => (
   <View className="w-4 h-4 items-center justify-center">
     <RNText>▼</RNText>
   </View>
-);
+)
 
 /**
  * Primary buttons are the main call-to-action. Use for the most important
@@ -102,7 +112,7 @@ export const Primary: Story = {
     variant: 'primary',
     size: 'md',
   },
-};
+}
 
 /**
  * Secondary buttons are for secondary actions. Use alongside primary buttons
@@ -114,7 +124,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     size: 'md',
   },
-};
+}
 
 /**
  * Tertiary buttons provide subtle emphasis. Use for tertiary actions or
@@ -126,7 +136,7 @@ export const Tertiary: Story = {
     variant: 'tertiary',
     size: 'md',
   },
-};
+}
 
 /**
  * Outline buttons have a border with transparent background. Use for
@@ -138,7 +148,7 @@ export const Outline: Story = {
     variant: 'outline',
     size: 'md',
   },
-};
+}
 
 /**
  * Ghost buttons have minimal styling. Use for actions that should blend
@@ -150,7 +160,7 @@ export const Ghost: Story = {
     variant: 'ghost',
     size: 'md',
   },
-};
+}
 
 /**
  * Link buttons look like text links. Use for navigation or actions that
@@ -162,7 +172,7 @@ export const Link: Story = {
     variant: 'link',
     size: 'md',
   },
-};
+}
 
 /**
  * Destructive buttons indicate dangerous or destructive actions. Use for
@@ -174,7 +184,7 @@ export const Destructive: Story = {
     variant: 'destructive',
     size: 'md',
   },
-};
+}
 
 /**
  * Success buttons indicate positive or completion actions. Use for
@@ -186,7 +196,7 @@ export const Success: Story = {
     variant: 'success',
     size: 'md',
   },
-};
+}
 
 /**
  * Warning buttons indicate caution. Use for actions that require
@@ -198,7 +208,7 @@ export const Warning: Story = {
     variant: 'warning',
     size: 'md',
   },
-};
+}
 
 /**
  * Extra small size (xs) - For compact interfaces or inline actions.
@@ -209,7 +219,7 @@ export const ExtraSmall: Story = {
     children: 'Extra Small',
     size: 'xs',
   },
-};
+}
 
 /**
  * Small size (sm) - For secondary actions or compact layouts.
@@ -219,7 +229,7 @@ export const Small: Story = {
     children: 'Small Button',
     size: 'sm',
   },
-};
+}
 
 /**
  * Medium size (md) - Default size for most use cases.
@@ -229,7 +239,7 @@ export const Medium: Story = {
     children: 'Medium Button',
     size: 'md',
   },
-};
+}
 
 /**
  * Large size (lg) - For primary actions or prominent CTAs.
@@ -239,7 +249,7 @@ export const Large: Story = {
     children: 'Large Button',
     size: 'lg',
   },
-};
+}
 
 /**
  * Extra large size (xl) - For hero sections or prominent actions.
@@ -249,7 +259,7 @@ export const ExtraLarge: Story = {
     children: 'Extra Large Button',
     size: 'xl',
   },
-};
+}
 
 /**
  * Disabled state prevents interaction. Shows reduced opacity
@@ -260,7 +270,7 @@ export const Disabled: Story = {
     children: 'Disabled Button',
     disabled: true,
   },
-};
+}
 
 /**
  * Loading state displays a native ActivityIndicator and prevents interaction.
@@ -271,7 +281,7 @@ export const Loading: Story = {
     children: 'Submitting...',
     loading: true,
   },
-};
+}
 
 /**
  * Button with icon on the left side. Use to provide visual context
@@ -282,7 +292,7 @@ export const WithIconLeft: Story = {
     children: 'Save',
     iconLeft: <SaveIcon />,
   },
-};
+}
 
 /**
  * Button with icon on the right side. Common for dropdown buttons
@@ -293,7 +303,7 @@ export const WithIconRight: Story = {
     children: 'More Options',
     iconRight: <ChevronDownIcon />,
   },
-};
+}
 
 /**
  * Icon-only button. Must include accessibilityLabel for screen readers.
@@ -305,7 +315,7 @@ export const IconOnly: Story = {
     iconOnly: true,
     accessibilityLabel: 'Add item',
   },
-};
+}
 
 /**
  * Icon-only delete button with destructive variant.
@@ -317,7 +327,7 @@ export const IconOnlyDestructive: Story = {
     variant: 'destructive',
     accessibilityLabel: 'Delete item',
   },
-};
+}
 
 /**
  * Full width button takes up 100% of parent container width.
@@ -328,7 +338,7 @@ export const FullWidth: Story = {
     children: 'Full Width Button',
     fullWidth: true,
   },
-};
+}
 
 /**
  * Toggle button using accessibilityState. Use for buttons that
@@ -339,7 +349,7 @@ export const ToggleButton: Story = {
     children: 'Toggle Feature',
     accessibilityState: { selected: false },
   },
-};
+}
 
 /**
  * Menu button with accessibilityState for expandable content.
@@ -351,7 +361,7 @@ export const MenuButton: Story = {
     accessibilityState: { expanded: false },
     accessibilityHint: 'Opens menu with additional options',
   },
-};
+}
 
 /**
  * All button variants displayed together for comparison.
@@ -376,7 +386,7 @@ export const AllVariants: Story = {
       </View>
     </View>
   ),
-};
+}
 
 /**
  * All button sizes displayed together for comparison.
@@ -391,7 +401,7 @@ export const AllSizes: Story = {
       <Button size="xl">Extra Large</Button>
     </View>
   ),
-};
+}
 
 /**
  * Buttons with different icon configurations.
@@ -413,7 +423,7 @@ export const WithIcons: Story = {
       </View>
     </View>
   ),
-};
+}
 
 /**
  * Form example with primary and secondary buttons.
@@ -429,7 +439,7 @@ export const FormButtons: Story = {
       </Button>
     </View>
   ),
-};
+}
 
 /**
  * Square button with no border radius (rounded="none").
@@ -440,7 +450,7 @@ export const SquareButton: Story = {
     children: 'Square Button',
     rounded: 'none',
   },
-};
+}
 
 /**
  * Small border radius (rounded="sm").
@@ -451,7 +461,7 @@ export const SmallRadius: Story = {
     children: 'Small Radius',
     rounded: 'sm',
   },
-};
+}
 
 /**
  * Pill-shaped button with full border radius (rounded="full").
@@ -462,7 +472,7 @@ export const PillButton: Story = {
     children: 'Pill Button',
     rounded: 'full',
   },
-};
+}
 
 /**
  * All border radius options displayed for comparison.
@@ -489,7 +499,7 @@ export const AllRoundedVariants: Story = {
       </View>
     </View>
   ),
-};
+}
 
 /**
  * Square buttons with different variants.
@@ -500,22 +510,38 @@ export const SquareVariants: Story = {
     <View className="flex-col gap-4 p-8">
       <RNText className="text-lg font-semibold">Square Buttons</RNText>
       <View className="flex-row gap-2 flex-wrap">
-        <Button variant="primary" rounded="none">Primary</Button>
-        <Button variant="secondary" rounded="none">Secondary</Button>
-        <Button variant="tertiary" rounded="none">Tertiary</Button>
+        <Button variant="primary" rounded="none">
+          Primary
+        </Button>
+        <Button variant="secondary" rounded="none">
+          Secondary
+        </Button>
+        <Button variant="tertiary" rounded="none">
+          Tertiary
+        </Button>
       </View>
       <View className="flex-row gap-2 flex-wrap">
-        <Button variant="outline" rounded="none">Outline</Button>
-        <Button variant="ghost" rounded="none">Ghost</Button>
+        <Button variant="outline" rounded="none">
+          Outline
+        </Button>
+        <Button variant="ghost" rounded="none">
+          Ghost
+        </Button>
       </View>
       <View className="flex-row gap-2 flex-wrap">
-        <Button variant="destructive" rounded="none">Destructive</Button>
-        <Button variant="success" rounded="none">Success</Button>
-        <Button variant="warning" rounded="none">Warning</Button>
+        <Button variant="destructive" rounded="none">
+          Destructive
+        </Button>
+        <Button variant="success" rounded="none">
+          Success
+        </Button>
+        <Button variant="warning" rounded="none">
+          Warning
+        </Button>
       </View>
     </View>
   ),
-};
+}
 
 /**
  * Pill buttons with different variants.
@@ -526,22 +552,38 @@ export const PillVariants: Story = {
     <View className="flex-col gap-4 p-8">
       <RNText className="text-lg font-semibold">Pill Buttons</RNText>
       <View className="flex-row gap-2 flex-wrap">
-        <Button variant="primary" rounded="full">Primary</Button>
-        <Button variant="secondary" rounded="full">Secondary</Button>
-        <Button variant="tertiary" rounded="full">Tertiary</Button>
+        <Button variant="primary" rounded="full">
+          Primary
+        </Button>
+        <Button variant="secondary" rounded="full">
+          Secondary
+        </Button>
+        <Button variant="tertiary" rounded="full">
+          Tertiary
+        </Button>
       </View>
       <View className="flex-row gap-2 flex-wrap">
-        <Button variant="outline" rounded="full">Outline</Button>
-        <Button variant="ghost" rounded="full">Ghost</Button>
+        <Button variant="outline" rounded="full">
+          Outline
+        </Button>
+        <Button variant="ghost" rounded="full">
+          Ghost
+        </Button>
       </View>
       <View className="flex-row gap-2 flex-wrap">
-        <Button variant="destructive" rounded="full">Destructive</Button>
-        <Button variant="success" rounded="full">Success</Button>
-        <Button variant="warning" rounded="full">Warning</Button>
+        <Button variant="destructive" rounded="full">
+          Destructive
+        </Button>
+        <Button variant="success" rounded="full">
+          Success
+        </Button>
+        <Button variant="warning" rounded="full">
+          Warning
+        </Button>
       </View>
     </View>
   ),
-};
+}
 
 /**
  * Square icon-only buttons.
@@ -564,7 +606,7 @@ export const SquareIconButtons: Story = {
       </Button>
     </View>
   ),
-};
+}
 
 /**
  * Circular icon buttons (rounded="full").
@@ -587,7 +629,7 @@ export const CircularIconButtons: Story = {
       </Button>
     </View>
   ),
-};
+}
 
 /**
  * Size and rounded combinations.
@@ -599,23 +641,43 @@ export const SizeAndRoundedCombinations: Story = {
       <View>
         <RNText className="text-sm font-medium mb-2">Square buttons at all sizes</RNText>
         <View className="flex-row items-center gap-2 flex-wrap">
-          <Button size="xs" rounded="none">XS</Button>
-          <Button size="sm" rounded="none">SM</Button>
-          <Button size="md" rounded="none">MD</Button>
-          <Button size="lg" rounded="none">LG</Button>
-          <Button size="xl" rounded="none">XL</Button>
+          <Button size="xs" rounded="none">
+            XS
+          </Button>
+          <Button size="sm" rounded="none">
+            SM
+          </Button>
+          <Button size="md" rounded="none">
+            MD
+          </Button>
+          <Button size="lg" rounded="none">
+            LG
+          </Button>
+          <Button size="xl" rounded="none">
+            XL
+          </Button>
         </View>
       </View>
       <View>
         <RNText className="text-sm font-medium mb-2">Pill buttons at all sizes</RNText>
         <View className="flex-row items-center gap-2 flex-wrap">
-          <Button size="xs" rounded="full">XS</Button>
-          <Button size="sm" rounded="full">SM</Button>
-          <Button size="md" rounded="full">MD</Button>
-          <Button size="lg" rounded="full">LG</Button>
-          <Button size="xl" rounded="full">XL</Button>
+          <Button size="xs" rounded="full">
+            XS
+          </Button>
+          <Button size="sm" rounded="full">
+            SM
+          </Button>
+          <Button size="md" rounded="full">
+            MD
+          </Button>
+          <Button size="lg" rounded="full">
+            LG
+          </Button>
+          <Button size="xl" rounded="full">
+            XL
+          </Button>
         </View>
       </View>
     </View>
   ),
-};
+}

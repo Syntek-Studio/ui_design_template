@@ -1,17 +1,18 @@
 # Sprint 07: Theme Hook & CI Pipeline
 
 **Sprint Goal:** Implement theme switching hook and begin CI/CD pipeline setup
+**ClickUp List ID:** [901519283756](https://app.clickup.com/90151635198/v/l/li/901519283756)
 **Total Points:** 11
 **Priority Focus:** Must Have
 **Phase:** Phase 3-4 Transition
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US012 | Theme Switching Hook Implementation | 5 | Must Have | Phase 3 |
-| US032 | Contributing Guide Documentation | 3 | Should Have | Phase 5 |
-| US035 | Publishing and Release Guide | 3 | Should Have | Phase 5 |
+| ID    | Title                               | Points | Priority    | Phase   |
+| ----- | ----------------------------------- | ------ | ----------- | ------- |
+| US012 | Theme Switching Hook Implementation | 5      | Must Have   | Phase 3 |
+| US032 | Contributing Guide Documentation    | 3      | Should Have | Phase 5 |
+| US035 | Publishing and Release Guide        | 3      | Should Have | Phase 5 |
 
 **Sprint Total: 11 points**
 
@@ -42,18 +43,18 @@ The useTheme() hook is the primary developer interface for theme management. It 
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US012 | ❌ | ✅ | ✅ | ✅ (hooks/) |
-| US032 | ❌ | ❌ | ❌ | ✅ (docs/) |
-| US035 | ❌ | ❌ | ❌ | ✅ (docs/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI   |
+| -------- | ------- | ------------ | --------------- | ----------- |
+| US012    | ❌      | ✅           | ✅              | ✅ (hooks/) |
+| US032    | ❌      | ❌           | ❌              | ✅ (docs/)  |
+| US035    | ❌      | ❌           | ❌              | ✅ (docs/)  |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| React Native hook compatibility | Low | Medium | Test on latest RN version |
-| Theme persistence | Low | Low | Use AsyncStorage/localStorage |
+| Risk                            | Likelihood | Impact | Mitigation                    |
+| ------------------------------- | ---------- | ------ | ----------------------------- |
+| React Native hook compatibility | Low        | Medium | Test on latest RN version     |
+| Theme persistence               | Low        | Low    | Use AsyncStorage/localStorage |
 
 ---
 

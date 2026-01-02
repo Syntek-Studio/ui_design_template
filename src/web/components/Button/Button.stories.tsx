@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from './Button'
 
 /**
  * The Button component provides a comprehensive set of button variants
@@ -32,7 +32,17 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'outline', 'ghost', 'link', 'destructive', 'success', 'warning'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'outline',
+        'ghost',
+        'link',
+        'destructive',
+        'success',
+        'warning',
+      ],
       description: 'Visual style variant of the button',
     },
     size: {
@@ -62,36 +72,42 @@ const meta = {
       description: 'Whether the button is icon-only',
     },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof Button>;
+export default meta
+type Story = StoryObj<typeof Button>
 
 // Icon components for examples
 const SaveIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
   </svg>
-);
+)
 
 const PlusIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
   </svg>
-);
+)
 
 const TrashIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-    <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+    <path
+      fillRule="evenodd"
+      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+    />
   </svg>
-);
+)
 
 const ChevronDownIcon = () => (
   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-    <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+    <path
+      fillRule="evenodd"
+      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+    />
   </svg>
-);
+)
 
 /**
  * Primary buttons are the main call-to-action. Use for the most important
@@ -103,7 +119,7 @@ export const Primary: Story = {
     variant: 'primary',
     size: 'md',
   },
-};
+}
 
 /**
  * Secondary buttons are for secondary actions. Use alongside primary buttons
@@ -115,7 +131,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     size: 'md',
   },
-};
+}
 
 /**
  * Tertiary buttons provide subtle emphasis. Use for tertiary actions or
@@ -127,7 +143,7 @@ export const Tertiary: Story = {
     variant: 'tertiary',
     size: 'md',
   },
-};
+}
 
 /**
  * Outline buttons have a border with transparent background. Use for
@@ -139,7 +155,7 @@ export const Outline: Story = {
     variant: 'outline',
     size: 'md',
   },
-};
+}
 
 /**
  * Ghost buttons have minimal styling. Use for actions that should blend
@@ -151,7 +167,7 @@ export const Ghost: Story = {
     variant: 'ghost',
     size: 'md',
   },
-};
+}
 
 /**
  * Link buttons look like text links. Use for navigation or actions that
@@ -163,7 +179,7 @@ export const Link: Story = {
     variant: 'link',
     size: 'md',
   },
-};
+}
 
 /**
  * Destructive buttons indicate dangerous or destructive actions. Use for
@@ -175,7 +191,7 @@ export const Destructive: Story = {
     variant: 'destructive',
     size: 'md',
   },
-};
+}
 
 /**
  * Success buttons indicate positive or completion actions. Use for
@@ -187,7 +203,7 @@ export const Success: Story = {
     variant: 'success',
     size: 'md',
   },
-};
+}
 
 /**
  * Warning buttons indicate caution. Use for actions that require
@@ -199,7 +215,7 @@ export const Warning: Story = {
     variant: 'warning',
     size: 'md',
   },
-};
+}
 
 /**
  * Extra small size (xs) - For compact interfaces or inline actions.
@@ -209,7 +225,7 @@ export const ExtraSmall: Story = {
     children: 'Extra Small',
     size: 'xs',
   },
-};
+}
 
 /**
  * Small size (sm) - For secondary actions or compact layouts.
@@ -219,7 +235,7 @@ export const Small: Story = {
     children: 'Small Button',
     size: 'sm',
   },
-};
+}
 
 /**
  * Medium size (md) - Default size for most use cases.
@@ -229,7 +245,7 @@ export const Medium: Story = {
     children: 'Medium Button',
     size: 'md',
   },
-};
+}
 
 /**
  * Large size (lg) - For primary actions or prominent CTAs.
@@ -239,7 +255,7 @@ export const Large: Story = {
     children: 'Large Button',
     size: 'lg',
   },
-};
+}
 
 /**
  * Extra large size (xl) - For hero sections or landing pages.
@@ -249,7 +265,7 @@ export const ExtraLarge: Story = {
     children: 'Extra Large Button',
     size: 'xl',
   },
-};
+}
 
 /**
  * Disabled state prevents interaction. Shows reduced opacity
@@ -260,7 +276,7 @@ export const Disabled: Story = {
     children: 'Disabled Button',
     disabled: true,
   },
-};
+}
 
 /**
  * Loading state displays a spinner and prevents interaction.
@@ -271,7 +287,7 @@ export const Loading: Story = {
     children: 'Submitting...',
     loading: true,
   },
-};
+}
 
 /**
  * Button with icon on the left side. Use to provide visual context
@@ -282,7 +298,7 @@ export const WithIconLeft: Story = {
     children: 'Save',
     iconLeft: <SaveIcon />,
   },
-};
+}
 
 /**
  * Button with icon on the right side. Common for dropdown buttons
@@ -293,7 +309,7 @@ export const WithIconRight: Story = {
     children: 'More Options',
     iconRight: <ChevronDownIcon />,
   },
-};
+}
 
 /**
  * Icon-only button. Must include aria-label for accessibility.
@@ -305,7 +321,7 @@ export const IconOnly: Story = {
     iconOnly: true,
     'aria-label': 'Add item',
   },
-};
+}
 
 /**
  * Icon-only delete button with destructive variant.
@@ -317,7 +333,7 @@ export const IconOnlyDestructive: Story = {
     variant: 'destructive',
     'aria-label': 'Delete item',
   },
-};
+}
 
 /**
  * Full width button takes up 100% of parent container width.
@@ -331,7 +347,7 @@ export const FullWidth: Story = {
   parameters: {
     layout: 'padded',
   },
-};
+}
 
 /**
  * Toggle button using aria-pressed attribute. Use for buttons that
@@ -342,7 +358,7 @@ export const ToggleButton: Story = {
     children: 'Toggle Feature',
     'aria-pressed': false,
   },
-};
+}
 
 /**
  * Menu button with aria-haspopup and aria-expanded. Use for buttons
@@ -355,7 +371,7 @@ export const MenuButton: Story = {
     'aria-haspopup': 'menu',
     'aria-expanded': false,
   },
-};
+}
 
 /**
  * All button variants displayed together for comparison.
@@ -378,7 +394,7 @@ export const AllVariants: Story = {
       </div>
     </div>
   ),
-};
+}
 
 /**
  * All button sizes displayed together for comparison.
@@ -393,7 +409,7 @@ export const AllSizes: Story = {
       <Button size="xl">Extra Large</Button>
     </div>
   ),
-};
+}
 
 /**
  * Buttons with different icon configurations.
@@ -413,7 +429,7 @@ export const WithIcons: Story = {
       </div>
     </div>
   ),
-};
+}
 
 /**
  * Form example with primary and secondary buttons.
@@ -425,7 +441,7 @@ export const FormButtons: Story = {
       <Button variant="primary">Submit</Button>
     </div>
   ),
-};
+}
 
 /**
  * Responsive button sizes using Tailwind classes.
@@ -436,7 +452,7 @@ export const ResponsiveSize: Story = {
     children: 'Responsive Button',
     className: 'text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6',
   },
-};
+}
 
 /**
  * Square button with no border radius (rounded="none").
@@ -447,7 +463,7 @@ export const SquareButton: Story = {
     children: 'Square Button',
     rounded: 'none',
   },
-};
+}
 
 /**
  * Small border radius (rounded="sm").
@@ -458,7 +474,7 @@ export const SmallRadius: Story = {
     children: 'Small Radius',
     rounded: 'sm',
   },
-};
+}
 
 /**
  * Pill-shaped button with full border radius (rounded="full").
@@ -469,7 +485,7 @@ export const PillButton: Story = {
     children: 'Pill Button',
     rounded: 'full',
   },
-};
+}
 
 /**
  * All border radius options displayed for comparison.
@@ -492,7 +508,7 @@ export const AllRoundedVariants: Story = {
       </div>
     </div>
   ),
-};
+}
 
 /**
  * Square buttons with different variants.
@@ -503,20 +519,36 @@ export const SquareVariants: Story = {
     <div className="flex flex-col gap-4 p-8">
       <h3 className="text-lg font-semibold">Square Buttons (rounded="none")</h3>
       <div className="flex gap-2 flex-wrap">
-        <Button variant="primary" rounded="none">Primary</Button>
-        <Button variant="secondary" rounded="none">Secondary</Button>
-        <Button variant="tertiary" rounded="none">Tertiary</Button>
-        <Button variant="outline" rounded="none">Outline</Button>
-        <Button variant="ghost" rounded="none">Ghost</Button>
+        <Button variant="primary" rounded="none">
+          Primary
+        </Button>
+        <Button variant="secondary" rounded="none">
+          Secondary
+        </Button>
+        <Button variant="tertiary" rounded="none">
+          Tertiary
+        </Button>
+        <Button variant="outline" rounded="none">
+          Outline
+        </Button>
+        <Button variant="ghost" rounded="none">
+          Ghost
+        </Button>
       </div>
       <div className="flex gap-2 flex-wrap">
-        <Button variant="destructive" rounded="none">Destructive</Button>
-        <Button variant="success" rounded="none">Success</Button>
-        <Button variant="warning" rounded="none">Warning</Button>
+        <Button variant="destructive" rounded="none">
+          Destructive
+        </Button>
+        <Button variant="success" rounded="none">
+          Success
+        </Button>
+        <Button variant="warning" rounded="none">
+          Warning
+        </Button>
       </div>
     </div>
   ),
-};
+}
 
 /**
  * Pill buttons with different variants.
@@ -527,20 +559,36 @@ export const PillVariants: Story = {
     <div className="flex flex-col gap-4 p-8">
       <h3 className="text-lg font-semibold">Pill Buttons (rounded="full")</h3>
       <div className="flex gap-2 flex-wrap">
-        <Button variant="primary" rounded="full">Primary</Button>
-        <Button variant="secondary" rounded="full">Secondary</Button>
-        <Button variant="tertiary" rounded="full">Tertiary</Button>
-        <Button variant="outline" rounded="full">Outline</Button>
-        <Button variant="ghost" rounded="full">Ghost</Button>
+        <Button variant="primary" rounded="full">
+          Primary
+        </Button>
+        <Button variant="secondary" rounded="full">
+          Secondary
+        </Button>
+        <Button variant="tertiary" rounded="full">
+          Tertiary
+        </Button>
+        <Button variant="outline" rounded="full">
+          Outline
+        </Button>
+        <Button variant="ghost" rounded="full">
+          Ghost
+        </Button>
       </div>
       <div className="flex gap-2 flex-wrap">
-        <Button variant="destructive" rounded="full">Destructive</Button>
-        <Button variant="success" rounded="full">Success</Button>
-        <Button variant="warning" rounded="full">Warning</Button>
+        <Button variant="destructive" rounded="full">
+          Destructive
+        </Button>
+        <Button variant="success" rounded="full">
+          Success
+        </Button>
+        <Button variant="warning" rounded="full">
+          Warning
+        </Button>
       </div>
     </div>
   ),
-};
+}
 
 /**
  * Square icon-only buttons.
@@ -563,7 +611,7 @@ export const SquareIconButtons: Story = {
       </Button>
     </div>
   ),
-};
+}
 
 /**
  * Circular icon buttons (rounded="full").
@@ -586,7 +634,7 @@ export const CircularIconButtons: Story = {
       </Button>
     </div>
   ),
-};
+}
 
 /**
  * Size and rounded combinations.
@@ -598,23 +646,43 @@ export const SizeAndRoundedCombinations: Story = {
       <div>
         <h4 className="text-sm font-medium mb-2">Square buttons at all sizes</h4>
         <div className="flex items-center gap-2">
-          <Button size="xs" rounded="none">XS Square</Button>
-          <Button size="sm" rounded="none">SM Square</Button>
-          <Button size="md" rounded="none">MD Square</Button>
-          <Button size="lg" rounded="none">LG Square</Button>
-          <Button size="xl" rounded="none">XL Square</Button>
+          <Button size="xs" rounded="none">
+            XS Square
+          </Button>
+          <Button size="sm" rounded="none">
+            SM Square
+          </Button>
+          <Button size="md" rounded="none">
+            MD Square
+          </Button>
+          <Button size="lg" rounded="none">
+            LG Square
+          </Button>
+          <Button size="xl" rounded="none">
+            XL Square
+          </Button>
         </div>
       </div>
       <div>
         <h4 className="text-sm font-medium mb-2">Pill buttons at all sizes</h4>
         <div className="flex items-center gap-2">
-          <Button size="xs" rounded="full">XS Pill</Button>
-          <Button size="sm" rounded="full">SM Pill</Button>
-          <Button size="md" rounded="full">MD Pill</Button>
-          <Button size="lg" rounded="full">LG Pill</Button>
-          <Button size="xl" rounded="full">XL Pill</Button>
+          <Button size="xs" rounded="full">
+            XS Pill
+          </Button>
+          <Button size="sm" rounded="full">
+            SM Pill
+          </Button>
+          <Button size="md" rounded="full">
+            MD Pill
+          </Button>
+          <Button size="lg" rounded="full">
+            LG Pill
+          </Button>
+          <Button size="xl" rounded="full">
+            XL Pill
+          </Button>
         </div>
       </div>
     </div>
   ),
-};
+}

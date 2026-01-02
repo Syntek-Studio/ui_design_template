@@ -1,7 +1,7 @@
 # src/mobile/components/
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -85,17 +85,19 @@ Versatile button component with multiple variants and states for React Native.
 **Location:** `Button/`
 
 **Props:**
+
 ```typescript
 interface ButtonProps {
-  title: string;                          // Button text
-  onPress?: () => void;                   // Press handler
-  variant?: 'primary' | 'secondary';      // Visual variant
-  disabled?: boolean;                     // Disabled state
-  className?: string;                     // Custom Nativewind classes
+  title: string // Button text
+  onPress?: () => void // Press handler
+  variant?: 'primary' | 'secondary' // Visual variant
+  disabled?: boolean // Disabled state
+  className?: string // Custom Nativewind classes
 }
 ```
 
 **Import:**
+
 ```typescript
 import { Mobile } from '@template/ui';
 
@@ -103,6 +105,7 @@ import { Mobile } from '@template/ui';
 ```
 
 **Example:**
+
 ```typescript
 <Mobile.Button
   title="Submit"
@@ -112,10 +115,12 @@ import { Mobile } from '@template/ui';
 ```
 
 **Variants:**
+
 - **primary** - Blue background, white text
 - **secondary** - Grey background, white text
 
 **States:**
+
 - Normal - Interactive
 - Active/Pressed - Darker shade (active: class)
 - Disabled - 50% opacity, no interaction
@@ -127,26 +132,26 @@ import { Mobile } from '@template/ui';
 ### Button Component
 
 ```typescript
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text } from 'react-native'
 
 export interface ButtonProps {
   /** The button text content */
-  title: string;
+  title: string
 
   /** Callback function when button is pressed */
-  onPress?: () => void;
+  onPress?: () => void
 
   /** Visual style of the button */
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary'
 
   /** Whether the button is disabled and not interactive */
-  disabled?: boolean;
+  disabled?: boolean
 
   /** Additional Nativewind CSS classes for customisation */
-  className?: string;
+  className?: string
 }
 
-export const Button: React.FC<ButtonProps>;
+export const Button: React.FC<ButtonProps>
 ```
 
 ---
@@ -357,8 +362,8 @@ export const Button = ({
 Provides Storybook documentation and examples:
 
 ```typescript
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from './Button'
 
 const meta = {
   component: Button,
@@ -366,31 +371,31 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
     title: 'Primary Button',
     variant: 'primary',
   },
-};
+}
 
 export const Secondary: Story = {
   args: {
     title: 'Secondary Button',
     variant: 'secondary',
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     title: 'Disabled Button',
     disabled: true,
   },
-};
+}
 ```
 
 ### index.ts
@@ -398,7 +403,7 @@ export const Disabled: Story = {
 Re-exports the component for public API:
 
 ```typescript
-export { Button, type ButtonProps } from './Button';
+export { Button, type ButtonProps } from './Button'
 ```
 
 ---
@@ -421,10 +426,10 @@ export { Button, type ButtonProps } from './Button';
 
 ```typescript
 // Good - use Nativewind/Tailwind classes
-className="px-4 py-2 rounded bg-blue-500 text-white"
+className = 'px-4 py-2 rounded bg-blue-500 text-white'
 
 // Avoid - custom StyleSheet (doesn't work well with Nativewind)
-className="my-custom-button"
+className = 'my-custom-button'
 ```
 
 ### Text Component Requirement
@@ -448,8 +453,8 @@ Always wrap text in `<Text>` component:
 Use responsive Tailwind classes (same as web):
 
 ```typescript
-className="px-4 md:px-6 lg:px-8"  // Different padding on different screens
-className="text-sm md:text-base"  // Responsive font sizes
+className = 'px-4 md:px-6 lg:px-8' // Different padding on different screens
+className = 'text-sm md:text-base' // Responsive font sizes
 ```
 
 ### Design Tokens
@@ -457,9 +462,9 @@ className="text-sm md:text-base"  // Responsive font sizes
 Use design tokens for dynamic values:
 
 ```typescript
-import { colours } from '@template/ui';
+import { colours } from '@template/ui'
 
-const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500];
+const bgColor = variant === 'primary' ? colours.primary[500] : colours.secondary[500]
 ```
 
 ---

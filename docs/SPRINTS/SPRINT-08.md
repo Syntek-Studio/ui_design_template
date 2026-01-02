@@ -1,16 +1,17 @@
 # Sprint 08: CI/CD Foundation
 
 **Sprint Goal:** Establish automated CI/CD pipeline and GitHub Actions
+**ClickUp List ID:** [901519283757](https://app.clickup.com/90151635198/v/l/li/901519283757)
 **Total Points:** 11
 **Priority Focus:** Must Have
 **Phase:** Phase 4 - Build & Publishing Pipeline
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US013 | GitHub Actions CI Pipeline | 8 | Must Have | Phase 4 |
-| US023 | Implement Card/Container Component | 3 | Could Have | Phase 7 |
+| ID    | Title                              | Points | Priority   | Phase   |
+| ----- | ---------------------------------- | ------ | ---------- | ------- |
+| US013 | GitHub Actions CI Pipeline         | 8      | Must Have  | Phase 4 |
+| US023 | Implement Card/Container Component | 3      | Could Have | Phase 7 |
 
 **Sprint Total: 11 points**
 
@@ -40,17 +41,17 @@ The CI pipeline is critical for maintaining code quality. It should run tests, l
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US013 | ❌ | ❌ | ❌ | ✅ (.github/) |
-| US023 | ❌ | ✅ | ✅ | ✅ (Card/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI     |
+| -------- | ------- | ------------ | --------------- | ------------- |
+| US013    | ❌      | ❌           | ❌              | ✅ (.github/) |
+| US023    | ❌      | ✅           | ✅              | ✅ (Card/)    |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| CI pipeline complexity | Medium | High | Use established GitHub Actions patterns |
-| Build time performance | Medium | Medium | Implement caching strategies |
+| Risk                   | Likelihood | Impact | Mitigation                              |
+| ---------------------- | ---------- | ------ | --------------------------------------- |
+| CI pipeline complexity | Medium     | High   | Use established GitHub Actions patterns |
+| Build time performance | Medium     | Medium | Implement caching strategies            |
 
 ---
 

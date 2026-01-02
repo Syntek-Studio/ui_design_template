@@ -1,7 +1,7 @@
 # Self-Learning System Data
 
-**Last Updated**: 29/12/2024
-**Version**: 0.5.1
+**Last Updated**: 01/01/2026
+**Version**: 0.7.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -22,21 +22,22 @@ This folder contains data for the Syntek Dev Suite self-learning system. The sys
 
 ## Folder Structure
 
-| Folder | Purpose |
-|--------|---------|
-| `runs/` | Records of individual agent runs |
-| `feedback/` | User feedback on agent outputs |
-| `aggregates/daily/` | Daily summary statistics |
-| `aggregates/weekly/` | Weekly summary statistics |
-| `variants/` | A/B test prompt variants |
-| `optimisations/pending/` | LLM-generated improvements awaiting review |
-| `optimisations/applied/` | Improvements that have been applied |
-| `optimisations/rejected/` | Improvements that were rejected |
-| `templates/` | Analysis prompt templates |
+| Folder                    | Purpose                                    |
+| ------------------------- | ------------------------------------------ |
+| `runs/`                   | Records of individual agent runs           |
+| `feedback/`               | User feedback on agent outputs             |
+| `aggregates/daily/`       | Daily summary statistics                   |
+| `aggregates/weekly/`      | Weekly summary statistics                  |
+| `variants/`               | A/B test prompt variants                   |
+| `optimisations/pending/`  | LLM-generated improvements awaiting review |
+| `optimisations/applied/`  | Improvements that have been applied        |
+| `optimisations/rejected/` | Improvements that were rejected            |
+| `templates/`              | Analysis prompt templates                  |
 
 ## Configuration
 
 See `config.json` for system settings:
+
 - `enabled`: Whether the learning system is active
 - `auto_optimisation_enabled`: Whether improvements are applied automatically
 - `min_runs_for_analysis`: Minimum runs before analysis occurs

@@ -1,6 +1,7 @@
 # US024: Component Generator CLI
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98xk](https://app.clickup.com/t/86c7a98xk)
 **Priority:** Could Have
 **Story Points:** 8
 **Sprint:** Sprint 20
@@ -14,6 +15,7 @@ so that I can quickly create new components following the established patterns.
 ## Acceptance Criteria
 
 ### Scenario 1: Interactive Component Generation
+
 - **Given** `npm run new-component ComponentName` is executed
 - **When** the CLI prompts for configuration
 - **Then** it asks: component name, description, web/mobile/both, with initial variant
@@ -21,6 +23,7 @@ so that I can quickly create new components following the established patterns.
 - **And** all necessary files are generated with boilerplate
 
 ### Scenario 2: Generated Files
+
 - **Given** component generator completes
 - **When** checking the generated structure
 - **Then** files include: ComponentName.tsx, ComponentName.stories.tsx, index.ts
@@ -29,6 +32,7 @@ so that I can quickly create new components following the established patterns.
 - **And** TypeScript is properly configured
 
 ### Scenario 3: Integration with Design System
+
 - **Given** a new component is generated
 - **When** it's created
 - **Then** it imports design tokens automatically

@@ -1,6 +1,7 @@
 # US019: Vitest Configuration and Setup
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98jd](https://app.clickup.com/t/86c7a98jd)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 13
@@ -14,14 +15,16 @@ so that I can write unit and integration tests for components efficiently.
 ## Acceptance Criteria
 
 ### Scenario 1: Vitest Setup
+
 - **Given** `npm run test` is executed
 - **When** Vitest runs
-- **Then** all test files (*.test.ts, *.test.tsx) are discovered
+- **Then** all test files (_.test.ts, _.test.tsx) are discovered
 - **And** tests run in parallel for speed
 - **And** test results are displayed with clear formatting
 - **And** exit code reflects pass/fail status
 
 ### Scenario 2: Coverage Configuration
+
 - **Given** tests are run with coverage
 - **When** `npm run test:coverage` is executed
 - **Then** coverage report is generated
@@ -30,6 +33,7 @@ so that I can write unit and integration tests for components efficiently.
 - **And** coverage data is suitable for CI integration
 
 ### Scenario 3: Watch Mode
+
 - **Given** a developer is actively developing
 - **When** they run `npm run test:watch`
 - **Then** Vitest runs in watch mode

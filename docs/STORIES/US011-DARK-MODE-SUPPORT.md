@@ -1,6 +1,7 @@
 # US011: Dark Mode Support in Design System
 
 **Status:** To Do
+**ClickUp ID:** [86c7a9847](https://app.clickup.com/t/86c7a9847)
 **Priority:** Must Have
 **Story Points:** 8
 **Sprint:** Sprint 06
@@ -14,6 +15,7 @@ so that end-user applications can provide a dark theme without custom styling.
 ## Acceptance Criteria
 
 ### Scenario 1: Dark Mode Token Configuration
+
 - **Given** theme.config.ts is configured
 - **When** dark mode is enabled
 - **Then** alternative colour tokens are generated for dark backgrounds
@@ -21,6 +23,7 @@ so that end-user applications can provide a dark theme without custom styling.
 - **And** semantic colours (error, success, warning) are adjusted for dark backgrounds
 
 ### Scenario 2: Dark Mode CSS Classes
+
 - **Given** a component is rendered with `dark` class
 - **When** it displays
 - **Then** Tailwind dark: prefix classes apply dark mode styles
@@ -28,6 +31,7 @@ so that end-user applications can provide a dark theme without custom styling.
 - **And** transitions between light and dark are smooth
 
 ### Scenario 3: Dark Mode Theme Hook
+
 - **Given** a React application uses the component library
 - **When** it imports useTheme() hook
 - **Then** it can check current theme and switch between light/dark

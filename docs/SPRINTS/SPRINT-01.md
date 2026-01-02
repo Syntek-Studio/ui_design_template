@@ -1,16 +1,17 @@
 # Sprint 01: Template Foundation
 
 **Sprint Goal:** Establish the core template infrastructure and initialisation CLI
+**ClickUp List ID:** [901519283750](https://app.clickup.com/90151635198/v/l/li/901519283750)
 **Total Points:** 11
 **Priority Focus:** Must Have
 **Phase:** Phase 1 - Template Infrastructure
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US001 | Template Initialisation CLI | 8 | Must Have | Phase 1 |
-| US002 | Template Configuration Metadata | 3 | Must Have | Phase 1 |
+| ID    | Title                           | Points | Priority  | Phase   |
+| ----- | ------------------------------- | ------ | --------- | ------- |
+| US001 | Template Initialisation CLI     | 8      | Must Have | Phase 1 |
+| US002 | Template Configuration Metadata | 3      | Must Have | Phase 1 |
 
 **Sprint Total: 11 points**
 
@@ -38,17 +39,17 @@ This sprint establishes the foundation for the entire template system. The CLI t
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US001 | ❌ | ❌ | ❌ | ✅ (scripts/) |
-| US002 | ❌ | ❌ | ❌ | ✅ (config/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI     |
+| -------- | ------- | ------------ | --------------- | ------------- |
+| US001    | ❌      | ❌           | ❌              | ✅ (scripts/) |
+| US002    | ❌      | ❌           | ❌              | ✅ (config/)  |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| CLI complexity | Medium | High | Break down into smaller functions, comprehensive testing |
-| Cross-platform issues | Low | Medium | Test on multiple OS platforms |
+| Risk                  | Likelihood | Impact | Mitigation                                               |
+| --------------------- | ---------- | ------ | -------------------------------------------------------- |
+| CLI complexity        | Medium     | High   | Break down into smaller functions, comprehensive testing |
+| Cross-platform issues | Low        | Medium | Test on multiple OS platforms                            |
 
 ---
 

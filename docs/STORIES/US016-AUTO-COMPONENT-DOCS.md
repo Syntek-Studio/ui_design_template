@@ -1,6 +1,7 @@
 # US016: Automated Component Documentation Generation
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98c6](https://app.clickup.com/t/86c7a98c6)
 **Priority:** Should Have
 **Story Points:** 8
 **Sprint:** Sprint 12
@@ -14,6 +15,7 @@ so that documentation stays in sync with component code and is never out of date
 ## Acceptance Criteria
 
 ### Scenario 1: Props Documentation Extraction
+
 - **Given** a component has TypeScript props interface
 - **When** documentation generation script runs
 - **Then** all props are extracted with types and descriptions
@@ -22,6 +24,7 @@ so that documentation stays in sync with component code and is never out of date
 - **And** default values are documented
 
 ### Scenario 2: Story-Based Usage Examples
+
 - **Given** component stories are defined in Storybook
 - **When** documentation is generated
 - **Then** story code examples are included in documentation
@@ -29,6 +32,7 @@ so that documentation stays in sync with component code and is never out of date
 - **And** examples are syntax-highlighted and copy-able
 
 ### Scenario 3: Documentation Export
+
 - **Given** documentation is generated
 - **When** the script completes
 - **Then** markdown files are created in docs/COMPONENTS/

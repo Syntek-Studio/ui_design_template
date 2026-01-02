@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   type ComponentSize,
   type ComponentVariant,
@@ -9,81 +9,81 @@ import {
   variantClasses,
   spinnerSizeClasses,
   cn,
-} from '@/utils';
+} from '@/utils'
 
 /**
  * Size variants for Button components
  */
-export type ButtonSize = ComponentSize;
+export type ButtonSize = ComponentSize
 
 /**
  * Visual style variants for Button components
  */
-export type ButtonVariant = ComponentVariant;
+export type ButtonVariant = ComponentVariant
 
 /**
  * Border radius variants for Button components
  * Maps to the borders.radius design tokens
  */
-export type ButtonRounded = ComponentRounded;
+export type ButtonRounded = ComponentRounded
 
 /**
  * Props for the Button component
  */
 export interface ButtonProps {
   /** The text or content displayed inside the button */
-  children: React.ReactNode;
+  children: React.ReactNode
 
   /** Callback function invoked when the button is clicked */
-  onClick?: () => void;
+  onClick?: () => void
 
   /** Visual style variant of the button */
-  variant?: ButtonVariant;
+  variant?: ButtonVariant
 
   /** Size of the button */
-  size?: ButtonSize;
+  size?: ButtonSize
 
   /** Border radius of the button - defaults to 'lg' (8px) */
-  rounded?: ButtonRounded;
+  rounded?: ButtonRounded
 
   /** Whether the button is disabled and should not respond to interactions */
-  disabled?: boolean;
+  disabled?: boolean
 
   /** Whether the button is in a loading state */
-  loading?: boolean;
+  loading?: boolean
 
   /** Whether the button should take the full width of its container */
-  fullWidth?: boolean;
+  fullWidth?: boolean
 
   /** Icon to display before the button text */
-  iconLeft?: React.ReactNode;
+  iconLeft?: React.ReactNode
 
   /** Icon to display after the button text */
-  iconRight?: React.ReactNode;
+  iconRight?: React.ReactNode
 
   /** Whether the button is icon-only (no text) */
-  iconOnly?: boolean;
+  iconOnly?: boolean
 
   /** Additional Tailwind CSS classes for custom styling */
-  className?: string;
+  className?: string
 
   /** ARIA label for icon-only buttons */
-  'aria-label'?: string;
+  'aria-label'?: string
 
   /** ARIA pressed state for toggle buttons */
-  'aria-pressed'?: boolean | 'false' | 'mixed' | 'true';
+  'aria-pressed'?: boolean | 'false' | 'mixed' | 'true'
 
   /** ARIA expanded state for buttons that open menus */
-  'aria-expanded'?: boolean;
+  'aria-expanded'?: boolean
 
   /** ARIA haspopup for buttons that trigger menus */
-  'aria-haspopup'?: boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
+  'aria-haspopup'?: boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog'
 
   /** ARIA busy state for loading buttons */
-  'aria-busy'?: boolean;
+  'aria-busy'?: boolean
 
   /** Button type attribute */
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit' | 'reset'
 }
 
 /**
@@ -104,22 +104,15 @@ const LoadingSpinner = ({ size }: { size: ButtonSize }) => {
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
       <path
         className="opacity-75"
         fill="currentColor"
         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
       />
     </svg>
-  );
-};
+  )
+}
 
 /**
  * Button component for web applications
@@ -198,7 +191,7 @@ export const Button = ({
 }: ButtonProps) => {
   // Base styles applied to all buttons (without rounded - applied separately)
   const baseStyles =
-    'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none';
+    'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none'
 
   // Combine all classes using the cn utility
   const buttonClasses = cn(
@@ -209,15 +202,15 @@ export const Button = ({
     fullWidth && 'w-full',
     loading && 'cursor-wait',
     className
-  );
+  )
 
   // Icon-only buttons must have aria-label
   if (iconOnly && !ariaLabel) {
-    console.warn('Icon-only buttons must have an aria-label for accessibility');
+    console.warn('Icon-only buttons must have an aria-label for accessibility')
   }
 
   // Determine aria-busy state
-  const computedAriaBusy = ariaBusy ?? loading;
+  const computedAriaBusy = ariaBusy ?? loading
 
   return (
     <button
@@ -237,5 +230,5 @@ export const Button = ({
       {iconOnly && children}
       {!loading && iconRight && <span className="inline-flex">{iconRight}</span>}
     </button>
-  );
-};
+  )
+}
