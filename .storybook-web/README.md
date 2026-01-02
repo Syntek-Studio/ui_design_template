@@ -12,24 +12,18 @@ This folder contains the Storybook configuration for web components.
 
 ## Table of Contents
 
-- [Web Storybook Configuration](#web-storybook-configuration)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [File Structure](#file-structure)
-  - [Commands](#commands)
-  - [Configuration Details](#configuration-details)
-    - [Story Discovery](#story-discovery)
-    - [Addons](#addons)
-    - [Webpack Configuration](#webpack-configuration)
-    - [Tailwind CSS](#tailwind-css)
-  - [Writing Stories](#writing-stories)
-  - [Customisation](#customisation)
-    - [Adding Global Decorators](#adding-global-decorators)
-    - [Adding Webpack Plugins](#adding-webpack-plugins)
-  - [Troubleshooting](#troubleshooting)
-    - [Tailwind classes not working](#tailwind-classes-not-working)
-    - [React Native components not rendering](#react-native-components-not-rendering)
-    - [TypeScript errors in stories](#typescript-errors-in-stories)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [File Structure](#file-structure)
+- [Commands](#commands)
+- [Writing Stories](#writing-stories)
+- [Customisation](#customisation)
+  - [Adding Global Decorators](#adding-global-decorators)
+  - [Adding Webpack Plugins](#adding-webpack-plugins)
+- [Troubleshooting](#troubleshooting)
+  - [Tailwind classes not working](#tailwind-classes-not-working)
+  - [React Native components not rendering](#react-native-components-not-rendering)
+  - [TypeScript errors in stories](#typescript-errors-in-stories)
 
 ## Overview
 
