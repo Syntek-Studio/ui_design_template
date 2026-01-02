@@ -27,6 +27,7 @@ import { constants } from 'node:fs'
 import chalk from 'chalk'
 import type { ReplacementMap } from './replacements'
 import { applyReplacements } from './replacements'
+import type { Logger } from './cli-options'
 
 /**
  * Checks if a file or directory exists.
@@ -136,6 +137,8 @@ export async function writeFile(filePath: string, content: string): Promise<void
  *
  * @param {string} filePath - The absolute or relative path to the file
  * @param {ReplacementMap} replacements - Map of placeholder→replacement pairs
+ * @param {boolean} [dryRun=false] - If true, simulate without writing files
+ * @param {Logger} [logger] - Optional logger for verbose output
  * @returns {Promise<boolean>} - True if file was modified, false if no changes made
  * @throws {Error} - If file does not exist or cannot be read/written
  *
@@ -154,24 +157,47 @@ export async function writeFile(filePath: string, content: string): Promise<void
  *   'Syntek Studio': 'Acme Corporation'
  * });
  * console.log(result ? 'Modified' : 'No changes');
+ *
+ * // Dry-run mode
+ * const wouldModify = await replaceInFile('./package.json', replacements, true, logger);
+ * // File is not actually modified when dryRun is true
  */
 export async function replaceInFile(
   filePath: string,
-  replacements: ReplacementMap
+  replacements: ReplacementMap,
+  dryRun: boolean = false,
+  logger?: Logger
 ): Promise<boolean> {
   // Read the current file content
   const originalContent = await readFile(filePath)
+
+  logger?.verbose(`  Reading ${filePath} (${originalContent.length} bytes)`)
 
   // Apply all replacements from the map
   const modifiedContent = applyReplacements(originalContent, replacements)
 
   // Check if content actually changed
   if (originalContent === modifiedContent) {
+    logger?.verbose(`  No changes needed in ${filePath}`)
     return false
   }
 
-  // Write the modified content back to the file
-  await writeFile(filePath, modifiedContent)
+  logger?.verbose(`  Content changed in ${filePath}`)
+
+  // Show diff in verbose mode
+  if (logger && originalContent !== modifiedContent) {
+    const originalLines = originalContent.split('\n').length
+    const modifiedLines = modifiedContent.split('\n').length
+    logger.verbose(`    Lines: ${originalLines} → ${modifiedLines}`)
+  }
+
+  // Write the modified content back to the file (unless dry-run)
+  if (!dryRun) {
+    await writeFile(filePath, modifiedContent)
+    logger?.verbose(`  Written ${filePath}`)
+  } else {
+    logger?.verbose(`  [DRY-RUN] Would write ${filePath}`)
+  }
 
   return true
 }
@@ -285,6 +311,8 @@ export async function restoreFromBackup(filePath: string): Promise<void> {
  *
  * @param {string[]} filePaths - Array of file paths to process
  * @param {ReplacementMap} replacements - Map of placeholder→replacement pairs
+ * @param {boolean} [dryRun=false] - If true, simulate without writing files
+ * @param {Logger} [logger] - Optional logger for verbose output
  * @returns {Promise<Array<{file: string, modified: boolean}>>} - Array of results
  * @throws {Error} - If any file does not exist or cannot be processed
  *
@@ -308,40 +336,76 @@ export async function restoreFromBackup(filePath: string): Promise<void> {
  */
 export async function processDirectory(
   filePaths: string[],
-  replacements: ReplacementMap
+  replacements: ReplacementMap,
+  dryRun: boolean = false,
+  logger?: Logger
 ): Promise<Array<{ file: string; modified: boolean }>> {
   const results: Array<{ file: string; modified: boolean }> = []
 
-  console.log(chalk.cyan('\nProcessing files...\n'))
+  const message = dryRun ? '\n[DRY-RUN] Previewing file changes...\n' : '\nProcessing files...\n'
+  if (logger) {
+    logger.log(chalk.cyan(message))
+  } else {
+    console.log(chalk.cyan(message))
+  }
 
   for (const filePath of filePaths) {
     try {
       // Check if file exists
       const exists = await fileExists(filePath)
       if (!exists) {
-        console.log(chalk.red(`✗ ${filePath} (file not found)`))
+        const errorMsg = chalk.red(`✗ ${filePath} (file not found)`)
+        if (logger) {
+          logger.log(errorMsg)
+        } else {
+          console.log(errorMsg)
+        }
         throw new Error(`File not found: ${filePath}`)
       }
 
       // Apply replacements
-      const modified = await replaceInFile(filePath, replacements)
+      const modified = await replaceInFile(filePath, replacements, dryRun, logger)
 
       // Display progress
       if (modified) {
-        console.log(chalk.green(`✓ ${filePath} `) + chalk.gray('(modified)'))
+        const statusMsg =
+          chalk.green(`✓ ${filePath} `) + chalk.gray(dryRun ? '(would be modified)' : '(modified)')
+        if (logger) {
+          logger.log(statusMsg)
+        } else {
+          console.log(statusMsg)
+        }
       } else {
-        console.log(chalk.gray(`- ${filePath} (no changes)`))
+        const statusMsg = chalk.gray(`- ${filePath} (no changes)`)
+        if (logger) {
+          logger.log(statusMsg)
+        } else {
+          console.log(statusMsg)
+        }
       }
 
       results.push({ file: filePath, modified })
     } catch (error) {
-      console.log(chalk.red(`✗ ${filePath} (error: ${(error as Error).message})`))
+      const errorMsg = chalk.red(`✗ ${filePath} (error: ${(error as Error).message})`)
+      if (logger) {
+        logger.log(errorMsg)
+      } else {
+        console.log(errorMsg)
+      }
       throw error
     }
   }
 
   const modifiedCount = results.filter((r) => r.modified).length
-  console.log(chalk.cyan(`\nModified ${modifiedCount} of ${results.length} files\n`))
+  const summaryMsg = dryRun
+    ? `\n[DRY-RUN] Would modify ${modifiedCount} of ${results.length} files\n`
+    : `\nModified ${modifiedCount} of ${results.length} files\n`
+
+  if (logger) {
+    logger.log(chalk.cyan(summaryMsg))
+  } else {
+    console.log(chalk.cyan(summaryMsg))
+  }
 
   return results
 }
@@ -360,6 +424,8 @@ export async function processDirectory(
  *
  * @param {string[]} filePaths - Array of file paths to process
  * @param {ReplacementMap} replacements - Map of placeholder→replacement pairs
+ * @param {boolean} [dryRun=false] - If true, simulate without writing files
+ * @param {Logger} [logger] - Optional logger for verbose output
  * @returns {Promise<Array<{file: string, modified: boolean}>>} - Array of results
  * @throws {Error} - If any file fails and rollback is performed
  *
@@ -373,71 +439,142 @@ export async function processDirectory(
  */
 export async function processDirectoryWithRollback(
   filePaths: string[],
-  replacements: ReplacementMap
+  replacements: ReplacementMap,
+  dryRun: boolean = false,
+  logger?: Logger
 ): Promise<Array<{ file: string; modified: boolean }>> {
   const results: Array<{ file: string; modified: boolean }> = []
   const backupPaths: string[] = []
 
-  console.log(chalk.cyan('\nCreating backups...\n'))
+  // Skip backups in dry-run mode
+  if (!dryRun) {
+    const backupMsg = chalk.cyan('\nCreating backups...\n')
+    if (logger) {
+      logger.log(backupMsg)
+    } else {
+      console.log(backupMsg)
+    }
 
-  // Step 1: Create backups of all files
-  for (const filePath of filePaths) {
-    try {
-      const exists = await fileExists(filePath)
-      if (!exists) {
-        console.log(chalk.yellow(`⚠ ${filePath} (file not found, skipping backup)`))
-        continue
+    // Step 1: Create backups of all files
+    for (const filePath of filePaths) {
+      try {
+        const exists = await fileExists(filePath)
+        if (!exists) {
+          const warnMsg = chalk.yellow(`⚠ ${filePath} (file not found, skipping backup)`)
+          if (logger) {
+            logger.log(warnMsg)
+          } else {
+            console.log(warnMsg)
+          }
+          continue
+        }
+
+        await createBackup(filePath)
+        backupPaths.push(filePath) // Store original path for restore
+        const backupSuccessMsg = chalk.gray(`  ↳ Backed up: ${filePath}`)
+        if (logger) {
+          logger.verbose(backupSuccessMsg)
+        } else {
+          console.log(backupSuccessMsg)
+        }
+      } catch (error) {
+        const errorMsg = chalk.red(`✗ Failed to backup ${filePath}: ${(error as Error).message}`)
+        if (logger) {
+          logger.log(errorMsg)
+        } else {
+          console.log(errorMsg)
+        }
+        // Restore any backups created so far
+        await cleanupBackups(backupPaths, true, logger)
+        throw new Error(`Backup failed for ${filePath}: ${(error as Error).message}`)
       }
-
-      await createBackup(filePath)
-      backupPaths.push(filePath) // Store original path for restore
-      console.log(chalk.gray(`  ↳ Backed up: ${filePath}`))
-    } catch (error) {
-      console.log(chalk.red(`✗ Failed to backup ${filePath}: ${(error as Error).message}`))
-      // Restore any backups created so far
-      await cleanupBackups(backupPaths, true)
-      throw new Error(`Backup failed for ${filePath}: ${(error as Error).message}`)
     }
   }
 
-  console.log(chalk.cyan('\nProcessing files...\n'))
+  const processingMsg = dryRun
+    ? chalk.cyan('\n[DRY-RUN] Previewing file changes...\n')
+    : chalk.cyan('\nProcessing files...\n')
+  if (logger) {
+    logger.log(processingMsg)
+  } else {
+    console.log(processingMsg)
+  }
 
   // Step 2: Apply replacements to all files
   try {
     for (const filePath of filePaths) {
       const exists = await fileExists(filePath)
       if (!exists) {
-        console.log(chalk.yellow(`⚠ ${filePath} (file not found, skipping)`))
+        const warnMsg = chalk.yellow(`⚠ ${filePath} (file not found, skipping)`)
+        if (logger) {
+          logger.log(warnMsg)
+        } else {
+          console.log(warnMsg)
+        }
         results.push({ file: filePath, modified: false })
         continue
       }
 
-      const modified = await replaceInFile(filePath, replacements)
+      const modified = await replaceInFile(filePath, replacements, dryRun, logger)
 
       if (modified) {
-        console.log(chalk.green(`✓ ${filePath} `) + chalk.gray('(modified)'))
+        const statusMsg =
+          chalk.green(`✓ ${filePath} `) + chalk.gray(dryRun ? '(would be modified)' : '(modified)')
+        if (logger) {
+          logger.log(statusMsg)
+        } else {
+          console.log(statusMsg)
+        }
       } else {
-        console.log(chalk.gray(`- ${filePath} (no changes)`))
+        const statusMsg = chalk.gray(`- ${filePath} (no changes)`)
+        if (logger) {
+          logger.log(statusMsg)
+        } else {
+          console.log(statusMsg)
+        }
       }
 
       results.push({ file: filePath, modified })
     }
 
-    // Step 3: Clean up backups on success (delete them)
-    await cleanupBackups(backupPaths, false)
+    // Step 3: Clean up backups on success (delete them) - skip in dry-run
+    if (!dryRun) {
+      await cleanupBackups(backupPaths, false, logger)
+    }
 
     const modifiedCount = results.filter((r) => r.modified).length
-    console.log(chalk.cyan(`\nModified ${modifiedCount} of ${results.length} files\n`))
+    const summaryMsg = dryRun
+      ? chalk.cyan(`\n[DRY-RUN] Would modify ${modifiedCount} of ${results.length} files\n`)
+      : chalk.cyan(`\nModified ${modifiedCount} of ${results.length} files\n`)
+    if (logger) {
+      logger.log(summaryMsg)
+    } else {
+      console.log(summaryMsg)
+    }
 
     return results
   } catch (error) {
-    // Step 4: Rollback on failure - restore all backups
-    console.log(chalk.red('\n✗ Error occurred during file processing'))
-    console.log(chalk.yellow('  Rolling back changes...\n'))
+    // Step 4: Rollback on failure - restore all backups (skip in dry-run)
+    if (!dryRun) {
+      const errorMsg = chalk.red('\n✗ Error occurred during file processing')
+      const rollbackMsg = chalk.yellow('  Rolling back changes...\n')
+      if (logger) {
+        logger.log(errorMsg)
+        logger.log(rollbackMsg)
+      } else {
+        console.log(errorMsg)
+        console.log(rollbackMsg)
+      }
 
-    await cleanupBackups(backupPaths, true)
+      await cleanupBackups(backupPaths, true, logger)
 
-    console.log(chalk.green('  ✓ All files restored to original state\n'))
+      const restoredMsg = chalk.green('  ✓ All files restored to original state\n')
+      if (logger) {
+        logger.log(restoredMsg)
+      } else {
+        console.log(restoredMsg)
+      }
+    }
     throw error
   }
 }
@@ -447,29 +584,43 @@ export async function processDirectoryWithRollback(
  *
  * @param {string[]} originalPaths - Array of original file paths (backups are .backup suffix)
  * @param {boolean} restore - If true, restore from backups; if false, delete backups
+ * @param {Logger} [logger] - Optional logger for verbose output
  * @returns {Promise<void>}
  */
-async function cleanupBackups(originalPaths: string[], restore: boolean): Promise<void> {
+async function cleanupBackups(
+  originalPaths: string[],
+  restore: boolean,
+  logger?: Logger
+): Promise<void> {
   for (const filePath of originalPaths) {
     try {
       if (restore) {
         await restoreFromBackup(filePath)
-        console.log(chalk.gray(`  ↳ Restored: ${filePath}`))
+        const restoredMsg = chalk.gray(`  ↳ Restored: ${filePath}`)
+        if (logger) {
+          logger.verbose(restoredMsg)
+        } else {
+          console.log(restoredMsg)
+        }
       } else {
         // Just delete the backup file
         const backupPath = `${filePath}.backup`
         const exists = await fileExists(backupPath)
         if (exists) {
           await unlink(backupPath)
+          logger?.verbose(chalk.gray(`  ↳ Removed backup: ${backupPath}`))
         }
       }
     } catch (cleanupError) {
       // Log but don't throw - best effort cleanup
-      console.log(
-        chalk.yellow(
-          `  ⚠ Could not ${restore ? 'restore' : 'clean up'} ${filePath}: ${(cleanupError as Error).message}`
-        )
+      const warnMsg = chalk.yellow(
+        `  ⚠ Could not ${restore ? 'restore' : 'clean up'} ${filePath}: ${(cleanupError as Error).message}`
       )
+      if (logger) {
+        logger.log(warnMsg)
+      } else {
+        console.log(warnMsg)
+      }
     }
   }
 }

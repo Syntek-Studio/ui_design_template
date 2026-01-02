@@ -144,7 +144,7 @@ export async function checkDirectoryConflict(): Promise<ConflictCheckResult> {
 
     // Config exists but not marked as initialized
     return { conflict: false }
-  } catch (error) {
+  } catch {
     // If config file is corrupted, treat as not initialized
     console.warn('Warning: template.config.json exists but could not be read')
     return { conflict: false }
@@ -222,7 +222,7 @@ export async function createTemplateConfig(answers: UserAnswers): Promise<void> 
  * Process:
  * 1. Creates replacement map from user answers
  * 2. Gets list of files to modify from replacements module
- * 3. Creates backups of all files before modification
+ * 3. Creates backups of all files before modification (unless dry-run)
  * 4. Applies replacements to each file
  * 5. On error, automatically rolls back all changes
  * 6. Returns results array showing which files were modified
@@ -235,6 +235,8 @@ export async function createTemplateConfig(answers: UserAnswers): Promise<void> 
  *
  * @param {UserAnswers} answers - The user's answers from initialization prompts
  * @param {boolean} [useRollback=true] - Whether to use rollback-protected processing
+ * @param {boolean} [dryRun=false] - If true, simulate without writing files
+ * @param {import('./lib/cli-options').Logger} [logger] - Optional logger for verbose output
  * @returns {Promise<ReplacementResult[]>} - Array of ReplacementResult objects
  *                                           showing file and modification status
  *
@@ -256,7 +258,9 @@ export async function createTemplateConfig(answers: UserAnswers): Promise<void> 
  */
 export async function performReplacements(
   answers: UserAnswers,
-  useRollback: boolean = true
+  useRollback: boolean = true,
+  dryRun: boolean = false,
+  logger?: import('./lib/cli-options').Logger
 ): Promise<ReplacementResult[]> {
   // Import the replacement utilities
   const { createReplacementMap, getFilesToModify } = await import('./lib/replacements')
@@ -271,8 +275,8 @@ export async function performReplacements(
   // Process all files with the replacement map
   // Use rollback-protected version by default for safety
   const results = useRollback
-    ? await processDirectoryWithRollback(filesToModify, replacementMap)
-    : await processDirectory(filesToModify, replacementMap)
+    ? await processDirectoryWithRollback(filesToModify, replacementMap, dryRun, logger)
+    : await processDirectory(filesToModify, replacementMap, dryRun, logger)
 
   return results
 }
@@ -352,16 +356,22 @@ export async function verifyReplacements(): Promise<boolean> {
  * Orchestrates the entire initialization workflow, combining all the above
  * functions in the correct sequence:
  *
- * 1. Display welcome message
- * 2. Check for existing initialization (conflict check)
- * 3. If conflict detected, exit with error message
- * 4. Display user prompts to collect input
- * 5. Display confirmation prompt
- * 6. If not confirmed, loop back to step 4
- * 7. Perform file replacements
- * 8. Create template configuration
- * 9. Verify all placeholders were replaced
- * 10. Display success message
+ * 1. Parse CLI options (--dry-run, --verbose, --json)
+ * 2. Display welcome message (unless JSON mode)
+ * 3. Check for existing initialization (conflict check)
+ * 4. If conflict detected, exit with error message
+ * 5. Display user prompts to collect input
+ * 6. Display confirmation prompt
+ * 7. If not confirmed, loop back to step 5
+ * 8. Perform file replacements (preview in dry-run mode)
+ * 9. Create template configuration (skip in dry-run mode)
+ * 10. Verify all placeholders were replaced
+ * 11. Display success message or JSON output
+ *
+ * CLI Options:
+ * - --dry-run: Preview changes without modifying files
+ * - --verbose: Show detailed logging of all operations
+ * - --json: Output structured JSON for automation
  *
  * Error handling:
  * - Catches and logs errors with clear messages
@@ -369,7 +379,7 @@ export async function verifyReplacements(): Promise<boolean> {
  * - Provides helpful error context
  *
  * This function should be called directly or via Node.js CLI:
- * node --loader tsx scripts/init-template.ts
+ * node --loader tsx scripts/init-template.ts [--dry-run] [--verbose] [--json]
  *
  * @returns {Promise<void>}
  *
@@ -399,22 +409,56 @@ export async function main(): Promise<void> {
   const { displayWelcomeMessage, promptUserInputs, confirmInputs, displaySuccessMessage } =
     await import('./lib/prompts')
   const chalk = (await import('chalk')).default
+  const { parseCliOptions, Logger } = await import('./lib/cli-options')
+  const { displayHelp, isHelpRequested } = await import('./lib/cli-help')
+
+  // Check for help flag first
+  if (isHelpRequested()) {
+    displayHelp()
+    process.exit(0)
+  }
+
+  // Parse CLI options
+  const options = parseCliOptions()
+  const logger = new Logger(options)
 
   try {
-    // Display welcome message
-    displayWelcomeMessage()
+    // Display welcome message (skip in JSON mode)
+    if (!options.json) {
+      displayWelcomeMessage()
+    }
 
-    // Check for existing initialization
-    const conflictCheck = await checkDirectoryConflict()
-    if (conflictCheck.conflict) {
-      console.log(chalk.red('✗ This template has already been initialized!\n'))
-      console.log(chalk.yellow('  Package: ') + chalk.white(conflictCheck.packageName))
-      console.log(chalk.yellow('  Client:  ') + chalk.white(conflictCheck.clientName))
-      console.log('\n')
-      console.log(
-        chalk.gray('If you need to re-initialize, please delete template.config.json first.\n')
+    logger.verbose(
+      chalk.gray(
+        `CLI Options: dryRun=${options.dryRun}, verbose=${options.verbose}, json=${options.json}`
       )
-      process.exit(1)
+    )
+
+    // Check for existing initialization (skip in dry-run mode)
+    if (!options.dryRun) {
+      const conflictCheck = await checkDirectoryConflict()
+      if (conflictCheck.conflict) {
+        if (options.json) {
+          logger.setJsonData({
+            success: false,
+            error: 'Template already initialized',
+            existingPackage: conflictCheck.packageName,
+            existingClient: conflictCheck.clientName,
+          })
+          logger.outputJson()
+        } else {
+          logger.log(chalk.red('✗ This template has already been initialized!\n'))
+          logger.log(chalk.yellow('  Package: ') + chalk.white(conflictCheck.packageName))
+          logger.log(chalk.yellow('  Client:  ') + chalk.white(conflictCheck.clientName))
+          logger.log('\n')
+          logger.log(
+            chalk.gray('If you need to re-initialize, please delete template.config.json first.\n')
+          )
+        }
+        process.exit(1)
+      }
+    } else {
+      logger.verbose(chalk.gray('[DRY-RUN] Skipping initialization conflict check'))
     }
 
     // Prompt for user inputs (will loop until confirmed)
@@ -426,66 +470,116 @@ export async function main(): Promise<void> {
       confirmed = await confirmInputs(answers)
 
       if (!confirmed) {
-        console.log('\n')
-        console.log("Let's try again...\n")
+        logger.log('\n')
+        logger.log("Let's try again...\n")
       }
     }
 
+    // Store answers for JSON output
+    logger.setJsonData({ answers: answers! })
+
     // Perform file replacements
-    console.log(chalk.cyan('\nInitializing template...\n'))
-    const results = await performReplacements(answers!)
+    const initMsg = options.dryRun
+      ? chalk.cyan('\n[DRY-RUN] Previewing template initialization...\n')
+      : chalk.cyan('\nInitializing template...\n')
+    logger.log(initMsg)
 
-    // Create template configuration
-    await createTemplateConfig(answers!)
-    console.log(chalk.green('✓ Configuration saved to template.config.json\n'))
+    const results = await performReplacements(answers!, true, options.dryRun, logger)
 
-    // Verify all replacements were successful
-    const verified = await verifyReplacements()
-    if (!verified) {
-      console.log(chalk.yellow('⚠ Warning: Some placeholders may not have been replaced'))
-      console.log(chalk.gray('Please review the modified files manually\n'))
+    // Store results for JSON output
+    const modifiedCount = results.filter((r) => r.modified).length
+    logger.setJsonData({
+      filesModified: modifiedCount,
+      files: results,
+    })
+
+    // Create template configuration (skip in dry-run mode)
+    if (!options.dryRun) {
+      await createTemplateConfig(answers!)
+      logger.log(chalk.green('✓ Configuration saved to template.config.json\n'))
     } else {
-      console.log(chalk.green('✓ All placeholders verified as replaced\n'))
+      logger.log(chalk.gray('[DRY-RUN] Would create template.config.json\n'))
     }
 
-    // Display success message
-    displaySuccessMessage(answers!, results)
+    // Verify all replacements were successful (skip in dry-run mode)
+    if (!options.dryRun) {
+      const verified = await verifyReplacements()
+      if (!verified) {
+        logger.log(chalk.yellow('⚠ Warning: Some placeholders may not have been replaced'))
+        logger.log(chalk.gray('Please review the modified files manually\n'))
+        logger.setJsonData({ verified: false })
+      } else {
+        logger.log(chalk.green('✓ All placeholders verified as replaced\n'))
+        logger.setJsonData({ verified: true })
+      }
+    } else {
+      logger.verbose(chalk.gray('[DRY-RUN] Skipping placeholder verification'))
+    }
+
+    // Mark as successful
+    logger.setJsonData({ success: true })
+
+    // Display success message or JSON output
+    if (options.json) {
+      logger.outputJson()
+    } else {
+      displaySuccessMessage(answers!, results)
+
+      // Add dry-run reminder
+      if (options.dryRun) {
+        logger.log(chalk.bold.yellow('\n[DRY-RUN] No files were actually modified.'))
+        logger.log(chalk.gray('Run without --dry-run to apply changes.\n'))
+      }
+    }
   } catch (error) {
     const errorMessage = (error as Error).message
-    console.log('\n')
-    console.log(chalk.red('✗ Initialisation failed'))
-    console.log(chalk.red(`  Error: ${errorMessage}`))
-    console.log('\n')
 
-    // Provide helpful remediation messages based on error type
-    console.log(chalk.yellow('Troubleshooting:'))
+    // Set error in JSON data
+    logger.setJsonData({
+      success: false,
+      error: errorMessage,
+    })
 
-    if (errorMessage.includes('File not found')) {
-      console.log(chalk.gray('  • Ensure you are running this command from the project root'))
-      console.log(chalk.gray('  • Check that the template files have not been deleted'))
-      console.log(chalk.gray('  • Try cloning the template repository again'))
-    } else if (errorMessage.includes('permission') || errorMessage.includes('EACCES')) {
-      console.log(chalk.gray('  • Check that you have write permissions in this directory'))
-      console.log(chalk.gray('  • Try running with elevated privileges if necessary'))
-      console.log(chalk.gray('  • Ensure no files are locked or open in another program'))
-    } else if (errorMessage.includes('Backup failed')) {
-      console.log(chalk.gray('  • Ensure sufficient disk space is available'))
-      console.log(chalk.gray('  • Check that you have write permissions'))
-      console.log(chalk.gray('  • Remove any existing .backup files and try again'))
-    } else if (errorMessage.includes('JSON')) {
-      console.log(chalk.gray('  • A configuration file may be corrupted'))
-      console.log(chalk.gray('  • Check package.json and template.config.json for syntax errors'))
-      console.log(chalk.gray('  • Try restoring from version control'))
+    if (options.json) {
+      // Output JSON error
+      logger.outputJson()
     } else {
-      console.log(chalk.gray('  • Check the error message above for details'))
-      console.log(chalk.gray('  • Ensure all template files are present and readable'))
-      console.log(chalk.gray('  • Try running the command again'))
-    }
+      // Display formatted error
+      logger.log('\n')
+      logger.log(chalk.red('✗ Initialisation failed'))
+      logger.log(chalk.red(`  Error: ${errorMessage}`))
+      logger.log('\n')
 
-    console.log('\n')
-    console.log(chalk.gray('If the problem persists, please report the issue at:'))
-    console.log(chalk.blue('  https://github.com/syntek-studio/ui_design_template/issues'))
-    console.log('\n')
+      // Provide helpful remediation messages based on error type
+      logger.log(chalk.yellow('Troubleshooting:'))
+
+      if (errorMessage.includes('File not found')) {
+        logger.log(chalk.gray('  • Ensure you are running this command from the project root'))
+        logger.log(chalk.gray('  • Check that the template files have not been deleted'))
+        logger.log(chalk.gray('  • Try cloning the template repository again'))
+      } else if (errorMessage.includes('permission') || errorMessage.includes('EACCES')) {
+        logger.log(chalk.gray('  • Check that you have write permissions in this directory'))
+        logger.log(chalk.gray('  • Try running with elevated privileges if necessary'))
+        logger.log(chalk.gray('  • Ensure no files are locked or open in another program'))
+      } else if (errorMessage.includes('Backup failed')) {
+        logger.log(chalk.gray('  • Ensure sufficient disk space is available'))
+        logger.log(chalk.gray('  • Check that you have write permissions'))
+        logger.log(chalk.gray('  • Remove any existing .backup files and try again'))
+      } else if (errorMessage.includes('JSON')) {
+        logger.log(chalk.gray('  • A configuration file may be corrupted'))
+        logger.log(chalk.gray('  • Check package.json and template.config.json for syntax errors'))
+        logger.log(chalk.gray('  • Try restoring from version control'))
+      } else {
+        logger.log(chalk.gray('  • Check the error message above for details'))
+        logger.log(chalk.gray('  • Ensure all template files are present and readable'))
+        logger.log(chalk.gray('  • Try running the command again'))
+      }
+
+      logger.log('\n')
+      logger.log(chalk.gray('If the problem persists, please report the issue at:'))
+      logger.log(chalk.blue('  https://github.com/syntek-studio/ui_design_template/issues'))
+      logger.log('\n')
+    }
 
     process.exit(1)
   }

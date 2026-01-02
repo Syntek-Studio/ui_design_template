@@ -1,6 +1,6 @@
 # US001: Template Initialisation CLI
 
-**Status:** 🔄 In Progress (Phase 3 Complete)
+**Status:** 🔄 In Progress (Phase 3 Complete, Nice to Have Complete)
 **ClickUp ID:** [86c7a97qj](https://app.clickup.com/t/86c7a97qj)
 **Priority:** Must Have
 **Story Points:** 8
@@ -164,6 +164,21 @@ so that I can quickly scaffold a client-specific UI component library without ma
 - [ ] Write integration tests
 - [ ] Document CLI in docs/SETUP.md
 - [ ] Add troubleshooting guide
+
+### Nice to Have Features ✅ COMPLETED
+
+- [x] Dry-run mode (`--dry-run`): Preview changes without applying them
+- [x] Verbose mode (`--verbose`): Detailed logging of all operations
+- [x] JSON output mode (`--json`): Structured JSON for automation
+
+**Implementation Details:**
+
+- `scripts/lib/cli-options.ts`: Added `CliOptions` interface and `parseCliOptions()` function
+- `scripts/lib/cli-options.ts`: Added `Logger` class with `log()`, `verbose()`, `setJsonData()`, and `outputJson()` methods
+- `scripts/lib/cli-options.ts`: Added `JsonOutputData` interface for type-safe JSON output
+- `scripts/lib/cli-help.ts`: Added `displayHelp()` and `isHelpRequested()` functions
+- `scripts/lib/file-operations.ts`: All functions support `dryRun` and `logger` parameters
+- `scripts/init-template.ts`: Full integration of all three modes in the main CLI workflow
 
 ## Notes
 

@@ -240,7 +240,10 @@ export function displayWelcomeMessage(): void {
  * // - .claude/CLAUDE.md
  * // - src/index.ts
  */
-export function displaySuccessMessage(answers: UserAnswers, results: any[]): void {
+export function displaySuccessMessage(
+  answers: UserAnswers,
+  results: Array<{ file: string; modified: boolean }>
+): void {
   console.log('\n')
   console.log(chalk.bold.green('✓ Initialisation completed successfully!'))
   console.log('\n')

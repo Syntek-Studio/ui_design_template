@@ -88,7 +88,7 @@ scripts/
 ### Template Initialisation
 
 ```bash
-node --loader tsx scripts/init-template.ts
+npm run init-template [-- [options]]
 ```
 
 Converts the template into a project-specific instance by:
@@ -99,6 +99,31 @@ Converts the template into a project-specific instance by:
 4. Replacing placeholders throughout the project
 5. Creating a configuration record
 6. Verifying all replacements succeeded
+
+#### CLI Options
+
+| Option      | Description                                  |
+| ----------- | -------------------------------------------- |
+| `--dry-run` | Preview changes without modifying files      |
+| `--verbose` | Show detailed logging of all operations      |
+| `--json`    | Output structured JSON for automation        |
+| `--help`    | Display help message with usage and examples |
+
+#### Examples
+
+```bash
+# Normal initialisation
+npm run init-template
+
+# Preview changes without modifying files
+npm run init-template -- --dry-run
+
+# Preview with detailed logging
+npm run init-template -- --dry-run --verbose
+
+# Output JSON for automation (useful for CI/CD)
+npm run init-template -- --json
+```
 
 ### Environment Scripts
 
