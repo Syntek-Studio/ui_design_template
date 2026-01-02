@@ -38,8 +38,8 @@ jobs:
                 const mergedResults = sarif.runs.flatMap(run => run.results || []);
                 sarif.runs = [{ ...sarif.runs[0], results: mergedResults }];
               }
-              fs.writeFileSync('results.sarif', JSON.stringify(sarif, null, 2));
-            "
+              fs.writeFileSync('processed.sarif', JSON.stringify(sarif, null, 2));
+            " && mv processed.sarif results.sarif
           fi
 
       - name: Upload SARIF to GitHub Security
