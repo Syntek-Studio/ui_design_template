@@ -34,8 +34,20 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
-      - run: npm run test:coverage -- --run --passWithNoTests
+      - name: Check for test files
+        id: check-tests
+        run: |
+          if find src -name "*.test.*" -o -name "*.spec.*" 2>/dev/null | grep -q .; then
+            echo "has_tests=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_tests=false" >> $GITHUB_OUTPUT
+            echo "No test files found, skipping tests"
+          fi
+      - name: Run tests
+        if: steps.check-tests.outputs.has_tests == 'true'
+        run: npm run test:coverage -- --run
       - name: Upload coverage report
+        if: steps.check-tests.outputs.has_tests == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report

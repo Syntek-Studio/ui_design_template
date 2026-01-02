@@ -25,6 +25,23 @@ jobs:
           gh-code-scanning-compat: true
           max-allowed-issues: 2147483647
 
+      - name: Process SARIF for GitHub compatibility
+        if: always()
+        run: |
+          # Extract only the first run to avoid duplicate category error
+          if [ -f results.sarif ]; then
+            node -e "
+              const fs = require('fs');
+              const sarif = JSON.parse(fs.readFileSync('results.sarif', 'utf8'));
+              if (sarif.runs && sarif.runs.length > 1) {
+                // Keep only the first run or merge results
+                const mergedResults = sarif.runs.flatMap(run => run.results || []);
+                sarif.runs = [{ ...sarif.runs[0], results: mergedResults }];
+              }
+              fs.writeFileSync('results.sarif', JSON.stringify(sarif, null, 2));
+            "
+          fi
+
       - name: Upload SARIF to GitHub Security
         uses: github/codeql-action/upload-sarif@v3
         if: always()
