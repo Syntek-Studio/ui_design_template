@@ -1,6 +1,7 @@
 # US010: Refactor Button Component to Use Generated Tokens
 
 **Status:** To Do
+**ClickUp ID:** [86c7a982n](https://app.clickup.com/t/86c7a982n)
 **Priority:** Must Have
 **Story Points:** 5
 **Sprint:** Sprint 05
@@ -14,6 +15,7 @@ so that the component reflects the design system's latest tokens and respects cl
 ## Acceptance Criteria
 
 ### Scenario 1: Button Uses Token Colours
+
 - **Given** the Button component is refactored
 - **When** it renders with a variant (primary, secondary, success, etc.)
 - **Then** colours come from the generated token files
@@ -21,6 +23,7 @@ so that the component reflects the design system's latest tokens and respects cl
 - **And** disabled state uses appropriate tokens
 
 ### Scenario 2: Button Uses Default Configuration
+
 - **Given** Button is rendered without all props
 - **When** it is instantiated
 - **Then** it applies defaults from component-defaults.ts
@@ -28,6 +31,7 @@ so that the component reflects the design system's latest tokens and respects cl
 - **And** passed props override defaults
 
 ### Scenario 3: Backward Compatibility
+
 - **Given** existing code uses the Button component
 - **When** the refactored version is released
 - **Then** all existing usage still works without changes

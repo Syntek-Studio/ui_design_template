@@ -1,6 +1,7 @@
 # US025: Multi-Theme Support for Design System
 
 **Status:** To Do
+**ClickUp ID:** [86c7a990h](https://app.clickup.com/t/86c7a990h)
 **Priority:** Could Have
 **Story Points:** 8
 **Sprint:** Sprint 21
@@ -14,6 +15,7 @@ so that applications can switch between different visual styles at runtime.
 ## Acceptance Criteria
 
 ### Scenario 1: Theme Configuration
+
 - **Given** multiple theme configurations exist
 - **When** a theme is selected
 - **Then** all tokens are swapped to match the selected theme
@@ -21,6 +23,7 @@ so that applications can switch between different visual styles at runtime.
 - **And** components automatically use the active theme
 
 ### Scenario 2: Runtime Theme Switching
+
 - **Given** an application loads
 - **When** user selects a different theme
 - **Then** all components immediately reflect the new theme
@@ -28,6 +31,7 @@ so that applications can switch between different visual styles at runtime.
 - **And** no page reload is required
 
 ### Scenario 3: Theme Provider
+
 - **Given** an application wraps components in ThemeProvider
 - **When** theme context is accessed by components
 - **Then** all components receive current theme tokens

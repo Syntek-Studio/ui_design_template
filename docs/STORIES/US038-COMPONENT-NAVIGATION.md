@@ -1,6 +1,7 @@
 # US038: Implement Navigation Components (Header, Footer, Sidebar)
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99y1](https://app.clickup.com/t/86c7a99y1)
 **Priority:** Should Have
 **Story Points:** 8
 **Sprint:** Sprint 18
@@ -14,6 +15,7 @@ so that I can quickly create standard application layouts.
 ## Acceptance Criteria
 
 ### Scenario 1: Header Component
+
 - **Given** application needs a top navigation bar
 - **When** Header component is used
 - **Then** it provides: logo area, nav links, user menu
@@ -21,6 +23,7 @@ so that I can quickly create standard application layouts.
 - **And** it's responsive and mobile-friendly
 
 ### Scenario 2: Footer Component
+
 - **Given** application needs a footer
 - **When** Footer component is used
 - **Then** it displays: copyright, links, social icons
@@ -28,6 +31,7 @@ so that I can quickly create standard application layouts.
 - **And** uses token colours and spacing
 
 ### Scenario 3: Sidebar Component
+
 - **Given** application needs side navigation
 - **When** Sidebar component is used
 - **Then** it can be expandable/collapsible

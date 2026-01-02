@@ -1,16 +1,17 @@
 # Sprint 02: Template Completion
 
 **Sprint Goal:** Complete the template infrastructure with package configuration and documentation
+**ClickUp List ID:** [901519283751](https://app.clickup.com/90151635198/v/l/li/901519283751)
 **Total Points:** 11
 **Priority Focus:** Must Have
 **Phase:** Phase 1 - Template Infrastructure
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US003 | Template Package.json Configuration | 3 | Must Have | Phase 1 |
-| US005 | Centralised Theme Configuration System | 8 | Must Have | Phase 2 |
+| ID    | Title                                  | Points | Priority  | Phase   |
+| ----- | -------------------------------------- | ------ | --------- | ------- |
+| US003 | Template Package.json Configuration    | 3      | Must Have | Phase 1 |
+| US005 | Centralised Theme Configuration System | 8      | Must Have | Phase 2 |
 
 **Sprint Total: 11 points**
 
@@ -38,17 +39,17 @@ This sprint completes Phase 1 and begins Phase 2. The theme configuration system
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US003 | ❌ | ❌ | ❌ | ✅ (root) |
-| US005 | ❌ | ❌ | ❌ | ✅ (config/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI    |
+| -------- | ------- | ------------ | --------------- | ------------ |
+| US003    | ❌      | ❌           | ❌              | ✅ (root)    |
+| US005    | ❌      | ❌           | ❌              | ✅ (config/) |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Theme config complexity | Medium | High | Clear schema definition, validation |
-| Package.json conflicts | Low | Low | Follow npm best practices |
+| Risk                    | Likelihood | Impact | Mitigation                          |
+| ----------------------- | ---------- | ------ | ----------------------------------- |
+| Theme config complexity | Medium     | High   | Clear schema definition, validation |
+| Package.json conflicts  | Low        | Low    | Follow npm best practices           |
 
 ---
 

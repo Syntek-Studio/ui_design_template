@@ -1,6 +1,7 @@
 # US012: Theme Switching Hook Implementation
 
 **Status:** To Do
+**ClickUp ID:** [86c7a9851](https://app.clickup.com/t/86c7a9851)
 **Priority:** Must Have
 **Story Points:** 5
 **Sprint:** Sprint 07
@@ -14,6 +15,7 @@ so that users can toggle themes and the preference is remembered.
 ## Acceptance Criteria
 
 ### Scenario 1: useTheme Hook API
+
 - **Given** an application imports `useTheme` hook
 - **When** it calls the hook
 - **Then** it returns current theme ('light' or 'dark')
@@ -21,6 +23,7 @@ so that users can toggle themes and the preference is remembered.
 - **And** it provides a toggleTheme function for convenience
 
 ### Scenario 2: Theme Persistence
+
 - **Given** a user switches to dark mode
 - **When** they close and reopen the application
 - **Then** their preference is restored
@@ -28,6 +31,7 @@ so that users can toggle themes and the preference is remembered.
 - **And** key is prefixed with package name (e.g., "mylib-theme")
 
 ### Scenario 3: System Preference Detection
+
 - **Given** the application first loads
 - **When** no stored preference exists
 - **Then** the system prefers-color-scheme is checked

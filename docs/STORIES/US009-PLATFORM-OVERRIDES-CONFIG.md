@@ -1,6 +1,7 @@
 # US009: Platform-Specific Component Overrides
 
 **Status:** To Do
+**ClickUp ID:** [86c7a9810](https://app.clickup.com/t/86c7a9810)
 **Priority:** Must Have
 **Story Points:** 5
 **Sprint:** Sprint 05
@@ -14,6 +15,7 @@ so that components can have different default props or styling based on the targ
 ## Acceptance Criteria
 
 ### Scenario 1: Platform Override Definition
+
 - **Given** src/config/platform-overrides.ts exists
 - **When** it is loaded
 - **Then** it defines platform-specific overrides for web and mobile
@@ -21,6 +23,7 @@ so that components can have different default props or styling based on the targ
 - **And** web overrides take precedence on web platform, mobile on React Native
 
 ### Scenario 2: Mobile-Specific Adjustments
+
 - **Given** a component has different requirements on mobile
 - **When** the component is used in React Native
 - **Then** mobile-specific overrides are applied
@@ -28,6 +31,7 @@ so that components can have different default props or styling based on the targ
 - **And** Text components have mobile-specific line heights
 
 ### Scenario 3: Build-Time Platform Selection
+
 - **Given** a component is imported
 - **When** the build system processes it
 - **Then** the correct platform implementation is selected (web or mobile)

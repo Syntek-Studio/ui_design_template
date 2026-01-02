@@ -1,16 +1,17 @@
 # Sprint 14: Comprehensive Testing Framework
 
 **Sprint Goal:** Complete testing framework with accessibility and visual regression
+**ClickUp List ID:** [901519283767](https://app.clickup.com/90151635198/v/l/li/901519283767)
 **Total Points:** 11
 **Priority Focus:** Should Have
 **Phase:** Phase 6 - Testing Framework
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US020 | Accessibility Testing with jest-axe | 5 | Should Have | Phase 6 |
-| US021 | Visual Regression Testing with Chromatic | 5 | Should Have | Phase 6 |
+| ID    | Title                                    | Points | Priority    | Phase   |
+| ----- | ---------------------------------------- | ------ | ----------- | ------- |
+| US020 | Accessibility Testing with jest-axe      | 5      | Should Have | Phase 6 |
+| US021 | Visual Regression Testing with Chromatic | 5      | Should Have | Phase 6 |
 
 **Sprint Total: 11 points** (Note: 10 points)
 
@@ -42,17 +43,17 @@ Accessibility testing is critical for WCAG compliance. Visual regression testing
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US020 | ❌ | ✅ | ✅ | ✅ (tests/) |
-| US021 | ❌ | ✅ | ❌ | ✅ (config/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI    |
+| -------- | ------- | ------------ | --------------- | ------------ |
+| US020    | ❌      | ✅           | ✅              | ✅ (tests/)  |
+| US021    | ❌      | ✅           | ❌              | ✅ (config/) |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Chromatic costs | Low | Medium | Use free tier, monitor usage |
-| Accessibility test coverage | Medium | High | Enforce 100% component coverage |
+| Risk                        | Likelihood | Impact | Mitigation                      |
+| --------------------------- | ---------- | ------ | ------------------------------- |
+| Chromatic costs             | Low        | Medium | Use free tier, monitor usage    |
+| Accessibility test coverage | Medium     | High   | Enforce 100% component coverage |
 
 ---
 

@@ -1,6 +1,7 @@
 # US032: Contributing Guide Documentation
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99hq](https://app.clickup.com/t/86c7a99hq)
 **Priority:** Should Have
 **Story Points:** 3
 **Sprint:** Sprint 07
@@ -14,6 +15,7 @@ so that I can effectively contribute to the project following established standa
 ## Acceptance Criteria
 
 ### Scenario 1: Contribution Standards
+
 - **Given** contributor reads docs/GUIDES/CONTRIBUTING.md
 - **When** they review the guide
 - **Then** code style guidelines are clear
@@ -22,6 +24,7 @@ so that I can effectively contribute to the project following established standa
 - **And** PR process is explained
 
 ### Scenario 2: Component Creation Guidelines
+
 - **Given** contributor wants to add a new component
 - **When** they follow component creation guide
 - **Then** file structure requirements are clear
@@ -30,6 +33,7 @@ so that I can effectively contribute to the project following established standa
 - **And** accessibility requirements are listed
 
 ### Scenario 3: Development Workflow
+
 - **Given** contributor is ready to start coding
 - **When** they follow the workflow guide
 - **Then** setup steps are provided

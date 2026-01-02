@@ -1,16 +1,17 @@
 # Sprint 11: Enhanced Storybook
 
 **Sprint Goal:** Enhance Storybook configuration and features
+**ClickUp List ID:** [901519283763](https://app.clickup.com/90151635198/v/l/li/901519283763)
 **Total Points:** 11
 **Priority Focus:** Should Have
 **Phase:** Phase 5 - Documentation & Storybook
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US017 | Enhanced Storybook Configuration and Features | 8 | Should Have | Phase 5 |
-| US033 | Theming and Customisation Guide | 5 | Should Have | Phase 5 |
+| ID    | Title                                         | Points | Priority    | Phase   |
+| ----- | --------------------------------------------- | ------ | ----------- | ------- |
+| US017 | Enhanced Storybook Configuration and Features | 8      | Should Have | Phase 5 |
+| US033 | Theming and Customisation Guide               | 5      | Should Have | Phase 5 |
 
 **Sprint Total: 11 points** (Note: 13 points - needs adjustment)
 
@@ -39,17 +40,17 @@ Enhanced Storybook should include interactive controls, comprehensive docs addon
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US017 | ❌ | ✅ | ❌ | ✅ (.storybook/) |
-| US033 | ❌ | ❌ | ❌ | ✅ (docs/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI        |
+| -------- | ------- | ------------ | --------------- | ---------------- |
+| US017    | ❌      | ✅           | ❌              | ✅ (.storybook/) |
+| US033    | ❌      | ❌           | ❌              | ✅ (docs/)       |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Storybook configuration complexity | Medium | Medium | Follow official Storybook patterns |
-| Theme switching in Storybook | Low | Low | Use Storybook theming addon |
+| Risk                               | Likelihood | Impact | Mitigation                         |
+| ---------------------------------- | ---------- | ------ | ---------------------------------- |
+| Storybook configuration complexity | Medium     | Medium | Follow official Storybook patterns |
+| Theme switching in Storybook       | Low        | Low    | Use Storybook theming addon        |
 
 ---
 

@@ -1,6 +1,7 @@
 # US005: Centralised Theme Configuration System
 
 **Status:** To Do
+**ClickUp ID:** [86c7a97wm](https://app.clickup.com/t/86c7a97wm)
 **Priority:** Must Have
 **Story Points:** 8
 **Sprint:** Sprint 02
@@ -14,6 +15,7 @@ so that I can manage the entire design system from a single source of truth and 
 ## Acceptance Criteria
 
 ### Scenario 1: Theme Configuration Structure
+
 - **Given** src/config/theme.config.ts exists
 - **When** the configuration is loaded
 - **Then** it contains all colour definitions, spacing scales, typography settings, breakpoints
@@ -21,6 +23,7 @@ so that I can manage the entire design system from a single source of truth and 
 - **And** it includes base values that can be extended
 
 ### Scenario 2: Colour Palette Definition
+
 - **Given** theme.config.ts defines base colours (e.g., primary: "#3b82f6")
 - **When** tokens are generated
 - **Then** colour shades (50-900) are automatically generated from base colours
@@ -28,6 +31,7 @@ so that I can manage the entire design system from a single source of truth and 
 - **And** the palette is accessible and follows contrast guidelines
 
 ### Scenario 3: Token Export Format
+
 - **Given** theme.config.ts is configured
 - **When** tokens are generated
 - **Then** exports are available in multiple formats: TypeScript, CSS, JSON

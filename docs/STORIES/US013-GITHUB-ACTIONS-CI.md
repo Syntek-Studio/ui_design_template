@@ -1,6 +1,7 @@
 # US013: GitHub Actions CI Pipeline
 
 **Status:** To Do
+**ClickUp ID:** [86c7a9861](https://app.clickup.com/t/86c7a9861)
 **Priority:** Must Have
 **Story Points:** 8
 **Sprint:** Sprint 08
@@ -14,6 +15,7 @@ so that code quality is maintained and issues are caught early.
 ## Acceptance Criteria
 
 ### Scenario 1: CI Workflow Execution
+
 - **Given** a commit is pushed to GitHub
 - **When** the CI workflow is triggered
 - **Then** it runs: install dependencies, lint, type check, build, test
@@ -21,6 +23,7 @@ so that code quality is maintained and issues are caught early.
 - **And** workflow status is visible on the PR
 
 ### Scenario 2: Coverage Reporting
+
 - **Given** tests are run in CI
 - **When** coverage is generated
 - **Then** coverage report is published as artifact
@@ -28,6 +31,7 @@ so that code quality is maintained and issues are caught early.
 - **And** failure if coverage drops below threshold
 
 ### Scenario 3: Build Verification
+
 - **Given** the build step runs
 - **When** it completes
 - **Then** output is verified: dist/ folder contains CJS and ESM builds

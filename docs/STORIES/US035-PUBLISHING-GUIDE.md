@@ -1,6 +1,7 @@
 # US035: Publishing and Release Guide
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99th](https://app.clickup.com/t/86c7a99th)
 **Priority:** Should Have
 **Story Points:** 3
 **Sprint:** Sprint 07
@@ -14,6 +15,7 @@ so that I can confidently manage releases and ensure consistent publishing proce
 ## Acceptance Criteria
 
 ### Scenario 1: Release Process Documentation
+
 - **Given** release manager wants to publish a version
 - **When** they read docs/GUIDES/PUBLISHING.md
 - **Then** release checklist is provided
@@ -22,6 +24,7 @@ so that I can confidently manage releases and ensure consistent publishing proce
 - **And** publishing steps are detailed
 
 ### Scenario 2: Pre-Release Verification
+
 - **Given** release is ready to publish
 - **When** pre-release checklist is followed
 - **Then** all tests pass
@@ -30,6 +33,7 @@ so that I can confidently manage releases and ensure consistent publishing proce
 - **And** breaking changes are highlighted
 
 ### Scenario 3: Post-Release Steps
+
 - **Given** version is published to npm
 - **When** release is complete
 - **Then** GitHub release is created

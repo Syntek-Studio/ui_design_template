@@ -1,6 +1,7 @@
 # US030: Architecture Decision Records (ADRs)
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99ax](https://app.clickup.com/t/86c7a99ax)
 **Priority:** Should Have
 **Story Points:** 3
 **Sprint:** Sprint 06
@@ -14,6 +15,7 @@ so that future maintainers understand the reasoning behind current design choice
 ## Acceptance Criteria
 
 ### Scenario 1: ADR Creation
+
 - **Given** a significant design decision is made
 - **When** an ADR is created
 - **Then** it documents: decision, context, alternatives considered, consequences
@@ -21,6 +23,7 @@ so that future maintainers understand the reasoning behind current design choice
 - **And** decision date is recorded
 
 ### Scenario 2: ADR Structure
+
 - **Given** ADRs are documented
 - **When** a developer reads them
 - **Then** they find consistent structure across all ADRs
@@ -28,6 +31,7 @@ so that future maintainers understand the reasoning behind current design choice
 - **And** related ADRs are linked
 
 ### Scenario 3: ADR Accessibility
+
 - **Given** an ADR exists
 - **When** developer needs to understand a decision
 - **Then** ADRs are easily discoverable in docs/DECISIONS/

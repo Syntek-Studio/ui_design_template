@@ -1,6 +1,7 @@
 # US021: Visual Regression Testing with Chromatic
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98pt](https://app.clickup.com/t/86c7a98pt)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 14
@@ -14,6 +15,7 @@ so that component visual appearance is maintained across versions.
 ## Acceptance Criteria
 
 ### Scenario 1: Chromatic Integration
+
 - **Given** Chromatic is configured
 - **When** stories are pushed to Chromatic service
 - **Then** visual snapshots are captured for all story variants
@@ -21,6 +23,7 @@ so that component visual appearance is maintained across versions.
 - **And** visual changes are highlighted for review
 
 ### Scenario 2: Visual Change Detection
+
 - **Given** a component's styling is changed
 - **When** CI pipeline runs
 - **Then** Chromatic detects visual changes
@@ -29,6 +32,7 @@ so that component visual appearance is maintained across versions.
 - **And** approved changes become new baseline
 
 ### Scenario 3: CI Integration
+
 - **Given** a PR is opened with visual changes
 - **When** CI runs Chromatic tests
 - **Then** Chromatic check is reported on PR

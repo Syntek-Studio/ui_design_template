@@ -1,6 +1,7 @@
 # US022: Implement Input/TextInput Component
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98rv](https://app.clickup.com/t/86c7a98rv)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 15
@@ -14,6 +15,7 @@ so that I can easily add form fields to my applications.
 ## Acceptance Criteria
 
 ### Scenario 1: Web Input Component
+
 - **Given** an application imports Input component
 - **When** it renders the component
 - **Then** an HTML `<input>` element is created
@@ -22,6 +24,7 @@ so that I can easily add form fields to my applications.
 - **And** focus states are clearly visible
 
 ### Scenario 2: Mobile TextInput Component
+
 - **Given** a React Native app imports Mobile.Input
 - **When** it renders the component
 - **Then** a React Native `<TextInput>` is created
@@ -30,6 +33,7 @@ so that I can easily add form fields to my applications.
 - **And** keyboard handling is appropriate for input type
 
 ### Scenario 3: Accessibility
+
 - **Given** Input is rendered
 - **When** accessibility checks run
 - **Then** associated label is present
