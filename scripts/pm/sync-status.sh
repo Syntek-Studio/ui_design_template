@@ -1,29 +1,74 @@
 #!/bin/bash
 #
 # ClickUp Status Sync Script
-# Manually update a ClickUp task status from the command line
+#
+# Manually updates a user story task status in ClickUp from the command line.
+# Provides a simple way to keep ClickUp in sync with development progress without
+# needing to access the web interface.
 #
 # Usage:
 #   ./scripts/pm/sync-status.sh <us-number> <status>
 #
-# Example:
+# Examples:
 #   ./scripts/pm/sync-status.sh 001 "In Progress"
+#   ./scripts/pm/sync-status.sh 042 "In Review"
+#   ./scripts/pm/sync-status.sh 015 "Accepted"
+#
+# Arguments:
+#   us-number  - User story number (3 digits, e.g., 001, 042)
+#                Will search for task named "US-###" in ClickUp
+#   status     - Target status (case-sensitive, see valid statuses below)
+#
+# Valid statuses:
+#   - Open
+#   - Pending
+#   - In Progress
+#   - In Review
+#   - Accepted
+#   - Accepted Customer
+#   - Blocked
+#   - Completed
+#   - Closed
+#   - Rejected
+#   - Rejected Customer
 #
 # Required environment variables:
-#   CLICKUP_API_KEY   - Your ClickUp API token
-#   CLICKUP_SPACE_ID  - Space ID
+#   CLICKUP_API_KEY   - ClickUp API authentication token
+#                      Generate at: https://app.clickup.com/settings/apps
+#   CLICKUP_SPACE_ID  - ClickUp space ID
+#                      Find in space settings or .env.dev
+#
+# How it works:
+#   1. Validates input format (3-digit US number, valid status)
+#   2. Checks required environment variables
+#   3. Authenticates with ClickUp API
+#   4. Searches for task matching "US-###" pattern
+#   5. Updates task status via ClickUp API
+#   6. Verifies update was successful
+#
+# Exit codes:
+#   0 - Status updated successfully
+#   1 - Invalid arguments, missing environment variables, or API error
+#
+# Troubleshooting:
+#   - "CLICKUP_API_KEY is not set" → Export API key: export CLICKUP_API_KEY="..."
+#   - "CLICKUP_SPACE_ID is not set" → Export space ID: export CLICKUP_SPACE_ID="..."
+#   - "No task found for US-###" → Task doesn't exist in ClickUp
+#   - "Failed to authenticate" → API key may be expired/invalid
+#   - "Failed to update task" → Check task permissions and status validity
 #
 
 set -e
 
-# Colors for output
+# ANSI colour codes for terminal output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m'
+NC='\033[0m' # No colour - resets formatting
 
-# Validate inputs
+# Validate command line arguments
+# Requires exactly 2 arguments: US number and status
 if [[ $# -lt 2 ]]; then
   echo -e "${RED}Error: Missing arguments${NC}"
   echo "Usage: $0 <us-number> <status>"
@@ -47,12 +92,14 @@ US_NUMBER="$1"
 STATUS="$2"
 
 # Validate US number format
+# Must be exactly 3 digits (e.g., 001, 042, 999)
 if [[ ! "$US_NUMBER" =~ ^[0-9]{3}$ ]]; then
   echo -e "${RED}Error: US number must be exactly 3 digits (e.g., 001)${NC}"
   exit 1
 fi
 
-# Validate status
+# Validate status against allowed values
+# Use case statement for clear list of valid statuses
 case "$STATUS" in
   "Open"|"Pending"|"In Progress"|"In Review"|"Accepted"|"Accepted Customer"|"Blocked"|"Completed"|"Closed"|"Rejected"|"Rejected Customer")
     ;;
@@ -63,7 +110,8 @@ case "$STATUS" in
     ;;
 esac
 
-# Check environment variables
+# Check for required environment variables
+# Script cannot proceed without authentication credentials
 if [[ -z "$CLICKUP_API_KEY" ]]; then
   echo -e "${RED}Error: CLICKUP_API_KEY is not set${NC}"
   exit 1
@@ -77,7 +125,9 @@ fi
 SEARCH_TERM="US-$US_NUMBER"
 echo -e "${BLUE}Searching for task: $SEARCH_TERM${NC}"
 
-# Get user ID
+# Get user ID from ClickUp API
+# Required to construct the correct API endpoint for task search
+# Request includes HTTP status code for error checking
 USER_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
   'https://api.clickup.com/api/v2/user' \
   -H "Authorization: $CLICKUP_API_KEY")
@@ -97,7 +147,9 @@ if [[ -z "$USER_ID" ]]; then
   exit 1
 fi
 
-# Search for task in space
+# Search for task in the specified space
+# Includes closed tasks to find completed items
+# Filters by space_ids to limit results to this project
 HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
   "https://api.clickup.com/api/v2/team/$USER_ID/task?space_ids[]=$CLICKUP_SPACE_ID&include_closed=true" \
   -H "Authorization: $CLICKUP_API_KEY" \
@@ -111,7 +163,9 @@ if [[ "$HTTP_CODE" -ne 200 ]]; then
   exit 1
 fi
 
-# Find task with matching US number
+# Find task with matching US number in the response
+# Extracts first matching task ID from JSON response
+# Returns empty if no matching task found
 TASK_ID=$(echo "$RESPONSE" | jq -r --arg search "$SEARCH_TERM" '.tasks[] | select(.name | contains($search)) | .id' | head -1)
 
 if [[ -z "$TASK_ID" || "$TASK_ID" == "null" ]]; then
@@ -122,9 +176,12 @@ fi
 echo -e "${GREEN}Found task ID: $TASK_ID${NC}"
 echo -e "${BLUE}Updating status to: $STATUS${NC}"
 
-# Update task status
+# Prepare JSON payload for status update
+# Uses jq to safely construct JSON without shell injection risk
 PAYLOAD=$(jq -n --arg status "$STATUS" '{status: $status}')
 
+# Update task status via ClickUp API
+# Uses PUT method to modify the task
 HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X PUT \
   "https://api.clickup.com/api/v2/task/$TASK_ID" \
   -H "Authorization: $CLICKUP_API_KEY" \
@@ -139,7 +196,8 @@ if [[ "$HTTP_CODE" -ne 200 ]]; then
   exit 1
 fi
 
-# Verify update
+# Verify the update was successful
+# Compares returned status with requested status
 UPDATED_STATUS=$(echo "$RESPONSE" | jq -r '.status.status // empty')
 
 if [[ "$UPDATED_STATUS" == "$STATUS" ]]; then

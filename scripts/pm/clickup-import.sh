@@ -1,47 +1,113 @@
 #!/bin/bash
 #
 # ClickUp Import Script
-# Imports user stories and sprints from markdown files to ClickUp
+#
+# Imports user stories and sprints from local markdown files to ClickUp.
+# Provides bidirectional sync with GitHub Actions via GitOps approach.
 #
 # Usage:
 #   ./scripts/pm/clickup-import.sh [--dry-run] [--stories-only] [--sprints-only]
 #
-# Required environment variables (or GitHub Secrets):
-#   CLICKUP_API_KEY           - Your ClickUp API key
-#   CLICKUP_BACKLOG_FOLDER_ID - Backlog folder ID (list is auto-discovered)
-#   CLICKUP_SPACE_ID          - Space ID
-#   CLICKUP_SPRINT_FOLDER_ID  - Sprints folder ID
+# Options:
+#   --dry-run         Preview what would be imported without making API calls
+#   --stories-only    Only import user stories, skip sprints
+#   --sprints-only    Only import sprints, skip user stories
 #
-# SECURITY: This script has been hardened against command injection
-# and credential exposure. Do not modify security controls without review.
+# Examples:
+#   ./scripts/pm/clickup-import.sh                    # Import everything
+#   ./scripts/pm/clickup-import.sh --dry-run          # Preview changes
+#   ./scripts/pm/clickup-import.sh --stories-only     # Only update user stories
+#
+# Required environment variables:
+#   CLICKUP_API_KEY           - ClickUp API authentication token
+#                              Generate at: https://app.clickup.com/settings/apps
+#   CLICKUP_SPACE_ID          - ClickUp space ID
+#                              Find in space settings
+#   CLICKUP_BACKLOG_FOLDER_ID - Backlog folder ID for user stories
+#                              List ID is automatically discovered
+#   CLICKUP_SPRINT_FOLDER_ID  - Sprints folder ID for sprint tasks
+#
+# Input file structure:
+#   User stories: docs/STORIES/US-###-description.md
+#   Sprints:      docs/SPRINTS/SPRINT-##.md
+#
+# How it works:
+#   1. Parses markdown files from docs/STORIES/ and docs/SPRINTS/
+#   2. Validates file format and extracts metadata
+#   3. Maps MoSCoW prioritisation to ClickUp priority levels
+#   4. Creates or updates tasks in ClickUp via API
+#   5. Logs changes with timestamps
+#   6. Returns exit code indicating success/failure
+#
+# Security features:
+#   - Input validation and sanitisation
+#   - API token never logged or exposed
+#   - Rate limiting between requests (0.1s)
+#   - HTTP error handling and recovery
+#   - No sensitive data in error messages
+#   - Command injection prevention
+#
+# Exit codes:
+#   0 - Success (all imports completed)
+#   1 - Validation error, missing environment variables, or API failure
+#
+# Troubleshooting:
+#   - "Invalid story ID format" → Files must be named US-###-description.md
+#   - "API Error (HTTP 401)" → API key expired, generate a new one
+#   - "API Error (HTTP 404)" → Space/Folder ID not found, verify in ClickUp
+#   - "--dry-run" to preview changes without making API calls
+#
+# SECURITY NOTE:
+#   This script has been hardened against command injection and credential
+#   exposure. Do not modify security controls (validation, sanitisation, or
+#   rate limiting) without careful review.
 #
 
-# Don't use set -e as it causes issues with arithmetic operations
+# Don't use set -e as it causes issues with arithmetic operations in bash
+# Instead, check return codes explicitly and handle errors
 # set -e
 
-# Colors for output
+# ANSI colour codes for terminal output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m' # No Colour - resets formatting
 
 # ============================================================================
-# SECURITY: Input sanitisation functions
+# SECURITY: Input validation and sanitisation functions
+#
+# These functions prevent command injection and ensure data is safe for API calls.
 # ============================================================================
 
 # Sanitise text input - removes control characters, limits length
-# Usage: sanitise_text "input" [max_length]
+#
+# Removes dangerous characters that could cause injection attacks while
+# preserving alphanumeric content, spaces, and safe punctuation.
+#
+# Usage: sanitise_text "input_text" [max_length]
+#   input_text  - Text to sanitise
+#   max_length  - Maximum length (default 500)
+#
+# Returns: Sanitised text with control characters removed
 sanitise_text() {
   local input="$1"
   local max_length="${2:-500}"
 
-  # Remove control characters except newline/tab, limit to safe characters
+  # Remove control characters except newline/tab, limit to safe characters only
   echo "$input" | tr -cd '[:alnum:][:space:][:punct:]' | tr -s ' ' | head -c "$max_length"
 }
 
-# Validate ID format - alphanumeric only
+# Validate ID format - ensures alphanumeric, hyphen, and underscore only
+#
+# Prevents injection of special characters in API IDs.
+# Used to validate folder IDs, list IDs, and other ClickUp identifiers.
+#
 # Usage: validate_id "id_value" "id_name"
+#   id_value  - The ID to validate
+#   id_name   - Friendly name for error messages (e.g., "CLICKUP_SPACE_ID")
+#
+# Returns: 0 (valid) or 1 (invalid)
 validate_id() {
   local id_value="$1"
   local id_name="$2"
@@ -53,8 +119,14 @@ validate_id() {
   return 0
 }
 
-# Validate story ID format (US### or US-###)
-# Usage: validate_story_id "US001" or "US-001"
+# Validate user story ID format - ensures US-### pattern
+#
+# Ensures story IDs follow the project naming convention.
+# Accepts both "US001" and "US-001" formats for compatibility.
+#
+# Usage: validate_story_id "US-001"
+#
+# Returns: 0 (valid) or 1 (invalid)
 validate_story_id() {
   local story_id="$1"
 

@@ -1,28 +1,81 @@
 #!/bin/bash
 #
 # ClickUp Sync IDs Script
-# Pulls task IDs from ClickUp and updates local markdown files
+#
+# Pulls task IDs from ClickUp and updates local markdown files.
+# Keeps local documentation in sync with ClickUp's canonical task identifiers.
 #
 # Usage:
 #   ./scripts/pm/clickup-sync-ids.sh [--dry-run]
 #
-# Required environment variables (or GitHub Secrets):
-#   CLICKUP_API_KEY           - Your ClickUp API key
-#   CLICKUP_BACKLOG_LIST_ID   - Backlog list ID
-#   CLICKUP_SPRINT_FOLDER_ID  - Sprints folder ID
+# Options:
+#   --dry-run  Preview what would be updated without modifying files
 #
-# SECURITY: This script has been hardened against command injection
-# and credential exposure. Do not modify security controls without review.
+# Examples:
+#   ./scripts/pm/clickup-sync-ids.sh        # Sync all IDs from ClickUp
+#   ./scripts/pm/clickup-sync-ids.sh --dry-run  # Preview changes
+#
+# Required environment variables:
+#   CLICKUP_API_KEY          - ClickUp API authentication token
+#                             Generate at: https://app.clickup.com/settings/apps
+#   CLICKUP_BACKLOG_LIST_ID  - Backlog list ID for user stories
+#   CLICKUP_SPRINT_FOLDER_ID - Sprints folder ID
+#
+# Environment loading:
+#   If .env.dev exists in project root, it will be sourced automatically.
+#   This allows credentials to be stored locally during development.
+#
+# How it works:
+#   1. Fetches all tasks from ClickUp backlog (with pagination)
+#   2. For each task, extracts the task ID (internal ClickUp identifier)
+#   3. Updates corresponding local markdown file with task ID
+#   4. Handles pagination for large task lists
+#   5. Reports changes and errors
+#
+# Input file structure:
+#   User stories: docs/STORIES/US-###-description.md
+#   Sprints:      docs/SPRINTS/SPRINT-##.md
+#
+# Output:
+#   Updates YAML front matter in markdown files with task_id field:
+#   ---
+#   task_id: "abc123def456"
+#   status: "Open"
+#   estimate: 5
+#   ---
+#
+# Security features:
+#   - Input validation and sanitisation
+#   - API token never logged or exposed
+#   - YAML parsing safety (no eval, only sed)
+#   - HTTP error handling
+#   - No sensitive data in error messages
+#   - Command injection prevention
+#
+# Exit codes:
+#   0 - Success (all IDs synced)
+#   1 - Validation error, missing environment variables, or API failure
+#
+# Troubleshooting:
+#   - "CLICKUP_API_KEY is not set" → Export key or add to .env.dev
+#   - "CLICKUP_BACKLOG_LIST_ID is not set" → Find in ClickUp space settings
+#   - "--dry-run" to preview what would change without modifying files
+#   - Check .env.dev permissions (should not be world-readable with secrets)
+#
+# SECURITY NOTE:
+#   This script has been hardened against command injection and credential
+#   exposure. Do not modify validation or sanitisation without careful review.
 #
 
+# Exit immediately on any error
 set -e
 
-# Colours for output
+# ANSI colour codes for terminal output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Colour
+NC='\033[0m' # No Colour - resets formatting
 
 # Script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -55,6 +108,13 @@ done
 # SECURITY: Input validation functions
 # ============================================================================
 
+# Validate ID format - ensures alphanumeric, hyphen, and underscore only
+#
+# Prevents injection of special characters in API IDs.
+#
+# Usage: validate_id "id_value" "id_name"
+#
+# Returns: 0 (valid) or 1 (invalid)
 validate_id() {
   local id_value="$1"
   local id_name="$2"
@@ -66,15 +126,29 @@ validate_id() {
   return 0
 }
 
-# Check required environment variables
+# Check required environment variables and validate formats
+#
+# Ensures all required credentials are set before attempting API calls.
+# Validates ID format to prevent injection attacks.
+#
+# Required variables checked:
+# - CLICKUP_API_KEY: API authentication token
+# - CLICKUP_BACKLOG_LIST_ID: Backlog list identifier
+# - CLICKUP_SPRINT_FOLDER_ID: Sprints folder identifier
+#
+# Returns: 0 (all valid) or exits with status 1 (any missing/invalid)
 check_env() {
   local missing=false
+
+  # Check each required variable is set
   for var in CLICKUP_API_KEY CLICKUP_BACKLOG_LIST_ID CLICKUP_SPRINT_FOLDER_ID; do
     if [[ -z "${!var}" ]]; then
       echo -e "${RED}Error: $var is not set${NC}"
       missing=true
     fi
   done
+
+  # If any are missing, display instructions and exit
   if $missing; then
     echo ""
     echo "Please set the required environment variables or source your .env.dev file:"
@@ -82,7 +156,7 @@ check_env() {
     exit 1
   fi
 
-  # SECURITY: Validate ID formats
+  # SECURITY: Validate ID formats to prevent injection
   if ! validate_id "$CLICKUP_BACKLOG_LIST_ID" "CLICKUP_BACKLOG_LIST_ID"; then
     exit 1
   fi
