@@ -1,7 +1,7 @@
 # src/tokens/
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -40,15 +40,17 @@
 
 ## Overview
 
-The `src/tokens/` folder contains the design system's central token definitions. These tokens define colours, spacing, typography, breakpoints, shadows, and borders used across all components in both web and mobile platforms.
+The `src/tokens/` folder contains the design system's central token definitions. These tokens define colours, spacing,
+typography, breakpoints, shadows, and borders used across all components in both web and mobile platforms.
 
-Tokens are JavaScript constants that serve as a single source of truth for design decisions, ensuring consistency across the entire library.
+Tokens are JavaScript constants that serve as a single source of truth for design decisions, ensuring consistency across
+the entire library.
 
 ---
 
 ## Directory Tree
 
-```
+```typescript
 src/tokens/
 ├── README.md              # This file
 ├── index.ts               # Main export file
@@ -82,7 +84,7 @@ src/tokens/
 
 The colour palette includes brand, semantic, and neutral colours.
 
-```typescript
+````typescript
 import { colours } from '@template/ui'
 
 // Brand colours with shade variations
@@ -99,7 +101,7 @@ colours.info // #3b82f6 - Blue
 colours.white // #ffffff
 colours.black // #000000
 colours.grey // {50, 100, 200, ..., 900} - Grey shades
-```
+```text
 
 **Example Usage:**
 
@@ -108,7 +110,7 @@ const bgColor = colours.primary[500] // #3b82f6
 const textColor = colours.white // #ffffff
 const borderColor = colours.grey[200] // #e5e7eb
 const errorColor = colours.error // #ef4444
-```
+````
 
 ### Spacing (`spacing.ts`)
 
@@ -130,12 +132,19 @@ spacing[96] // 384px
 **Mapping:**
 
 - `spacing[0]` = 0px
+
 - `spacing[px]` = 1px
+
 - `spacing[0.5]` = 2px
+
 - `spacing[1]` = 4px (base unit)
+
 - `spacing[2]` = 8px (2x)
+
 - `spacing[4]` = 16px (4x)
+
 - `spacing[6]` = 24px (6x)
+
 - And so on...
 
 **Example Usage:**
@@ -150,7 +159,7 @@ const gap = spacing[3] // 12px
 
 Font families, sizes, and weights for consistent text styling.
 
-```typescript
+````typescript
 import { typography } from '@template/ui'
 
 // Font families
@@ -178,7 +187,7 @@ typography.fontWeight.medium // 500
 typography.fontWeight.semibold // 600
 typography.fontWeight.bold // 700
 typography.fontWeight.black // 900
-```
+```text
 
 **Example Usage:**
 
@@ -186,13 +195,13 @@ typography.fontWeight.black // 900
 const headingSize = typography.fontSize['2xl'] // { size: 24, lineHeight: 32 }
 const bodySize = typography.fontSize.base // { size: 16, lineHeight: 24 }
 const boldWeight = typography.fontWeight.bold // 700
-```
+````
 
 ### Breakpoints (`breakpoints.ts`)
 
 Responsive design breakpoints for mobile-first approach.
 
-```typescript
+````typescript
 import { breakpoints } from '@template/ui'
 
 breakpoints.xs // 0px (default/mobile)
@@ -201,7 +210,7 @@ breakpoints.md // 768px
 breakpoints.lg // 1024px
 breakpoints.xl // 1280px
 breakpoints['2xl'] // 1536px
-```
+```text
 
 **Usage in Media Queries:**
 
@@ -209,20 +218,20 @@ breakpoints['2xl'] // 1536px
 const isMobile = windowWidth < breakpoints.sm
 const isTablet = windowWidth >= breakpoints.md && windowWidth < breakpoints.lg
 const isDesktop = windowWidth >= breakpoints.lg
-```
+```text
 
 **Usage with Tailwind CSS:**
 
 ```typescript
 className = 'px-4 sm:px-6 md:px-8 lg:px-12' // Responsive padding
 className = 'text-sm md:text-base lg:text-lg' // Responsive font
-```
+````
 
 ### Shadows (`shadows.ts`)
 
 Shadow definitions for elevation and visual hierarchy.
 
-```typescript
+````typescript
 import { shadows } from '@template/ui'
 
 shadows.none // none - No shadow
@@ -233,7 +242,7 @@ shadows.lg // Large shadow (10px elevation)
 shadows.xl // Extra large shadow (20px elevation)
 shadows['2xl'] // 2XL shadow (25px elevation)
 shadows.inner // Inner shadow (inset)
-```
+```text
 
 **Example Usage:**
 
@@ -241,13 +250,13 @@ shadows.inner // Inner shadow (inset)
 const cardShadow = shadows.md // 0 4px 6px -1px rgb(0 0 0 / 0.1), ...
 const floatShadow = shadows.lg // 0 10px 15px -3px rgb(0 0 0 / 0.1), ...
 const subtleShadow = shadows.sm // 0 1px 2px 0 rgb(0 0 0 / 0.05)
-```
+````
 
 ### Borders (`borders.ts`)
 
 Border radius and width definitions for consistent rounded corners and strokes.
 
-```typescript
+````typescript
 import { borders } from '@template/ui'
 
 // Border radius
@@ -267,7 +276,7 @@ borders.width[1] // 1px (thin)
 borders.width[2] // 2px
 borders.width[4] // 4px
 borders.width[8] // 8px (thick)
-```
+```text
 
 **Example Usage:**
 
@@ -275,7 +284,7 @@ borders.width[8] // 8px (thick)
 const roundedButton = borders.radius.lg // 8px corners
 const circleAvatar = borders.radius.full // Perfect circle
 const thinBorder = borders.width[1] // 1px border
-```
+```markdown
 
 ---
 
@@ -287,7 +296,7 @@ const thinBorder = borders.width[1] // 1px border
 
 ```typescript
 import { colours, spacing, typography, breakpoints, shadows, borders } from '@template/ui'
-```
+```text
 
 **Individual tokens:**
 
@@ -295,7 +304,7 @@ import { colours, spacing, typography, breakpoints, shadows, borders } from '@te
 import { colours } from '@template/ui'
 import { spacing } from '@template/ui'
 import { typography } from '@template/ui'
-```
+```markdown
 
 ### Using Tokens in Components
 
@@ -321,7 +330,7 @@ export const Card = ({ children }) => {
     </div>
   );
 };
-```
+```text
 
 **Mobile Component Example:**
 
@@ -342,7 +351,7 @@ export const Card = ({ children }) => {
     </View>
   );
 };
-```
+```text
 
 **With Tailwind CSS:**
 
@@ -351,7 +360,7 @@ export const Card = ({ children }) => {
 <div className="bg-white p-6 rounded-lg shadow-md">
   {children}
 </div>
-```
+```markdown
 
 ### Type Safety
 
@@ -363,7 +372,7 @@ import { colours, type Colours } from '@template/ui'
 // Type-safe access
 const primaryColor: string = colours.primary[500]
 const colourType: Colours = colours
-```
+````
 
 ---
 
@@ -373,47 +382,63 @@ const colourType: Colours = colours
 
 The colour system uses:
 
-1. **Brand colours** - Primary and secondary with 9 shades (50-900)
-2. **Semantic colours** - Success, warning, error, info for status
-3. **Neutral colours** - White, black, grey for text and backgrounds
+1. **Brand colours**- Primary and secondary with 9 shades (50-900)
+
+2.**Semantic colours**- Success, warning, error, info for status
+
+3.**Neutral colours**- White, black, grey for text and backgrounds
 
 ### Spacing Scale
 
 Based on 4px grid system for mathematical consistency:
 
 - Multiples of 4 (4, 8, 12, 16, 20, 24...)
+
 - Enables precise pixel-perfect designs
+
 - Consistent vertical and horizontal rhythm
 
 ### Typography Hierarchy
 
 Predefined scales ensure readability:
 
-- **Heading levels** - 2xl to 6xl for H1 to H6
-- **Body text** - base and sm for paragraphs
-- **UI text** - xs and sm for labels and captions
-- **Font weights** - thin to black for emphasis
+-**Heading levels**- 2xl to 6xl for H1 to H6
+
+-**Body text**- base and sm for paragraphs
+
+-**UI text**- xs and sm for labels and captions
+
+-**Font weights**- thin to black for emphasis
 
 ### Responsive Design
 
 Mobile-first breakpoints:
 
-- **xs (0px)** - Mobile default
-- **sm (640px)** - Large phone
-- **md (768px)** - Tablet
-- **lg (1024px)** - Desktop
-- **xl (1280px)** - Large desktop
-- **2xl (1536px)** - Ultra-wide
+-**xs (0px)**- Mobile default
+
+-**sm (640px)**- Large phone
+
+-**md (768px)**- Tablet
+
+-**lg (1024px)**- Desktop
+
+-**xl (1280px)**- Large desktop
+
+-**2xl (1536px)**- Ultra-wide
 
 ### Elevation System
 
 Shadows create depth:
 
-- **none/sm** - Subtle, flat design
-- **base/md** - Standard elevation
-- **lg/xl** - Floating, prominent
-- **2xl** - Modal/overlay elevation
-- **inner** - Inset/depressed
+-**none/sm**- Subtle, flat design
+
+-**base/md**- Standard elevation
+
+-**lg/xl**- Floating, prominent
+
+-**2xl**- Modal/overlay elevation
+
+-**inner** - Inset/depressed
 
 ---
 
@@ -422,8 +447,11 @@ Shadows create depth:
 To add new tokens:
 
 1. Open the relevant file (e.g., `colours.ts`)
+
 2. Add the new token to the exported object
+
 3. Update the TypeScript type
+
 4. Re-export from `index.ts`
 
 **Example - Adding a new colour:**
@@ -446,20 +474,28 @@ export type Colours = typeof colours
 
 ## Best Practices
 
-1. **Always use tokens** - Don't hardcode colours or spacing values
-2. **Consistent naming** - Follow token naming conventions
-3. **Single source of truth** - Maintain tokens here, not in component styles
-4. **Type safety** - Leverage TypeScript types for safety
-5. **Documentation** - Document new tokens with comments
-6. **Version control** - Track token changes in git history
+1. **Always use tokens**- Don't hardcode colours or spacing values
+
+2.**Consistent naming**- Follow token naming conventions
+
+3.**Single source of truth**- Maintain tokens here, not in component styles
+
+4.**Type safety**- Leverage TypeScript types for safety
+
+5.**Documentation**- Document new tokens with comments
+
+6.**Version control** - Track token changes in git history
 
 ---
 
 ## Related Sections
 
 - [../web/components/](../web/components/) - Web components using tokens
+
 - [../mobile/components/](../mobile/components/) - Mobile components using tokens
+
 - [../../docs/TOKENS.md](../../docs/TOKENS.md) - Token documentation
+
 - [../../README.md](../../README.md) - Main project README
 
 ---

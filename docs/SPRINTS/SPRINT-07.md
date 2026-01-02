@@ -23,23 +23,33 @@
 ## Sprint Deliverables
 
 - useTheme() hook for theme management
+
 - Contributing guide documentation
+
 - Publishing and release guide
+
 - Foundation for CI/CD documentation
 
 ## Acceptance Criteria
 
 - [ ] useTheme() hook is functional
+
 - [ ] Hook provides theme state and toggle function
+
 - [ ] Hook works on web and mobile
+
 - [ ] Contributing guide is complete
+
 - [ ] Publishing guide is complete
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-The useTheme() hook is the primary developer interface for theme management. It must work seamlessly across web and React Native.
+The useTheme() hook is the primary developer interface for theme management. It must work seamlessly across web and
+React Native.
 
 ## Repository Breakdown
 

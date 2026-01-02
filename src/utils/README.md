@@ -1,7 +1,7 @@
 # src/utils/
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -35,20 +35,24 @@
 
 ## Overview
 
-The `src/utils/` folder contains shared utility functions and component style mappings used across both web and mobile components. These utilities ensure consistency, type safety, and DRY principles throughout the component library.
+The `src/utils/` folder contains shared utility functions and component style mappings used across both web and mobile
+components. These utilities ensure consistency, type safety, and DRY principles throughout the component library.
 
 **Key Features:**
 
 - Type-safe class name manipulation utilities
+
 - Centralised component style mappings (size, variant, rounded)
+
 - Cross-platform compatibility (web Tailwind CSS and mobile Nativewind)
+
 - Reusable patterns that prevent code duplication
 
 ---
 
 ## Directory Tree
 
-```
+```typescript
 src/utils/
 ├── README.md              # This file
 ├── index.ts               # Main export file
@@ -76,14 +80,15 @@ Provides helper functions for managing CSS class names in a type-safe manner.
 
 **Functions:**
 
-1. **`cn(...classes)`** - Combines multiple class names, filtering out falsy values
+1. **`cn(...classes)`**- Combines multiple class names, filtering out falsy values
    - Useful for conditional class application
    - Handles strings, booleans, undefined, and null values
    - Returns a clean space-separated string
 
-2. **`mergeClasses(...classes)`** - Merges class strings, removing duplicates
-   - Deduplicates repeated class names
-   - Useful when combining multiple class strings
+2.**`mergeClasses(...classes)`** - Merges class strings, removing duplicates
+
+- Deduplicates repeated class names
+- Useful when combining multiple class strings
 
 ### Component Style Mappings (`componentStyles.ts`)
 
@@ -92,7 +97,10 @@ Centralised style mappings for common component patterns.
 **Types:**
 
 - `ComponentSize` - Size variants: `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
-- `ComponentVariant` - Visual variants: `'primary' | 'secondary' | 'tertiary' | 'outline' | 'ghost' | 'link' | 'destructive' | 'success' | 'warning'`
+
+- `ComponentVariant` - Visual variants: `'primary' | 'secondary' | 'tertiary' | 'outline' |
+'ghost' | 'link' | 'destructive' | 'success' | 'warning'`
+
 - `ComponentRounded` - Border radius: `'none' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'`
 
 **Style Mappings:**
@@ -118,16 +126,16 @@ Centralised style mappings for common component patterns.
 
 **Import from the main library:**
 
-```typescript
+````typescript
 import { cn, mergeClasses, sizeClasses, variantClasses } from '@template/ui'
-```
+```text
 
 **Import from utils directly:**
 
 ```typescript
 import { cn, mergeClasses } from '@/utils'
 import { sizeClasses, variantClasses, ComponentSize } from '@/utils'
-```
+````
 
 ### Using Class Name Utilities
 
@@ -148,12 +156,12 @@ const buttonClass = cn(
 
 **Merging Classes with `mergeClasses`:**
 
-```typescript
+````typescript
 import { mergeClasses } from '@/utils'
 
 const merged = mergeClasses('px-4 py-2 text-white', 'px-4 bg-blue-600', 'rounded-lg')
 // Result: "px-4 py-2 text-white bg-blue-600 rounded-lg" (duplicates removed)
-```
+```markdown
 
 ### Using Component Styles in Web Components
 
@@ -178,7 +186,7 @@ export const Button = ({ size = 'md', variant = 'primary', rounded = 'lg', iconO
 
   return <button className={buttonClasses}>Click me</button>;
 };
-```
+```markdown
 
 ### Using Component Styles in Mobile Components
 
@@ -217,7 +225,7 @@ export const Button = ({ size = 'md', variant = 'primary', rounded = 'lg', iconO
     </Pressable>
   );
 };
-```
+```markdown
 
 ---
 
@@ -239,18 +247,23 @@ const sizeClass: string = sizeClasses[size] // "px-4 py-2 text-base gap-2"
 
 // TypeScript will error on invalid values
 const invalid: ComponentSize = 'huge' // Error: Type '"huge"' is not assignable
-```
+````
 
 ---
 
 ## Best Practices
 
-1. **Always use shared utilities** - Don't duplicate class mappings in components
-2. **Use `cn` for conditional classes** - Cleaner than template literals
-3. **Import types alongside values** - Ensure type safety across components
-4. **Platform-specific mappings** - Use `mobileVariantClasses` for mobile, `variantClasses` for web
-5. **Consistent naming** - Use the same prop names (`size`, `variant`, `rounded`) across components
-6. **Extend, don't duplicate** - Add new mappings to `componentStyles.ts` rather than creating inline definitions
+1. **Always use shared utilities**- Don't duplicate class mappings in components
+
+2.**Use `cn` for conditional classes**- Cleaner than template literals
+
+3.**Import types alongside values**- Ensure type safety across components
+
+4.**Platform-specific mappings**- Use `mobileVariantClasses` for mobile, `variantClasses` for web
+
+5.**Consistent naming**- Use the same prop names (`size`, `variant`, `rounded`) across components
+
+6.**Extend, don't duplicate** - Add new mappings to `componentStyles.ts` rather than creating inline definitions
 
 ---
 
@@ -258,7 +271,7 @@ const invalid: ComponentSize = 'huge' // Error: Type '"huge"' is not assignable
 
 ### Adding a New Size Variant
 
-```typescript
+````typescript
 // In componentStyles.ts
 export const sizeClasses: Record<ComponentSize, string> = {
   xs: 'px-2 py-1 text-xs gap-1',
@@ -271,7 +284,7 @@ export const sizeClasses: Record<ComponentSize, string> = {
 
 // Update the type
 export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
-```
+```markdown
 
 ### Adding a New Variant
 
@@ -296,24 +309,19 @@ export type ComponentVariant =
   | 'success'
   | 'warning'
   | 'info' // Add here
-```
+```markdown
 
 ### Creating a New Utility Function
 
 ```typescript
 // In classNames.ts
 /**
- * Conditionally applies class names based on a boolean mapping.
+ *Conditionally applies class names based on a boolean mapping.*
+ *@param classMap - Object mapping class names to boolean conditions* @returns A space-separated string of active class names
  *
- * @param classMap - Object mapping class names to boolean conditions
- * @returns A space-separated string of active class names
- *
- * @example
- * const classes = classIf({
- *   'bg-blue-600': isPrimary,
- *   'bg-red-600': isDestructive,
- *   'w-full': isFullWidth,
- * });
+ *@example* const classes = classIf({
+ *'bg-blue-600': isPrimary,*   'bg-red-600': isDestructive,
+ *'w-full': isFullWidth,* });
  */
 export function classIf(classMap: Record<string, boolean>): string {
   return Object.entries(classMap)
@@ -321,15 +329,18 @@ export function classIf(classMap: Record<string, boolean>): string {
     .map(([className]) => className)
     .join(' ')
 }
-```
+````
 
 ---
 
 ## Related Sections
 
 - [../web/components/](../web/components/) - Web components using these utilities
+
 - [../mobile/components/](../mobile/components/) - Mobile components using these utilities
+
 - [../tokens/](../tokens/) - Design tokens that inform these style mappings
+
 - [../../README.md](../../README.md) - Main project README
 
 ---

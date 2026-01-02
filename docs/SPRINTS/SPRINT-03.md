@@ -18,25 +18,33 @@
 ## Dependencies
 
 - US005 (Centralised Theme Configuration System) must be complete
+
 - Note: US004 was listed as 5 points in the original brief, using US002 placeholder
 
 ## Sprint Deliverables
 
 - Automated token generation script
+
 - Template README documentation
+
 - Complete token generation workflow
 
 ## Acceptance Criteria
 
 - [ ] Token generation script is functional
+
 - [ ] Tokens are generated from theme configuration
+
 - [ ] README template is complete
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-The token generation script must read from the centralised theme configuration and output tokens in formats usable by both web and mobile platforms.
+The token generation script must read from the centralised theme configuration and output tokens in formats usable by
+both web and mobile platforms.
 
 ## Repository Breakdown
 

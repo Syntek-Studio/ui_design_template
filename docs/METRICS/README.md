@@ -1,14 +1,15 @@
 # Self-Learning System Data
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
 
 ---
 
-This folder contains data for the Syntek Dev Suite self-learning system. The system improves agent performance based on team feedback.
+This folder contains data for the Syntek Dev Suite self-learning system. The system improves agent performance based on
+team feedback.
 
 ## Table of Contents
 
@@ -39,29 +40,39 @@ This folder contains data for the Syntek Dev Suite self-learning system. The sys
 See `config.json` for system settings:
 
 - `enabled`: Whether the learning system is active
+
 - `auto_optimisation_enabled`: Whether improvements are applied automatically
+
 - `min_runs_for_analysis`: Minimum runs before analysis occurs
 
 ## How It Works
 
-1. **Feedback Collection** - After each agent run, rate the output with `/syntek-dev-suite:learning-feedback`
-2. **Metrics Recording** - Run duration, outcomes, and errors are tracked automatically
-3. **Pattern Analysis** - The system identifies what works and what doesn't
-4. **A/B Testing** - Prompt variants are tested to find the best approach
-5. **Prompt Optimisation** - Winning prompts are applied (automatically if enabled)
+1. **Feedback Collection**- After each agent run, rate the output with `/syntek-dev-suite:learning-feedback`
+
+2.**Metrics Recording**- Run duration, outcomes, and errors are tracked automatically
+
+3.**Pattern Analysis**- The system identifies what works and what doesn't
+
+4.**A/B Testing**- Prompt variants are tested to find the best approach
+
+5.**Prompt Optimisation**- Winning prompts are applied (automatically if enabled)
 
 ## Commands
 
 ```bash
+
 # Give feedback after an agent run
+
 /syntek-dev-suite:learning-feedback good
 /syntek-dev-suite:learning-feedback bad [reason]
 
 # Check A/B test status
+
 /syntek-dev-suite:learning-ab-test list
 /syntek-dev-suite:learning-ab-test status <agent>
 
 # Manage optimisations
+
 /syntek-dev-suite:learning-optimise status
 /syntek-dev-suite:learning-optimise analyse <agent>
 /syntek-dev-suite:learning-optimise apply <id>
@@ -69,7 +80,10 @@ See `config.json` for system settings:
 
 ## Best Practices
 
-1. **Be consistent** - Always provide feedback after significant agent runs
-2. **Be specific** - When marking as "bad", explain what was wrong
-3. **Commit regularly** - The team benefits when feedback is in version control
-4. **Review periodically** - Check `aggregates/` for performance trends
+1.**Be consistent**- Always provide feedback after significant agent runs
+
+2.**Be specific**- When marking as "bad", explain what was wrong
+
+3.**Commit regularly**- The team benefits when feedback is in version control
+
+4.**Review periodically** - Check `aggregates/` for performance trends

@@ -1,0 +1,88 @@
+title: "Showcase: Project Name"
+labels: ["show-and-tell"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Excited to share your project? We'd love to see what you've built with @template/ui!
+
+  - type: textarea
+    id: project
+    attributes:
+      label: Project Name & Description
+      description: What is your project called and what does it do?
+      placeholder: |
+        Example: MyStore Admin Dashboard
+        A modern admin dashboard for managing e-commerce inventory with real-time updates.
+    validations:
+      required: true
+
+  - type: textarea
+    id: usage
+    attributes:
+      label: How You're Using @template/ui
+      description: Which components from @template/ui are you using and how?
+      placeholder: |
+        - Button for all interactive elements
+        - Card for inventory item cards
+        - Input and Select for forms
+        - Icon for navigation and status indicators
+    validations:
+      required: true
+
+  - type: textarea
+    id: links
+    attributes:
+      label: Links
+      description: Share links to your project (GitHub repo, live site, etc.)
+      placeholder: |
+        - GitHub: https://github.com/yourname/project
+        - Live Demo: https://mystore-admin.example.com
+        - Blog Post: https://example.com/blog/...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Project Type
+      options:
+        - Open Source Project
+        - Commercial Product
+        - Design System/Component Wrapper
+        - Learning Project
+        - Other
+
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: Platforms Used
+      description: Which platforms does your project target?
+      options:
+        - Web Only
+        - Mobile (React Native) Only
+        - Both Web and Mobile
+        - Web Components in Native App
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional Details
+      description: Tell us more about your project!
+      placeholder: |
+        - Team size, if applicable
+        - How long it took to build
+        - Lessons learned using @template/ui
+        - What customisations you made
+        - (Optional) Screenshots or demo GIFs
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've included working links
+        - label: I've included screenshots or demos (if applicable)
+        - label: I've credited the @template/ui library

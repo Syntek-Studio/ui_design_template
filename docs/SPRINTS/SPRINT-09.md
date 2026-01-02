@@ -18,25 +18,33 @@
 ## Dependencies
 
 - US013 (CI Pipeline) must be complete
+
 - npm publishing credentials configured
 
 ## Sprint Deliverables
 
 - Automated release workflow
+
 - npm publishing automation
+
 - Complete CI/CD pipeline
 
 ## Acceptance Criteria
 
 - [ ] Release workflow triggers on tags
+
 - [ ] Package publishes to npm automatically
+
 - [ ] Changelog generation automated
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-The release pipeline should use semantic versioning and automatically publish to npm when tags are pushed. Consider using semantic-release or similar tooling.
+The release pipeline should use semantic versioning and automatically publish to npm when tags are pushed. Consider
+using semantic-release or similar tooling.
 
 ## Repository Breakdown
 

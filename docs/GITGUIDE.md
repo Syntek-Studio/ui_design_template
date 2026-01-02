@@ -1,24 +1,28 @@
 # Git Commit Guide
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
 
 ---
 
-This guide follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for consistent, readable commit history.
+This guide follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for
+consistent, readable commit history.
 
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+
 - [Commit Template](#commit-template)
+
 - [Definitions](#definitions)
   - [Types](#types)
   - [Scope](#scope)
   - [Description](#description)
   - [Body](#body)
+
 - [Git Commit Commands](#git-commit-commands)
   - [Quick Method: Command Line](#quick-method-command-line)
   - [Editor Method: Full Template](#editor-method-full-template)
@@ -26,17 +30,21 @@ This guide follows the [Conventional Commits](https://www.conventionalcommits.or
     - [Finding Your Current Editor](#finding-your-current-editor)
     - [Setting Your Preferred Editor](#setting-your-preferred-editor)
     - [Editor-Specific Commands](#editor-specific-commands)
+
 - [Useful Git Commands](#useful-git-commands)
   - [Viewing History](#viewing-history)
   - [Amending Commits](#amending-commits)
   - [Undoing Changes](#undoing-changes)
+
 - [Pull Request Workflow](#pull-request-workflow)
   - [Branch Strategy](#branch-strategy)
   - [PR Flow Steps](#pr-flow-steps)
+
 - [PR Template](#pr-template)
   - [Title Format](#title-format)
   - [PR Body Template](#pr-body-template)
   - [Example PR](#example-pr)
+
 - [Best Practices](#best-practices)
   - [Commit Messages](#commit-messages)
   - [Pull Requests](#pull-requests)
@@ -44,17 +52,21 @@ This guide follows the [Conventional Commits](https://www.conventionalcommits.or
 
 ## Commit Template
 
-```
+```text
 type(scope): Description - Summarise
 
 Body - What did you do?
 
 Files Changed:
+
 - List the files you generated or edited
+
 - For created apps just list app-name created
+
 - For files use app-name/folder/file OR app-name/file
 
 Still to do:
+
 - For this user story what is there still to do
 ```
 
@@ -81,8 +93,11 @@ Still to do:
 A small scope indicating the part of the codebase affected. Examples:
 
 - `button`, `card`, `input` - Component names
+
 - `tokens`, `theme`, `colors` - Design system parts
+
 - `build`, `deps`, `config` - Infrastructure
+
 - `storybook`, `docs` - Documentation/tooling
 
 ### Description
@@ -93,9 +108,11 @@ A concise summary (50 chars or less) of what changed. Use imperative mood: "add"
 
 Detailed explanation of what you did and why. Answer:
 
-- **What** changed?
-- **Why** was it needed?
-- **How** does it work?
+- **What**changed?
+
+-**Why**was it needed?
+
+-**How** does it work?
 
 ## Git Commit Commands
 
@@ -113,12 +130,18 @@ Commit with multi-line message using `-m` flags:
 git commit -m "feat(button): add loading state with spinner animation" \
 -m "Added loading prop to Button component that displays a spinner icon and disables interaction. Implemented for both web and native platforms with consistent styling." \
 -m "Files Changed:
+
 - src/components/Button/Button.types.ts
+
 - src/components/Button/Button.web.tsx
+
 - src/components/Button/Button.native.tsx
+
 - stories/Button.stories.tsx" \
 -m "Still to do:
+
 - Add accessibility labels for loading state
+
 - Add unit tests for loading behavior"
 ```
 
@@ -128,10 +151,10 @@ git commit -m "feat(button): add loading state with spinner animation" \
 
 For longer commits, use an editor:
 
-```bash
+````bash
 git add .
 git commit
-```
+```markdown
 
 This opens your default Git editor. Write your commit using the template, then save and close.
 
@@ -141,24 +164,30 @@ This opens your default Git editor. Write your commit using the template, then s
 
 ```bash
 git var GIT_EDITOR
-```
+````
 
 Common outputs:
 
 - `vim` or `editor` → Vim
+
 - `nano` → Nano
+
 - `code` → VS Code
 
 #### Setting Your Preferred Editor
 
 ```bash
+
 # Set VS Code (recommended for beginners)
+
 git config --global core.editor "code --wait"
 
 # Set Nano
+
 git config --global core.editor "nano"
 
 # Set Vim
+
 git config --global core.editor "vim"
 ```
 
@@ -174,40 +203,51 @@ git config --global core.editor "vim"
 
 ### Viewing History
 
-```bash
+````bash
+
 # See commit history
+
 git log --oneline --graph --all
 
 # See what changed in last commit
+
 git show
 
 # See changes in a specific file
+
 git log -p src/components/Button/Button.web.tsx
-```
+```markdown
 
 ### Amending Commits
 
 ```bash
+
 # Fix the last commit message
+
 git commit --amend
 
 # Add forgotten files to last commit
+
 git add forgotten-file.ts
 git commit --amend --no-edit
-```
+```markdown
 
 ### Undoing Changes
 
 ```bash
+
 # Unstage files (keep changes)
+
 git reset HEAD file.ts
 
 # Discard changes in working directory
+
 git checkout -- file.ts
 
 # Undo last commit (keep changes)
+
 git reset --soft HEAD~1
-```
+```markdown
 
 ---
 
@@ -215,7 +255,7 @@ git reset --soft HEAD~1
 
 ### Branch Strategy
 
-```
+```text
 main (production)
   ↑
 staging (pre-production)
@@ -225,26 +265,28 @@ dev (development)
 testing (QA)
   ↑
 feature/your-feature (your work)
-```
+````
 
 ### PR Flow Steps
 
-1. **Development** → Create PR from `feature/your-feature` to `testing`
-   - Complete all automatic tests
-   - Perform manual testing
-   - Follow PR Template below
+1.**Development**→ Create PR from `feature/your-feature` to `testing`
 
-2. **QA Testing** → Testing team reviews
-   - ✅ **Pass**: QA creates PR from `testing` to `dev`
-   - ❌ **Fail**: PR sent back with feedback
+- Complete all automatic tests
+- Perform manual testing
+- Follow PR Template below
 
-3. **Lead Dev Review** → Lead reviews code
-   - ✅ **Approve**: Creates PR from `dev` to `staging`
+2.**QA Testing**→ Testing team reviews
+
+- ✅**Pass**: QA creates PR from `testing` to `dev`
+- ❌ **Fail**: PR sent back with feedback
+
+3. **Lead Dev Review**→ Lead reviews code
+   - ✅**Approve**: Creates PR from `dev` to `staging`
    - ❌ **Changes needed**: PR sent back with feedback
 
-4. **Staging Deploy** → Deploy to staging environment
+4. **Staging Deploy**→ Deploy to staging environment
    - Client tests the feature
-   - ✅ **Approve**: PR created to `main`
+   - ✅**Approve**: PR created to `main`
    - ❌ **Changes needed**: Sent back to development
 
 5. **Production** → Merge to `main` and deploy
@@ -255,14 +297,16 @@ feature/your-feature (your work)
 
 ### Title Format
 
-```
+```text
 user-story-number/your-feature-name
 ```
 
 **Examples:**
 
 - `US-123/add-loading-button-state`
+
 - `BUG-456/fix-card-mobile-padding`
+
 - `FEAT-789/implement-dark-mode`
 
 ### PR Body Template
@@ -275,20 +319,27 @@ Brief description of what this PR does (2-3 sentences).
 ## Changes Made
 
 - List all the bodies of your commit messages
+
 - Summarize the key changes
 
 ## Files Changed
 
 - List the files you generated or edited
+
 - For created apps just list app-name created
+
 - For files use app-name/folder/file OR app-name/file
 
 ## Testing
 
 - [ ] Unit tests pass
+
 - [ ] Manual testing completed
+
 - [ ] Storybook stories updated (if applicable)
+
 - [ ] Tested on Chrome/Safari
+
 - [ ] Tested on iOS/Android (if native changes)
 
 ## Screenshots/Videos
@@ -298,6 +349,7 @@ Brief description of what this PR does (2-3 sentences).
 ## Still to do
 
 - For this sprint what is there still to do
+
 - Any known limitations or future improvements
 
 ## Related Issues
@@ -320,25 +372,37 @@ Added loading state to Button component with spinner animation. Supports both we
 ## Changes Made
 
 - Added `loading` prop to Button component
+
 - Created Spinner component for loading indicator
+
 - Disabled button interaction during loading state
+
 - Updated Storybook stories with loading examples
 
 ## Files Changed
 
 - src/components/Button/Button.types.ts
+
 - src/components/Button/Button.web.tsx
+
 - src/components/Button/Button.native.tsx
+
 - src/components/Spinner/Spinner.web.tsx
+
 - src/components/Spinner/Spinner.native.tsx
+
 - stories/Button.stories.tsx
 
 ## Testing
 
 - [x] Unit tests pass
+
 - [x] Manual testing completed
+
 - [x] Storybook stories updated
+
 - [x] Tested on Chrome/Safari
+
 - [x] Tested on iOS/Android
 
 ## Screenshots
@@ -348,6 +412,7 @@ Added loading state to Button component with spinner animation. Supports both we
 ## Still to do
 
 - Add accessibility labels for screen readers
+
 - Performance testing with slow network conditions
 
 ## Related Issues
@@ -362,22 +427,33 @@ Closes #456
 ### Commit Messages
 
 - ✅ **DO**: Keep subject line under 50 characters
+
 - ✅ **DO**: Use imperative mood ("add" not "added")
+
 - ✅ **DO**: Explain _why_ in the body, not just _what_
+
 - ❌ **DON'T**: Use vague messages like "fix stuff" or "updates"
+
 - ❌ **DON'T**: Commit unrelated changes together
 
 ### Pull Requests
 
 - ✅ **DO**: Keep PRs focused on one feature/fix
+
 - ✅ **DO**: Update documentation and tests
+
 - ✅ **DO**: Rebase on target branch before creating PR
+
 - ❌ **DON'T**: Create PRs with 100+ files changed
+
 - ❌ **DON'T**: Mix multiple features in one PR
 
 ### Code Review
 
 - Respond to feedback within 24 hours
+
 - Mark conversations as resolved when addressed
+
 - Thank reviewers for their time and feedback
+
 - Ask questions if feedback is unclear

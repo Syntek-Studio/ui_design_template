@@ -22,18 +22,27 @@
 ## Sprint Deliverables
 
 - i18n framework integration
+
 - Component string externalisation
+
 - Language switching support
+
 - Complete form components
 
 ## Acceptance Criteria
 
 - [ ] i18n library integrated
+
 - [ ] Component strings externalised
+
 - [ ] Language switching functional
+
 - [ ] RTL support implemented
+
 - [ ] Form components finalised
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes

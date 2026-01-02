@@ -18,27 +18,37 @@
 ## Dependencies
 
 - Component structure patterns established
+
 - Template system complete
 
 ## Sprint Deliverables
 
 - Component generator CLI tool
+
 - Automated component scaffolding
+
 - Complete Template README
 
 ## Acceptance Criteria
 
 - [ ] Generator CLI creates new components
+
 - [ ] Web and mobile variants generated
+
 - [ ] Storybook stories auto-generated
+
 - [ ] Test files auto-generated
+
 - [ ] Template README finalised
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-The component generator should create both web and mobile variants with all necessary boilerplate (stories, tests, index files).
+The component generator should create both web and mobile variants with all necessary boilerplate (stories, tests, index
+files).
 
 ## Repository Breakdown
 

@@ -22,22 +22,31 @@
 ## Sprint Deliverables
 
 - GitHub Actions CI pipeline configuration
+
 - Automated testing on pull requests
+
 - Card/Container component (bonus feature)
+
 - Continuous integration established
 
 ## Acceptance Criteria
 
 - [ ] CI pipeline runs on all PRs
+
 - [ ] Tests execute automatically
+
 - [ ] Linting and type-checking automated
+
 - [ ] Card component implemented for web and mobile
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-The CI pipeline is critical for maintaining code quality. It should run tests, linting, type-checking, and accessibility checks on every PR.
+The CI pipeline is critical for maintaining code quality. It should run tests, linting, type-checking, and accessibility
+checks on every PR.
 
 ## Repository Breakdown
 
