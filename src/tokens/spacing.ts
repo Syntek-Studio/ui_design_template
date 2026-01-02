@@ -1,23 +1,47 @@
 /**
- * Spacing scale for consistent layout rhythm
+ * spacing.ts - Spacing scale for consistent layout rhythm
  *
- * Based on 4px grid system (0px to 384px) to ensure mathematical consistency
- * and help achieve pixel-perfect designs.
+ * Defines a standardised spacing scale based on a 4px grid system to ensure
+ * mathematical consistency and pixel-perfect designs. All spacing values are
+ * multiples of 4px, creating a harmonious rhythm throughout the design system.
  *
- * Each spacing value represents a multiple of 4px:
+ * ## Grid System
+ *
+ * The base spacing unit is 4px:
+ * - spacing[0] = 0px
  * - spacing[1] = 4px (base unit)
  * - spacing[2] = 8px
  * - spacing[4] = 16px
  * - spacing[6] = 24px
- * - And so on...
+ * - spacing[12] = 48px
+ * - Up to spacing[96] = 384px
  *
- * Use for padding, margins, gaps, and other layout spacing.
+ * Fractional values available: 0.5, 1.5, 2.5, 3.5 (2px, 6px, 10px, 14px)
+ * Pixel-perfect value: `px` = 1px (for borders)
+ *
+ * ## Usage
+ *
+ * Use for:
+ * - **Padding**: Internal space within components
+ * - **Margins**: External space between components
+ * - **Gaps**: Space between flex/grid children
+ * - **Positioning**: top, right, bottom, left offsets
+ * - **Sizing**: Width and height values
+ *
+ * ## Scale Guidance
+ *
+ * - **xs spacing** (0-2): Component internal padding
+ * - **sm spacing** (3-4): Component gaps and tight layouts
+ * - **md spacing** (5-8): Standard margins and gaps
+ * - **lg spacing** (9-12): Generous spacing for visual breathing room
+ * - **xl spacing** (16-96): Large sections and page-level spacing
  *
  * @example
- * import { spacing } from '@template/ui';
- * const padding = spacing[4];  // 16px
- * const margin = spacing[6];   // 24px
- * const gap = spacing[3];      // 12px
+ * import { spacing } from '@syntek-studio/ui';
+ * const padding = spacing[4];      // 16px
+ * const margin = spacing[6];       // 24px
+ * const gap = spacing[3];          // 12px
+ * const largeSpacing = spacing[16]; // 64px
  *
  * @see {@link https://example.com/design-tokens} Design tokens documentation
  */
@@ -57,6 +81,6 @@ export const spacing = {
   72: 288,
   80: 320,
   96: 384,
-} as const;
+} as const
 
-export type Spacing = typeof spacing;
+export type Spacing = typeof spacing

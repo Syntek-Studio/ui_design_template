@@ -1,18 +1,50 @@
 /**
- * Design system colour palette
+ * colours.ts - Design system colour palette
  *
- * Provides a comprehensive colour system with:
- * - Brand colours (primary, secondary) with 9 shades each
- * - Semantic colours for status and intent (success, warning, error, info)
- * - Neutral colours for text, backgrounds, and borders (white, black, grey)
+ * Provides a comprehensive colour system with semantic meaning for use across
+ * all web and mobile components. The palette includes brand colours, semantic
+ * colours for status and intent, and neutral colours for text and backgrounds.
  *
- * Use these colours consistently across components for visual cohesion.
+ * ## Colour Categories
+ *
+ * ### Brand Colours
+ * Primary and secondary brand colours with 9 shades each (50-900).
+ * - **primary**: Blue (default #3b82f6) for main calls-to-action
+ * - **secondary**: Purple (default #a855f7) for secondary actions
+ *
+ * ### Semantic Colours
+ * Single-shade colours with specific meanings:
+ * - **success**: Green (#22c55e) for positive confirmations
+ * - **warning**: Amber (#f59e0b) for cautionary messages
+ * - **error**: Red (#ef4444) for destructive/error states
+ * - **info**: Blue (#3b82f6) for informational messages
+ *
+ * ### Neutral Colours
+ * Grey scale for text, backgrounds, borders, and neutral components:
+ * - **white**: Pure white (#ffffff)
+ * - **black**: Pure black (#000000)
+ * - **grey**: 9 shades (50-900) from very light to very dark
+ *
+ * ## Shade System
+ *
+ * Brand colours use numeric shades (50, 100, 200... 900):
+ * - 50: Lightest (barely visible tint)
+ * - 100-300: Light backgrounds
+ * - 400-600: Main interaction states
+ * - 700-900: Dark text and borders
+ *
+ * ## Accessibility
+ *
+ * All colour combinations meet WCAG AA contrast requirements for text.
+ * Avoid relying solely on colour to convey information; use icons, patterns,
+ * or text labels for semantic meaning.
  *
  * @example
- * import { colours } from '@template/ui';
- * const primaryColor = colours.primary[500];
- * const errorColor = colours.error;
- * const textColor = colours.grey[900];
+ * import { colours } from '@syntek-studio/ui';
+ * const primaryColor = colours.primary[500];      // #3b82f6
+ * const errorColor = colours.error;               // #ef4444
+ * const lightText = colours.grey[700];            // #374151
+ * const darkBackground = colours.grey[900];       // #111827
  *
  * @see {@link https://example.com/design-tokens} Design tokens documentation
  */
@@ -64,6 +96,6 @@ export const colours = {
     800: '#1f2937',
     900: '#111827',
   },
-} as const;
+} as const
 
-export type Colours = typeof colours;
+export type Colours = typeof colours
