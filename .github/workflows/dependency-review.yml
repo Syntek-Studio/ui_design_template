@@ -22,3 +22,7 @@ jobs:
           comment-summary-in-pr: always
           license-check: true
           allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, 0BSD, CC0-1.0, Unlicense
+          # Allow dependencies with low OpenSSF Scorecard ratings (threshold is 3)
+          allow-dependencies-licenses: >-
+            pkg:npm/signal-exit,
+            pkg:githubactions/ajinabraham/njsscan-action
