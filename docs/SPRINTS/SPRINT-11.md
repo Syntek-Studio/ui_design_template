@@ -18,25 +18,33 @@
 ## Dependencies
 
 - Existing Storybook setup
+
 - Theme system (US005-012) complete
 
 ## Sprint Deliverables
 
 - Enhanced Storybook with advanced features
+
 - Theming and customisation guide
+
 - Interactive component playground
 
 ## Acceptance Criteria
 
 - [ ] Storybook enhanced with controls and docs
+
 - [ ] Theme switching works in Storybook
+
 - [ ] Theming guide is comprehensive
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-Enhanced Storybook should include interactive controls, comprehensive docs addon, and theme switching capabilities to showcase the design system.
+Enhanced Storybook should include interactive controls, comprehensive docs addon, and theme switching capabilities to
+showcase the design system.
 
 ## Repository Breakdown
 

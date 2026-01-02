@@ -15,9 +15,13 @@ jobs:
 
       - name: Get changed files
         id: changed
+        env:
+          # SECURITY: Pass base_ref via env var to prevent shell injection
+          BASE_REF: ${{ github.base_ref }}
         run: |
           # Get list of changed files in this PR
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          # SECURITY: Using env var instead of direct interpolation
+          CHANGED_FILES=$(git diff --name-only "origin/$BASE_REF"...HEAD)
           echo "Changed files:"
           echo "$CHANGED_FILES"
 
@@ -60,9 +64,12 @@ jobs:
 
       - name: Version check passed
         if: steps.changed.outputs.code_changed == 'false' || steps.changed.outputs.version_updated == 'true'
+        env:
+          # SECURITY: Pass step outputs via env var
+          CODE_CHANGED: ${{ steps.changed.outputs.code_changed }}
         run: |
-          if [ "${{ steps.changed.outputs.code_changed }}" == "false" ]; then
-            echo "✅ No source code changes - version update not required"
+          if [ "$CODE_CHANGED" == "false" ]; then
+            echo "No source code changes - version update not required"
           else
-            echo "✅ Version files updated correctly"
+            echo "Version files updated correctly"
           fi

@@ -5,8 +5,27 @@ exclude_paths:
   - "node_modules/**"
   - "dist/**"
   - "coverage/**"
+  - ".storybook-web/**"
 
 engines:
+  # Disable Trivy - no Dockerfile/containers in this project
+  trivy:
+    enabled: false
+  # Disable legacy ESLint - project uses flat config (eslint.config.js)
+  # which Codacy's built-in ESLint doesn't support
+  eslint:
+    enabled: false
+  eslint-8:
+    enabled: false
+  # Disable CSS linting - Tailwind CSS handles styling, no standalone CSS to lint
+  stylelint:
+    enabled: false
+  csslint:
+    enabled: false
+  # Disable remark-lint - conflicts with GFM and Keep a Changelog format
+  # See docs/BUGS/BUG-001-CODACY-REMARK-LINT-FALSE-POSITIVES.md for details
+  remark-lint:
+    enabled: false
   semgrep:
     exclude_paths:
       # Ignore SHA pinning warning for njsscan-action - we accept the risk

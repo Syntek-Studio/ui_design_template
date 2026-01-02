@@ -18,26 +18,35 @@
 ## Dependencies
 
 - Component structure established
+
 - Storybook configuration complete (US017)
 
 ## Sprint Deliverables
 
 - Automated documentation generation script
+
 - Component API documentation
+
 - Theming and customisation guide (moved from Sprint 11)
 
 ## Acceptance Criteria
 
 - [ ] Documentation auto-generated from TypeScript types
+
 - [ ] Props tables generated automatically
+
 - [ ] Examples extracted from Storybook stories
+
 - [ ] Theming guide complete
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-Use tools like react-docgen-typescript to automatically generate component documentation from TypeScript interfaces and JSDoc comments.
+Use tools like react-docgen-typescript to automatically generate component documentation from TypeScript interfaces and
+JSDoc comments.
 
 ## Repository Breakdown
 

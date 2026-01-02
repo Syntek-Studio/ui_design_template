@@ -1,7 +1,7 @@
 # Release Notes
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -12,29 +12,32 @@
 
 - [Table of Contents](#table-of-contents)
 - [Latest Release](#latest-release)
-  - [Version 0.7.0 - 01 January 2026](#version-070---01-january-2026)
+  - [Version 0.7.1 - 02 January 2026](#version-071---02-january-2026)
     - [What's New](#whats-new)
     - [For Developers](#for-developers)
-    - [Migration Note](#migration-note)
 - [Previous Releases](#previous-releases)
-  - [Version 0.6.0 - 01 January 2026](#version-060---01-january-2026)
+  - [Version 0.7.0 - 01 January 2026](#version-070---01-january-2026)
     - [What's New](#whats-new-1)
-    - [Workflow Automation](#workflow-automation)
+    - [For Developers](#for-developers-1)
+    - [Migration Note](#migration-note)
 - [Previous Releases](#previous-releases-1)
-  - [Version 0.5.1 - 29 December 2024](#version-051---29-december-2024)
+  - [Version 0.6.0 - 01 January 2026](#version-060---01-january-2026)
     - [What's New](#whats-new-2)
-  - [Version 0.5.0 - 29 December 2024](#version-050---29-december-2024)
+    - [Workflow Automation](#workflow-automation)
+  - [Version 0.5.1 - 29 December 2024](#version-051---29-december-2024)
     - [What's New](#whats-new-3)
-  - [Version 0.4.0 - 29 December 2024](#version-040---29-december-2024)
+  - [Version 0.5.0 - 29 December 2024](#version-050---29-december-2024)
     - [What's New](#whats-new-4)
-  - [Version 0.3.0 - 29 December 2024](#version-030---29-december-2024)
+  - [Version 0.4.0 - 29 December 2024](#version-040---29-december-2024)
     - [What's New](#whats-new-5)
-  - [Version 0.2.1 - 29 December 2024](#version-021---29-december-2024)
+  - [Version 0.3.0 - 29 December 2024](#version-030---29-december-2024)
     - [What's New](#whats-new-6)
-  - [Version 0.2.0 - 29 December 2024](#version-020---29-december-2024)
+  - [Version 0.2.1 - 29 December 2024](#version-021---29-december-2024)
     - [What's New](#whats-new-7)
-  - [Version 0.1.1 - 29 December 2024](#version-011---29-december-2024)
+  - [Version 0.2.0 - 29 December 2024](#version-020---29-december-2024)
     - [What's New](#whats-new-8)
+  - [Version 0.1.1 - 29 December 2024](#version-011---29-december-2024)
+    - [What's New](#whats-new-9)
   - [Version 0.1.0 - 29 December 2024](#version-010---29-december-2024)
     - [What's Included](#whats-included)
 - [Coming Soon](#coming-soon)
@@ -44,11 +47,43 @@
 
 ## Latest Release
 
+### Version 0.7.1 - 02 January 2026
+
+**Documentation Quality Improvements**
+
+We've improved the quality and consistency of all documentation across the project.
+
+#### What's New
+
+- **Improved Documentation Readability**: All 99 markdown files have been updated with consistent formatting, proper
+  heading spacing, and standardised line lengths for better readability.
+
+- **Enhanced Code Examples**: All code blocks now include proper language identifiers for improved syntax highlighting
+  in documentation viewers.
+
+- **Better Link Navigation**: Fixed over 600 broken reference links in CHANGELOG.md and VERSION-HISTORY.md, ensuring
+  all version references work correctly.
+
+- **Linting Configuration**: Added `.markdownlint.json` and `.remarkrc.json` configuration files to maintain
+  documentation quality going forward.
+
+#### For Developers
+
+- All markdown files now pass markdownlint and remark-lint validation
+- Consistent 120 character line length across all documentation
+- Proper heading hierarchy maintained throughout
+- No functional changes to the library itself
+
+---
+
+## Previous Releases
+
 ### Version 0.7.0 - 01 January 2026
 
 **Enhanced Developer Experience & Security**
 
-We've significantly improved the development workflow with comprehensive CI/CD infrastructure, automated security scanning, and quality assurance tooling.
+We've significantly improved the development workflow with comprehensive CI/CD infrastructure, automated security
+scanning, and quality assurance tooling.
 
 #### What's New
 
@@ -56,24 +91,33 @@ We've significantly improved the development workflow with comprehensive CI/CD i
 Every code change now goes through automatic validation:
 
 - Code formatting and style checks
+
 - TypeScript type validation
+
 - Automated testing
+
 - Build verification
 
 **Security First**
 Your code is now protected by multiple layers of security scanning:
 
 - Automatic vulnerability detection in dependencies
+
 - Weekly security updates via Dependabot
+
 - Static code analysis for security issues
+
 - Pre-commit hooks prevent common mistakes
 
 **Streamlined Contributions**
 Contributing to the project is now easier than ever:
 
 - Clear contributing guidelines
+
 - Issue templates for bugs and features
+
 - Pull request templates for consistent reviews
+
 - Code of Conduct for a welcoming community
 
 **Package Update**
@@ -85,14 +129,18 @@ The package has been renamed from `@template/ui` to `@syntek-studio/ui` to bette
 Your local commits now automatically check:
 
 - TypeScript compilation
+
 - ESLint rules
+
 - Prettier formatting
 
 **VS Code Integration**
 Enhanced editor settings provide:
 
 - Automatic formatting on save
+
 - Consistent TypeScript configuration
+
 - Better IntelliSense support
 
 #### Migration Note
@@ -120,9 +168,13 @@ We've added comprehensive ClickUp integration for seamless project management an
 #### What's New
 
 - **ClickUp Sync**: Bidirectional synchronisation between GitHub and ClickUp
+
 - **Automatic Status Updates**: Branch pushes and PR events automatically update ClickUp task status
+
 - **Sprint Planning**: 23 comprehensive sprint documents to guide development
+
 - **User Stories**: 39 detailed user stories with acceptance criteria
+
 - **PM Documentation**: Setup guides and troubleshooting documentation
 
 #### Workflow Automation
@@ -136,8 +188,6 @@ We've added comprehensive ClickUp integration for seamless project management an
 
 ---
 
-## Previous Releases
-
 ### Version 0.5.1 - 29 December 2024
 
 **Documentation Overhaul**
@@ -147,8 +197,11 @@ We've completely refreshed all documentation across the project to make it easie
 #### What's New
 
 - **Standardised Headers**: Every documentation file now includes consistent metadata (version, date, maintainer)
+
 - **Better Organisation**: Added architectural planning documentation in `docs/PLANS/`
+
 - **Improved Guides**: Enhanced README files for all components and tokens
+
 - **British English**: Consistent language conventions throughout
 
 ---
@@ -162,7 +215,9 @@ New utility functions make component development faster and more consistent.
 #### What's New
 
 - **Utility Library**: New `src/utils/` folder with helper functions
+
 - **Enhanced Buttons**: Both web and mobile Button components improved
+
 - **Better Types**: Improved TypeScript definitions throughout
 
 ---
@@ -176,7 +231,9 @@ Full TypeScript support for all design tokens.
 #### What's New
 
 - **Design Token Types**: All tokens now have comprehensive TypeScript definitions
+
 - **CSS Types**: New type definitions for styling
+
 - **Better Autocomplete**: Your IDE will now suggest token values as you type
 
 ---
@@ -190,7 +247,9 @@ Enhanced component documentation with TypeScript support.
 #### What's New
 
 - **TypeScript Config**: Storybook now uses TypeScript throughout
+
 - **Better Documentation**: Added comprehensive Storybook guide
+
 - **Improved Preview**: Migrated preview configuration to TypeScript
 
 ---
@@ -204,6 +263,7 @@ Package configuration and dependency updates.
 #### What's New
 
 - **Package Renamed**: Changed from `@syntek/ui` to `@template/ui`
+
 - **Updated Dependencies**: All packages updated to latest versions
 
 ---
@@ -217,7 +277,9 @@ Introduction of comprehensive version tracking.
 #### What's New
 
 - **VERSION-HISTORY.md**: Technical change log for developers
+
 - **CHANGELOG.md**: Brief developer-focused summary
+
 - **RELEASES.md**: User-facing release notes (this file!)
 
 ---
@@ -231,8 +293,11 @@ Tooling setup for consistent development experience.
 #### What's New
 
 - **EditorConfig**: Consistent formatting across all editors
+
 - **Prettier**: Automated code formatting
+
 - **Git Attributes**: Better line ending handling
+
 - **TypeScript**: Stricter type checking enabled
 
 ---
@@ -248,21 +313,29 @@ Welcome to the first release of **@template/ui**!
 **Cross-Platform Components**
 
 - Button component for web and mobile
+
 - Consistent API across platforms
 
 **Design System**
 
 - Colour palette with primary, secondary, and semantic colours
+
 - Spacing scale (4px grid system)
+
 - Typography tokens
+
 - Responsive breakpoints
+
 - Shadow and border definitions
 
 **Developer Experience**
 
 - Full TypeScript support
+
 - Tailwind CSS 4 for web styling
+
 - Nativewind 4 for React Native
+
 - Storybook for component documentation
 
 **Getting Started**
@@ -284,20 +357,27 @@ In upcoming releases:
 **New Components**
 
 - Card component
+
 - Input component
+
 - Modal component
+
 - Navigation components
 
 **Features**
 
 - Dark mode theme support
+
 - Animation presets
+
 - Enhanced accessibility
 
 **Developer Experience**
 
 - More Storybook examples
+
 - Performance guides
+
 - Migration documentation
 
 ---
@@ -307,7 +387,9 @@ In upcoming releases:
 Questions or issues?
 
 - Open an issue on our repository
+
 - Check documentation in the `docs/` folder
+
 - Review component examples in Storybook
 
 ---

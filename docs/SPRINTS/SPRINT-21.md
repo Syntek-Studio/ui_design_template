@@ -18,26 +18,35 @@
 ## Dependencies
 
 - Theme system (US005-012) complete
+
 - Token generation system complete
 
 ## Sprint Deliverables
 
 - Multi-theme support implementation
+
 - Theme switching between multiple themes
+
 - Token versioning finalised
 
 ## Acceptance Criteria
 
 - [ ] Multiple themes can be defined
+
 - [ ] Runtime theme switching works
+
 - [ ] Themes persist correctly
+
 - [ ] Token versioning complete
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-Multi-theme support enables users to have multiple brand themes (e.g., different clients, white-label products) in a single design system.
+Multi-theme support enables users to have multiple brand themes (e.g., different clients, white-label products) in a
+single design system.
 
 ## Repository Breakdown
 

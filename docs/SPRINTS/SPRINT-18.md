@@ -22,21 +22,29 @@
 ## Sprint Deliverables
 
 - Navigation components (Header, Footer, Sidebar)
+
 - Responsive navigation patterns
+
 - Mobile navigation support
 
 ## Acceptance Criteria
 
 - [ ] Header component implemented
+
 - [ ] Footer component implemented
+
 - [ ] Sidebar component implemented
+
 - [ ] Navigation responsive on all screen sizes
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-Navigation components should be flexible and support various layouts. Mobile navigation should handle touch gestures appropriately.
+Navigation components should be flexible and support various layouts. Mobile navigation should handle touch gestures
+appropriately.
 
 ## Repository Breakdown
 

@@ -1,7 +1,7 @@
 # Version History
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -11,84 +11,92 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [\[Unreleased\]](#unreleased)
+- [Unreleased](#unreleased)
   - [Technical Changes](#technical-changes)
-- [\[0.7.0\] - 01/01/2026](#070---01012026)
+- [0.7.1 - 02/01/2026](#071---02012026)
   - [Summary](#summary)
   - [Breaking Changes](#breaking-changes)
   - [Database Migrations](#database-migrations)
   - [API Changes](#api-changes)
   - [Files Changed](#files-changed)
   - [Configuration Changes](#configuration-changes)
-  - [Security Notes](#security-notes)
-  - [Architecture Notes](#architecture-notes)
-- [\[0.6.0\] - 01/01/2026](#060---01012026)
+  - [Documentation Notes](#documentation-notes)
+- [0.7.0 - 01/01/2026](#070---01012026)
   - [Summary](#summary-1)
   - [Breaking Changes](#breaking-changes-1)
   - [Database Migrations](#database-migrations-1)
   - [API Changes](#api-changes-1)
   - [Files Changed](#files-changed-1)
-  - [Removed Files](#removed-files)
   - [Configuration Changes](#configuration-changes-1)
-  - [Documentation Notes](#documentation-notes)
-  - [Architecture Notes](#architecture-notes-1)
-- [\[0.5.1\] - 29/12/2024](#051---29122024)
+  - [Security Notes](#security-notes)
+  - [Architecture Notes](#architecture-notes)
+- [0.6.0 - 01/01/2026](#060---01012026)
   - [Summary](#summary-2)
   - [Breaking Changes](#breaking-changes-2)
   - [Database Migrations](#database-migrations-2)
   - [API Changes](#api-changes-2)
   - [Files Changed](#files-changed-2)
+  - [Removed Files](#removed-files)
+  - [Configuration Changes](#configuration-changes-2)
   - [Documentation Notes](#documentation-notes-1)
-- [\[0.5.0\] - 29/12/2024](#050---29122024)
+  - [Architecture Notes](#architecture-notes-1)
+- [0.5.1 - 29/12/2024](#051---29122024)
   - [Summary](#summary-3)
   - [Breaking Changes](#breaking-changes-3)
   - [Database Migrations](#database-migrations-3)
   - [API Changes](#api-changes-3)
   - [Files Changed](#files-changed-3)
-  - [Architecture Notes](#architecture-notes-2)
-- [\[0.4.0\] - 29/12/2024](#040---29122024)
+  - [Documentation Notes](#documentation-notes-2)
+- [0.5.0 - 29/12/2024](#050---29122024)
   - [Summary](#summary-4)
   - [Breaking Changes](#breaking-changes-4)
   - [Database Migrations](#database-migrations-4)
   - [API Changes](#api-changes-4)
   - [Files Changed](#files-changed-4)
-  - [Performance Notes](#performance-notes)
-- [\[0.3.0\] - 29/12/2024](#030---29122024)
+  - [Architecture Notes](#architecture-notes-2)
+- [0.4.0 - 29/12/2024](#040---29122024)
   - [Summary](#summary-5)
   - [Breaking Changes](#breaking-changes-5)
   - [Database Migrations](#database-migrations-5)
   - [API Changes](#api-changes-5)
   - [Files Changed](#files-changed-5)
-  - [Configuration Changes](#configuration-changes-2)
-- [\[0.2.1\] - 29/12/2024](#021---29122024)
+  - [Performance Notes](#performance-notes)
+- [0.3.0 - 29/12/2024](#030---29122024)
   - [Summary](#summary-6)
   - [Breaking Changes](#breaking-changes-6)
   - [Database Migrations](#database-migrations-6)
   - [API Changes](#api-changes-6)
   - [Files Changed](#files-changed-6)
-  - [Dependencies Updated](#dependencies-updated)
-- [\[0.2.0\] - 29/12/2024](#020---29122024)
+  - [Configuration Changes](#configuration-changes-3)
+- [0.2.1 - 29/12/2024](#021---29122024)
   - [Summary](#summary-7)
   - [Breaking Changes](#breaking-changes-7)
   - [Database Migrations](#database-migrations-7)
   - [API Changes](#api-changes-7)
   - [Files Changed](#files-changed-7)
-  - [Documentation Notes](#documentation-notes-2)
-- [\[0.1.1\] - 29/12/2024](#011---29122024)
+  - [Dependencies Updated](#dependencies-updated)
+- [0.2.0 - 29/12/2024](#020---29122024)
   - [Summary](#summary-8)
   - [Breaking Changes](#breaking-changes-8)
   - [Database Migrations](#database-migrations-8)
   - [API Changes](#api-changes-8)
   - [Files Changed](#files-changed-8)
-  - [Configuration Changes](#configuration-changes-3)
-- [\[0.1.0\] - 29/12/2024](#010---29122024)
+  - [Documentation Notes](#documentation-notes-3)
+- [0.1.1 - 29/12/2024](#011---29122024)
   - [Summary](#summary-9)
   - [Breaking Changes](#breaking-changes-9)
   - [Database Migrations](#database-migrations-9)
   - [API Changes](#api-changes-9)
   - [Files Changed](#files-changed-9)
-  - [Dependencies Updated](#dependencies-updated-1)
   - [Configuration Changes](#configuration-changes-4)
+- [0.1.0 - 29/12/2024](#010---29122024)
+  - [Summary](#summary-10)
+  - [Breaking Changes](#breaking-changes-10)
+  - [Database Migrations](#database-migrations-10)
+  - [API Changes](#api-changes-10)
+  - [Files Changed](#files-changed-10)
+  - [Dependencies Updated](#dependencies-updated-1)
+  - [Configuration Changes](#configuration-changes-5)
   - [Performance Notes](#performance-notes-1)
   - [Security Notes](#security-notes-1)
   - [Architecture Notes](#architecture-notes-3)
@@ -103,11 +111,124 @@
 
 ---
 
+## [0.7.1] - 02/01/2026
+
+### Summary
+
+Comprehensive markdown linting fixes across the entire codebase. Resolved 1,776+ markdown linting issues including
+remark-lint undefined references, line length violations, heading spacing, list spacing, duplicate headings, code block
+language specifiers, and bare URL formatting. Added `.markdownlint.json` and `.remarkrc.json` configuration files.
+
+### Breaking Changes
+
+None - documentation formatting only.
+
+### Database Migrations
+
+Not applicable - library project.
+
+### API Changes
+
+None - documentation formatting only.
+
+### Files Changed
+
+**Configuration Files Added:**
+
+- `.markdownlint.json` - Markdown linting rules (120 char limit, GFM tables, emphasis styling)
+- `.remarkrc.json` - Remark linting configuration (allows GFM checkboxes)
+
+**Documentation Files Modified (99 files):**
+
+- `.claude/CLAUDE.md` - Fixed line length, heading spacing, list spacing
+- `.claude/README.md` - Fixed markdown formatting
+- `.claude/SYNTEK-GUIDE.md` - Fixed extensive formatting issues
+- `.claude/commands/*.md` - Fixed formatting in all command files (8 files)
+- `.github/CODE_OF_CONDUCT.md` - Fixed heading and list spacing
+- `.github/CONTRIBUTING.md` - Fixed formatting issues
+- `.github/ISSUE_TEMPLATE/bug_report.md` - Fixed spacing
+- `.github/SECURITY.md` - Fixed formatting
+- `.storybook-web/README.md` - Fixed markdown issues
+- `CHANGELOG.md` - Added missing link definitions for versions [0.6.0] and [0.7.0]
+- `DOCUMENTATION-INDEX.md` - Fixed extensive formatting
+- `README.md` - Fixed line length and spacing
+- `RELEASES.md` - Fixed duplicate "Previous Releases" heading, added link definition
+- `VERSION-HISTORY.md` - Added link definitions for all version references
+- `docs/GITGUIDE.md` - Fixed formatting
+- `docs/METRICS/README.md` - Fixed formatting
+- `docs/README.md` - Fixed extensive formatting
+- `docs/SPRINTS/README.md` - Fixed formatting
+- `docs/SPRINTS/SPRINT-*.md` - Fixed formatting in all 23 sprint files
+- `docs/SPRINTS/SPRINT-INDEX.md` - Fixed formatting
+- `docs/STORIES/*.md` - Fixed formatting in all 42 user story files
+- `scripts/pm/README.md` - Fixed malformed code blocks
+- `src/README.md` - Fixed formatting
+- `src/mobile/README.md` - Fixed formatting
+- `src/mobile/components/README.md` - Fixed formatting
+- `src/tokens/README.md` - Fixed formatting
+- `src/utils/README.md` - Fixed formatting
+- `src/web/README.md` - Fixed formatting
+- `src/web/components/README.md` - Fixed formatting
+
+**Key Fixes Applied:**
+
+1. **remark-lint-no-undefined-references (637 alerts)** - Added link definitions to CHANGELOG.md and VERSION-HISTORY.md
+2. **MD013 (line length - 707 alerts)** - Wrapped long lines, configured 120 char limit with table/code exclusions
+3. **MD022 (heading spacing - 127 alerts)** - Added blank lines before/after all headings
+4. **MD032 (list spacing - 136 alerts)** - Added blank lines around all lists
+5. **MD024 (duplicate headings - 86 alerts)** - Fixed duplicate "Previous Releases" heading in RELEASES.md
+6. **MD036 (emphasis as heading - 41 alerts)** - Configured as intentional styling pattern
+7. **MD040 (code block language - 39 alerts)** - Added language specifiers (text, bash, markdown, json, etc.)
+8. **Bare URLs** - Wrapped all bare URLs in angle brackets for proper rendering
+
+### Configuration Changes
+
+**Markdown Linting Configuration:**
+
+```json
+{
+  "line-length": {
+    "line_length": 120,
+    "code_blocks": false,
+    "tables": false
+  },
+  "no-inline-html": {
+    "allowed_elements": ["br", "kbd", "details", "summary"]
+  },
+  "emphasis-style": false
+}
+```
+
+**Remark Configuration:**
+
+```json
+{
+  "plugins": [
+    "remark-preset-lint-recommended",
+    ["remark-lint-list-item-indent", "space"],
+    ["remark-lint-checkbox-character-style", { "checked": "x", "unchecked": " " }]
+  ]
+}
+```
+
+### Documentation Notes
+
+- All markdown files now pass markdownlint and remark-lint validation
+- Consistent 120 character line length across all documentation
+- Proper heading hierarchy and spacing throughout
+- All code blocks now have language specifiers for syntax highlighting
+- Link references properly defined for version numbers
+- No functionality changes - purely formatting improvements
+
+---
+
 ## [0.7.0] - 01/01/2026
 
 ### Summary
 
-Comprehensive CI/CD infrastructure implementation with GitHub Actions workflows for continuous integration, automated releases, security scanning (CodeQL, njsscan, Codacy), dependency management, and developer tooling with pre-commit hooks. Renamed package to @syntek-studio/ui and enhanced developer experience with VS Code settings.
+Comprehensive CI/CD infrastructure implementation with GitHub Actions workflows for continuous integration, automated
+releases, security scanning (CodeQL, njsscan, Codacy), dependency management, and developer tooling with pre-commit
+hooks. Renamed package to @syntek-studio/ui and enhanced developer experience with VS Code settings.
 
 ### Breaking Changes
 
@@ -162,11 +283,17 @@ None - infrastructure and configuration only.
 ### Security Notes
 
 - CodeQL analysis scans for JavaScript/TypeScript security vulnerabilities on every push
+
 - njsscan performs Node.js-specific security scanning
+
 - Codacy provides static code analysis with security checks
+
 - Dependency review workflow blocks PRs with vulnerable dependencies
+
 - Dependabot automatically creates PRs for security updates
+
 - Pre-commit hooks enforce code quality and type safety before commits
+
 - Security policy (SECURITY.md) provides clear vulnerability reporting process
 
 ### Architecture Notes
@@ -174,22 +301,31 @@ None - infrastructure and configuration only.
 **CI/CD Pipeline:**
 
 - All pull requests run comprehensive checks: lint, type-check, test, build
+
 - Version tags automatically trigger release creation and publishing
+
 - GitHub Packages integration for internal package distribution
+
 - Version consistency validation ensures package.json matches git tags
 
 **Security Infrastructure:**
 
 - Multi-layered security scanning (CodeQL, njsscan, Codacy)
+
 - Automated dependency vulnerability detection
+
 - Weekly Dependabot updates for npm packages
+
 - Pre-commit hooks prevent committing code quality issues
 
 **Developer Experience:**
 
 - Husky + lint-staged enforce code quality locally
+
 - VS Code settings provide consistent editor configuration
+
 - Issue and PR templates guide contributions
+
 - Contributing guidelines streamline collaboration
 
 ---
@@ -198,7 +334,8 @@ None - infrastructure and configuration only.
 
 ### Summary
 
-Added ClickUp project management integration with bidirectional GitHub synchronisation, comprehensive sprint planning documentation, and project management infrastructure.
+Added ClickUp project management integration with bidirectional GitHub synchronisation, comprehensive sprint planning
+documentation, and project management infrastructure.
 
 ### Breaking Changes
 
@@ -254,14 +391,19 @@ None - infrastructure and documentation only.
 ### Documentation Notes
 
 - Comprehensive sprint planning with 23 sprint documents
+
 - 39 user stories defined with acceptance criteria
+
 - PM integration guides for setup and troubleshooting
+
 - Bidirectional sync documentation for GitHub ↔ ClickUp
 
 ### Architecture Notes
 
 - GitHub Actions workflow enables automatic ClickUp status updates
+
 - Branch naming convention (`us###/description`) links to ClickUp tasks
+
 - Status mapping: Branch push → In Progress, PR opened → In Review, PR merged → Accepted
 
 ---
@@ -270,7 +412,8 @@ None - infrastructure and documentation only.
 
 ### Summary
 
-Comprehensive documentation overhaul with standardised metadata headers, British English conventions, and improved structure across all documentation files.
+Comprehensive documentation overhaul with standardised metadata headers, British English conventions, and improved
+structure across all documentation files.
 
 ### Breaking Changes
 
@@ -310,8 +453,11 @@ None - documentation only.
 ### Documentation Notes
 
 - All `.md` files now include standardised metadata headers
+
 - Consistent British English (en_GB) used throughout
+
 - DD/MM/YYYY date format applied consistently
+
 - Europe/London timezone specified for all timestamps
 
 ---
@@ -320,7 +466,8 @@ None - documentation only.
 
 ### Summary
 
-Added utility system and enhanced Button components for both web and mobile platforms with improved styling utilities and type safety.
+Added utility system and enhanced Button components for both web and mobile platforms with improved styling utilities
+and type safety.
 
 ### Breaking Changes
 
@@ -333,6 +480,7 @@ Not applicable - library project.
 ### API Changes
 
 - New utility functions exported from `src/utils/`
+
 - Enhanced Button component props with improved types
 
 ### Files Changed
@@ -354,6 +502,7 @@ Not applicable - library project.
 ### Architecture Notes
 
 - New utility system reduces code duplication in components
+
 - Centralised styling logic for consistency across platforms
 
 ---
@@ -362,7 +511,8 @@ Not applicable - library project.
 
 ### Summary
 
-Added comprehensive type system for design tokens and enhanced all token files with TypeScript types and documentation headers.
+Added comprehensive type system for design tokens and enhanced all token files with TypeScript types and documentation
+headers.
 
 ### Breaking Changes
 
@@ -375,6 +525,7 @@ Not applicable - library project.
 ### API Changes
 
 - All design tokens now have full TypeScript type definitions
+
 - New CSS type definitions for improved styling support
 
 ### Files Changed
@@ -393,6 +544,7 @@ Not applicable - library project.
 ### Performance Notes
 
 - Enhanced type safety improves IDE autocomplete performance
+
 - Compile-time type checking catches errors early
 
 ---
@@ -401,7 +553,8 @@ Not applicable - library project.
 
 ### Summary
 
-Enhanced Storybook configuration with TypeScript support, migrated preview configuration from JavaScript to TypeScript, and added comprehensive Storybook documentation.
+Enhanced Storybook configuration with TypeScript support, migrated preview configuration from JavaScript to TypeScript,
+and added comprehensive Storybook documentation.
 
 ### Breaking Changes
 
@@ -470,7 +623,8 @@ None - configuration changes only.
 
 ### Summary
 
-Introduction of version management system with VERSION-HISTORY.md, CHANGELOG.md, and RELEASES.md for comprehensive version tracking.
+Introduction of version management system with VERSION-HISTORY.md, CHANGELOG.md, and RELEASES.md for comprehensive
+version tracking.
 
 ### Breaking Changes
 
@@ -496,8 +650,11 @@ None - documentation only.
 ### Documentation Notes
 
 - Established three-tier version documentation system
+
 - VERSION-HISTORY.md for technical details (developers)
+
 - CHANGELOG.md for brief developer summary
+
 - RELEASES.md for user-facing feature highlights
 
 ---
@@ -506,7 +663,8 @@ None - documentation only.
 
 ### Summary
 
-Added project configuration and tooling setup including EditorConfig, Git attributes, npm configuration, Prettier, global TypeScript definitions, and enhanced TypeScript configuration.
+Added project configuration and tooling setup including EditorConfig, Git attributes, npm configuration, Prettier,
+global TypeScript definitions, and enhanced TypeScript configuration.
 
 ### Breaking Changes
 
@@ -547,7 +705,9 @@ None - configuration changes only.
 
 ### Summary
 
-Initial release of @template/ui shared component library. Established core architecture for cross-platform React components with TypeScript, Tailwind CSS 4, and Nativewind 4. Implemented comprehensive design token system and development tooling.
+Initial release of @template/ui shared component library. Established core architecture for cross-platform React
+components with TypeScript, Tailwind CSS 4, and Nativewind 4. Implemented comprehensive design token system and
+development tooling.
 
 ### Breaking Changes
 
@@ -615,15 +775,21 @@ Not applicable - initial release.
 ### Performance Notes
 
 - Build outputs optimised dual format (CJS/ESM) for maximum compatibility
+
 - Tsup configured with tree-shaking for minimal bundle size
+
 - Path aliases reduce import statement complexity
+
 - Design tokens centralised for consistent theming performance
 
 ### Security Notes
 
 - TypeScript strict mode enabled for type safety
+
 - ESLint configured for code quality and security linting
+
 - No runtime dependencies in production build (only peer dependencies)
+
 - All dependencies are development-only or peer-managed
 
 ### Architecture Notes
@@ -631,29 +797,53 @@ Not applicable - initial release.
 **Component Structure:**
 
 - Platform-specific implementations in `src/web/` and `src/mobile/`
+
 - Shared design tokens in `src/tokens/`
+
 - Namespaced exports: default for web, `Mobile.*` namespace for React Native
 
 **Build System:**
 
 - Tsup for fast, modern bundling
+
 - Dual format output (CommonJS and ESM)
+
 - TypeScript declaration files generated automatically
 
 **Styling System:**
 
 - Tailwind CSS 4 for web components
+
 - Nativewind 4 for React Native compatibility
+
 - Design tokens exportable as JavaScript objects
 
 **Development Workflow:**
 
 - Storybook for component development and documentation
+
 - Vitest for unit testing
+
 - ESLint for code quality
+
 - TypeScript for type safety
+
 - Conventional Commits for semantic versioning
 
 ---
 
-**Note:** This project is in pre-MVP (0.x.x) versioning. Breaking changes may occur between minor versions until 1.0.0 is released.
+**Note:** This project is in pre-MVP (0.x.x) versioning. Breaking changes may occur between minor versions until 1.0.0
+is released.
+
+[unreleased]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.1...HEAD
+[0.7.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.7.0...v0.7.1
+[0.7.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.6.0...v0.7.0
+[0.6.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.5.1...v0.6.0
+[0.5.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.5.0...v0.5.1
+[0.5.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.1.1...v0.2.0
+[0.1.1]: https://github.com/Syntek-Studio/ui_design_template/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/Syntek-Studio/ui_design_template/releases/tag/v0.1.0

@@ -18,27 +18,37 @@
 ## Dependencies
 
 - Version history established
+
 - Breaking changes documented
 
 ## Sprint Deliverables
 
 - Migration codemods for version upgrades
+
 - Automated migration scripts
+
 - Migration documentation
+
 - Complete theming guide
 
 ## Acceptance Criteria
 
 - [ ] Codemods functional for major upgrades
+
 - [ ] Migration scripts automated
+
 - [ ] Migration guide comprehensive
+
 - [ ] Theming guide finalised
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-Migration tooling should use codemods (via jscodeshift or similar) to automatically update user code during version upgrades.
+Migration tooling should use codemods (via jscodeshift or similar) to automatically update user code during version
+upgrades.
 
 ## Repository Breakdown
 

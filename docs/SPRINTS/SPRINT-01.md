@@ -22,20 +22,27 @@
 ## Sprint Deliverables
 
 - CLI tool for initialising new design system projects from template
+
 - Template configuration metadata system
+
 - Ability to scaffold new projects with `npm run init-template`
 
 ## Acceptance Criteria
 
 - [ ] Template initialisation CLI is functional
+
 - [ ] Configuration metadata system is in place
+
 - [ ] New projects can be scaffolded successfully
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
 
 ## Implementation Notes
 
-This sprint establishes the foundation for the entire template system. The CLI tool (US001) must work seamlessly with the configuration metadata (US002) to provide a smooth initialisation experience.
+This sprint establishes the foundation for the entire template system. The CLI tool (US001) must work seamlessly with
+the configuration metadata (US002) to provide a smooth initialisation experience.
 
 ## Repository Breakdown
 

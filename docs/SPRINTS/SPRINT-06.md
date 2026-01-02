@@ -18,28 +18,39 @@
 ## Dependencies
 
 - US010 (Button Refactor) must be complete to test dark mode
+
 - US005-007 (Theme system) must be complete
 
 ## Sprint Deliverables
 
 - Dark mode tokens and styles
+
 - Dark mode toggle functionality
+
 - ADR documentation framework
+
 - Complete Phase 3 component theming integration
 
 ## Acceptance Criteria
 
 - [ ] Dark mode tokens generated
+
 - [ ] Components render correctly in dark mode
+
 - [ ] Theme persists across sessions
+
 - [ ] ADR documentation structure established
+
 - [ ] All code is reviewed and merged
+
 - [ ] Documentation updated
+
 - [ ] Phase 3 complete
 
 ## Implementation Notes
 
-Dark mode is a critical feature for modern design systems. The implementation must handle both automatic OS preference detection and manual override.
+Dark mode is a critical feature for modern design systems. The implementation must handle both automatic OS preference
+detection and manual override.
 
 ## Repository Breakdown
 

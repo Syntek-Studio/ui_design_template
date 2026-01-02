@@ -11,7 +11,9 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+
 - [Overview](#overview)
+
 - [Story Summary by Phase](#story-summary-by-phase)
   - [Phase 1: Template Infrastructure (Must Have) - 4 Stories](#phase-1-template-infrastructure-must-have---4-stories)
   - [Phase 2: Theme Configuration System (Must Have) - 3 Stories](#phase-2-theme-configuration-system-must-have---3-stories)
@@ -20,23 +22,30 @@
   - [Phase 5: Documentation \& Storybook (Should Have) - 8 Stories](#phase-5-documentation--storybook-should-have---8-stories)
   - [Phase 6: Testing Framework (Should Have) - 3 Stories](#phase-6-testing-framework-should-have---3-stories)
   - [Phase 7: Advanced Features \& Components (Could Have) - 12 Stories](#phase-7-advanced-features--components-could-have---12-stories)
+
 - [Priority Breakdown](#priority-breakdown)
   - [Must Have (Phases 1-4)](#must-have-phases-1-4)
   - [Should Have (Phase 5-6)](#should-have-phase-5-6)
   - [Could Have (Phase 7)](#could-have-phase-7)
+
 - [Sprint Assignments](#sprint-assignments)
+
 - [Key Dependencies](#key-dependencies)
+
 - [Success Criteria](#success-criteria)
+
 - [Component Checklist](#component-checklist)
   - [Phase 3-4 Components (Built-in)](#phase-3-4-components-built-in)
   - [Sprint 08 Components](#sprint-08-components)
   - [Sprint 15-19 Components](#sprint-15-19-components)
   - [Future Components (Could Have)](#future-components-could-have)
+
 - [Notes](#notes)
 
 ## Overview
 
-This document provides an index and roadmap of all user stories for the @template/ui component library project. Stories are organised by phase and priority, with each story assigned to a specific sprint targeting 11 story points per sprint.
+This document provides an index and roadmap of all user stories for the @template/ui component library project. Stories
+are organised by phase and priority, with each story assigned to a specific sprint targeting 11 story points per sprint.
 
 **Sprint Capacity:** 11 points per sprint (2 weeks)
 **Total Timeline:** 23 sprints (~46 weeks)
@@ -151,24 +160,33 @@ Extended functionality for advanced use cases.
 
 ### Must Have (Phases 1-4)
 
-- **Stories:** 16
-- **Total Points:** 94
-- **Sprints:** 01-10
-- **Purpose:** Core infrastructure, theme system, CI/CD, and publishing
+- **Stories:**16
+
+-**Total Points:**94
+
+-**Sprints:**01-10
+
+-**Purpose:**Core infrastructure, theme system, CI/CD, and publishing
 
 ### Should Have (Phase 5-6)
 
-- **Stories:** 11
-- **Total Points:** 55
-- **Sprints:** 06-07, 11-15
-- **Purpose:** Documentation, testing, and foundational features
+-**Stories:**11
+
+-**Total Points:**55
+
+-**Sprints:**06-07, 11-15
+
+-**Purpose:**Documentation, testing, and foundational features
 
 ### Could Have (Phase 7)
 
-- **Stories:** 12
-- **Total Points:** 89
-- **Sprints:** 08, 15-23
-- **Purpose:** Advanced features and component library expansion
+-**Stories:**12
+
+-**Total Points:**89
+
+-**Sprints:**08, 15-23
+
+-**Purpose:** Advanced features and component library expansion
 
 ---
 
@@ -206,16 +224,25 @@ Extended functionality for advanced use cases.
 
 ## Key Dependencies
 
-- **US001-002** (Sprint 01): Form the foundation; nothing depends on these directly
-- **US003, US005** (Sprint 02): Requires US002 for config structure
-- **US006** (Sprint 03): Requires US005 for theme config
-- **US007-008** (Sprint 04): Requires US006 for token generation
-- **US009-010** (Sprint 05): Requires US007-008 for defaults and validation
-- **US011** (Sprint 06): Requires US010 for component refactor
-- **US012** (Sprint 07): Requires US011 for dark mode tokens
-- **US013** (Sprint 08): Requires code from previous sprints
-- **US014** (Sprint 09): Requires US013 for CI pipeline
-- **US015** (Sprint 10): Requires US014 for release workflow
+- **US001-002**(Sprint 01): Form the foundation; nothing depends on these directly
+
+-**US003, US005**(Sprint 02): Requires US002 for config structure
+
+-**US006**(Sprint 03): Requires US005 for theme config
+
+-**US007-008**(Sprint 04): Requires US006 for token generation
+
+-**US009-010**(Sprint 05): Requires US007-008 for defaults and validation
+
+-**US011**(Sprint 06): Requires US010 for component refactor
+
+-**US012**(Sprint 07): Requires US011 for dark mode tokens
+
+-**US013**(Sprint 08): Requires code from previous sprints
+
+-**US014**(Sprint 09): Requires US013 for CI pipeline
+
+-**US015** (Sprint 10): Requires US014 for release workflow
 
 **After Sprint 10:** Most stories can be worked in parallel.
 
@@ -224,11 +251,17 @@ Extended functionality for advanced use cases.
 ## Success Criteria
 
 - All Must Have stories completed and tested
+
 - CI/CD pipeline configured and functional
+
 - Library publishable to npm
+
 - Comprehensive documentation available
+
 - 80%+ test coverage
+
 - All components accessible (WCAG AA)
+
 - Storybook deployed and publicly available
 
 ---
@@ -246,30 +279,51 @@ Extended functionality for advanced use cases.
 ### Sprint 15-19 Components
 
 - [ ] Input/TextInput (US022) - Sprint 15
+
 - [ ] Modal/Dialog (US036) - Sprint 16
+
 - [ ] Label (US037) - Sprint 17
+
 - [ ] FormError (US037) - Sprint 17
+
 - [ ] HelperText (US037) - Sprint 17
+
 - [ ] Header (US038) - Sprint 18
+
 - [ ] Footer (US038) - Sprint 18
+
 - [ ] Sidebar (US038) - Sprint 18
+
 - [ ] Badge (US039) - Sprint 19
+
 - [ ] Avatar (US039) - Sprint 19
+
 - [ ] Alert (US039) - Sprint 19
+
 - [ ] Tooltip (US039) - Sprint 19
 
 ### Future Components (Could Have)
 
 - Tabs
+
 - Breadcrumb
+
 - Table/DataGrid
+
 - Select/Dropdown
+
 - Checkbox
+
 - Radio
+
 - Toggle/Switch
+
 - Accordion
+
 - Progress
+
 - Spinner
+
 - Toast/Notification
 
 ---
@@ -277,17 +331,23 @@ Extended functionality for advanced use cases.
 ## Notes
 
 - All story points use Fibonacci scale (1, 2, 3, 5, 8)
+
 - Maximum 11 points per sprint target (with ±2 variance allowed)
+
 - Sprint duration: 2 weeks
+
 - Dependencies should be respected during planning
+
 - Stories can be adjusted based on team capacity and priorities
+
 - Regular review and retrospectives should inform story refinement
 
 ---
 
 **Document Maintenance**
 
-This index should be updated as stories progress through the workflow. Use this as the single source of truth for project planning and progress tracking.
+This index should be updated as stories progress through the workflow. Use this as the single source of truth for
+project planning and progress tracking.
 
 ---
 

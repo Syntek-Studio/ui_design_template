@@ -1,0 +1,84 @@
+title: "Idea: Your Feature Suggestion"
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your suggestion! We value community input on how to improve @template/ui.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Use Case
+      description: What problem does this idea solve? What's the use case?
+      placeholder: |
+        Example: Currently, there's no way to create an accessible tabs component.
+        I need a Tabs component that supports keyboard navigation and ARIA attributes.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this to work? Describe the API or interface.
+      placeholder: |
+        ```typescript
+        import { Tabs } from '@template/ui';
+
+        export function MyTabs() {
+          return (
+            <Tabs defaultValue="tab1">
+              <Tabs.List>
+                <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+                <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+              </Tabs.List>
+              <Tabs.Content value="tab1">Content 1</Tabs.Content>
+              <Tabs.Content value="tab2">Content 2</Tabs.Content>
+            </Tabs>
+          );
+        }
+        ```
+      render: typescript
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other approaches have you considered?
+      placeholder: |
+        - Using Headless UI (not web + mobile)
+        - Custom implementation (too much boilerplate)
+
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: Platforms
+      description: Which platforms would benefit from this feature?
+      options:
+        - Web
+        - Mobile (React Native)
+        - Both
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other information, examples, or mockups?
+      placeholder: |
+        - Links to similar components in other libraries
+        - Screenshots or design mockups
+        - User feedback or requests
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I've searched for similar ideas
+        - label: I've provided example code or mockups
+        - label: I've considered accessibility implications

@@ -1,7 +1,7 @@
 # Syntek Dev Suite - Plugin Usage Guide
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -12,68 +12,65 @@
 
 ## Table of Contents
 
-- [Syntek Dev Suite - Plugin Usage Guide](#syntek-dev-suite---plugin-usage-guide)
-  - [Table of Contents](#table-of-contents)
-  - [Quick Start](#quick-start)
-    - [Basic Usage](#basic-usage)
-  - [Complete Development Workflow](#complete-development-workflow)
-    - [Phase 1: Planning](#phase-1-planning)
-    - [Phase 2: Test-Driven Development](#phase-2-test-driven-development)
-    - [Phase 3: Implementation](#phase-3-implementation)
-    - [Phase 4: Quality Assurance](#phase-4-quality-assurance)
-    - [Phase 5: Completion](#phase-5-completion)
-  - [Command Types](#command-types)
-  - [Agent Commands](#agent-commands)
-    - [Planning \& Architecture](#planning--architecture)
-    - [Development](#development)
-    - [Quality \& Testing](#quality--testing)
-    - [Refactoring \& Maintenance](#refactoring--maintenance)
-    - [Infrastructure](#infrastructure)
-    - [Specialised](#specialised)
-  - [Plugin Commands](#plugin-commands)
-  - [Learning Commands](#learning-commands)
-  - [Skills Reference](#skills-reference)
-    - [Stack Skills](#stack-skills)
-    - [Global Skill](#global-skill)
-  - [Self-Learning and A/B Testing](#self-learning-and-ab-testing)
-    - [How It Works](#how-it-works)
-    - [Giving Feedback](#giving-feedback)
-    - [Project-Specific Learning](#project-specific-learning)
-  - [Best Practices](#best-practices)
-    - [1. Always Start with `/syntek-dev-suite:plan`](#1-always-start-with-syntek-dev-suiteplan)
-    - [2. Use `/syntek-dev-suite:qa-tester` Before Merging](#2-use-syntek-dev-suiteqa-tester-before-merging)
-    - [3. Keep CLAUDE.md Updated](#3-keep-claudemd-updated)
-    - [4. Let Agents Read Files](#4-let-agents-read-files)
-    - [5. Chain Commands Logically](#5-chain-commands-logically)
-    - [6. Commit After Each Step](#6-commit-after-each-step)
-    - [7. Give Feedback](#7-give-feedback)
-  - [Environment Commands](#environment-commands)
-  - [Getting Help](#getting-help)
+- [Table of Contents](#table-of-contents)
+- [Quick Start](#quick-start)
+  - [Basic Usage](#basic-usage)
+- [Command Types](#command-types)
+- [Agent Commands](#agent-commands)
+  - [Planning \& Architecture](#planning--architecture)
+  - [Development](#development)
+  - [Quality \& Testing](#quality--testing)
+  - [Refactoring \& Maintenance](#refactoring--maintenance)
+  - [Infrastructure](#infrastructure)
+  - [Specialised](#specialised)
+- [Plugin Commands](#plugin-commands)
+- [Learning Commands](#learning-commands)
+- [Skills Reference](#skills-reference)
+  - [Stack Skills](#stack-skills)
+  - [Global Skill](#global-skill)
+- [Self-Learning and A/B Testing](#self-learning-and-ab-testing)
+  - [How It Works](#how-it-works)
+  - [Giving Feedback](#giving-feedback)
+  - [Project-Specific Learning](#project-specific-learning)
+- [Best Practices](#best-practices)
+  - [1. Always Start with `/syntek-dev-suite:plan`](#1-always-start-with-syntek-dev-suiteplan)
+  - [2. Use `/syntek-dev-suite:qa-tester` Before Merging](#2-use-syntek-dev-suiteqa-tester-before-merging)
+  - [3. Keep CLAUDE.md Updated](#3-keep-claudemd-updated)
+  - [4. Let Agents Read Files](#4-let-agents-read-files)
+- [Environment Commands](#environment-commands)
+- [Getting Help](#getting-help)
 
 ---
 
 ## Quick Start
 
-The Syntek Dev Suite provides specialised AI agents for full-stack development. Each agent has domain expertise and understands your project's stack through the `CLAUDE.md` file.
+The Syntek Dev Suite provides specialised AI agents for full-stack development. Each agent has domain expertise and
+understands your project's stack through the `CLAUDE.md` file.
 
 ### Basic Usage
 
-```bash
+````bash
+
 # Plan a new feature
+
 /syntek-dev-suite:plan Add a new Card component with variants
 
 # Implement frontend
+
 /syntek-dev-suite:frontend Create the Card component for web and mobile
 
 # Write tests
+
 /syntek-dev-suite:test-writer Write tests for the Card component
 
 # Review code
+
 /syntek-dev-suite:review Review the Card implementation
 
 # Give feedback to improve the agent
+
 /syntek-dev-suite:learning-feedback good
-```
+```markdown
 
 ---
 
@@ -84,57 +81,73 @@ This section walks through a complete development cycle for a shared library.
 ### Phase 1: Planning
 
 ```bash
+
 # 1. Plan the component architecture
+
 /syntek-dev-suite:plan Design a Modal component with animations
 
 # 2. Generate user stories if needed
+
 /syntek-dev-suite:stories Create user stories for the Modal component
-```
+```markdown
 
 ### Phase 2: Test-Driven Development
 
 ```bash
+
 # 1. Write tests first (TDD)
+
 /syntek-dev-suite:test-writer Write tests for the Modal component
 
 # 2. Generate documentation
+
 /syntek-dev-suite:docs Document the Modal component API
-```
+```markdown
 
 ### Phase 3: Implementation
 
 ```bash
+
 # 1. Implement the component
+
 /syntek-dev-suite:frontend Create the Modal component for web
 
 /syntek-dev-suite:frontend Create the Modal component for mobile
 
 # 2. Fix any syntax or linting issues
+
 /syntek-dev-suite:syntax Fix linting errors in the Modal component
-```
+```markdown
 
 ### Phase 4: Quality Assurance
 
 ```bash
+
 # 1. Run QA testing
+
 /syntek-dev-suite:qa-tester Review the Modal implementation for edge cases
 
 # 2. Code review
+
 /syntek-dev-suite:review Review the Modal component
-```
+```markdown
 
 ### Phase 5: Completion
 
 ```bash
+
 # 1. Refactor if needed
+
 /syntek-dev-suite:refactor Clean up the Modal component code
 
 # 2. Update documentation
+
 /syntek-dev-suite:docs Update Modal documentation with examples
 
 # 3. Commit changes
+
 git add . && git commit -m "feat(modal): add Modal component for web and mobile"
-```
+````
 
 ---
 
@@ -248,44 +261,61 @@ Skills are loaded automatically based on your project's `Skill Target` in `CLAUD
 The `global-workflow` skill is always loaded and provides:
 
 - British English localisation
+
 - Date format: DD/MM/YYYY
+
 - Time format: 24-hour clock (14:30)
+
 - Timezone: Europe/London
+
 - Currency: GBP
+
 - Git commit message standards
+
 - Documentation formatting rules
 
 ---
 
 ## Self-Learning and A/B Testing
 
-The plugin includes a self-learning system that improves agent performance based on your feedback. Each project develops its own optimised prompts over time.
+The plugin includes a self-learning system that improves agent performance based on your feedback. Each project develops
+its own optimised prompts over time.
 
 ### How It Works
 
-1. **Feedback Collection** - After each agent run, rate the output
-2. **Metrics Recording** - Run duration, outcomes, and errors are tracked
-3. **Pattern Analysis** - The system identifies what works and what doesn't
-4. **A/B Testing** - Prompt variants are tested to find the best approach
-5. **Prompt Optimisation** - Winning prompts are applied automatically
+1. **Feedback Collection**- After each agent run, rate the output
+
+2.**Metrics Recording**- Run duration, outcomes, and errors are tracked
+
+3.**Pattern Analysis**- The system identifies what works and what doesn't
+
+4.**A/B Testing**- Prompt variants are tested to find the best approach
+
+5.**Prompt Optimisation**- Winning prompts are applied automatically
 
 ### Giving Feedback
 
 After each agent run, provide feedback to improve future runs:
 
 ```bash
+
 # If the output was good
+
 /syntek-dev-suite:learning-feedback good
 
 # If the output needs improvement
+
 /syntek-dev-suite:learning-feedback bad The output didn't follow the coding style
 ```
 
 ### Project-Specific Learning
 
 - All feedback and metrics are stored in your project's `docs/METRICS/` folder
+
 - Data is committed to Git, so the whole team benefits from improvements
+
 - Each project develops its own optimised prompts over time
+
 - The more feedback you provide, the better the agents become for your project
 
 ---
@@ -316,33 +346,37 @@ When you add dependencies or change frameworks, update `.claude/CLAUDE.md`.
 
 Don't paste code into commands. The agent will read files:
 
-```bash
+````bash
+
 # Good
+
 /syntek-dev-suite:frontend Fix the Button component
 
 # Less good
+
 /syntek-dev-suite:frontend Fix this code: [pasted code]
-```
+```markdown
 
 ### 5. Chain Commands Logically
 
 Follow the natural development flow:
 
-```
-plan -> test-writer -> frontend -> syntax -> qa-tester -> review -> docs
-```
+````
 
+plan -> test-writer -> frontend -> syntax -> qa-tester -> review -> docs
+
+`````markdown
 ### 6. Commit After Each Step
 
 Small, focused commits after each agent interaction:
 
-```bash
+````bash
 /syntek-dev-suite:frontend Create the Card component
 git commit -m "feat(card): add Card component"
 
 /syntek-dev-suite:test-writer Write tests for Card component
 git commit -m "test(card): add Card component tests"
-```
+```markdown
 
 ### 7. Give Feedback
 
@@ -351,6 +385,9 @@ Help agents improve by providing feedback:
 ```bash
 /syntek-dev-suite:learning-feedback good   # When output is correct
 /syntek-dev-suite:learning-feedback bad    # When output needs improvement
+````
+`````
+
 ```
 
 ---
@@ -370,10 +407,13 @@ This project uses root-level scripts for different environments:
 
 ## Getting Help
 
-- **Plugin Issues:** https://github.com/syntek-developers/syntek-dev-suite/issues
-- **Documentation:** See `examples/` folder in the plugin directory
-- **Reset to Default:** Delete `.claude/` folder and run `/syntek-dev-suite:init` again
+- **Plugin Issues:** <https://github.com/syntek-studio/syntek-dev-suite/issues>
+
+-**Documentation:**See `examples/` folder in the plugin directory
+
+-**Reset to Default:** Delete `.claude/` folder and run `/syntek-dev-suite:init` again
 
 ---
 
 **Happy coding with Syntek Dev Suite!**
+```

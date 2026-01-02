@@ -1,7 +1,7 @@
 # src/web/components/
 
-**Last Updated**: 01/01/2026
-**Version**: 0.7.0
+**Last Updated**: 02/01/2026
+**Version**: 0.7.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -47,18 +47,22 @@
 
 This folder contains all web component implementations for React. Each component is built with:
 
-- **React 18/19** for component logic
-- **TypeScript** for type safety
-- **Tailwind CSS 4** for styling
-- **Storybook** for documentation and testing
+- **React 18/19**for component logic
 
-Components are organised into individual folders, each containing the component implementation, Storybook stories, and exports.
+-**TypeScript**for type safety
+
+-**Tailwind CSS 4**for styling
+
+-**Storybook** for documentation and testing
+
+Components are organised into individual folders, each containing the component implementation, Storybook stories, and
+exports.
 
 ---
 
 ## Directory Tree
 
-```
+```typescript
 src/web/components/
 ├── README.md              # This file
 ├── index.ts               # Main export file
@@ -80,7 +84,7 @@ Versatile button component with multiple variants and states.
 
 **Props:**
 
-```typescript
+````typescript
 interface ButtonProps {
   title: string // Button text
   onClick?: () => void // Click handler
@@ -88,13 +92,13 @@ interface ButtonProps {
   disabled?: boolean // Disabled state
   className?: string // Custom Tailwind classes
 }
-```
+```text
 
 **Import:**
 
 ```typescript
 import { Button } from '@template/ui'
-```
+```text
 
 **Example:**
 
@@ -104,17 +108,20 @@ import { Button } from '@template/ui'
   variant="primary"
   onClick={() => console.log('Clicked')}
 />
-```
+```markdown
 
 **Variants:**
 
-- **primary** - Blue background, white text
-- **secondary** - Grey background, white text
+- **primary**- Blue background, white text
+
+-**secondary** - Grey background, white text
 
 **States:**
 
 - Normal - Interactive
+
 - Hover - Reduced opacity
+
 - Disabled - 50% opacity
 
 ---
@@ -125,24 +132,24 @@ import { Button } from '@template/ui'
 
 ```typescript
 export interface ButtonProps {
-  /** The button text content */
+  /**The button text content*/
   title: string
 
-  /** Callback function when button is clicked */
+  /**Callback function when button is clicked*/
   onClick?: () => void
 
-  /** Visual style of the button */
+  /**Visual style of the button*/
   variant?: 'primary' | 'secondary'
 
-  /** Whether the button is disabled */
+  /**Whether the button is disabled*/
   disabled?: boolean
 
-  /** Additional Tailwind CSS classes for customisation */
+  /**Additional Tailwind CSS classes for customisation*/
   className?: string
 }
 
 export const Button: React.FC<ButtonProps>
-```
+```markdown
 
 ---
 
@@ -157,7 +164,7 @@ import { Button } from '@template/ui';
   title="Click me"
   onClick={() => alert('Clicked!')}
 />
-```
+```markdown
 
 ### Primary Button
 
@@ -167,7 +174,7 @@ import { Button } from '@template/ui';
   variant="primary"
   onClick={handleSubmit}
 />
-```
+```markdown
 
 ### Secondary Button
 
@@ -177,7 +184,7 @@ import { Button } from '@template/ui';
   variant="secondary"
   onClick={handleCancel}
 />
-```
+```markdown
 
 ### Disabled Button
 
@@ -187,7 +194,7 @@ import { Button } from '@template/ui';
   disabled={true}
   onClick={handleSubmit}
 />
-```
+```markdown
 
 ### Custom Styling
 
@@ -197,7 +204,7 @@ import { Button } from '@template/ui';
   className="bg-gradient-to-r from-blue-500 to-purple-600"
   onClick={() => {}}
 />
-```
+```markdown
 
 ### Form Integration
 
@@ -230,7 +237,7 @@ export function LoginForm() {
     </form>
   );
 }
-```
+```markdown
 
 ### Loading State Pattern
 
@@ -258,7 +265,7 @@ export function AsyncButton() {
     />
   );
 }
-```
+```markdown
 
 ---
 
@@ -266,18 +273,19 @@ export function AsyncButton() {
 
 ### Button Component Example
 
-```
-Button/
-├── Button.tsx              # Component implementation
-├── Button.stories.tsx      # Storybook documentation
-└── index.ts                # TypeScript re-export
-```
+````
 
+Button/
+├── Button.tsx # Component implementation
+├── Button.stories.tsx # Storybook documentation
+└── index.ts # TypeScript re-export
+
+````markdown
 ### Button.tsx
 
 Implements the component logic and styling:
 
-```typescript
+````typescript
 export interface ButtonProps {
   title: string;
   onClick?: () => void;
@@ -310,7 +318,7 @@ export const Button = ({
     </button>
   );
 };
-```
+```markdown
 
 ### Button.stories.tsx
 
@@ -351,7 +359,7 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
-```
+```markdown
 
 ### index.ts
 
@@ -359,18 +367,22 @@ Re-exports the component for public API:
 
 ```typescript
 export { Button, type ButtonProps } from './Button'
-```
+````
+````
 
 ---
 
 ## Adding New Components
 
 1. Create a folder: `src/web/components/ComponentName/`
+
 2. Create three files:
    - `ComponentName.tsx` - Implementation
    - `ComponentName.stories.tsx` - Storybook stories
    - `index.ts` - Re-export
+
 3. Update `src/web/components/index.ts` to export the new component
+
 4. Run `npm run storybook:web` to view in Storybook
 
 ---
@@ -379,19 +391,19 @@ export { Button, type ButtonProps } from './Button'
 
 ### Use Tailwind CSS Classes
 
-```typescript
+````typescript
 // Good
 className = 'px-4 py-2 rounded bg-blue-500 text-white'
 
 // Avoid custom CSS
 className = 'my-custom-button'
-```
+```markdown
 
 ### Responsive Design
 
 ```typescript
 className = 'px-4 md:px-6 lg:px-8 text-sm md:text-base lg:text-lg'
-```
+```markdown
 
 ### Design Tokens
 
@@ -400,7 +412,7 @@ import { colours } from '@template/ui'
 
 const bgColor = colours.primary[500] // #3b82f6
 const textColor = colours.white // #ffffff
-```
+```markdown
 
 ---
 
@@ -412,7 +424,7 @@ View and test components interactively:
 
 ```bash
 npm run storybook:web
-```
+```markdown
 
 ### Unit Tests
 
@@ -436,15 +448,18 @@ describe('Button', () => {
     expect(onClick).toHaveBeenCalled();
   });
 });
-```
+````
 
 ---
 
 ## Related Sections
 
 - [../](../) - Parent web folder
+
 - [../../mobile/components/](../../mobile/components/) - Mobile components
+
 - [../../tokens/](../../tokens/) - Design system tokens
+
 - [../../../README.md](../../../README.md) - Main project README
 
 ---
