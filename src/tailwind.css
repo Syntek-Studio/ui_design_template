@@ -1,1 +1,29 @@
+/**
+ * @fileoverview Tailwind CSS entry point for the @syntek-studio/ui component library.
+ *
+ * This file imports Tailwind CSS 4 using the new CSS-first configuration approach.
+ * The `layer(tailwind)` directive ensures styles are applied to the correct CSS layer,
+ * maintaining the cascade order for proper specificity handling.
+ *
+ * Used by: PostCSS (postcss.config.mjs) processes this file during build
+ *
+ * @see {@link ../postcss.config.mjs} PostCSS configuration that processes this file
+ * @see {@link ../tailwind.config.js} Tailwind CSS configuration (if exists)
+ * @see {@link https://tailwindcss.com/docs} Tailwind CSS v4 documentation
+ *
+ * @version 4.1.18 - Tailwind CSS 4
+ */
+
+/**
+ * Import Tailwind CSS framework
+ *
+ * This is the primary entry point for all Tailwind styles. The `layer(tailwind)`
+ * directive ensures the imported styles go into the 'tailwind' layer, which
+ * comes after 'base' and 'components' layers but before 'utilities'.
+ *
+ * Layers order: base → components → tailwind → utilities
+ *
+ * This allows component styles to override Tailwind defaults where needed,
+ * and ensures utility classes can override everything.
+ */
 @import 'tailwindcss' layer(tailwind);

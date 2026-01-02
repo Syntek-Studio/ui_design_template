@@ -10,22 +10,21 @@
 
 ## Table of Contents
 
-- [src/](#src)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Directory Tree](#directory-tree)
-  - [Files](#files)
-  - [Structure](#structure)
-    - [Entry Point (`index.ts`)](#entry-point-indexts)
-    - [Web Components (`web/components/`)](#web-components-webcomponents)
-    - [Mobile Components (`mobile/components/`)](#mobile-components-mobilecomponents)
-    - [Design Tokens (`tokens/`)](#design-tokens-tokens)
-  - [Usage](#usage)
-    - [Importing Web Components](#importing-web-components)
-    - [Importing Mobile Components](#importing-mobile-components)
-    - [Using Design Tokens](#using-design-tokens)
-    - [Creating New Components](#creating-new-components)
-  - [Related Sections](#related-sections)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Directory Tree](#directory-tree)
+- [Files](#files)
+- [Structure](#structure)
+  - [Entry Point (`index.ts`)](#entry-point-indexts)
+  - [Web Components (`web/components/`)](#web-components-webcomponents)
+  - [Mobile Components (`mobile/components/`)](#mobile-components-mobilecomponents)
+  - [Design Tokens (`tokens/`)](#design-tokens-tokens)
+- [Usage](#usage)
+  - [Importing Web Components](#importing-web-components)
+  - [Importing Mobile Components](#importing-mobile-components)
+  - [Using Design Tokens](#using-design-tokens)
+  - [Creating New Components](#creating-new-components)
+- [Related Sections](#related-sections)
 
 ---
 
@@ -197,26 +196,26 @@ Centralised design system values that should be used across all components:
 
 ### Importing Web Components
 
-````typescript
-import { Button, Card, Input } from '@template/ui';
+```typescript
+import { Button, Card, Input } from '@syntek-studio/ui';
 
 // Use in your React component
 <Button title="Click me" variant="primary" onClick={() => {}} />
-```markdown
+```
 
 ### Importing Mobile Components
 
 ```typescript
-import { Mobile } from '@template/ui';
+import { Mobile } from '@syntek-studio/ui';
 
 // Use in your React Native component
 <Mobile.Button title="Click me" variant="primary" onPress={() => {}} />
-```markdown
+```
 
 ### Using Design Tokens
 
 ```typescript
-import { colours, spacing, typography, breakpoints, shadows, borders } from '@template/ui'
+import { colours, spacing, typography, breakpoints, shadows, borders } from '@syntek-studio/ui'
 
 // Use tokens for consistent styling
 const primaryColor = colours.primary[500] // #3b82f6
@@ -225,7 +224,7 @@ const fontSize = typography.fontSize.lg.size // 18
 const breakpoint = breakpoints.md // 768px
 const shadow = shadows.md // Box shadow string
 const radius = borders.radius.lg // 8px
-````
+```
 
 ### Creating New Components
 
@@ -257,4 +256,4 @@ const radius = borders.radius.lg // 8px
 
 ---
 
-**Last Updated:** 22 December 2025
+**Last Updated:** 02/01/2026
