@@ -1,6 +1,7 @@
 # US039: Implement Utility Components (Badge, Avatar, Alert, Tooltip)
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99z6](https://app.clickup.com/t/86c7a99z6)
 **Priority:** Should Have
 **Story Points:** 8
 **Sprint:** Sprint 19
@@ -14,6 +15,7 @@ so that I can build interfaces faster without creating custom components.
 ## Acceptance Criteria
 
 ### Scenario 1: Badge Component
+
 - **Given** developer needs to display status indicators
 - **When** Badge component is used
 - **Then** it displays small, coloured labels
@@ -21,6 +23,7 @@ so that I can build interfaces faster without creating custom components.
 - **And** size variants are available (small, medium, large)
 
 ### Scenario 2: Avatar Component
+
 - **Given** application displays user images
 - **When** Avatar component is used
 - **Then** it shows circular user image
@@ -29,6 +32,7 @@ so that I can build interfaces faster without creating custom components.
 - **And** presence indicator can be shown
 
 ### Scenario 3: Alert Component
+
 - **Given** application needs to show alert messages
 - **When** Alert component is used
 - **Then** variants include: info, success, warning, error

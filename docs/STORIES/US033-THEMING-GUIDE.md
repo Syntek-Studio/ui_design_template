@@ -1,6 +1,7 @@
 # US033: Theming and Customisation Guide
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99kz](https://app.clickup.com/t/86c7a99kz)
 **Priority:** Should Have
 **Story Points:** 5
 **Sprint:** Sprint 11
@@ -14,6 +15,7 @@ so that I can effectively customise the design system for specific clients.
 ## Acceptance Criteria
 
 ### Scenario 1: Theme Customisation
+
 - **Given** developer wants to create a custom theme
 - **When** they read docs/GUIDES/THEMING.md
 - **Then** instructions for creating theme configuration are provided
@@ -22,6 +24,7 @@ so that I can effectively customise the design system for specific clients.
 - **And** inheritance and overrides are documented
 
 ### Scenario 2: Token Extension
+
 - **Given** client needs additional tokens
 - **When** they read the token extension guide
 - **Then** process for adding custom tokens is documented
@@ -30,6 +33,7 @@ so that I can effectively customise the design system for specific clients.
 - **And** type safety for custom tokens is maintained
 
 ### Scenario 3: Theme Application
+
 - **Given** custom theme is created
 - **When** developer wants to use it
 - **Then** instructions for applying theme are provided

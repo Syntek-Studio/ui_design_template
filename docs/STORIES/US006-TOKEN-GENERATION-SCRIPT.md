@@ -1,6 +1,7 @@
 # US006: Automated Token Generation Script
 
 **Status:** To Do
+**ClickUp ID:** [86c7a97y6](https://app.clickup.com/t/86c7a97y6)
 **Priority:** Must Have
 **Story Points:** 8
 **Sprint:** Sprint 03
@@ -14,6 +15,7 @@ so that I can keep tokens in sync with the source configuration without manual u
 ## Acceptance Criteria
 
 ### Scenario 1: Token File Generation
+
 - **Given** src/config/theme.config.ts is defined
 - **When** `npm run generate-tokens` is executed
 - **Then** all token files in src/tokens/ are regenerated
@@ -22,6 +24,7 @@ so that I can keep tokens in sync with the source configuration without manual u
 - **And** JSON exports are created for documentation and tooling
 
 ### Scenario 2: Colour Shade Generation
+
 - **Given** theme.config.ts defines a base primary colour
 - **When** tokens are generated
 - **Then** all 50, 100, 200, ..., 900 shades are automatically calculated
@@ -29,6 +32,7 @@ so that I can keep tokens in sync with the source configuration without manual u
 - **And** contrast ratios are maintained for accessibility
 
 ### Scenario 3: Error Handling and Validation
+
 - **Given** theme.config.ts has invalid colour values
 - **When** token generation runs
 - **Then** clear error messages are shown

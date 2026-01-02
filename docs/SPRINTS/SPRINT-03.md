@@ -1,16 +1,17 @@
 # Sprint 03: Token Generation System
 
 **Sprint Goal:** Build automated token generation and validation tools
+**ClickUp List ID:** [901519283752](https://app.clickup.com/90151635198/v/l/li/901519283752)
 **Total Points:** 11
 **Priority Focus:** Must Have
 **Phase:** Phase 2 - Theme Configuration System
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US006 | Automated Token Generation Script | 8 | Must Have | Phase 2 |
-| US002 | Template README with Client-Specific Customisation | 3 | Must Have | Phase 1 |
+| ID    | Title                                              | Points | Priority  | Phase   |
+| ----- | -------------------------------------------------- | ------ | --------- | ------- |
+| US006 | Automated Token Generation Script                  | 8      | Must Have | Phase 2 |
+| US002 | Template README with Client-Specific Customisation | 3      | Must Have | Phase 1 |
 
 **Sprint Total: 11 points**
 
@@ -39,17 +40,17 @@ The token generation script must read from the centralised theme configuration a
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US006 | ❌ | ❌ | ❌ | ✅ (scripts/) |
-| US004 | ❌ | ❌ | ❌ | ✅ (docs/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI     |
+| -------- | ------- | ------------ | --------------- | ------------- |
+| US006    | ❌      | ❌           | ❌              | ✅ (scripts/) |
+| US004    | ❌      | ❌           | ❌              | ✅ (docs/)    |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Token format compatibility | Medium | High | Test on both web and native platforms |
-| Generation script performance | Low | Medium | Optimise for large token sets |
+| Risk                          | Likelihood | Impact | Mitigation                            |
+| ----------------------------- | ---------- | ------ | ------------------------------------- |
+| Token format compatibility    | Medium     | High   | Test on both web and native platforms |
+| Generation script performance | Low        | Medium | Optimise for large token sets         |
 
 ---
 

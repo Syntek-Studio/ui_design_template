@@ -133,11 +133,13 @@ get_list_from_folder() {
     return 1
   fi
 
-  local response=$(curl -s -X GET \
+  local response
+  response=$(curl -s -X GET \
     "https://api.clickup.com/api/v2/folder/$folder_id/list" \
     -H "Authorization: $CLICKUP_API_KEY")
 
-  local list_id=$(echo "$response" | jq -r '.lists[0].id // empty')
+  local list_id
+  list_id=$(echo "$response" | jq -r '.lists[0].id // empty')
 
   if [[ -n "$list_id" && "$list_id" != "null" ]]; then
     echo "$list_id"
@@ -189,7 +191,8 @@ clickup_api() {
   fi
 
   http_code=$(echo "$response" | tail -n1)
-  local body=$(echo "$response" | sed '$d')
+  local body
+  body=$(echo "$response" | sed '$d')
 
   # SECURITY: Check for API errors without exposing sensitive data
   if [[ "$http_code" -ge 400 ]]; then
@@ -264,11 +267,14 @@ create_task() {
   name=$(sanitise_text "$name" 200)
 
   # Get ClickUp priority number
-  local cu_priority=$(get_clickup_priority "$priority")
+  local cu_priority
+  cu_priority=$(get_clickup_priority "$priority")
 
   # Get custom field option IDs
-  local moscow_option_id=$(get_moscow_option_id "$priority")
-  local points_option_id=$(get_story_points_option_id "$points")
+  local moscow_option_id
+  moscow_option_id=$(get_moscow_option_id "$priority")
+  local points_option_id
+  points_option_id=$(get_story_points_option_id "$points")
 
   # SECURITY: Validate status is allowed
   case "$status" in
@@ -285,7 +291,8 @@ create_task() {
 
   # SECURITY: Use jq to safely construct JSON payload (prevents injection)
   # Include custom fields for MoSCoW and Story Points
-  local payload=$(jq -n \
+  local payload
+  payload=$(jq -n \
     --arg name "$name" \
     --arg desc "$description" \
     --argjson priority "$cu_priority" \
@@ -318,8 +325,10 @@ create_task() {
     return 0
   fi
 
-  local response=$(clickup_api "POST" "/list/$list_id/task" "$payload")
-  local task_id=$(echo "$response" | jq -r '.id // empty')
+  local response
+  response=$(clickup_api "POST" "/list/$list_id/task" "$payload")
+  local task_id
+  task_id=$(echo "$response" | jq -r '.id // empty')
 
   # SECURITY: Validate returned task ID
   if [[ -n "$task_id" && "$task_id" != "null" ]]; then
@@ -358,7 +367,8 @@ create_subtask() {
   fi
 
   # Create as a subtask (child task)
-  local payload=$(jq -n \
+  local payload
+  payload=$(jq -n \
     --arg name "$subtask_name" \
     --arg parent "$task_id" \
     '{
@@ -366,8 +376,10 @@ create_subtask() {
       parent: $parent
     }')
 
-  local response=$(clickup_api "POST" "/list/$BACKLOG_LIST_ID/task" "$payload")
-  local subtask_id=$(echo "$response" | jq -r '.id // empty')
+  local response
+  response=$(clickup_api "POST" "/list/$BACKLOG_LIST_ID/task" "$payload")
+  local subtask_id
+  subtask_id=$(echo "$response" | jq -r '.id // empty')
 
   if [[ -n "$subtask_id" && "$subtask_id" != "null" ]]; then
     echo -e "    ${GREEN}✓ Subtask: $subtask_name${NC}"
@@ -396,12 +408,14 @@ add_task_to_list() {
   fi
 
   # Use the Add Task To List endpoint to link task to additional list
-  local response=$(curl -s -w "\n%{http_code}" -X POST \
+  local response
+  response=$(curl -s -w "\n%{http_code}" -X POST \
     "https://api.clickup.com/api/v2/list/$list_id/task/$task_id" \
     -H "Authorization: $CLICKUP_API_KEY" \
     -H "Content-Type: application/json")
 
-  local http_code=$(echo "$response" | tail -n1)
+  local http_code
+  http_code=$(echo "$response" | tail -n1)
 
   if [[ "$http_code" -lt 400 ]]; then
     echo -e "  ${GREEN}✓ Linked to sprint list${NC}"
@@ -429,7 +443,8 @@ create_list() {
   name=$(sanitise_text "$name" 100)
 
   # SECURITY: Use jq to safely construct JSON payload
-  local payload=$(jq -n --arg name "$name" '{name: $name}')
+  local payload
+  payload=$(jq -n --arg name "$name" '{name: $name}')
 
   if $DRY_RUN; then
     echo -e "${BLUE}[DRY RUN] Would create list: $name${NC}"
@@ -437,8 +452,10 @@ create_list() {
     return 0
   fi
 
-  local response=$(clickup_api "POST" "/folder/$folder_id/list" "$payload")
-  local list_id=$(echo "$response" | jq -r '.id // empty')
+  local response
+  response=$(clickup_api "POST" "/folder/$folder_id/list" "$payload")
+  local list_id
+  list_id=$(echo "$response" | jq -r '.id // empty')
 
   # SECURITY: Validate returned list ID
   if [[ -n "$list_id" && "$list_id" != "null" ]]; then
@@ -474,7 +491,8 @@ parse_user_stories() {
       continue
     fi
 
-    local filename=$(basename "$story_file")
+    local filename
+    filename=$(basename "$story_file")
     local story_id=""
     local story_title=""
     local story_priority="Medium"
@@ -549,11 +567,13 @@ parse_user_stories() {
         echo -e "\n${YELLOW}Processing: $story_id: $story_title${NC}"
 
         # Create the main task and capture the task ID
-        local task_output=$(create_task "$BACKLOG_LIST_ID" "$story_id: $story_title" "$full_description" "$story_priority" "$story_points" "$story_status")
+        local task_output
+        task_output=$(create_task "$BACKLOG_LIST_ID" "$story_id: $story_title" "$full_description" "$story_priority" "$story_points" "$story_status")
         echo "$task_output" | grep -v '^[a-z0-9]*$'  # Print output except raw task ID
 
         # Extract task ID from output (last line that looks like an ID)
-        local task_id=$(echo "$task_output" | grep -E '^[a-z0-9]+$' | tail -1)
+        local task_id
+        task_id=$(echo "$task_output" | grep -E '^[a-z0-9]+$' | tail -1)
 
         # Create subtasks for each task item
         if [[ -n "$task_id" && ${#tasks[@]} -gt 0 ]]; then
@@ -566,7 +586,9 @@ parse_user_stories() {
         # Link task to sprint list if sprint is specified
         if [[ -n "$task_id" && -n "$story_sprint" ]]; then
           # Remove leading zeros for array lookup (e.g., "01" -> "1")
-          local sprint_key=$(echo "$story_sprint" | sed 's/^0*//')
+          local sprint_key
+          sprint_key="${story_sprint#"${story_sprint%%[!0]*}"}"
+          [[ -z "$sprint_key" ]] && sprint_key="0"
           local sprint_list_id="${SPRINT_LIST_IDS[$sprint_key]}"
           if [[ -n "$sprint_list_id" ]]; then
             add_task_to_list "$task_id" "$sprint_list_id"
@@ -601,15 +623,17 @@ parse_sprints() {
       continue
     fi
 
-    local filename=$(basename "$sprint_file")
+    local filename
+    filename=$(basename "$sprint_file")
     local sprint_title=""
     local sprint_number=""
 
     # Extract sprint number from filename (e.g., SPRINT-01.md -> 1)
     if [[ "$filename" =~ SPRINT-([0-9]+)\.md ]]; then
       sprint_number="${BASH_REMATCH[1]}"
-      # Remove leading zeros
-      sprint_number=$(echo "$sprint_number" | sed 's/^0*//')
+      # Remove leading zeros using parameter expansion
+      sprint_number="${sprint_number#"${sprint_number%%[!0]*}"}"
+      [[ -z "$sprint_number" ]] && sprint_number="0"
     fi
 
     # Parse sprint file
@@ -624,8 +648,10 @@ parse_sprints() {
       echo -e "${YELLOW}Creating: $sprint_title${NC}"
 
       # Create the sprint list and capture the ID
-      local list_output=$(create_list "$CLICKUP_SPRINT_FOLDER_ID" "$sprint_title" 2>&1)
-      local list_id=$(echo "$list_output" | grep -E '^[0-9]+$' | tail -1)
+      local list_output
+      list_output=$(create_list "$CLICKUP_SPRINT_FOLDER_ID" "$sprint_title" 2>&1)
+      local list_id
+      list_id=$(echo "$list_output" | grep -E '^[0-9]+$' | tail -1)
 
       if [[ -n "$list_id" && "$list_id" != "0" ]]; then
         # Store the list ID for later linking

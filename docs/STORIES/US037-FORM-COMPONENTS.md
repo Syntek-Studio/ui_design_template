@@ -1,6 +1,7 @@
 # US037: Implement Form Component System
 
 **Status:** To Do
+**ClickUp ID:** [86c7a99we](https://app.clickup.com/t/86c7a99we)
 **Priority:** Should Have
 **Story Points:** 8
 **Sprint:** Sprint 17
@@ -14,13 +15,15 @@ so that I can easily create accessible, validated forms.
 ## Acceptance Criteria
 
 ### Scenario 1: Label Component
+
 - **Given** a form label is needed
 - **When** Label component is used
 - **Then** it associates with input via htmlFor
-- **And** required indicator (*) is shown if needed
+- **And** required indicator (\*) is shown if needed
 - **And** it applies consistent styling from tokens
 
 ### Scenario 2: Error Component
+
 - **Given** form field has validation error
 - **When** Error component is used
 - **Then** error message is displayed in error colour
@@ -28,6 +31,7 @@ so that I can easily create accessible, validated forms.
 - **And** screen readers announce the error
 
 ### Scenario 3: HelperText Component
+
 - **Given** input needs guidance text
 - **When** HelperText component is used
 - **Then** hint text is displayed below input

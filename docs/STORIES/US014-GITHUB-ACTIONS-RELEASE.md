@@ -1,6 +1,7 @@
 # US014: GitHub Actions Release and Publishing Pipeline
 
 **Status:** To Do
+**ClickUp ID:** [86c7a9877](https://app.clickup.com/t/86c7a9877)
 **Priority:** Must Have
 **Story Points:** 8
 **Sprint:** Sprint 09
@@ -14,6 +15,7 @@ so that publishing new versions is consistent and error-free.
 ## Acceptance Criteria
 
 ### Scenario 1: Automatic Release Workflow
+
 - **Given** a commit is pushed with specific keywords (e.g., [release])
 - **When** the release workflow is triggered
 - **Then** version bump is calculated (major/minor/patch)
@@ -23,6 +25,7 @@ so that publishing new versions is consistent and error-free.
 - **And** GitHub release is created with release notes
 
 ### Scenario 2: Semantic Versioning
+
 - **Given** commits follow conventional commits format
 - **When** release workflow runs
 - **Then** version is automatically determined from commit messages
@@ -30,6 +33,7 @@ so that publishing new versions is consistent and error-free.
 - **And** version follows semver (major.minor.patch)
 
 ### Scenario 3: Publishing to npm
+
 - **Given** all checks pass
 - **When** release workflow publishes
 - **Then** package is published with correct version

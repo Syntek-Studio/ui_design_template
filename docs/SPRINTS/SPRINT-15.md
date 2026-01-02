@@ -1,16 +1,17 @@
 # Sprint 15: Testing Documentation & Input Component
 
 **Sprint Goal:** Complete testing documentation and add Input component
+**ClickUp List ID:** [901519283768](https://app.clickup.com/90151635198/v/l/li/901519283768)
 **Total Points:** 11
 **Priority Focus:** Should Have & Could Have
 **Phase:** Phase 6-7 Transition
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US034 | Testing Guide and Best Practices | 5 | Should Have | Phase 6 |
-| US022 | Implement Input/TextInput Component | 5 | Could Have | Phase 7 |
+| ID    | Title                               | Points | Priority    | Phase   |
+| ----- | ----------------------------------- | ------ | ----------- | ------- |
+| US034 | Testing Guide and Best Practices    | 5      | Should Have | Phase 6 |
+| US022 | Implement Input/TextInput Component | 5      | Could Have  | Phase 7 |
 
 **Sprint Total: 11 points** (Note: 10 points)
 
@@ -40,17 +41,17 @@ The testing guide should cover unit testing, accessibility testing, visual regre
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US034 | ❌ | ❌ | ❌ | ✅ (docs/) |
-| US022 | ❌ | ✅ | ✅ | ✅ (Input/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI   |
+| -------- | ------- | ------------ | --------------- | ----------- |
+| US034    | ❌      | ❌           | ❌              | ✅ (docs/)  |
+| US022    | ❌      | ✅           | ✅              | ✅ (Input/) |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Input component complexity | Medium | Medium | Start with basic functionality |
-| Cross-platform input differences | High | Medium | Thorough platform-specific testing |
+| Risk                             | Likelihood | Impact | Mitigation                         |
+| -------------------------------- | ---------- | ------ | ---------------------------------- |
+| Input component complexity       | Medium     | Medium | Start with basic functionality     |
+| Cross-platform input differences | High       | Medium | Thorough platform-specific testing |
 
 ---
 

@@ -1,16 +1,17 @@
 # Sprint 04: Token Validation & Component Defaults
 
 **Sprint Goal:** Complete theme system with validation and begin component integration
+**ClickUp List ID:** [901519283753](https://app.clickup.com/90151635198/v/l/li/901519283753)
 **Total Points:** 11
 **Priority Focus:** Must Have
 **Phase:** Phase 2-3 Transition
 
 ## Stories
 
-| ID | Title | Points | Priority | Phase |
-|----|-------|--------|----------|-------|
-| US007 | Token Validation and Accessibility Checking | 5 | Must Have | Phase 2 |
-| US008 | Component Default Props Configuration | 5 | Must Have | Phase 3 |
+| ID    | Title                                       | Points | Priority  | Phase   |
+| ----- | ------------------------------------------- | ------ | --------- | ------- |
+| US007 | Token Validation and Accessibility Checking | 5      | Must Have | Phase 2 |
+| US008 | Component Default Props Configuration       | 5      | Must Have | Phase 3 |
 
 **Sprint Total: 11 points** (Note: 10 points, but closest to 11)
 
@@ -41,17 +42,17 @@ This sprint completes the theme configuration system and establishes the foundat
 
 ## Repository Breakdown
 
-| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI |
-|----------|---------|--------------|-----------------|-----------|
-| US007 | ❌ | ❌ | ❌ | ✅ (scripts/) |
-| US008 | ❌ | ✅ | ✅ | ✅ (config/) |
+| Story ID | Backend | Frontend Web | Frontend Mobile | Shared UI     |
+| -------- | ------- | ------------ | --------------- | ------------- |
+| US007    | ❌      | ❌           | ❌              | ✅ (scripts/) |
+| US008    | ❌      | ✅           | ✅              | ✅ (config/)  |
 
 ## Risk Assessment
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
-| Accessibility validation complexity | Medium | High | Use established WCAG algorithms |
-| Component defaults scope | Low | Medium | Start with essential props only |
+| Risk                                | Likelihood | Impact | Mitigation                      |
+| ----------------------------------- | ---------- | ------ | ------------------------------- |
+| Accessibility validation complexity | Medium     | High   | Use established WCAG algorithms |
+| Component defaults scope            | Low        | Medium | Start with essential props only |
 
 ## Notes
 

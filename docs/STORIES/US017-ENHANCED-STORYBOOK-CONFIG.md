@@ -1,6 +1,7 @@
 # US017: Enhanced Storybook Configuration and Features
 
 **Status:** To Do
+**ClickUp ID:** [86c7a98dn](https://app.clickup.com/t/86c7a98dn)
 **Priority:** Should Have
 **Story Points:** 8
 **Sprint:** Sprint 11
@@ -14,6 +15,7 @@ so that component documentation is interactive, well-organised, and supports the
 ## Acceptance Criteria
 
 ### Scenario 1: Multi-Platform Stories
+
 - **Given** stories are defined for both web and mobile
 - **When** Storybook loads
 - **Then** web components are shown in default Storybook
@@ -21,6 +23,7 @@ so that component documentation is interactive, well-organised, and supports the
 - **And** stories can be toggled between platforms
 
 ### Scenario 2: Design Token Documentation
+
 - **Given** Storybook is viewing design tokens
 - **When** token pages are accessed
 - **Then** colour palette is displayed with swatches
@@ -29,6 +32,7 @@ so that component documentation is interactive, well-organised, and supports the
 - **And** all tokens are interactive and copyable
 
 ### Scenario 3: Theme Switching in Storybook
+
 - **Given** a component story is displayed
 - **When** user toggles light/dark theme
 - **Then** component immediately shows dark mode variant

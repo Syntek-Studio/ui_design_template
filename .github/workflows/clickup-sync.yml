@@ -49,17 +49,38 @@ jobs:
     steps:
       - name: Extract User Story ID from Branch
         id: extract
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          HEAD_REF: ${{ github.head_ref }}
+          REF_NAME: ${{ github.ref_name }}
+          INPUT_TASK_ID: ${{ github.event.inputs.task_id }}
+          INPUT_STATUS: ${{ github.event.inputs.status }}
         run: |
           # Get branch name from different event types
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            BRANCH="${{ github.head_ref }}"
-          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo "task_id=${{ github.event.inputs.task_id }}" >> $GITHUB_OUTPUT
-            echo "status=${{ github.event.inputs.status }}" >> $GITHUB_OUTPUT
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            BRANCH="$HEAD_REF"
+          elif [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            # SECURITY: Validate task_id format before use
+            if [[ "$INPUT_TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then
+              echo "task_id=$INPUT_TASK_ID" >> $GITHUB_OUTPUT
+            else
+              echo "::error::Invalid task ID format"
+              exit 1
+            fi
+            # SECURITY: Validate status is one of allowed values
+            case "$INPUT_STATUS" in
+              "Open"|"Pending"|"In Progress"|"In Review"|"Accepted"|"Accepted Customer"|"Blocked"|"Completed"|"Closed")
+                echo "status=$INPUT_STATUS" >> $GITHUB_OUTPUT
+                ;;
+              *)
+                echo "::error::Invalid status value"
+                exit 1
+                ;;
+            esac
             echo "manual=true" >> $GITHUB_OUTPUT
             exit 0
           else
-            BRANCH="${{ github.ref_name }}"
+            BRANCH="$REF_NAME"
           fi
 
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
@@ -145,13 +166,12 @@ jobs:
         env:
           CLICKUP_API_KEY: ${{ secrets.CLICKUP_API_KEY }}
           CLICKUP_SPACE_ID: ${{ secrets.CLICKUP_SPACE_ID }}
-          CLICKUP_BACKLOG_FOLDER_ID: ${{ secrets.CLICKUP_BACKLOG_FOLDER_ID }}
+          CLICKUP_BACKLOG_LIST_ID: ${{ secrets.CLICKUP_BACKLOG_LIST_ID }}
+          US_NUM: ${{ steps.extract.outputs.us_number }}
+          TASK_ID_INPUT: ${{ steps.extract.outputs.task_id }}
         run: |
           # SECURITY: Disable command echoing to prevent secret exposure
           set +x
-
-          US_NUM="${{ steps.extract.outputs.us_number }}"
-          TASK_ID="${{ steps.extract.outputs.task_id }}"
 
           # SECURITY: Validate US_NUM is exactly 3 digits
           if [[ -n "$US_NUM" && ! "$US_NUM" =~ ^[0-9]{3}$ ]]; then
@@ -161,15 +181,15 @@ jobs:
           fi
 
           # SECURITY: Validate TASK_ID contains only alphanumeric characters
-          if [[ -n "$TASK_ID" && ! "$TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then
+          if [[ -n "$TASK_ID_INPUT" && ! "$TASK_ID_INPUT" =~ ^[a-zA-Z0-9]+$ ]]; then
             echo "::error::Invalid task ID format"
             echo "skip=true" >> $GITHUB_OUTPUT
             exit 0
           fi
 
           # If manual trigger with task_id, use that directly
-          if [[ -n "$TASK_ID" ]]; then
-            echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
+          if [[ -n "$TASK_ID_INPUT" ]]; then
+            echo "task_id=$TASK_ID_INPUT" >> $GITHUB_OUTPUT
             exit 0
           fi
 
@@ -177,10 +197,10 @@ jobs:
           SEARCH_TERM="US-$US_NUM"
           echo "Searching for task: $SEARCH_TERM"
 
-          # First, try searching in the backlog folder
+          # Search for task directly in the backlog list
           # SECURITY: Capture HTTP status code separately from response body
           HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
-            "https://api.clickup.com/api/v2/folder/$CLICKUP_BACKLOG_FOLDER_ID" \
+            "https://api.clickup.com/api/v2/list/$CLICKUP_BACKLOG_LIST_ID/task?include_closed=true" \
             -H "Authorization: $CLICKUP_API_KEY" \
             -H "Content-Type: application/json")
 
@@ -197,30 +217,6 @@ jobs:
           # SECURITY: Validate response is valid JSON before parsing
           if ! echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
             echo "::error::Invalid JSON response from ClickUp API"
-            echo "skip=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Get first list ID from the folder
-          LIST_ID=$(echo "$RESPONSE" | jq -r '.lists[0].id // empty')
-
-          if [[ -z "$LIST_ID" || "$LIST_ID" == "null" ]]; then
-            echo "::warning::No lists found in backlog folder"
-            echo "skip=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Search for task in the list
-          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" -X GET \
-            "https://api.clickup.com/api/v2/list/$LIST_ID/task?include_closed=true" \
-            -H "Authorization: $CLICKUP_API_KEY" \
-            -H "Content-Type: application/json")
-
-          HTTP_CODE=$(echo "$HTTP_RESPONSE" | tail -n1)
-          RESPONSE=$(echo "$HTTP_RESPONSE" | sed '$d')
-
-          if [[ "$HTTP_CODE" -ne 200 ]]; then
-            echo "::error::Failed to get tasks from list"
             echo "skip=true" >> $GITHUB_OUTPUT
             exit 0
           fi
@@ -355,16 +351,15 @@ jobs:
         if: github.event_name == 'pull_request' && steps.find_task.outputs.task_id != '' && steps.find_task.outputs.skip != 'true'
         env:
           CLICKUP_API_KEY: ${{ secrets.CLICKUP_API_KEY }}
+          TASK_ID: ${{ steps.find_task.outputs.task_id }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_ACTION: ${{ github.event.action }}
+          BASE_REF: ${{ github.base_ref }}
+          MERGED: ${{ github.event.pull_request.merged }}
         run: |
           # SECURITY: Disable command echoing to prevent secret exposure
           set +x
-
-          TASK_ID="${{ steps.find_task.outputs.task_id }}"
-          PR_URL="${{ github.event.pull_request.html_url }}"
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          PR_ACTION="${{ github.event.action }}"
-          BASE_REF="${{ github.base_ref }}"
-          MERGED="${{ github.event.pull_request.merged }}"
 
           # SECURITY: Validate task ID format
           if [[ ! "$TASK_ID" =~ ^[a-zA-Z0-9]+$ ]]; then

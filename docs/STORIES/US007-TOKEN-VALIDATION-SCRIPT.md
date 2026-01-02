@@ -1,6 +1,7 @@
 # US007: Token Validation and Accessibility Checking
 
 **Status:** To Do
+**ClickUp ID:** [86c7a97yy](https://app.clickup.com/t/86c7a97yy)
 **Priority:** Must Have
 **Story Points:** 5
 **Sprint:** Sprint 04
@@ -14,6 +15,7 @@ so that the design system meets WCAG standards and catches issues early.
 ## Acceptance Criteria
 
 ### Scenario 1: Colour Contrast Validation
+
 - **Given** `npm run validate-tokens` is executed
 - **When** colour tokens are checked
 - **Then** contrast ratios are calculated for text colour combinations
@@ -21,6 +23,7 @@ so that the design system meets WCAG standards and catches issues early.
 - **And** errors are shown for ratios below WCAG AAA (7:1)
 
 ### Scenario 2: Token Consistency Checks
+
 - **Given** tokens are validated
 - **When** the validation runs
 - **Then** it checks for undefined or missing token values
@@ -28,6 +31,7 @@ so that the design system meets WCAG standards and catches issues early.
 - **And** it ensures typography scales follow a logical progression
 
 ### Scenario 3: Accessibility Report Generation
+
 - **Given** validation is complete
 - **When** issues are found
 - **Then** a detailed report is generated
