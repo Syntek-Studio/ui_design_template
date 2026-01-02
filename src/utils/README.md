@@ -10,26 +10,25 @@
 
 ## Table of Contents
 
-- [src/utils/](#srcutils)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Directory Tree](#directory-tree)
-  - [Files](#files)
-  - [Utilities](#utilities)
-    - [Class Name Utilities (`classNames.ts`)](#class-name-utilities-classnamests)
-    - [Component Style Mappings (`componentStyles.ts`)](#component-style-mappings-componentstylests)
-  - [Usage Guide](#usage-guide)
-    - [Importing Utilities](#importing-utilities)
-    - [Using Class Name Utilities](#using-class-name-utilities)
-    - [Using Component Styles in Web Components](#using-component-styles-in-web-components)
-    - [Using Component Styles in Mobile Components](#using-component-styles-in-mobile-components)
-  - [Type Safety](#type-safety)
-  - [Best Practices](#best-practices)
-  - [Extending the Utilities](#extending-the-utilities)
-    - [Adding a New Size Variant](#adding-a-new-size-variant)
-    - [Adding a New Variant](#adding-a-new-variant)
-    - [Creating a New Utility Function](#creating-a-new-utility-function)
-  - [Related Sections](#related-sections)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Directory Tree](#directory-tree)
+- [Files](#files)
+- [Utilities](#utilities)
+  - [Class Name Utilities (`classNames.ts`)](#class-name-utilities-classnamests)
+  - [Component Style Mappings (`componentStyles.ts`)](#component-style-mappings-componentstylests)
+- [Usage Guide](#usage-guide)
+  - [Importing Utilities](#importing-utilities)
+  - [Using Class Name Utilities](#using-class-name-utilities)
+  - [Using Component Styles in Web Components](#using-component-styles-in-web-components)
+  - [Using Component Styles in Mobile Components](#using-component-styles-in-mobile-components)
+- [Type Safety](#type-safety)
+- [Best Practices](#best-practices)
+- [Extending the Utilities](#extending-the-utilities)
+  - [Adding a New Size Variant](#adding-a-new-size-variant)
+  - [Adding a New Variant](#adding-a-new-variant)
+  - [Creating a New Utility Function](#creating-a-new-utility-function)
+- [Related Sections](#related-sections)
 
 ---
 
@@ -126,16 +125,16 @@ Centralised style mappings for common component patterns.
 
 **Import from the main library:**
 
-````typescript
-import { cn, mergeClasses, sizeClasses, variantClasses } from '@template/ui'
-```text
+```typescript
+import { cn, mergeClasses, sizeClasses, variantClasses } from '@syntek-studio/ui'
+```
 
 **Import from utils directly:**
 
 ```typescript
 import { cn, mergeClasses } from '@/utils'
 import { sizeClasses, variantClasses, ComponentSize } from '@/utils'
-````
+```
 
 ### Using Class Name Utilities
 
@@ -156,12 +155,12 @@ const buttonClass = cn(
 
 **Merging Classes with `mergeClasses`:**
 
-````typescript
+```typescript
 import { mergeClasses } from '@/utils'
 
 const merged = mergeClasses('px-4 py-2 text-white', 'px-4 bg-blue-600', 'rounded-lg')
 // Result: "px-4 py-2 text-white bg-blue-600 rounded-lg" (duplicates removed)
-```markdown
+```
 
 ### Using Component Styles in Web Components
 
@@ -186,7 +185,7 @@ export const Button = ({ size = 'md', variant = 'primary', rounded = 'lg', iconO
 
   return <button className={buttonClasses}>Click me</button>;
 };
-```markdown
+```
 
 ### Using Component Styles in Mobile Components
 
@@ -225,7 +224,7 @@ export const Button = ({ size = 'md', variant = 'primary', rounded = 'lg', iconO
     </Pressable>
   );
 };
-```markdown
+```
 
 ---
 
@@ -247,7 +246,7 @@ const sizeClass: string = sizeClasses[size] // "px-4 py-2 text-base gap-2"
 
 // TypeScript will error on invalid values
 const invalid: ComponentSize = 'huge' // Error: Type '"huge"' is not assignable
-````
+```
 
 ---
 
@@ -271,7 +270,7 @@ const invalid: ComponentSize = 'huge' // Error: Type '"huge"' is not assignable
 
 ### Adding a New Size Variant
 
-````typescript
+```typescript
 // In componentStyles.ts
 export const sizeClasses: Record<ComponentSize, string> = {
   xs: 'px-2 py-1 text-xs gap-1',
@@ -284,7 +283,7 @@ export const sizeClasses: Record<ComponentSize, string> = {
 
 // Update the type
 export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
-```markdown
+```
 
 ### Adding a New Variant
 
@@ -309,19 +308,23 @@ export type ComponentVariant =
   | 'success'
   | 'warning'
   | 'info' // Add here
-```markdown
+```
 
 ### Creating a New Utility Function
 
 ```typescript
 // In classNames.ts
 /**
- *Conditionally applies class names based on a boolean mapping.*
- *@param classMap - Object mapping class names to boolean conditions* @returns A space-separated string of active class names
+ * Conditionally applies class names based on a boolean mapping.
+ * @param classMap - Object mapping class names to boolean conditions
+ * @returns A space-separated string of active class names
  *
- *@example* const classes = classIf({
- *'bg-blue-600': isPrimary,*   'bg-red-600': isDestructive,
- *'w-full': isFullWidth,* });
+ * @example
+ * const classes = classIf({
+ *   'bg-blue-600': isPrimary,
+ *   'bg-red-600': isDestructive,
+ *   'w-full': isFullWidth,
+ * });
  */
 export function classIf(classMap: Record<string, boolean>): string {
   return Object.entries(classMap)
@@ -329,7 +332,7 @@ export function classIf(classMap: Record<string, boolean>): string {
     .map(([className]) => className)
     .join(' ')
 }
-````
+```
 
 ---
 
@@ -345,4 +348,4 @@ export function classIf(classMap: Record<string, boolean>): string {
 
 ---
 
-**Last Updated:** 29 December 2024
+**Last Updated:** 02/01/2026
