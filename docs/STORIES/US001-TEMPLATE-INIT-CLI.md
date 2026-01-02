@@ -1,6 +1,6 @@
 # US001: Template Initialisation CLI
 
-**Status:** 🔄 In Progress (Phase 2 Complete)
+**Status:** 🔄 In Progress (Phase 3 Complete)
 **ClickUp ID:** [86c7a97qj](https://app.clickup.com/t/86c7a97qj)
 **Priority:** Must Have
 **Story Points:** 8
@@ -77,7 +77,7 @@ so that I can quickly scaffold a client-specific UI component library without ma
 ## Repository Completion Status
 
 **Story ID:** US001
-**Last Updated:** 02/01/2026 17:30
+**Last Updated:** 02/01/2026 17:35
 
 | Repository | Required | Status         | Completed By | Date                |
 | ---------- | -------- | -------------- | ------------ | ------------------- |
@@ -87,19 +87,20 @@ so that I can quickly scaffold a client-specific UI component library without ma
 
 #### Shared UI (Component Library)
 
-- **Status:** 🔄 In Progress (Phase 2 Complete)
+- **Status:** 🔄 In Progress (Phase 3 Complete)
 - **Phase 1 Completed:** 02/01/2026 ✅
 - **Phase 2 Completed:** 02/01/2026 ✅
-- **Phase 3 Status:** ⬜ Not Started
+- **Phase 3 Completed:** 02/01/2026 ✅
 - **Phase 4 Status:** ⬜ Not Started
 - **Branch:** `us001/template-init-cli`
-- **Commits:** Multiple commits for validators, prompts, main CLI, and replacement engine
-- **Overall Progress:** 50% (2 of 4 phases complete)
+- **Commits:** Multiple commits for validators, prompts, main CLI, replacement engine, and error handling
+- **Overall Progress:** 75% (3 of 4 phases complete)
 
 **Completed Work:**
 
 - ✅ Phase 1: Core CLI Infrastructure fully implemented and tested
 - ✅ Phase 2: Placeholder Replacement Engine fully implemented
+- ✅ Phase 3: Validation and Error Handling fully implemented
 - ✅ Interactive prompts working with inquirer.js
 - ✅ All validation functions implemented with comprehensive JSDoc
 - ✅ Welcome and success messages implemented with chalk styling
@@ -108,13 +109,12 @@ so that I can quickly scaffold a client-specific UI component library without ma
 - ✅ Progress indicators and verification checks
 - ✅ npm script added: `npm run init-template`
 - ✅ Dependencies installed: inquirer, @types/inquirer, tsx
+- ✅ Directory conflict detection (checkDirectoryConflict)
+- ✅ Atomic file operations with rollback (processDirectoryWithRollback)
+- ✅ Context-specific error messages with remediation steps
 
 **Remaining Work:**
 
-- ⬜ Phase 3: Validation and Error Handling
-  - Directory conflict detection
-  - Error handling implementation
-  - Helpful error messages
 - ⬜ Phase 4: Testing and Documentation
   - template.config.json schema
   - Unit tests for validators
@@ -149,11 +149,13 @@ so that I can quickly scaffold a client-specific UI component library without ma
 - [x] Add verifyReplacements() to check for remaining placeholders
 - [x] TypeScript type checking passes
 
-### Phase 3: Validation and Error Handling ⬜ NOT STARTED
+### Phase 3: Validation and Error Handling ✅ COMPLETED
 
-- [ ] Add directory conflict detection
-- [ ] Implement error handling
-- [ ] Create helpful error messages
+- [x] Add directory conflict detection (checkDirectoryConflict)
+- [x] Implement error handling with graceful cleanup (processDirectoryWithRollback)
+- [x] Create helpful error messages with remediation steps
+- [x] Test all validators with edge cases
+- [x] TypeScript type checking passes
 
 ### Phase 4: Testing and Documentation ⬜ NOT STARTED
 

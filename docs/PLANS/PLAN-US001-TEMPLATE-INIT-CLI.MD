@@ -564,29 +564,44 @@ async function performReplacements(answers) {
 
 ---
 
-### Phase 3: Validation and Error Handling
+### Phase 3: Validation and Error Handling ✅ COMPLETED
 
 **Goal:** Add robust validation and error handling.
 
+**Status:** ✅ Completed on 02/01/2026
+
 **Tasks:**
 
-- [ ] Create `scripts/lib/validators.js` with validation functions
-- [ ] Implement `validatePackageName(name)` with npm rules
-- [ ] Implement `validateHexColour(colour)` with regex
-- [ ] Implement `validateDescription(text)` with length checks
-- [ ] Add directory conflict detection
-- [ ] Implement confirmation prompt before applying changes
-- [ ] Add error handling with graceful cleanup
-- [ ] Create helpful error messages
+- [x] Create `scripts/lib/validators.ts` with validation functions
+- [x] Implement `validatePackageName(name)` with npm rules
+- [x] Implement `validateHexColour(colour)` with regex
+- [x] Implement `validateDescription(text)` with length checks
+- [x] Implement `validateClientName(name)` with length checks
+- [x] Add directory conflict detection (checkDirectoryConflict)
+- [x] Implement confirmation prompt before applying changes (confirmInputs)
+- [x] Add error handling with graceful cleanup (processDirectoryWithRollback)
+- [x] Create helpful error messages with remediation steps
 
 **Deliverable:** CLI validates all inputs and handles errors gracefully.
 
+**Implementation Notes:**
+- All validators implemented in TypeScript with comprehensive JSDoc documentation
+- Directory conflict detection checks for existing template.config.json
+- Confirmation prompt displays summary of all inputs before proceeding
+- New `processDirectoryWithRollback()` function provides atomic-like operations:
+  - Creates backups of all files before modification
+  - Automatically restores files on failure
+  - Cleans up backup files on success
+- Error handling provides context-specific troubleshooting guidance
+- Error messages suggest remediation steps based on error type
+
 **Testing:**
 
-- Test invalid package names (uppercase, spaces, special chars)
-- Test invalid hex colours (missing #, wrong length)
-- Test edge cases (empty inputs, very long inputs)
-- Verify error messages are helpful
+- [x] Test invalid package names (uppercase, spaces, special chars)
+- [x] Test invalid hex colours (missing #, wrong length)
+- [x] Test edge cases (empty inputs, very long inputs)
+- [x] Verify error messages are helpful
+- [x] TypeScript type-check passes
 
 ---
 
@@ -1074,9 +1089,9 @@ After completing US001:
 
 ---
 
-**Document Version:** 1.1
-**Last Updated:** 02/01/2026 17:30
+**Document Version:** 1.2
+**Last Updated:** 02/01/2026 19:00
 **Author:** System Architect
-**Status:** In Progress (Phase 2 Complete)
+**Status:** In Progress (Phase 3 Complete)
 **Sprint:** Sprint 01
 **Story Points:** 8

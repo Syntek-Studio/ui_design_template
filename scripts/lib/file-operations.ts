@@ -345,3 +345,131 @@ export async function processDirectory(
 
   return results
 }
+
+/**
+ * Processes multiple files with replacements, backup support, and automatic rollback on failure.
+ *
+ * This is a safer version of processDirectory that:
+ * 1. Creates backups of all files before modification
+ * 2. Applies replacements to all files
+ * 3. Automatically restores from backups if any file fails
+ * 4. Cleans up backup files on success
+ *
+ * This ensures atomic-like behaviour where either all files are modified successfully
+ * or none are modified (rolled back to original state).
+ *
+ * @param {string[]} filePaths - Array of file paths to process
+ * @param {ReplacementMap} replacements - Map of placeholder→replacement pairs
+ * @returns {Promise<Array<{file: string, modified: boolean}>>} - Array of results
+ * @throws {Error} - If any file fails and rollback is performed
+ *
+ * @example
+ * try {
+ *   const results = await processDirectoryWithRollback(filesToModify, replacementMap);
+ *   console.log('All files modified successfully');
+ * } catch (error) {
+ *   console.log('Operation failed, all changes rolled back');
+ * }
+ */
+export async function processDirectoryWithRollback(
+  filePaths: string[],
+  replacements: ReplacementMap
+): Promise<Array<{ file: string; modified: boolean }>> {
+  const results: Array<{ file: string; modified: boolean }> = []
+  const backupPaths: string[] = []
+
+  console.log(chalk.cyan('\nCreating backups...\n'))
+
+  // Step 1: Create backups of all files
+  for (const filePath of filePaths) {
+    try {
+      const exists = await fileExists(filePath)
+      if (!exists) {
+        console.log(chalk.yellow(`⚠ ${filePath} (file not found, skipping backup)`))
+        continue
+      }
+
+      await createBackup(filePath)
+      backupPaths.push(filePath) // Store original path for restore
+      console.log(chalk.gray(`  ↳ Backed up: ${filePath}`))
+    } catch (error) {
+      console.log(chalk.red(`✗ Failed to backup ${filePath}: ${(error as Error).message}`))
+      // Restore any backups created so far
+      await cleanupBackups(backupPaths, true)
+      throw new Error(`Backup failed for ${filePath}: ${(error as Error).message}`)
+    }
+  }
+
+  console.log(chalk.cyan('\nProcessing files...\n'))
+
+  // Step 2: Apply replacements to all files
+  try {
+    for (const filePath of filePaths) {
+      const exists = await fileExists(filePath)
+      if (!exists) {
+        console.log(chalk.yellow(`⚠ ${filePath} (file not found, skipping)`))
+        results.push({ file: filePath, modified: false })
+        continue
+      }
+
+      const modified = await replaceInFile(filePath, replacements)
+
+      if (modified) {
+        console.log(chalk.green(`✓ ${filePath} `) + chalk.gray('(modified)'))
+      } else {
+        console.log(chalk.gray(`- ${filePath} (no changes)`))
+      }
+
+      results.push({ file: filePath, modified })
+    }
+
+    // Step 3: Clean up backups on success (delete them)
+    await cleanupBackups(backupPaths, false)
+
+    const modifiedCount = results.filter((r) => r.modified).length
+    console.log(chalk.cyan(`\nModified ${modifiedCount} of ${results.length} files\n`))
+
+    return results
+  } catch (error) {
+    // Step 4: Rollback on failure - restore all backups
+    console.log(chalk.red('\n✗ Error occurred during file processing'))
+    console.log(chalk.yellow('  Rolling back changes...\n'))
+
+    await cleanupBackups(backupPaths, true)
+
+    console.log(chalk.green('  ✓ All files restored to original state\n'))
+    throw error
+  }
+}
+
+/**
+ * Cleans up backup files - either by deleting them (success) or restoring them (failure).
+ *
+ * @param {string[]} originalPaths - Array of original file paths (backups are .backup suffix)
+ * @param {boolean} restore - If true, restore from backups; if false, delete backups
+ * @returns {Promise<void>}
+ */
+async function cleanupBackups(originalPaths: string[], restore: boolean): Promise<void> {
+  for (const filePath of originalPaths) {
+    try {
+      if (restore) {
+        await restoreFromBackup(filePath)
+        console.log(chalk.gray(`  ↳ Restored: ${filePath}`))
+      } else {
+        // Just delete the backup file
+        const backupPath = `${filePath}.backup`
+        const exists = await fileExists(backupPath)
+        if (exists) {
+          await unlink(backupPath)
+        }
+      }
+    } catch (cleanupError) {
+      // Log but don't throw - best effort cleanup
+      console.log(
+        chalk.yellow(
+          `  ⚠ Could not ${restore ? 'restore' : 'clean up'} ${filePath}: ${(cleanupError as Error).message}`
+        )
+      )
+    }
+  }
+}

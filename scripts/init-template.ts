@@ -222,15 +222,19 @@ export async function createTemplateConfig(answers: UserAnswers): Promise<void> 
  * Process:
  * 1. Creates replacement map from user answers
  * 2. Gets list of files to modify from replacements module
- * 3. Applies replacements to each file
- * 4. Returns results array showing which files were modified
+ * 3. Creates backups of all files before modification
+ * 4. Applies replacements to each file
+ * 5. On error, automatically rolls back all changes
+ * 6. Returns results array showing which files were modified
  *
  * Error handling:
- * - If a file does not exist, throws an error (fails fast)
- * - Caller is responsible for backup/restore if needed
- * - All files should be modified or none for consistency
+ * - Creates backups before any modifications
+ * - Automatically rolls back on failure (atomic-like operation)
+ * - Files are either all modified or none (restored to original state)
+ * - Provides detailed error messages with remediation steps
  *
  * @param {UserAnswers} answers - The user's answers from initialization prompts
+ * @param {boolean} [useRollback=true] - Whether to use rollback-protected processing
  * @returns {Promise<ReplacementResult[]>} - Array of ReplacementResult objects
  *                                           showing file and modification status
  *
@@ -246,13 +250,17 @@ export async function createTemplateConfig(answers: UserAnswers): Promise<void> 
  *     });
  *   } catch (error) {
  *     console.error('Replacement failed:', error.message);
+ *     // Note: Files are automatically restored on error
  *   }
  * }
  */
-export async function performReplacements(answers: UserAnswers): Promise<ReplacementResult[]> {
+export async function performReplacements(
+  answers: UserAnswers,
+  useRollback: boolean = true
+): Promise<ReplacementResult[]> {
   // Import the replacement utilities
   const { createReplacementMap, getFilesToModify } = await import('./lib/replacements')
-  const { processDirectory } = await import('./lib/file-operations')
+  const { processDirectory, processDirectoryWithRollback } = await import('./lib/file-operations')
 
   // Create the replacement map from user answers
   const replacementMap = createReplacementMap(answers)
@@ -261,7 +269,10 @@ export async function performReplacements(answers: UserAnswers): Promise<Replace
   const filesToModify = getFilesToModify()
 
   // Process all files with the replacement map
-  const results = await processDirectory(filesToModify, replacementMap)
+  // Use rollback-protected version by default for safety
+  const results = useRollback
+    ? await processDirectoryWithRollback(filesToModify, replacementMap)
+    : await processDirectory(filesToModify, replacementMap)
 
   return results
 }
@@ -440,10 +451,42 @@ export async function main(): Promise<void> {
     // Display success message
     displaySuccessMessage(answers!, results)
   } catch (error) {
+    const errorMessage = (error as Error).message
     console.log('\n')
-    console.log(chalk.red('✗ Initialization failed'))
-    console.log(chalk.red(`  Error: ${(error as Error).message}`))
+    console.log(chalk.red('✗ Initialisation failed'))
+    console.log(chalk.red(`  Error: ${errorMessage}`))
     console.log('\n')
+
+    // Provide helpful remediation messages based on error type
+    console.log(chalk.yellow('Troubleshooting:'))
+
+    if (errorMessage.includes('File not found')) {
+      console.log(chalk.gray('  • Ensure you are running this command from the project root'))
+      console.log(chalk.gray('  • Check that the template files have not been deleted'))
+      console.log(chalk.gray('  • Try cloning the template repository again'))
+    } else if (errorMessage.includes('permission') || errorMessage.includes('EACCES')) {
+      console.log(chalk.gray('  • Check that you have write permissions in this directory'))
+      console.log(chalk.gray('  • Try running with elevated privileges if necessary'))
+      console.log(chalk.gray('  • Ensure no files are locked or open in another program'))
+    } else if (errorMessage.includes('Backup failed')) {
+      console.log(chalk.gray('  • Ensure sufficient disk space is available'))
+      console.log(chalk.gray('  • Check that you have write permissions'))
+      console.log(chalk.gray('  • Remove any existing .backup files and try again'))
+    } else if (errorMessage.includes('JSON')) {
+      console.log(chalk.gray('  • A configuration file may be corrupted'))
+      console.log(chalk.gray('  • Check package.json and template.config.json for syntax errors'))
+      console.log(chalk.gray('  • Try restoring from version control'))
+    } else {
+      console.log(chalk.gray('  • Check the error message above for details'))
+      console.log(chalk.gray('  • Ensure all template files are present and readable'))
+      console.log(chalk.gray('  • Try running the command again'))
+    }
+
+    console.log('\n')
+    console.log(chalk.gray('If the problem persists, please report the issue at:'))
+    console.log(chalk.blue('  https://github.com/syntek-studio/ui_design_template/issues'))
+    console.log('\n')
+
     process.exit(1)
   }
 }

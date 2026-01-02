@@ -11,9 +11,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-
 - [Overview](#overview)
-
 - [Story Summary by Phase](#story-summary-by-phase)
   - [Phase 1: Template Infrastructure (Must Have) - 4 Stories](#phase-1-template-infrastructure-must-have---4-stories)
   - [Phase 2: Theme Configuration System (Must Have) - 3 Stories](#phase-2-theme-configuration-system-must-have---3-stories)
@@ -22,24 +20,18 @@
   - [Phase 5: Documentation \& Storybook (Should Have) - 8 Stories](#phase-5-documentation--storybook-should-have---8-stories)
   - [Phase 6: Testing Framework (Should Have) - 3 Stories](#phase-6-testing-framework-should-have---3-stories)
   - [Phase 7: Advanced Features \& Components (Could Have) - 12 Stories](#phase-7-advanced-features--components-could-have---12-stories)
-
 - [Priority Breakdown](#priority-breakdown)
   - [Must Have (Phases 1-4)](#must-have-phases-1-4)
   - [Should Have (Phase 5-6)](#should-have-phase-5-6)
   - [Could Have (Phase 7)](#could-have-phase-7)
-
 - [Sprint Assignments](#sprint-assignments)
-
 - [Key Dependencies](#key-dependencies)
-
 - [Success Criteria](#success-criteria)
-
 - [Component Checklist](#component-checklist)
   - [Phase 3-4 Components (Built-in)](#phase-3-4-components-built-in)
   - [Sprint 08 Components](#sprint-08-components)
   - [Sprint 15-19 Components](#sprint-15-19-components)
   - [Future Components (Could Have)](#future-components-could-have)
-
 - [Notes](#notes)
 
 ## Overview
