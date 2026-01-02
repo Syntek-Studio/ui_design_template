@@ -27,9 +27,24 @@
 
 - Ability to scaffold new projects with `npm run init-template`
 
+## Sprint Status
+
+**Overall Status:** 🔄 In Progress
+**Started:** 02/01/2026
+**Completion:** Expected within sprint timeline
+
+### Story Completion
+
+| Story ID | Title                           | Points | Status         | Progress |
+| -------- | ------------------------------- | ------ | -------------- | -------- |
+| US001    | Template Initialisation CLI     | 8      | 🔄 In Progress | 50%      |
+| US002    | Template Configuration Metadata | 3      | ⬜ Not Started | 0%       |
+
+**Sprint Points:** 0/11 completed
+
 ## Acceptance Criteria
 
-- [ ] Template initialisation CLI is functional
+- [ ] Template initialisation CLI is functional (50% complete - Phases 1-2 done)
 
 - [ ] Configuration metadata system is in place
 
@@ -58,8 +73,34 @@ the configuration metadata (US002) to provide a smooth initialisation experience
 | CLI complexity        | Medium     | High   | Break down into smaller functions, comprehensive testing |
 | Cross-platform issues | Low        | Medium | Test on multiple OS platforms                            |
 
+## Completion Notes
+
+### US001 Progress Update (02/01/2026)
+
+**Phase 1 ✅ COMPLETED:**
+
+- Core CLI Infrastructure implemented
+- Interactive prompts with inquirer.js
+- Validation functions with comprehensive JSDoc
+- Welcome and success messages with chalk styling
+
+**Phase 2 ✅ COMPLETED:**
+
+- Placeholder Replacement Engine implemented
+- File operations module with async fs/promises API
+- Replacement mapping for package name, client name, colour, description
+- Progress indicators and verification checks
+
+**Remaining for US001:**
+
+- Phase 3: Validation and Error Handling
+- Phase 4: Testing and Documentation
+
+**Branch:** `us001/template-init-cli`
+
 ---
 
 **Created:** 01/01/2026
+**Last Updated:** 02/01/2026
 **Language:** British English (en_GB)
 **Timezone:** Europe/London

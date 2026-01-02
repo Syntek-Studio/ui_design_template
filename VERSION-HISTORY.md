@@ -1,7 +1,7 @@
 # Version History
 
 **Last Updated**: 02/01/2026
-**Version**: 0.8.0
+**Version**: 0.9.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -13,6 +13,24 @@
 - [Table of Contents](#table-of-contents)
 - [Unreleased](#unreleased)
   - [Technical Changes](#technical-changes)
+- [0.9.0 - 02/01/2026](#090---02012026)
+  - [Summary](#summary)
+  - [Breaking Changes](#breaking-changes)
+  - [Database Migrations](#database-migrations)
+  - [API Changes](#api-changes)
+  - [Files Changed](#files-changed)
+  - [Configuration Changes](#configuration-changes)
+  - [Documentation Notes](#documentation-notes)
+  - [Architecture Notes](#architecture-notes)
+- [0.8.0 - 02/01/2026](#080---02012026)
+  - [Summary](#summary-1)
+  - [Breaking Changes](#breaking-changes-1)
+  - [Database Migrations](#database-migrations-1)
+  - [API Changes](#api-changes-1)
+  - [Files Changed](#files-changed-1)
+  - [Configuration Changes](#configuration-changes-1)
+  - [Documentation Notes](#documentation-notes-1)
+  - [Architecture Notes](#architecture-notes-1)
 - [0.7.2 - 02/01/2026](#072---02012026)
   - [Summary](#summary)
   - [Breaking Changes](#breaking-changes)
@@ -117,6 +135,108 @@
 ### Technical Changes
 
 - Nothing yet
+
+---
+
+## [0.9.0] - 02/01/2026
+
+### Summary
+
+Implemented Phase 2 (Placeholder Replacement Engine) of the template initialisation CLI tool (US001). Created comprehensive file operations module supporting UTF-8 file I/O, in-place content replacement, and backup/rollback capability. Implemented replacement mapping system that transforms user inputs into placeholder-replacement pairs and applies them across multiple files. Added complete workflow orchestration in main CLI script with directory conflict detection, configuration persistence, replacement execution, and verification.
+
+### Breaking Changes
+
+None - extends existing CLI functionality, no changes to library API or existing features.
+
+### Database Migrations
+
+Not applicable - library project.
+
+### API Changes
+
+None - CLI tool is for template initialisation only, not part of exported library API.
+
+### Files Changed
+
+**New Files Added:**
+
+| File                             | Changes                                                                                                                                                           |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scripts/lib/file-operations.ts` | Created comprehensive file system operations module (235 lines) with UTF-8 file I/O, backup/restore functionality, and progress indicators for batch processing   |
+| `scripts/lib/replacements.ts`    | Created replacement mapping module (187 lines) with placeholder-to-replacement transformation, file target listing, regex escaping, and batch content replacement |
+
+**Files Modified:**
+
+| File                        | Changes                                                                                                                                                                                                                                                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scripts/init-template.ts`  | Updated main CLI with complete Phase 2 workflow: `checkDirectoryConflict()` prevents re-initialisation, `createTemplateConfig()` persists configuration to JSON, `performReplacements()` orchestrates file replacement with progress feedback, `verifyReplacements()` validates all placeholders replaced (lines 1-280) |
+| `scripts/lib/prompts.ts`    | No functional changes - compatible with Phase 2 workflow                                                                                                                                                                                                                                                                |
+| `scripts/lib/validators.ts` | No functional changes - compatible with Phase 2 workflow                                                                                                                                                                                                                                                                |
+
+### Configuration Changes
+
+None - no new configuration files or environment variables required.
+
+### Documentation Notes
+
+**File Operations Module (`file-operations.ts`):**
+
+- `fileExists(filePath: string): Promise<boolean>` - Async file existence check
+- `readFile(filePath: string): Promise<string>` - UTF-8 file read operation
+- `writeFile(filePath: string, content: string): Promise<void>` - UTF-8 file write operation
+- `replaceInFile(filePath: string, replacements: ReplacementMap): Promise<void>` - In-place content replacement with regex escaping
+- `createBackup(filePath: string): Promise<string>` - Creates `.bak` backup files before modifications
+- `restoreFromBackup(backupPath: string, originalPath: string): Promise<void>` - Rollback capability for failed operations
+- `processDirectory(files: string[], replacements: ReplacementMap): Promise<void>` - Batch file processing with progress indicators
+
+**Replacement Mapping Module (`replacements.ts`):**
+
+- `UserAnswers` interface - TypeScript type defining CLI input structure (packageName, packageScope, description, clientName, primaryColour)
+- `ReplacementMap` type - Record<string, string> mapping placeholders to replacement values
+- `createReplacementMap(answers: UserAnswers): ReplacementMap` - Transforms user inputs into placeholder pairs (e.g., `{{PACKAGE_NAME}}` → actual name)
+- `getFilesToModify(): string[]` - Returns comprehensive list of files containing placeholders (package.json, README.md, design tokens, component files)
+- `escapeRegExp(string: string): string` - Escapes special regex characters in replacement values
+- `applyReplacements(content: string, replacements: ReplacementMap): string` - Applies all placeholder replacements to content string
+
+**Main CLI Workflow Updates (`init-template.ts`):**
+
+- `checkDirectoryConflict(): Promise<boolean>` - Checks for existing `template.config.json` to prevent accidental re-initialisation
+- `createTemplateConfig(answers: UserAnswers): Promise<void>` - Persists user answers to `template.config.json` for future reference
+- `performReplacements(answers: UserAnswers): Promise<void>` - Orchestrates replacement process with progress feedback (creates backups, applies replacements, logs results)
+- `verifyReplacements(): Promise<void>` - Validates no `{{PLACEHOLDER}}` patterns remain in processed files
+- Updated `main()` function - Complete Phase 2 workflow: welcome → inputs → confirm → conflict check → replacements → verify → config save → success
+
+### Architecture Notes
+
+**Phase 2 Capabilities:**
+
+- Processes 15+ files across package configuration, documentation, and design tokens
+- Supports placeholders: `{{PACKAGE_NAME}}`, `{{PACKAGE_SCOPE}}`, `{{DESCRIPTION}}`, `{{CLIENT_NAME}}`, `{{PRIMARY_COLOUR}}`, `{{PACKAGE_FULL_NAME}}`
+- Automatic backup creation before file modifications (`.bak` files)
+- Rollback capability if replacement process fails
+- Verification step ensures complete placeholder replacement
+- Configuration persistence for reference and debugging
+
+**Implementation Status:**
+
+- ✅ Phase 1 Complete: Core CLI Infrastructure (v0.8.0)
+- ✅ Phase 2 Complete: Placeholder Replacement Engine (v0.9.0)
+- ⏳ Phase 3 Pending: Comprehensive Testing & Error Handling
+- ⏳ Phase 4 Pending: Advanced Features (dry-run mode, custom placeholders, undo capability)
+
+**Error Handling:**
+
+- File operations wrapped in try-catch blocks with backup restoration
+- Conflict detection prevents accidental data loss
+- Verification step catches incomplete replacements
+- Progress indicators inform user of long-running operations
+
+**Testing Status:**
+
+- File operations module ready for unit testing
+- Replacement mapping module ready for unit testing
+- End-to-end workflow ready for integration testing
+- Manual testing guide can be expanded for Phase 2 verification
 
 ---
 

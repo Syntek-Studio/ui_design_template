@@ -1,7 +1,7 @@
 # Changelog
 
 **Last Updated**: 02/01/2026
-**Version**: 0.8.0
+**Version**: 0.9.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -24,6 +24,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More comprehensive design tokens documentation
 
 - Accessibility testing and ARIA enhancements
+
+---
+
+## [0.9.0] - 02/01/2026
+
+### Added
+
+- Placeholder replacement engine (Phase 2 of template initialisation CLI)
+  - File operations module (`scripts/lib/file-operations.ts`)
+    - UTF-8 file read/write operations
+    - In-place content replacement with regex-safe escaping
+    - Automatic backup creation (`.bak` files) before modifications
+    - Rollback capability for failed operations
+    - Batch file processing with progress indicators
+  - Replacement mapping module (`scripts/lib/replacements.ts`)
+    - `UserAnswers` interface for type-safe CLI input handling
+    - `ReplacementMap` type for placeholder-to-value mappings
+    - `createReplacementMap()` - transforms user inputs into replacement pairs
+    - `getFilesToModify()` - returns list of files containing placeholders
+    - `escapeRegExp()` - safely escapes special regex characters
+    - `applyReplacements()` - applies all replacements to content
+  - Complete workflow in `scripts/init-template.ts`
+    - `checkDirectoryConflict()` - prevents accidental re-initialisation
+    - `createTemplateConfig()` - persists configuration to JSON
+    - `performReplacements()` - orchestrates file replacement process
+    - `verifyReplacements()` - validates complete placeholder replacement
+
+### Changed
+
+- Updated `scripts/init-template.ts` main function with Phase 2 workflow
+  - Added directory conflict detection
+  - Integrated replacement engine
+  - Added verification step after replacements
+  - Enhanced success message with next steps
+
+### Security
+
+- Backup creation before file modifications prevents data loss
+- Verification step ensures no placeholders remain in output
+- Conflict detection prevents accidental template re-initialisation
 
 ---
 

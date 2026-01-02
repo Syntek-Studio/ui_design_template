@@ -16,7 +16,17 @@
  * @created 2026-01-02
  */
 
+import {
+  readFile as fsReadFile,
+  writeFile as fsWriteFile,
+  copyFile,
+  unlink,
+  access,
+} from 'node:fs/promises'
+import { constants } from 'node:fs'
+import chalk from 'chalk'
 import type { ReplacementMap } from './replacements'
+import { applyReplacements } from './replacements'
 
 /**
  * Checks if a file or directory exists.
@@ -34,8 +44,13 @@ import type { ReplacementMap } from './replacements'
  *   console.log('package.json found');
  * }
  */
-export async function fileExists(_filePath: string): Promise<boolean> {
-  throw new Error('Not implemented')
+export async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await access(filePath, constants.F_OK)
+    return true
+  } catch {
+    return false
+  }
 }
 
 /**
@@ -62,8 +77,8 @@ export async function fileExists(_filePath: string): Promise<boolean> {
  *   console.error('Failed to read file:', error.message);
  * }
  */
-export async function readFile(_filePath: string): Promise<string> {
-  throw new Error('Not implemented')
+export async function readFile(filePath: string): Promise<string> {
+  return await fsReadFile(filePath, 'utf-8')
 }
 
 /**
@@ -98,8 +113,8 @@ export async function readFile(_filePath: string): Promise<string> {
  * const newContent = oldContent + '\\nNew line';
  * await writeFile('./config.txt', newContent);
  */
-export async function writeFile(_filePath: string, _content: string): Promise<void> {
-  throw new Error('Not implemented')
+export async function writeFile(filePath: string, content: string): Promise<void> {
+  await fsWriteFile(filePath, content, 'utf-8')
 }
 
 /**
@@ -141,10 +156,24 @@ export async function writeFile(_filePath: string, _content: string): Promise<vo
  * console.log(result ? 'Modified' : 'No changes');
  */
 export async function replaceInFile(
-  _filePath: string,
-  _replacements: ReplacementMap
+  filePath: string,
+  replacements: ReplacementMap
 ): Promise<boolean> {
-  throw new Error('Not implemented')
+  // Read the current file content
+  const originalContent = await readFile(filePath)
+
+  // Apply all replacements from the map
+  const modifiedContent = applyReplacements(originalContent, replacements)
+
+  // Check if content actually changed
+  if (originalContent === modifiedContent) {
+    return false
+  }
+
+  // Write the modified content back to the file
+  await writeFile(filePath, modifiedContent)
+
+  return true
 }
 
 /**
@@ -180,8 +209,10 @@ export async function replaceInFile(
  *   console.error('Failed, restored from backup');
  * }
  */
-export async function createBackup(_filePath: string): Promise<string> {
-  throw new Error('Not implemented')
+export async function createBackup(filePath: string): Promise<string> {
+  const backupPath = `${filePath}.backup`
+  await copyFile(filePath, backupPath)
+  return backupPath
 }
 
 /**
@@ -227,6 +258,90 @@ export async function createBackup(_filePath: string): Promise<string> {
  *   throw error;
  * }
  */
-export async function restoreFromBackup(_filePath: string): Promise<void> {
-  throw new Error('Not implemented')
+export async function restoreFromBackup(filePath: string): Promise<void> {
+  const backupPath = `${filePath}.backup`
+
+  // Copy backup file back to original location
+  await copyFile(backupPath, filePath)
+
+  // Delete the backup file
+  await unlink(backupPath)
+}
+
+/**
+ * Processes multiple files with replacements and displays progress.
+ *
+ * Applies the same replacement map to multiple files and shows progress
+ * indicators during processing. Returns an array of results indicating
+ * which files were modified.
+ *
+ * Progress display:
+ * - Shows "Processing..." message before starting
+ * - Displays each file as it's processed with a check mark or skip indicator
+ * - Shows summary of total files modified
+ *
+ * The function does not create backups; the caller is responsible for
+ * backup/restore logic if needed.
+ *
+ * @param {string[]} filePaths - Array of file paths to process
+ * @param {ReplacementMap} replacements - Map of placeholder→replacement pairs
+ * @returns {Promise<Array<{file: string, modified: boolean}>>} - Array of results
+ * @throws {Error} - If any file does not exist or cannot be processed
+ *
+ * @example
+ * const replacementMap = createReplacementMap(answers);
+ * const filesToModify = getFilesToModify();
+ *
+ * const results = await processDirectory(filesToModify, replacementMap);
+ *
+ * const modifiedCount = results.filter(r => r.modified).length;
+ * console.log(`Modified ${modifiedCount} of ${results.length} files`);
+ *
+ * // Example output:
+ * // Processing files...
+ * // ✓ package.json (modified)
+ * // ✓ README.md (modified)
+ * // - .claude/CLAUDE.md (no changes)
+ * // ✓ src/index.ts (modified)
+ * //
+ * // Modified 3 of 4 files
+ */
+export async function processDirectory(
+  filePaths: string[],
+  replacements: ReplacementMap
+): Promise<Array<{ file: string; modified: boolean }>> {
+  const results: Array<{ file: string; modified: boolean }> = []
+
+  console.log(chalk.cyan('\nProcessing files...\n'))
+
+  for (const filePath of filePaths) {
+    try {
+      // Check if file exists
+      const exists = await fileExists(filePath)
+      if (!exists) {
+        console.log(chalk.red(`✗ ${filePath} (file not found)`))
+        throw new Error(`File not found: ${filePath}`)
+      }
+
+      // Apply replacements
+      const modified = await replaceInFile(filePath, replacements)
+
+      // Display progress
+      if (modified) {
+        console.log(chalk.green(`✓ ${filePath} `) + chalk.gray('(modified)'))
+      } else {
+        console.log(chalk.gray(`- ${filePath} (no changes)`))
+      }
+
+      results.push({ file: filePath, modified })
+    } catch (error) {
+      console.log(chalk.red(`✗ ${filePath} (error: ${(error as Error).message})`))
+      throw error
+    }
+  }
+
+  const modifiedCount = results.filter((r) => r.modified).length
+  console.log(chalk.cyan(`\nModified ${modifiedCount} of ${results.length} files\n`))
+
+  return results
 }

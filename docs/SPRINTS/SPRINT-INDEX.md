@@ -72,31 +72,31 @@ Each sprint contains exactly 11 story points (or as close as possible given the 
 
 ## Sprint Summary
 
-| Sprint             | Theme                                   | Points | Priority     | Phase | Status  |
-| ------------------ | --------------------------------------- | ------ | ------------ | ----- | ------- |
-| [01](SPRINT-01.md) | Template Foundation                     | 11     | Must Have    | 1     | Planned |
-| [02](SPRINT-02.md) | Template Completion                     | 11     | Must Have    | 1-2   | Planned |
-| [03](SPRINT-03.md) | Token Generation System                 | 11     | Must Have    | 2     | Planned |
-| [04](SPRINT-04.md) | Token Validation & Component Defaults   | 10     | Must Have    | 2-3   | Planned |
-| [05](SPRINT-05.md) | Component Theming Integration           | 10     | Must Have    | 3     | Planned |
-| [06](SPRINT-06.md) | Dark Mode & Theme Switching             | 11     | Must Have    | 3     | Planned |
-| [07](SPRINT-07.md) | Theme Hook & CI Pipeline                | 11     | Must/Should  | 3-4   | Planned |
-| [08](SPRINT-08.md) | CI/CD Foundation                        | 11     | Must/Could   | 4     | Planned |
-| [09](SPRINT-09.md) | Release Automation                      | 11     | Must Have    | 4     | Planned |
-| [10](SPRINT-10.md) | Versioning & Documentation Foundation   | 10     | Must/Should  | 4-5   | Planned |
-| [11](SPRINT-11.md) | Enhanced Storybook                      | 13     | Should Have  | 5     | Planned |
-| [12](SPRINT-12.md) | Automated Documentation                 | 11     | Should Have  | 5     | Planned |
-| [13](SPRINT-13.md) | Storybook Deployment & Testing Setup    | 10     | Should Have  | 5-6   | Planned |
-| [14](SPRINT-14.md) | Comprehensive Testing Framework         | 10     | Should Have  | 6     | Planned |
-| [15](SPRINT-15.md) | Testing Documentation & Input Component | 10     | Should/Could | 6-7   | Planned |
-| [16](SPRINT-16.md) | Modal & Bundle Optimisation             | 10     | Could Have   | 7     | Planned |
-| [17](SPRINT-17.md) | Form & Token Versioning                 | 13     | Could Have   | 7     | Planned |
-| [18](SPRINT-18.md) | Navigation Components                   | 11     | Could Have   | 7     | Planned |
-| [19](SPRINT-19.md) | Utility Components                      | 13     | Could Have   | 7     | Planned |
-| [20](SPRINT-20.md) | Component Generator & Multi-Theme       | 11     | Could Have   | 7     | Planned |
-| [21](SPRINT-21.md) | Multi-Theme Support                     | 11     | Could Have   | 7     | Planned |
-| [22](SPRINT-22.md) | Internationalisation Support            | 11     | Could Have   | 7     | Planned |
-| [23](SPRINT-23.md) | Migration Tooling                       | 11     | Could Have   | 7     | Planned |
+| Sprint             | Theme                                   | Points | Priority     | Phase | Status         |
+| ------------------ | --------------------------------------- | ------ | ------------ | ----- | -------------- |
+| [01](SPRINT-01.md) | Template Foundation                     | 11     | Must Have    | 1     | 🔄 In Progress |
+| [02](SPRINT-02.md) | Template Completion                     | 11     | Must Have    | 1-2   | Planned        |
+| [03](SPRINT-03.md) | Token Generation System                 | 11     | Must Have    | 2     | Planned        |
+| [04](SPRINT-04.md) | Token Validation & Component Defaults   | 10     | Must Have    | 2-3   | Planned        |
+| [05](SPRINT-05.md) | Component Theming Integration           | 10     | Must Have    | 3     | Planned        |
+| [06](SPRINT-06.md) | Dark Mode & Theme Switching             | 11     | Must Have    | 3     | Planned        |
+| [07](SPRINT-07.md) | Theme Hook & CI Pipeline                | 11     | Must/Should  | 3-4   | Planned        |
+| [08](SPRINT-08.md) | CI/CD Foundation                        | 11     | Must/Could   | 4     | Planned        |
+| [09](SPRINT-09.md) | Release Automation                      | 11     | Must Have    | 4     | Planned        |
+| [10](SPRINT-10.md) | Versioning & Documentation Foundation   | 10     | Must/Should  | 4-5   | Planned        |
+| [11](SPRINT-11.md) | Enhanced Storybook                      | 13     | Should Have  | 5     | Planned        |
+| [12](SPRINT-12.md) | Automated Documentation                 | 11     | Should Have  | 5     | Planned        |
+| [13](SPRINT-13.md) | Storybook Deployment & Testing Setup    | 10     | Should Have  | 5-6   | Planned        |
+| [14](SPRINT-14.md) | Comprehensive Testing Framework         | 10     | Should Have  | 6     | Planned        |
+| [15](SPRINT-15.md) | Testing Documentation & Input Component | 10     | Should/Could | 6-7   | Planned        |
+| [16](SPRINT-16.md) | Modal & Bundle Optimisation             | 10     | Could Have   | 7     | Planned        |
+| [17](SPRINT-17.md) | Form & Token Versioning                 | 13     | Could Have   | 7     | Planned        |
+| [18](SPRINT-18.md) | Navigation Components                   | 11     | Could Have   | 7     | Planned        |
+| [19](SPRINT-19.md) | Utility Components                      | 13     | Could Have   | 7     | Planned        |
+| [20](SPRINT-20.md) | Component Generator & Multi-Theme       | 11     | Could Have   | 7     | Planned        |
+| [21](SPRINT-21.md) | Multi-Theme Support                     | 11     | Could Have   | 7     | Planned        |
+| [22](SPRINT-22.md) | Internationalisation Support            | 11     | Could Have   | 7     | Planned        |
+| [23](SPRINT-23.md) | Migration Tooling                       | 11     | Could Have   | 7     | Planned        |
 
 **Total Planned Points:** 250 (adjusted from 238 due to sprint balancing)
 **Average Points per Sprint:** 10.9
@@ -282,11 +282,11 @@ points).
 
 ### Historical Velocity (To Be Updated)
 
-| Sprint | Committed | Completed | Velocity | Notes       |
-| ------ | --------- | --------- | -------- | ----------- |
-| 01     | 11        | -         | -        | Not started |
-| 02     | 11        | -         | -        | Not started |
-| ...    | ...       | ...       | ...      | ...         |
+| Sprint | Committed | Completed | Velocity | Notes                               |
+| ------ | --------- | --------- | -------- | ----------------------------------- |
+| 01     | 11        | 0         | -        | In Progress (US001: 50%, US002: 0%) |
+| 02     | 11        | -         | -        | Not started                         |
+| ...    | ...       | ...       | ...      | ...                                 |
 
 **Update this table as sprints complete to track actual velocity.**
 
@@ -367,13 +367,19 @@ After Sprint 10, many stories can be worked in parallel:
 
 1. ✅ Review and approve sprint plan
 
-2. ⬜ Assign Sprint 01 stories to team
+2. ✅ Assign Sprint 01 stories to team
 
-3. ⬜ Set up project tracking in ClickUp
+3. ✅ Set up project tracking in ClickUp
 
 4. ⬜ Schedule sprint planning meetings
 
 5. ⬜ Establish sprint review cadence
+
+**Sprint 01 Update (02/01/2026):**
+
+- Sprint 01 is now in progress
+- US001 is 50% complete (Phases 1-2 done, Phases 3-4 remaining)
+- US002 has not yet started
 
 ### For Development Team
 
@@ -451,11 +457,15 @@ After Sprint 10, many stories can be worked in parallel:
 
 ## Document Maintenance
 
-**Version:** 1.0
+**Version:** 1.1
 **Created:** 01/01/2026
-**Last Updated:** 01/01/2026
+**Last Updated:** 02/01/2026
 **Maintained By:** Development Team
 **Review Cycle:** After each sprint completion
+
+**Recent Updates:**
+
+- 02/01/2026: Sprint 01 marked as "In Progress", US001 progress updated to 50%
 
 **Update Process:**
 

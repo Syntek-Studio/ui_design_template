@@ -117,7 +117,38 @@ export interface ReplacementResult {
  * }
  */
 export async function checkDirectoryConflict(): Promise<ConflictCheckResult> {
-  throw new Error('Not implemented')
+  const { fileExists, readFile } = await import('./lib/file-operations')
+
+  // Check if template.config.json exists
+  const configExists = await fileExists('template.config.json')
+
+  if (!configExists) {
+    // No conflict - template not yet initialized
+    return { conflict: false }
+  }
+
+  try {
+    // Read and parse the config file
+    const configContent = await readFile('template.config.json')
+    const config: TemplateConfig = JSON.parse(configContent)
+
+    // Check if initialized flag is set
+    if (config.initialized) {
+      return {
+        conflict: true,
+        reason: 'already-initialized',
+        packageName: config.packageName,
+        clientName: config.clientName,
+      }
+    }
+
+    // Config exists but not marked as initialized
+    return { conflict: false }
+  } catch (error) {
+    // If config file is corrupted, treat as not initialized
+    console.warn('Warning: template.config.json exists but could not be read')
+    return { conflict: false }
+  }
 }
 
 /**
@@ -151,8 +182,28 @@ export async function checkDirectoryConflict(): Promise<ConflictCheckResult> {
  * await createTemplateConfig(answers);
  * // Creates: template.config.json with formatted JSON containing all config data
  */
-export async function createTemplateConfig(_answers: UserAnswers): Promise<void> {
-  throw new Error('Not implemented')
+export async function createTemplateConfig(answers: UserAnswers): Promise<void> {
+  const { writeFile } = await import('./lib/file-operations')
+  const { readFile } = await import('./lib/file-operations')
+
+  // Read current package.json to get version
+  const packageJsonContent = await readFile('package.json')
+  const packageJson = JSON.parse(packageJsonContent)
+
+  // Create the template configuration
+  const config: TemplateConfig = {
+    initialized: true,
+    initializedAt: new Date().toISOString(),
+    packageName: answers.packageName,
+    clientName: answers.clientName,
+    primaryColour: answers.primaryColour,
+    description: answers.description,
+    originalTemplate: '@syntek-studio/ui',
+    templateVersion: packageJson.version,
+  }
+
+  // Write configuration to template.config.json
+  await writeFile('template.config.json', JSON.stringify(config, null, 2))
 }
 
 /**
@@ -198,8 +249,21 @@ export async function createTemplateConfig(_answers: UserAnswers): Promise<void>
  *   }
  * }
  */
-export async function performReplacements(_answers: UserAnswers): Promise<ReplacementResult[]> {
-  throw new Error('Not implemented')
+export async function performReplacements(answers: UserAnswers): Promise<ReplacementResult[]> {
+  // Import the replacement utilities
+  const { createReplacementMap, getFilesToModify } = await import('./lib/replacements')
+  const { processDirectory } = await import('./lib/file-operations')
+
+  // Create the replacement map from user answers
+  const replacementMap = createReplacementMap(answers)
+
+  // Get the list of files to modify
+  const filesToModify = getFilesToModify()
+
+  // Process all files with the replacement map
+  const results = await processDirectory(filesToModify, replacementMap)
+
+  return results
 }
 
 /**
@@ -239,7 +303,36 @@ export async function performReplacements(_answers: UserAnswers): Promise<Replac
  * }
  */
 export async function verifyReplacements(): Promise<boolean> {
-  throw new Error('Not implemented')
+  const { getFilesToModify } = await import('./lib/replacements')
+  const { readFile } = await import('./lib/file-operations')
+
+  // Placeholders that should no longer exist after replacement
+  const placeholders = [
+    '@syntek-studio/ui',
+    'SYNTEK_CLIENT_NAME',
+    'Syntek Studio',
+    '#3b82f6',
+    'A shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.',
+  ]
+
+  // Get files that were modified
+  const filesToCheck = getFilesToModify()
+
+  // Check each file for remaining placeholders
+  for (const filePath of filesToCheck) {
+    const content = await readFile(filePath)
+
+    for (const placeholder of placeholders) {
+      if (content.includes(placeholder)) {
+        // Found a placeholder that wasn't replaced
+        console.warn(`Warning: Placeholder "${placeholder}" still found in ${filePath}`)
+        return false
+      }
+    }
+  }
+
+  // All placeholders were successfully replaced
+  return true
 }
 
 /**
@@ -291,40 +384,68 @@ export async function verifyReplacements(): Promise<boolean> {
  * // ✓ Initialization complete!
  */
 export async function main(): Promise<void> {
-  // Import the prompt functions we just implemented
-  const { displayWelcomeMessage, promptUserInputs, confirmInputs } = await import('./lib/prompts')
+  // Import the prompt functions
+  const { displayWelcomeMessage, promptUserInputs, confirmInputs, displaySuccessMessage } =
+    await import('./lib/prompts')
+  const chalk = (await import('chalk')).default
 
-  // Display welcome message
-  displayWelcomeMessage()
+  try {
+    // Display welcome message
+    displayWelcomeMessage()
 
-  // Prompt for user inputs (will loop until confirmed)
-  let answers: UserAnswers
-  let confirmed = false
-
-  while (!confirmed) {
-    answers = await promptUserInputs()
-    confirmed = await confirmInputs(answers)
-
-    if (!confirmed) {
+    // Check for existing initialization
+    const conflictCheck = await checkDirectoryConflict()
+    if (conflictCheck.conflict) {
+      console.log(chalk.red('✗ This template has already been initialized!\n'))
+      console.log(chalk.yellow('  Package: ') + chalk.white(conflictCheck.packageName))
+      console.log(chalk.yellow('  Client:  ') + chalk.white(conflictCheck.clientName))
       console.log('\n')
-      console.log("Let's try again...\n")
+      console.log(
+        chalk.gray('If you need to re-initialize, please delete template.config.json first.\n')
+      )
+      process.exit(1)
     }
-  }
 
-  // For Phase 1, we just display what would happen
-  // The actual file operations will be implemented in Phase 2
-  console.log('\n')
-  console.log('Phase 1 Complete: Validation and prompts are working!')
-  console.log('\n')
-  console.log('In Phase 2, the following files would be modified:')
-  console.log('  - package.json')
-  console.log('  - README.md')
-  console.log('  - .claude/CLAUDE.md')
-  console.log('  - src/index.ts')
-  console.log('\n')
-  console.log('Your answers:')
-  console.log(JSON.stringify(answers!, null, 2))
-  console.log('\n')
+    // Prompt for user inputs (will loop until confirmed)
+    let answers: UserAnswers
+    let confirmed = false
+
+    while (!confirmed) {
+      answers = await promptUserInputs()
+      confirmed = await confirmInputs(answers)
+
+      if (!confirmed) {
+        console.log('\n')
+        console.log("Let's try again...\n")
+      }
+    }
+
+    // Perform file replacements
+    console.log(chalk.cyan('\nInitializing template...\n'))
+    const results = await performReplacements(answers!)
+
+    // Create template configuration
+    await createTemplateConfig(answers!)
+    console.log(chalk.green('✓ Configuration saved to template.config.json\n'))
+
+    // Verify all replacements were successful
+    const verified = await verifyReplacements()
+    if (!verified) {
+      console.log(chalk.yellow('⚠ Warning: Some placeholders may not have been replaced'))
+      console.log(chalk.gray('Please review the modified files manually\n'))
+    } else {
+      console.log(chalk.green('✓ All placeholders verified as replaced\n'))
+    }
+
+    // Display success message
+    displaySuccessMessage(answers!, results)
+  } catch (error) {
+    console.log('\n')
+    console.log(chalk.red('✗ Initialization failed'))
+    console.log(chalk.red(`  Error: ${(error as Error).message}`))
+    console.log('\n')
+    process.exit(1)
+  }
 }
 
 /**

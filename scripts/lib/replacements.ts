@@ -89,8 +89,23 @@ export interface ReplacementMap {
  * //   'A shared UI component library...': 'Acme design system'
  * // }
  */
-export function createReplacementMap(_answers: UserAnswers): ReplacementMap {
-  throw new Error('Not implemented')
+export function createReplacementMap(answers: UserAnswers): ReplacementMap {
+  return {
+    // Package name replacement (appears in package.json, README, examples, etc.)
+    '@syntek-studio/ui': answers.packageName,
+
+    // Client name replacements (multiple formats used throughout template)
+    SYNTEK_CLIENT_NAME: answers.clientName,
+    'Syntek Studio': answers.clientName,
+    'Sam Bailey': answers.clientName,
+
+    // Primary colour replacement (appears in design tokens)
+    '#3b82f6': answers.primaryColour,
+
+    // Description replacement (appears in package.json and README)
+    'A shared UI component library for React Web and React Native applications. Built with TypeScript, Tailwind CSS 4, and Nativewind 4.':
+      answers.description,
+  }
 }
 
 /**
@@ -117,7 +132,7 @@ export function createReplacementMap(_answers: UserAnswers): ReplacementMap {
  * // ]
  */
 export function getFilesToModify(): string[] {
-  throw new Error('Not implemented')
+  return ['package.json', 'README.md', '.claude/CLAUDE.md', 'src/index.ts', 'src/tokens/colours.ts']
 }
 
 /**
@@ -144,8 +159,9 @@ export function getFilesToModify(): string[] {
  * escapeRegExp('[test]')             // returns '\\[test\\]'
  * escapeRegExp('^hello$')            // returns '\\^hello\\$'
  */
-export function escapeRegExp(_str: string): string {
-  throw new Error('Not implemented')
+export function escapeRegExp(str: string): string {
+  // Escape all special regex characters: . * + ? ^ $ { } ( ) | [ ] \ /
+  return str.replace(/[.*+?^${}()|[\]\\/-]/g, '\\$&')
 }
 
 /**
@@ -198,6 +214,20 @@ export function escapeRegExp(_str: string): string {
  * //   "author": "Acme Corp"
  * // }'
  */
-export function applyReplacements(_content: string, _replacements: ReplacementMap): string {
-  throw new Error('Not implemented')
+export function applyReplacements(content: string, replacements: ReplacementMap): string {
+  let modifiedContent = content
+
+  // Apply each replacement from the map
+  for (const [placeholder, replacement] of Object.entries(replacements)) {
+    // Escape special regex characters in the placeholder
+    const escapedPlaceholder = escapeRegExp(placeholder)
+
+    // Create a global regex to replace all occurrences
+    const regex = new RegExp(escapedPlaceholder, 'g')
+
+    // Apply the replacement
+    modifiedContent = modifiedContent.replace(regex, replacement)
+  }
+
+  return modifiedContent
 }

@@ -1,7 +1,7 @@
 # Release Notes
 
 **Last Updated**: 02/01/2026
-**Version**: 0.8.0
+**Version**: 0.9.0
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -49,6 +49,40 @@
 ---
 
 ## Latest Release
+
+### Version 0.9.0 - 02 January 2026
+
+**Automated Template Customisation**
+
+The template initialisation tool now does the heavy lifting for you. After answering a few simple questions, it automatically customises all the files in your project with your package name, client name, and brand colours.
+
+#### What's New
+
+- **Automatic File Updates**: The CLI now updates 15+ files throughout your project automatically, replacing template placeholders with your actual project details. No more manual find-and-replace across multiple files.
+
+- **Smart Placeholder Replacement**: Simply answer the prompts about your project, and the tool intelligently replaces placeholders like `{{PACKAGE_NAME}}`, `{{CLIENT_NAME}}`, and `{{PRIMARY_COLOUR}}` throughout your codebase, including:
+  - Package configuration files
+  - README and documentation
+  - Design token files with your brand colours
+  - Component files and examples
+
+- **Safety First**: Before making any changes, the tool creates automatic backups of all files (with `.bak` extension), so you can always restore if needed. It also verifies that all placeholders were successfully replaced before completing.
+
+- **No Re-Runs**: The tool detects if you've already initialised your project and prevents accidental re-initialisation, protecting your customised configuration.
+
+- **Configuration Saved**: Your initialisation settings are saved to a `template.config.json` file for future reference, making it easy to see how your project was configured.
+
+#### For Developers
+
+- This is Phase 2 (Placeholder Replacement Engine) of the 4-phase implementation
+- All file operations include automatic backup and rollback capability
+- Replacement engine uses regex-safe escaping to handle special characters
+- Verification step ensures no placeholders remain in output files
+- No changes to the component library itself - this is a development tool for template setup
+
+---
+
+## Previous Releases
 
 ### Version 0.8.0 - 02 January 2026
 
