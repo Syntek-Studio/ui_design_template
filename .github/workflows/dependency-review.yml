@@ -1,3 +1,35 @@
+# Dependency Review and Security Scanning
+#
+# This workflow reviews all dependency changes in pull requests to detect
+# security vulnerabilities, licensing issues, and dependency health problems.
+# It provides early warning of potentially risky dependency changes before
+# they are merged.
+#
+# Purpose:
+#   - Check for known security vulnerabilities in dependencies
+#   - Review open-source license compatibility
+#   - Validate package health and maintenance status
+#   - Prevent introduction of unmaintained or risky dependencies
+#   - Add summary comments directly to pull requests
+#
+# Triggers:
+#   - pull_request: On all PR activity to main, staging, dev, testing branches
+#
+# Permissions:
+#   - contents:read - Read repository code and package.json
+#   - pull-requests:write - Add comments to pull requests
+#
+# Configuration:
+#   - Fail on HIGH severity vulnerabilities (blocks PR merge)
+#   - Allowed licences: MIT, Apache-2.0, BSD variants, ISC, CC0-1.0, Unlicense
+#   - Whitelist exceptions for signal-exit and njsscan-action (low OpenSSF scores)
+#   - Always post summary comment on PRs
+#
+# Notes:
+#   - Requires valid package.json and package-lock.json
+#   - Signal-exit and njsscan-action are whitelisted due to ecosystem needs
+#   - Low OpenSSF Scorecard threshold: 3
+
 name: Dependency Review
 
 on:
@@ -9,20 +41,31 @@ permissions:
   pull-requests: write
 
 jobs:
+  # Job: Review dependencies for security and licensing issues
+  # Purpose: Ensure all new dependencies meet security and licensing standards
+  # Failure impact: Blocks PR merge if HIGH severity vulnerabilities detected
   dependency-review:
     name: Dependency Review
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
+      # Run GitHub's dependency review action
+      # Analyses all dependency changes against security databases and licensing rules
+      # Provides detailed feedback on each package change (add, upgrade, downgrade, remove)
       - name: Dependency Review
         uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: high
           comment-summary-in-pr: always
           license-check: true
+          # Whitelist of allowed open-source licenses
+          # This aligns with project licensing strategy
           allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, 0BSD, CC0-1.0, Unlicense
-          # Allow dependencies with low OpenSSF Scorecard ratings (threshold is 3)
+          # Allow specific dependencies with low OpenSSF Scorecard ratings (threshold is 3)
+          # These exceptions are necessary for ecosystem compatibility:
+          # - signal-exit: Essential for process exit handling in Node.js ecosystem
+          # - njsscan-action: Provides Node.js security scanning capabilities
           allow-dependencies-licenses: >-
             pkg:npm/signal-exit,
             pkg:githubactions/ajinabraham/njsscan-action

@@ -1,6 +1,44 @@
+# Dependabot Configuration
+#
+# This configuration automates dependency updates using GitHub's Dependabot.
+# It automatically creates pull requests to keep npm packages and GitHub Actions
+# up to date with the latest security patches and feature releases.
+#
+# Purpose:
+#   - Automatically detect and update outdated dependencies
+#   - Create PRs for security patches (npm production dependencies)
+#   - Create PRs for feature updates in development dependencies
+#   - Batch updates into manageable pull requests
+#   - Keep GitHub Actions workflows current
+#
+# Schedule:
+#   - npm packages: Weekly on Monday at 00:00 UTC
+#   - GitHub Actions: Weekly on Monday at 00:00 UTC
+#
+# Configuration:
+#   - npm production dependencies: patch updates only (security)
+#   - npm development dependencies: minor and patch updates
+#   - GitHub Actions: all available updates
+#   - Max 10 open PRs at a time per ecosystem
+#
+# Commit Message Prefixes:
+#   - npm updates: "deps: " (for conventional commits)
+#   - GitHub Actions: "ci: " (for conventional commits)
+#
+# Labels Applied:
+#   - npm updates: "dependencies"
+#   - GitHub Actions: "ci", "dependencies"
+#
+# Notes:
+#   - Dependabot automatically resolves dependency conflicts
+#   - PR merging is automated by CI/CD workflows
+#   - Dependabot respects CI check statuses before suggesting merge
+#   - Pre-release versions are skipped unless configured
+
 version: 2
 updates:
-  # npm dependencies
+  # npm package updates
+  # Manages dependencies in package.json and package-lock.json
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
@@ -11,18 +49,25 @@ updates:
       prefix: 'deps'
     labels:
       - 'dependencies'
+    # Separate updates for dev and production dependencies
+    # This allows different update strategies for each category
     groups:
+      # Development dependencies: Allow minor and patch updates
+      # Minor updates are generally safe in dev-only packages
       dev-dependencies:
         dependency-type: 'development'
         update-types:
           - 'minor'
           - 'patch'
+      # Production dependencies: Only patch (security) updates
+      # Prevents breaking changes in user-facing code
       production-dependencies:
         dependency-type: 'production'
         update-types:
           - 'patch'
 
-  # GitHub Actions
+  # GitHub Actions workflow updates
+  # Keeps GitHub Actions used in workflows current
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:

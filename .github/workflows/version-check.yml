@@ -1,3 +1,42 @@
+# Version Consistency Check
+#
+# This workflow enforces that version numbers are updated whenever source code
+# changes are made. It prevents accidental releases of code without version
+# bumps and ensures changelog documentation is kept in sync with code changes.
+#
+# Purpose:
+#   - Ensure version files are updated when code changes
+#   - Prevent merging code without changelog documentation
+#   - Maintain consistency between package.json and VERSION file
+#   - Block PRs with code changes but missing version updates
+#   - Provide clear guidance on semantic versioning
+#
+# Triggers:
+#   - pull_request: On all PR activity to main, staging, dev, testing branches
+#
+# Permissions:
+#   - contents:read - Read repository code and version files
+#
+# Checked Files:
+#   - Source code: src/**/*.ts and src/**/*.tsx
+#   - Version files: VERSION, CHANGELOG.md, RELEASES.md, VERSION-HISTORY.md, package.json
+#
+# Rules:
+#   - If source code changes: at least one version file must be updated
+#   - If only version files change: no error (documentation updates)
+#   - Semantic versioning required: MAJOR.MINOR.PATCH format
+#
+# Semantic Versioning Guide:
+#   - PATCH: Bug fixes and minor improvements
+#   - MINOR: New features (backwards compatible)
+#   - MAJOR: Breaking changes or major refactoring
+#
+# Notes:
+#   - Uses git diff to compare with base branch
+#   - Supports pre-release versions (e.g., 1.2.3-alpha)
+#   - Error prevents PR merge until version files updated
+#   - Encourages developers to document changes in CHANGELOG
+
 name: Version Check
 
 on:
@@ -5,6 +44,9 @@ on:
     branches: [main, staging, dev, testing]
 
 jobs:
+  # Job: Verify version files are updated with code changes
+  # Purpose: Enforce consistent versioning and changelog updates
+  # Failure impact: Blocks PR merge
   check-version:
     name: Check Version Updated
     runs-on: ubuntu-latest
@@ -13,6 +55,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Detect which files changed in this PR by comparing with base branch
+      # Identifies source code changes and version file updates separately
       - name: Get changed files
         id: changed
         env:
@@ -25,10 +69,11 @@ jobs:
           echo "Changed files:"
           echo "$CHANGED_FILES"
 
-          # Check if source code was changed
+          # Check if source code was changed (TypeScript files in src/)
           CODE_CHANGED=$(echo "$CHANGED_FILES" | grep -E "^src/.*\.(ts|tsx)$" || true)
 
-          # Check if version files were updated
+          # Check if any version files were updated
+          # Includes: VERSION, CHANGELOG.md, RELEASES.md, VERSION-HISTORY.md, package.json
           VERSION_UPDATED=$(echo "$CHANGED_FILES" | grep -E "^(VERSION|CHANGELOG\.md|RELEASES\.md|VERSION-HISTORY\.md|package\.json)$" || true)
 
           if [ -n "$CODE_CHANGED" ]; then
@@ -43,10 +88,12 @@ jobs:
             echo "version_updated=false" >> $GITHUB_OUTPUT
           fi
 
+      # Enforce version update requirement when source code changes
+      # Fails if code changed but version files not updated
       - name: Check version requirement
         if: steps.changed.outputs.code_changed == 'true' && steps.changed.outputs.version_updated == 'false'
         run: |
-          echo "::error::❌ Source code was changed but version was not updated!"
+          echo "::error::Source code was changed but version was not updated!"
           echo ""
           echo "Please update the following before merging:"
           echo "  1. VERSION file - bump the version number"
@@ -62,6 +109,7 @@ jobs:
           echo ""
           exit 1
 
+      # Success message when version checks pass
       - name: Version check passed
         if: steps.changed.outputs.code_changed == 'false' || steps.changed.outputs.version_updated == 'true'
         env:

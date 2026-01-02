@@ -1,3 +1,42 @@
+# Publish to GitHub Packages
+#
+# This workflow automatically publishes the built package to GitHub Packages
+# (GitHub's npm registry) whenever a new release is published on GitHub.
+# This allows team members and external consumers to install the package
+# via GitHub's npm registry.
+#
+# Purpose:
+#   - Automatically publish built packages on release
+#   - Make packages available via @syntek-studio npm scope
+#   - Enable installation via GitHub Packages registry
+#   - Maintain parallel publishing alongside other registries
+#
+# Triggers:
+#   - release.published: When a release is published (not draft)
+#
+# Permissions:
+#   - contents:read - Read repository code and release info
+#   - packages:write - Publish packages to GitHub Packages registry
+#
+# Environment:
+#   - Node: v20.x
+#   - Registry: npm.pkg.github.com
+#   - Package Scope: @syntek-studio
+#   - Auth: Uses GITHUB_TOKEN (automatically provided by GitHub Actions)
+#
+# Steps:
+#   1. Checkout release code
+#   2. Setup Node.js with GitHub Packages registry auth
+#   3. Install dependencies
+#   4. Build distribution files
+#   5. Publish to GitHub Packages
+#
+# Notes:
+#   - GITHUB_TOKEN is automatically provided and has write:packages permission
+#   - Package must be scoped (@syntek-studio) to publish to GitHub Packages
+#   - Release must be marked as "published" (not draft) to trigger
+#   - Version comes from VERSION file updated during release process
+
 name: Publish to GitHub Packages
 
 on:
@@ -5,6 +44,9 @@ on:
     types: [published]
 
 jobs:
+  # Job: Build and publish package to GitHub Packages
+  # Purpose: Make released package available via GitHub's npm registry
+  # Trigger: New GitHub release published
   publish:
     name: Publish to GitHub Packages
     runs-on: ubuntu-latest
@@ -15,6 +57,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # Setup Node.js with GitHub Packages registry authentication
+      # This configures npm to authenticate with GitHub Packages using GITHUB_TOKEN
       - uses: actions/setup-node@v6
         with:
           node-version: 20
@@ -22,8 +66,12 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@syntek-studio'
 
+      # Install dependencies from lockfile
       - run: npm ci
+      # Build production distribution files
       - run: npm run build
+      # Publish built package to GitHub Packages registry
+      # Uses GITHUB_TOKEN for authentication (automatically provided by GitHub Actions)
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,3 +1,26 @@
+# Continuous Integration Pipeline
+#
+# This workflow runs code quality checks, tests, and builds on every pull request
+# and push to main development branches. It ensures all contributions meet quality
+# standards before being merged.
+#
+# Triggers:
+#   - pull_request: On all PR activity to main, staging, dev, testing branches
+#   - push: On commits pushed to main, staging, dev, testing branches
+#
+# Jobs:
+#   - check: ESLint and TypeScript type checking (runs first, blocks if fails)
+#   - test: Unit test suite with coverage reporting (runs in parallel with check)
+#   - build: Production build (runs only after check and test pass)
+#
+# Permissions:
+#   - contents:read - Read access to repository code
+#   - pull-requests:write - Write comments to pull requests
+#
+# Build Artifacts:
+#   - coverage-report: Test coverage data (7 days retention)
+#   - dist: Built library files (7 days retention)
+
 name: CI
 
 on:
@@ -11,6 +34,9 @@ permissions:
   pull-requests: write
 
 jobs:
+  # Job 1: Lint and type check
+  # Purpose: Validate code style and TypeScript types are correct
+  # Failure impact: Blocks PR and subsequent jobs
   check:
     name: Lint & Type Check
     runs-on: ubuntu-latest
@@ -24,6 +50,10 @@ jobs:
       - run: npm run type-check
       - run: npm run lint
 
+  # Job 2: Run test suite
+  # Purpose: Execute all unit tests and generate coverage reports
+  # Runs in parallel with check job
+  # Failure impact: Blocks build job but doesn't block PR checks
   test:
     name: Tests
     runs-on: ubuntu-latest
@@ -34,6 +64,8 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      # Check if test files exist in src/ directory before running tests
+      # Skips test run if no .test.* or .spec.* files are found
       - name: Check for test files
         id: check-tests
         run: |
@@ -46,6 +78,7 @@ jobs:
       - name: Run tests
         if: steps.check-tests.outputs.has_tests == 'true'
         run: npm run test:coverage -- --run
+      # Upload coverage reports as build artifact for review
       - name: Upload coverage report
         if: steps.check-tests.outputs.has_tests == 'true'
         uses: actions/upload-artifact@v6
@@ -54,6 +87,10 @@ jobs:
           path: coverage/
           retention-days: 7
 
+  # Job 3: Build library
+  # Purpose: Create production-ready distribution files
+  # Depends on: check and test jobs must pass first
+  # Artifacts: Compiled TypeScript/React code in dist/ directory
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -66,6 +103,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+      # Upload dist artifacts for inspection and debugging
       - name: Upload build artifacts
         uses: actions/upload-artifact@v6
         with:

@@ -1,3 +1,31 @@
+# Codacy Code Quality and Security Analysis
+#
+# This workflow runs Codacy static analysis to detect code quality issues,
+# security vulnerabilities, and code smells. Results are uploaded to GitHub's
+# security tab for visibility alongside other security scanning results.
+#
+# Purpose:
+#   - Detect code quality issues and anti-patterns
+#   - Identify potential security vulnerabilities
+#   - Track code metrics across the codebase
+#   - Provide quality feedback in pull requests
+#
+# Triggers:
+#   - push: On commits to main, staging, dev, testing branches
+#   - pull_request: On all PR activity to main, staging, dev, testing branches
+#
+# Permissions:
+#   - contents:read - Read repository code
+#   - security-events:write - Upload security findings to GitHub Security tab
+#
+# Outputs:
+#   - SARIF report: Uploaded to GitHub's Code Security and Analysis section
+#
+# Notes:
+#   - SARIF processing merges multiple analysis runs to avoid GitHub category
+#     duplication errors
+#   - Tool version: Codacy Analysis CLI v4.4.7
+
 name: Codacy
 
 on:
@@ -7,6 +35,8 @@ on:
     branches: [main, staging, dev, testing]
 
 jobs:
+  # Job: Run Codacy security and quality analysis
+  # Purpose: Identify code quality issues and potential security problems
   codacy-security-scan:
     name: Codacy Security Scan
     runs-on: ubuntu-latest
@@ -17,6 +47,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # Run Codacy's static analysis engine on the codebase
+      # Outputs analysis results in SARIF format for GitHub integration
       - name: Run Codacy Analysis CLI
         # v4.4.7
         uses: codacy/codacy-analysis-cli-action@562ee3e92b8e92df8b67e0a5ff8aa8e261919c08
@@ -26,6 +58,9 @@ jobs:
           gh-code-scanning-compat: true
           max-allowed-issues: 2147483647
 
+      # Process SARIF output to ensure GitHub compatibility
+      # GitHub requires a single run in SARIF reports to avoid category duplication errors.
+      # If Codacy produces multiple runs, merge them into one.
       - name: Process SARIF for GitHub compatibility
         if: always()
         run: |
@@ -43,6 +78,8 @@ jobs:
             " && mv processed.sarif results.sarif
           fi
 
+      # Upload the SARIF report to GitHub's Security tab for easy review
+      # This makes Codacy findings visible alongside CodeQL and other security tools
       - name: Upload SARIF to GitHub Security
         uses: github/codeql-action/upload-sarif@v4
         if: always()

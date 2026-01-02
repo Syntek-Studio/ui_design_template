@@ -1,3 +1,36 @@
+# njsscan Static Security Analysis
+#
+# This workflow uses njsscan to perform static security analysis on Node.js and
+# JavaScript code, detecting common security issues and vulnerabilities specific
+# to the Node.js ecosystem.
+#
+# Purpose:
+#   - Detect hardcoded secrets and API keys
+#   - Identify unsafe cryptographic functions
+#   - Find common security anti-patterns
+#   - Detect vulnerable API usage
+#   - Identify code injection vulnerabilities
+#
+# Triggers:
+#   - push: On commits to main, staging, dev, testing branches
+#   - pull_request: On all PR activity to main, staging, dev, testing branches
+#
+# Permissions:
+#   - contents:read - Read repository code
+#   - security-events:write - Upload security findings to GitHub Security tab
+#
+# Scanned Paths:
+#   - src/ directory (all source code)
+#
+# Outputs:
+#   - SARIF report: Uploaded to GitHub's Code Security and Analysis section
+#
+# Notes:
+#   - Tool version: njsscan v9
+#   - Focuses on Node.js-specific security issues
+#   - Complements CodeQL and Codacy for comprehensive security coverage
+#   - Uses '|| true' to prevent workflow failure on findings (reports are still generated)
+
 name: njsscan
 
 on:
@@ -7,6 +40,9 @@ on:
     branches: [main, staging, dev, testing]
 
 jobs:
+  # Job: Node.js security static analysis
+  # Purpose: Identify Node.js/JavaScript-specific security vulnerabilities
+  # Tool: njsscan (OWASP secure code scanning tool)
   njsscan:
     name: Security Scan
     runs-on: ubuntu-latest
@@ -17,11 +53,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # Run njsscan security analysis on src/ directory
+      # njsscan is an OWASP tool that identifies common Node.js security issues
+      # Output format: SARIF for GitHub integration
+      # The '|| true' ensures workflow doesn't fail if security issues are found,
+      # allowing the SARIF upload to complete regardless
       - name: Run njsscan
         uses: ajinabraham/njsscan-action@v9
         with:
           args: '--sarif --output results.sarif src/ || true'
 
+      # Upload njsscan findings to GitHub's Security tab
+      # Displays njsscan results alongside CodeQL, Codacy, and other security tools
       - name: Upload SARIF to GitHub Security
         uses: github/codeql-action/upload-sarif@v4
         if: always()

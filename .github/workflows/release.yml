@@ -1,3 +1,40 @@
+# Automated Release Creation
+#
+# This workflow automatically creates GitHub releases whenever the VERSION
+# file is updated on the main branch. It extracts the version, retrieves
+# corresponding changelog entries, and publishes a new GitHub release with
+# appropriate metadata and pre-release flags.
+#
+# Purpose:
+#   - Automate release creation when VERSION file changes
+#   - Keep GitHub releases synchronised with code versions
+#   - Automatically mark pre-releases (versions with -alpha, -beta, etc.)
+#   - Include changelog entries in release notes
+#   - Trigger downstream publish workflows
+#
+# Triggers:
+#   - push to main branch when VERSION file changes
+#
+# Permissions:
+#   - contents:write - Create and update releases in repository
+#   - pull-requests:read - Read PR information (for context)
+#
+# Version Format:
+#   - MAJOR.MINOR.PATCH (e.g., 1.2.3)
+#   - MAJOR.MINOR.PATCH-prerelease (e.g., 1.2.3-alpha, 1.2.3-rc.1)
+#
+# Release Detection:
+#   - Reads version from VERSION file
+#   - Extracts changelog section from CHANGELOG.md matching version number
+#   - Automatically marks as pre-release if version contains '-' suffix
+#
+# Notes:
+#   - VERSION file path: project root
+#   - CHANGELOG.md format: ## [VERSION] sections with changes
+#   - Release tag format: v{VERSION}
+#   - Pre-releases marked by hyphen in version (e.g., v1.2.3-beta)
+#   - Uses softprops/action-gh-release v2.5.0
+
 name: Release
 
 on:
@@ -11,6 +48,9 @@ permissions:
   pull-requests: read
 
 jobs:
+  # Job: Create GitHub release from VERSION file
+  # Purpose: Automate release creation and publish release notes
+  # Trigger: VERSION file updated on main branch
   release:
     name: Create Release
     runs-on: ubuntu-latest
@@ -19,10 +59,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Extract version number from VERSION file in project root
+      # VERSION file should contain only the semantic version (e.g., 1.2.3)
       - name: Get version
         id: version
         run: echo "version=$(cat VERSION)" >> $GITHUB_OUTPUT
 
+      # Extract changelog entry for this version from CHANGELOG.md
+      # Searches for "## [VERSION]" section and extracts content until next version
+      # SECURITY: Validates version format before shell usage to prevent injection
       - name: Get changelog entry
         id: changelog
         env:
@@ -40,6 +85,8 @@ jobs:
           echo "$CHANGELOG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
+      # Create GitHub release with version info and changelog
+      # Automatically marks as pre-release if version contains '-' (e.g., 1.2.3-alpha)
       - name: Create Release
         # v2.5.0
         uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b
