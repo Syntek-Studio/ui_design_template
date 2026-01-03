@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Syntek-Studio/ui_design_template/main/template.config.schema.json",
+  "title": "Template Configuration",
+  "description": "Configuration file created after template initialization. Records initialization metadata and prevents re-initialization.",
+  "type": "object",
+  "required": [
+    "initialized",
+    "initializedAt",
+    "packageName",
+    "clientName",
+    "primaryColour",
+    "description",
+    "originalTemplate",
+    "templateVersion"
+  ],
+  "properties": {
+    "initialized": {
+      "type": "boolean",
+      "description": "Whether the template has been initialized (always true when file exists)",
+      "const": true
+    },
+    "initializedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when initialization occurred (e.g., '2026-01-02T12:30:45.123Z')"
+    },
+    "packageName": {
+      "type": "string",
+      "description": "The npm package name chosen by the user (e.g., '@acme/ui' or 'acme-ui')",
+      "pattern": "^(@[a-z0-9-~][a-z0-9-._~]*/)?[a-z0-9-~][a-z0-9-._~]*$",
+      "maxLength": 214
+    },
+    "clientName": {
+      "type": "string",
+      "description": "The client/company name chosen by the user",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "primaryColour": {
+      "type": "string",
+      "description": "The primary brand colour as hex code (e.g., '#3b82f6')",
+      "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+    },
+    "description": {
+      "type": "string",
+      "description": "The project description chosen by the user",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "originalTemplate": {
+      "type": "string",
+      "description": "The original template package name (always '@syntek-studio/ui')",
+      "const": "@syntek-studio/ui"
+    },
+    "templateVersion": {
+      "type": "string",
+      "description": "The version of the template that was initialized (semver format)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?(\\+[a-zA-Z0-9.]+)?$"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "initialized": true,
+      "initializedAt": "2026-01-02T12:00:00.000Z",
+      "packageName": "@acme/ui",
+      "clientName": "Acme Corporation",
+      "primaryColour": "#3b82f6",
+      "description": "Acme's design system for web and mobile",
+      "originalTemplate": "@syntek-studio/ui",
+      "templateVersion": "0.9.0"
+    },
+    {
+      "initialized": true,
+      "initializedAt": "2026-01-02T14:30:00.000Z",
+      "packageName": "my-design-system",
+      "clientName": "My Company",
+      "primaryColour": "#ff6b6b",
+      "description": "Modern design system for My Company's products",
+      "originalTemplate": "@syntek-studio/ui",
+      "templateVersion": "0.9.0"
+    }
+  ]
+}

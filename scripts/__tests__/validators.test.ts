@@ -176,9 +176,19 @@ describe('validatePackageName', () => {
       expect(result).not.toBe(true)
     })
 
-    it('should handle minimum length package names', () => {
-      expect(validatePackageName('@a/b')).toBe(true)
-      expect(validatePackageName('a')).toBe(true)
+    it('should reject package names shorter than 3 characters (security)', () => {
+      const result1 = validatePackageName('ab')
+      expect(result1).not.toBe(true)
+      expect(result1).toContain('at least 3 characters')
+
+      const result2 = validatePackageName('a')
+      expect(result2).not.toBe(true)
+      expect(result2).toContain('at least 3 characters')
+    })
+
+    it('should accept minimum valid length package names', () => {
+      expect(validatePackageName('abc')).toBe(true)
+      expect(validatePackageName('@a/bcd')).toBe(true)
     })
 
     it('should handle exactly 214 characters', () => {

@@ -148,6 +148,13 @@ describe('createTemplateConfig', () => {
   beforeEach(async () => {
     await fs.mkdir(testDir, { recursive: true })
     process.chdir(testDir)
+
+    // Create package.json in test directory for createTemplateConfig to read
+    await fs.writeFile(
+      path.join(testDir, 'package.json'),
+      JSON.stringify({ version: '1.0.0' }, null, 2),
+      'utf-8'
+    )
   })
 
   afterEach(async () => {
@@ -384,8 +391,9 @@ describe('performReplacements', () => {
   })
 
   it('should handle files with multiple occurrences of placeholders', async () => {
+    // Use README.md which is in the list of files to modify
     await fs.writeFile(
-      path.join(testDir, 'test.md'),
+      path.join(testDir, 'README.md'),
       '@syntek-studio/ui is great. Use @syntek-studio/ui today!',
       'utf-8'
     )
@@ -399,7 +407,7 @@ describe('performReplacements', () => {
 
     await performReplacements(answers)
 
-    const content = await fs.readFile(path.join(testDir, 'test.md'), 'utf-8')
+    const content = await fs.readFile(path.join(testDir, 'README.md'), 'utf-8')
     expect(content).toBe('@test/ui is great. Use @test/ui today!')
   })
 
@@ -451,6 +459,18 @@ describe('verifyReplacements', () => {
   beforeEach(async () => {
     await fs.mkdir(testDir, { recursive: true })
     process.chdir(testDir)
+
+    // Create all files that verifyReplacements checks
+    await fs.writeFile(
+      path.join(testDir, 'package.json'),
+      JSON.stringify({ name: '@acme/ui' }),
+      'utf-8'
+    )
+    await fs.writeFile(path.join(testDir, 'README.md'), '# @acme/ui', 'utf-8')
+    await fs.mkdir(path.join(testDir, '.claude'), { recursive: true })
+    await fs.writeFile(path.join(testDir, '.claude', 'CLAUDE.md'), 'Use @acme/ui', 'utf-8')
+    await fs.mkdir(path.join(testDir, 'src'), { recursive: true })
+    await fs.writeFile(path.join(testDir, 'src', 'index.ts'), '// @acme/ui', 'utf-8')
   })
 
   afterEach(async () => {
@@ -459,12 +479,7 @@ describe('verifyReplacements', () => {
   })
 
   it('should return true when all placeholders are replaced', async () => {
-    await fs.writeFile(
-      path.join(testDir, 'package.json'),
-      JSON.stringify({ name: '@acme/ui' }),
-      'utf-8'
-    )
-    await fs.writeFile(path.join(testDir, 'README.md'), '# @acme/ui', 'utf-8')
+    // Files already created in beforeEach
 
     const verified = await verifyReplacements()
 
@@ -472,6 +487,7 @@ describe('verifyReplacements', () => {
   })
 
   it('should return false when placeholders remain', async () => {
+    // Overwrite package.json with placeholder
     await fs.writeFile(
       path.join(testDir, 'package.json'),
       JSON.stringify({ name: '@syntek-studio/ui' }),
@@ -484,26 +500,14 @@ describe('verifyReplacements', () => {
   })
 
   it('should check all relevant files', async () => {
-    // Create files with no placeholders
-    await fs.writeFile(
-      path.join(testDir, 'package.json'),
-      JSON.stringify({ name: '@acme/ui' }),
-      'utf-8'
-    )
-    await fs.writeFile(path.join(testDir, 'README.md'), '# @acme/ui', 'utf-8')
-
-    await fs.mkdir(path.join(testDir, '.claude'), { recursive: true })
-    await fs.writeFile(path.join(testDir, '.claude', 'CLAUDE.md'), 'Use @acme/ui', 'utf-8')
-
-    await fs.mkdir(path.join(testDir, 'src'), { recursive: true })
-    await fs.writeFile(path.join(testDir, 'src', 'index.ts'), '// @acme/ui', 'utf-8')
-
+    // Files already created without placeholders in beforeEach
     const verified = await verifyReplacements()
 
     expect(verified).toBe(true)
   })
 
   it('should detect remaining @syntek-studio/ui placeholders', async () => {
+    // Overwrite package.json with placeholder
     await fs.writeFile(
       path.join(testDir, 'package.json'),
       'Install @syntek-studio/ui from npm',
@@ -516,6 +520,7 @@ describe('verifyReplacements', () => {
   })
 
   it('should detect remaining @syntek-studio/ui placeholders', async () => {
+    // Overwrite README.md with placeholder
     await fs.writeFile(
       path.join(testDir, 'README.md'),
       'Use @syntek-studio/ui in your project',
@@ -528,6 +533,7 @@ describe('verifyReplacements', () => {
   })
 
   it('should detect remaining "Syntek Studio" placeholders', async () => {
+    // Overwrite README.md with placeholder
     await fs.writeFile(path.join(testDir, 'README.md'), 'Created by Syntek Studio', 'utf-8')
 
     const verified = await verifyReplacements()

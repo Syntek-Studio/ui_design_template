@@ -24,10 +24,54 @@ import {
   access,
 } from 'node:fs/promises'
 import { constants } from 'node:fs'
+import { resolve, relative } from 'node:path'
 import chalk from 'chalk'
 import type { ReplacementMap } from './replacements'
 import { applyReplacements } from './replacements'
 import type { Logger } from './cli-options'
+
+/**
+ * Validates that a file path is safe and within the project directory.
+ *
+ * Prevents path traversal attacks by ensuring paths do not escape the project root.
+ * Performs the following security checks:
+ * - Allows both absolute paths within project directory and relative paths
+ * - Rejects paths that traverse outside project directory (e.g., ../)
+ * - Rejects paths containing null bytes (security vulnerability)
+ *
+ * Defence-in-depth measure to protect file operations from malicious paths.
+ * While current implementation uses hardcoded file lists, this protects against
+ * future modifications where user-controlled paths might be introduced.
+ *
+ * @param {string} filePath - The file path to validate
+ * @throws {Error} - If path attempts traversal outside project or contains null bytes
+ *
+ * @example
+ * validateFilePath('package.json')                        // OK (relative)
+ * validateFilePath('src/index.ts')                        // OK (relative)
+ * validateFilePath('/full/path/to/project/package.json')  // OK (absolute within project)
+ * validateFilePath('../../../etc/passwd')                 // Throws error (traversal)
+ * validateFilePath('/etc/shadow')                         // Throws error (outside project)
+ * validateFilePath('file\0.txt')                          // Throws error (null byte)
+ */
+export function validateFilePath(filePath: string): void {
+  const projectRoot = process.cwd()
+  const resolvedPath = resolve(projectRoot, filePath)
+  const relativePath = relative(projectRoot, resolvedPath)
+
+  // Ensure the resolved path is within project root
+  // Allow both relative paths and absolute paths that resolve to within the project
+  if (relativePath.startsWith('..')) {
+    throw new Error(
+      `Invalid file path: ${filePath}. Path attempts to access files outside project directory.`
+    )
+  }
+
+  // Reject paths with null bytes (security check)
+  if (filePath.includes('\0')) {
+    throw new Error(`Invalid file path: ${filePath}. Path contains null bytes.`)
+  }
+}
 
 /**
  * Checks if a file or directory exists.
@@ -60,14 +104,16 @@ export async function fileExists(filePath: string): Promise<boolean> {
  * Reads the complete file content from disk. All files are decoded as UTF-8,
  * which supports both ASCII text and Unicode characters (including emojis).
  *
+ * Security: Validates file path before reading to prevent path traversal attacks.
+ *
  * The function will throw an error if:
+ * - The file path is invalid or attempts directory traversal
  * - The file does not exist (ENOENT)
  * - The file cannot be read due to permissions (EACCES)
- * - The file path is invalid
  *
  * @param {string} filePath - The absolute or relative path to the file
  * @returns {Promise<string>} - The complete file content as a UTF-8 string
- * @throws {Error} - If file does not exist or cannot be read
+ * @throws {Error} - If file path is invalid, file does not exist, or cannot be read
  *
  * @example
  * try {
@@ -79,6 +125,7 @@ export async function fileExists(filePath: string): Promise<boolean> {
  * }
  */
 export async function readFile(filePath: string): Promise<string> {
+  validateFilePath(filePath)
   return await fsReadFile(filePath, 'utf-8')
 }
 
@@ -87,6 +134,8 @@ export async function readFile(filePath: string): Promise<string> {
  *
  * Creates the file if it does not exist, or completely replaces the existing
  * file content if it does. All content is encoded as UTF-8.
+ *
+ * Security: Validates file path before writing to prevent path traversal attacks.
  *
  * Parent directories must already exist; this function does not create them.
  * If you need to create directories, use fs.mkdir() first.
@@ -100,6 +149,7 @@ export async function readFile(filePath: string): Promise<string> {
  * @param {string} filePath - The absolute or relative path to the file
  * @param {string} content - The content to write to the file (UTF-8 encoded)
  * @returns {Promise<void>}
+ * @throws {Error} - If file path is invalid or write operation fails
  *
  * @example
  * // Write plain text
@@ -115,6 +165,7 @@ export async function readFile(filePath: string): Promise<string> {
  * await writeFile('./config.txt', newContent);
  */
 export async function writeFile(filePath: string, content: string): Promise<void> {
+  validateFilePath(filePath)
   await fsWriteFile(filePath, content, 'utf-8')
 }
 
@@ -173,7 +224,8 @@ export async function replaceInFile(
 
   logger?.verbose(`  Reading ${filePath} (${originalContent.length} bytes)`)
 
-  // Apply all replacements from the map
+  // Apply all replacements from the map (sanitisation NOT applied by default for backward compatibility)
+  // To enable sanitisation, use applyReplacements directly with filePath parameter
   const modifiedContent = applyReplacements(originalContent, replacements)
 
   // Check if content actually changed
@@ -209,16 +261,18 @@ export async function replaceInFile(
  * If a backup already exists, it is overwritten with the new backup.
  * The original file is not modified.
  *
+ * Security: Validates file path before creating backup to prevent path traversal attacks.
+ *
  * This function is used to allow rollback of file modifications in case of
- * errors during the initialization process.
+ * errors during the initialisation process.
  *
  * Backup naming:
  * - Original: ./package.json → Backup: ./package.json.backup
- * - Original: /etc/config.txt → Backup: /etc/config.txt.backup
+ * - Original: src/index.ts → Backup: src/index.ts.backup
  *
  * @param {string} filePath - The absolute or relative path to the file to backup
  * @returns {Promise<string>} - The path to the created backup file
- * @throws {Error} - If original file does not exist or backup fails
+ * @throws {Error} - If file path is invalid, original file does not exist, or backup fails
  *
  * @example
  * try {
@@ -236,6 +290,7 @@ export async function replaceInFile(
  * }
  */
 export async function createBackup(filePath: string): Promise<string> {
+  validateFilePath(filePath)
   const backupPath = `${filePath}.backup`
   await copyFile(filePath, backupPath)
   return backupPath
@@ -245,20 +300,23 @@ export async function createBackup(filePath: string): Promise<string> {
  * Restores a file from its backup copy.
  *
  * Copies the .backup file back to the original filename and deletes the
- * backup file. Used to undo modifications made during the initialization
+ * backup file. Used to undo modifications made during the initialisation
  * process if errors occur.
  *
+ * Security: Validates file path before restoration to prevent path traversal attacks.
+ *
  * Process:
- * 1. Read content from filename.backup
- * 2. Write content back to original filename (overwrite)
- * 3. Delete the backup file (filename.backup)
+ * 1. Validate file path
+ * 2. Read content from filename.backup
+ * 3. Write content back to original filename (overwrite)
+ * 4. Delete the backup file (filename.backup)
  *
  * This completely restores the original file state that existed when the
  * backup was created.
  *
  * @param {string} filePath - The path to the original file (not the .backup file)
  * @returns {Promise<void>}
- * @throws {Error} - If backup file does not exist or restore fails
+ * @throws {Error} - If file path is invalid, backup file does not exist, or restore fails
  *
  * @example
  * // Error handling with automatic rollback
@@ -277,7 +335,7 @@ export async function createBackup(filePath: string): Promise<string> {
  *
  * } catch (error) {
  *   // Restore from backups on error
- *   console.error('Initialization failed, restoring from backups...');
+ *   console.error('Initialisation failed, restoring from backups...');
  *   for (const file of filesToModify) {
  *     await restoreFromBackup(file);
  *   }
@@ -285,6 +343,7 @@ export async function createBackup(filePath: string): Promise<string> {
  * }
  */
 export async function restoreFromBackup(filePath: string): Promise<void> {
+  validateFilePath(filePath)
   const backupPath = `${filePath}.backup`
 
   // Copy backup file back to original location

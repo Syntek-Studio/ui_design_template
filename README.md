@@ -1,7 +1,7 @@
 # @syntek-studio/ui
 
-**Last Updated**: 02/01/2026
-**Version**: 0.9.0
+**Last Updated**: 03/01/2026
+**Version**: 0.9.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -14,6 +14,9 @@ Nativewind 4.
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [Getting Started](#getting-started)
+  - [For New Projects (Using Template)](#for-new-projects-using-template)
+  - [For Existing Projects (Installing Package)](#for-existing-projects-installing-package)
 - [Features](#features)
 - [Installation](#installation)
   - [Peer Dependencies](#peer-dependencies)
@@ -55,6 +58,59 @@ Nativewind 4.
   - [Pull Request Workflow](#pull-request-workflow)
 - [License](#license)
 - [Support](#support)
+
+---
+
+## Getting Started
+
+### For New Projects (Using Template)
+
+If you're starting from this template to create a custom design system:
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/Syntek-Studio/ui_design_template.git my-design-system
+cd my-design-system
+```
+
+2. **Run the initialization wizard:**
+
+```bash
+npm run init-template
+```
+
+3. **Follow the interactive prompts:**
+
+The CLI will ask for:
+
+- **Client/Company Name** (e.g., "Acme Corporation")
+- **Package Name** (e.g., "@acme/ui")
+- **Primary Brand Colour** (e.g., "#3b82f6")
+- **Description** (e.g., "Acme's design system for web and mobile")
+
+4. **Install dependencies:**
+
+```bash
+npm install
+```
+
+5. **Start development:**
+
+```bash
+npm run dev          # Watch mode for builds
+npm run storybook:web  # Open Storybook on http://localhost:6006
+```
+
+**For detailed setup instructions, troubleshooting, and advanced options, see [docs/SETUP.md](docs/SETUP.md).**
+
+---
+
+### For Existing Projects (Installing Package)
+
+If you want to use this library in an existing React or React Native project:
+
+See the [Installation](#installation) section below.
 
 ---
 

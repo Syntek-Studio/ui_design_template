@@ -1,20 +1,77 @@
 /**
- * Input validation utilities for the template initialization CLI.
+ * Input validation utilities for the template initialisation CLI.
  *
  * This module provides validation functions for user inputs collected during the
- * template initialization process. Each validator returns either true (valid) or
+ * template initialisation process. Each validator returns either true (valid) or
  * an error message string (invalid) to provide clear feedback to the user.
  *
  * Validation Rules Summary:
- * - Package names: npm naming standards (lowercase, scoped format support, max 214 chars)
+ * - Package names: npm naming standards (lowercase, scoped format support, 3-214 chars)
  * - Hex colours: valid 3-digit or 6-digit hex codes with hash prefix
  * - Descriptions: non-empty, max 500 characters, allows special characters and emojis
  * - Client names: non-empty, max 100 characters, allows letters/numbers/special chars
+ *
+ * Helper Functions:
+ * - validateNonEmpty: Reusable empty check with custom field name
+ * - validateMaxLength: Reusable length check with custom field name and limit
  *
  * @module scripts/lib/validators
  * @author Claude Code Documentation Generator
  * @created 2026-01-02
  */
+
+/**
+ * Validates that a string is non-empty after trimming whitespace.
+ *
+ * Reusable helper function for empty/whitespace validation with custom
+ * error messages. Used by description and client name validators to avoid
+ * code duplication.
+ *
+ * @param {string} value - The value to validate
+ * @param {string} fieldName - The name of the field for error messages
+ * @returns {boolean|string} - True if valid, or error message if empty
+ *
+ * @example
+ * validateNonEmpty('Acme', 'Client name')       // returns true
+ * validateNonEmpty('', 'Client name')           // returns 'Client name cannot be empty'
+ * validateNonEmpty('   ', 'Description')        // returns 'Description cannot be empty'
+ */
+function validateNonEmpty(value: string, fieldName: string): boolean | string {
+  const trimmed = value.trim()
+
+  if (trimmed.length === 0) {
+    return `${fieldName} cannot be empty`
+  }
+
+  return true
+}
+
+/**
+ * Validates that a string does not exceed a maximum length.
+ *
+ * Reusable helper function for length validation with custom error messages.
+ * Used by description and client name validators to avoid code duplication.
+ * Trims whitespace before checking length.
+ *
+ * @param {string} value - The value to validate
+ * @param {number} maxLength - The maximum allowed length
+ * @param {string} fieldName - The name of the field for error messages
+ * @returns {boolean|string} - True if valid, or error message if too long
+ *
+ * @example
+ * validateMaxLength('Acme', 100, 'Client name')          // returns true
+ * validateMaxLength('A'.repeat(101), 100, 'Client name') // returns 'Client name must be 100 characters or less'
+ * validateMaxLength('Short', 500, 'Description')         // returns true
+ */
+function validateMaxLength(value: string, maxLength: number, fieldName: string): boolean | string {
+  const trimmed = value.trim()
+
+  if (trimmed.length > maxLength) {
+    return `${fieldName} must be ${maxLength} characters or less`
+  }
+
+  return true
+}
 
 /**
  * Validates an npm package name according to npm naming rules.
@@ -24,7 +81,8 @@
  * - Can contain hyphens, dots, underscores, and tildes
  * - Cannot contain spaces or special characters (except @, /, -, ., _, ~)
  * - Cannot start with a dot or underscore
- * - Cannot be longer than 214 characters
+ * - Must be between 3 and 214 characters (security enhancement)
+ * - Must contain only ASCII characters (security enhancement)
  * - Scoped packages must follow format: @scope/package-name
  * - Scoped package scope and name must both be non-empty
  *
@@ -39,6 +97,8 @@
  * validatePackageName('acme ui')               // returns 'Package name must be lowercase...'
  * validatePackageName('@/ui')                  // returns error message
  * validatePackageName('@company/')             // returns error message
+ * validatePackageName('ab')                    // returns 'Package name must be at least 3 characters'
+ * validatePackageName('пакет')                 // returns 'Package name contains non-ASCII characters...'
  */
 export function validatePackageName(name: string): boolean | string {
   // Check if empty
@@ -49,6 +109,17 @@ export function validatePackageName(name: string): boolean | string {
   // Check length (npm maximum is 214 characters)
   if (name.length > 214) {
     return 'Package name must be 214 characters or less'
+  }
+
+  // Check minimum length (security enhancement to prevent single-char packages)
+  if (name.length < 3) {
+    return 'Package name must be at least 3 characters'
+  }
+
+  // Check for non-ASCII characters (security enhancement to prevent typosquatting)
+  // eslint-disable-next-line no-control-regex
+  if (/[^\x00-\x7F]/.test(name)) {
+    return 'Package name contains non-ASCII characters which may cause issues'
   }
 
   // Check if lowercase only
@@ -128,7 +199,7 @@ export function validatePackageName(name: string): boolean | string {
 export function validateHexColour(colour: string): boolean | string {
   // Check if empty
   if (!colour || colour.trim().length === 0) {
-    return 'Colour cannot be empty'
+    return 'Colour must be a valid hex code (e.g., #3b82f6 or #fff)'
   }
 
   // Trim whitespace
@@ -166,6 +237,8 @@ export function validateHexColour(colour: string): boolean | string {
  * - Accepts special characters, numbers, emojis, and punctuation
  * - Leading and trailing whitespace is trimmed before validation
  *
+ * Uses helper functions to avoid code duplication.
+ *
  * @param {string} description - The description to validate
  * @returns {boolean|string} - Returns true if valid, or error message string if invalid
  *
@@ -179,18 +252,13 @@ export function validateHexColour(colour: string): boolean | string {
  * validateDescription('a'.repeat(501))                                      // returns 'Description must be 500 characters or less'
  */
 export function validateDescription(description: string): boolean | string {
-  // Trim leading and trailing whitespace
-  const trimmed = description.trim()
+  // Check if empty using helper function
+  const emptyCheck = validateNonEmpty(description, 'Description')
+  if (emptyCheck !== true) return emptyCheck
 
-  // Check if empty or whitespace-only
-  if (trimmed.length === 0) {
-    return 'Description cannot be empty'
-  }
-
-  // Check maximum length
-  if (trimmed.length > 500) {
-    return 'Description must be 500 characters or less'
-  }
+  // Check maximum length using helper function
+  const lengthCheck = validateMaxLength(description, 500, 'Description')
+  if (lengthCheck !== true) return lengthCheck
 
   return true
 }
@@ -204,6 +272,8 @@ export function validateDescription(description: string): boolean | string {
  * - Maximum length: 100 characters
  * - Accepts letters, numbers, spaces, and special characters (apostrophes, hyphens, ampersands, etc.)
  * - Leading and trailing whitespace is trimmed before validation
+ *
+ * Uses helper functions to avoid code duplication.
  *
  * @param {string} name - The client name to validate
  * @returns {boolean|string} - Returns true if valid, or error message string if invalid
@@ -221,18 +291,13 @@ export function validateDescription(description: string): boolean | string {
  * validateClientName('A'.repeat(101))                 // returns 'Client name must be 100 characters or less'
  */
 export function validateClientName(name: string): boolean | string {
-  // Trim leading and trailing whitespace
-  const trimmed = name.trim()
+  // Check if empty using helper function
+  const emptyCheck = validateNonEmpty(name, 'Client name')
+  if (emptyCheck !== true) return emptyCheck
 
-  // Check if empty or whitespace-only
-  if (trimmed.length === 0) {
-    return 'Client name cannot be empty'
-  }
-
-  // Check maximum length
-  if (trimmed.length > 100) {
-    return 'Client name must be 100 characters or less'
-  }
+  // Check maximum length using helper function
+  const lengthCheck = validateMaxLength(name, 100, 'Client name')
+  if (lengthCheck !== true) return lengthCheck
 
   return true
 }

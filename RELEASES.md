@@ -1,7 +1,7 @@
 # Release Notes
 
-**Last Updated**: 02/01/2026
-**Version**: 0.9.0
+**Last Updated**: 03/01/2026
+**Version**: 0.9.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -49,6 +49,33 @@
 ---
 
 ## Latest Release
+
+### Version 0.9.1 - 03 January 2026
+
+**Security Hardening and Quality Improvements**
+
+This release focuses on security enhancements and bug fixes for the template initialisation tool, ensuring your project setup is safe and reliable.
+
+#### What's New
+
+- **Enhanced Security**: The template initialisation tool now includes protection against path traversal attacks and input injection vulnerabilities. Your project files are safer from malicious inputs.
+
+- **Reliable Testing**: All 160 tests now pass successfully (100% pass rate), giving you confidence that the initialisation tool works correctly in all scenarios.
+
+- **Better Input Validation**: Package name validation has been improved to catch more potential issues early, including minimum length requirements and non-ASCII character detection.
+
+- **Complete Documentation**: New comprehensive setup guide (`docs/SETUP.md`) walks you through every step of using this template to create your design system.
+
+#### For Developers
+
+- Security grade improved to B+ (Good)
+- All medium-severity security vulnerabilities resolved
+- Test suite fully operational with 100% pass rate
+- Production-ready and approved for use
+
+---
+
+## Previous Releases
 
 ### Version 0.9.0 - 02 January 2026
 

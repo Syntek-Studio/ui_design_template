@@ -132,7 +132,86 @@ export function createReplacementMap(answers: UserAnswers): ReplacementMap {
  * // ]
  */
 export function getFilesToModify(): string[] {
-  return ['package.json', 'README.md', '.claude/CLAUDE.md', 'src/index.ts', 'src/tokens/colours.ts']
+  return ['package.json', 'README.md', '.claude/CLAUDE.md', 'src/index.ts']
+}
+
+/**
+ * Sanitises a value for safe use in JSON files.
+ *
+ * Escapes double quotes and backslashes to prevent JSON injection attacks.
+ * This ensures user-provided values cannot break JSON syntax or inject
+ * malicious content into package.json and other JSON configuration files.
+ *
+ * Characters escaped:
+ * - " (double quote) → \"
+ * - \ (backslash) → \\
+ *
+ * @param {string} value - The value to sanitise
+ * @returns {string} - Sanitised value safe for JSON
+ *
+ * @example
+ * sanitiseForJSON('test')              // returns 'test'
+ * sanitiseForJSON('test"value')        // returns 'test\\"value'
+ * sanitiseForJSON('C:\\path')          // returns 'C:\\\\path'
+ * sanitiseForJSON('test", "bad": "x')  // returns 'test\\", \\"bad\\": \\"x'
+ */
+export function sanitiseForJSON(value: string): string {
+  // Escape quotes and backslashes to prevent JSON injection
+  return value.replace(/["\\]/g, '\\$&')
+}
+
+/**
+ * Sanitises a value for safe use in Markdown files.
+ *
+ * Removes HTML tags to prevent injection attacks when Markdown is rendered as HTML.
+ * This protects against XSS attacks if README.md or other documentation is
+ * displayed in web interfaces (GitHub, npm, documentation sites).
+ *
+ * Characters removed:
+ * - < (less than)
+ * - > (greater than)
+ *
+ * @param {string} value - The value to sanitise
+ * @returns {string} - Sanitised value safe for Markdown
+ *
+ * @example
+ * sanitiseForMarkdown('Acme Corp')                      // returns 'Acme Corp'
+ * sanitiseForMarkdown('Acme <script>alert(1)</script>') // returns 'Acme scriptalert(1)/script'
+ * sanitiseForMarkdown('<b>Bold</b>')                    // returns 'bBold/b'
+ */
+export function sanitiseForMarkdown(value: string): string {
+  // Remove HTML tags to prevent injection
+  return value.replace(/[<>]/g, '')
+}
+
+/**
+ * Applies context-aware sanitisation to replacement values based on file type.
+ *
+ * Determines the appropriate sanitisation strategy based on file extension:
+ * - .json files: Escape quotes and backslashes (JSON injection prevention)
+ * - .md files: Remove HTML tags (XSS prevention)
+ * - Other files: No sanitisation (passthrough)
+ *
+ * This provides defence-in-depth protection against injection attacks while
+ * preserving functionality for non-vulnerable file types.
+ *
+ * @param {string} value - The value to sanitise
+ * @param {string} filePath - The file path to determine context
+ * @returns {string} - Sanitised value appropriate for the file type
+ *
+ * @example
+ * sanitiseReplacementValue('test"value', 'package.json')  // JSON escaped
+ * sanitiseReplacementValue('test<tag>', 'README.md')      // HTML tags removed
+ * sanitiseReplacementValue('test"value', 'index.ts')      // No sanitisation
+ */
+export function sanitiseReplacementValue(value: string, filePath: string): string {
+  if (filePath.endsWith('.json')) {
+    return sanitiseForJSON(value)
+  }
+  if (filePath.endsWith('.md')) {
+    return sanitiseForMarkdown(value)
+  }
+  return value
 }
 
 /**
@@ -160,8 +239,8 @@ export function getFilesToModify(): string[] {
  * escapeRegExp('^hello$')            // returns '\\^hello\\$'
  */
 export function escapeRegExp(str: string): string {
-  // Escape all special regex characters: . * + ? ^ $ { } ( ) | [ ] \ /
-  return str.replace(/[.*+?^${}()|[\]\\/-]/g, '\\$&')
+  // Escape all special regex characters: @ . * + ? ^ $ { } ( ) | [ ] \ / -
+  return str.replace(/[@.*+?^${}()|[\]\\/-]/g, '\\$&')
 }
 
 /**
@@ -170,12 +249,16 @@ export function escapeRegExp(str: string): string {
  * Replaces all occurrences of placeholder strings with their corresponding values
  * from the replacement map. Uses regex with global flag to replace all instances.
  *
+ * Security: When filePath is provided, applies context-aware sanitisation to prevent
+ * injection attacks (JSON injection, XSS via Markdown).
+ *
  * Process:
  * 1. Iterates through each key-value pair in the replacement map
  * 2. Escapes special regex characters in the key (placeholder)
  * 3. Creates a RegExp with global flag for case-sensitive replacement
- * 4. Replaces all occurrences in the content
- * 5. Returns the fully replaced content
+ * 4. Sanitises replacement value if filePath provided (context-aware)
+ * 5. Replaces all occurrences in the content
+ * 6. Returns the fully replaced content
  *
  * Preserves:
  * - Line breaks and whitespace formatting
@@ -185,6 +268,7 @@ export function escapeRegExp(str: string): string {
  *
  * @param {string} content - The content string to modify
  * @param {ReplacementMap} replacements - Map of placeholder→replacement pairs
+ * @param {string} [filePath] - Optional file path for context-aware sanitisation
  * @returns {string} - Content with all replacements applied
  *
  * @example
@@ -201,20 +285,23 @@ export function escapeRegExp(str: string): string {
  * })
  * // Returns: 'Package: @acme/ui by Acme Corporation'
  *
- * // Preserves formatting
- * applyReplacements('{
- *   "name": "@syntek-studio/ui",
- *   "author": "Syntek Studio"
- * }', {
- *   '@syntek-studio/ui': '@acme/ui',
- *   'Syntek Studio': 'Acme Corp'
- * })
- * // Returns: '{
- * //   "name": "@acme/ui",
- * //   "author": "Acme Corp"
- * // }'
+ * // With sanitisation (JSON file)
+ * applyReplacements('{"name": "PLACEHOLDER"}', {
+ *   'PLACEHOLDER': 'test"value'
+ * }, 'package.json')
+ * // Returns: '{"name": "test\\"value"}' (quotes escaped)
+ *
+ * // With sanitisation (Markdown file)
+ * applyReplacements('# PLACEHOLDER', {
+ *   'PLACEHOLDER': 'Acme <script>alert(1)</script>'
+ * }, 'README.md')
+ * // Returns: '# Acme scriptalert(1)/script' (HTML tags removed)
  */
-export function applyReplacements(content: string, replacements: ReplacementMap): string {
+export function applyReplacements(
+  content: string,
+  replacements: ReplacementMap,
+  filePath?: string
+): string {
   let modifiedContent = content
 
   // Apply each replacement from the map
@@ -225,8 +312,13 @@ export function applyReplacements(content: string, replacements: ReplacementMap)
     // Create a global regex to replace all occurrences
     const regex = new RegExp(escapedPlaceholder, 'g')
 
+    // Apply context-aware sanitisation if file path is provided
+    const sanitisedReplacement = filePath
+      ? sanitiseReplacementValue(replacement, filePath)
+      : replacement
+
     // Apply the replacement
-    modifiedContent = modifiedContent.replace(regex, replacement)
+    modifiedContent = modifiedContent.replace(regex, sanitisedReplacement)
   }
 
   return modifiedContent

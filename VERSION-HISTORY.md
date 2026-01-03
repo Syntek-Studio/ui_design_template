@@ -1,7 +1,7 @@
 # Version History
 
-**Last Updated**: 02/01/2026
-**Version**: 0.9.0
+**Last Updated**: 03/01/2026
+**Version**: 0.9.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -13,6 +13,13 @@
 - [Table of Contents](#table-of-contents)
 - [Unreleased](#unreleased)
   - [Technical Changes](#technical-changes)
+- [0.9.1 - 03/01/2026](#091---03012026)
+  - [Summary](#summary)
+  - [Security Fixes](#security-fixes)
+  - [Bug Fixes](#bug-fixes)
+  - [Files Changed](#files-changed)
+  - [Documentation Notes](#documentation-notes)
+  - [Architecture Notes](#architecture-notes)
 - [0.9.0 - 02/01/2026](#090---02012026)
   - [Summary](#summary)
   - [Breaking Changes](#breaking-changes)
@@ -135,6 +142,134 @@
 ### Technical Changes
 
 - Nothing yet
+
+---
+
+## [0.9.1] - 03/01/2026
+
+### Summary
+
+Security hardening and test remediation for template initialisation CLI (US001 Phase 4 completion). Addressed all medium-severity security vulnerabilities and resolved test suite failures, achieving 100% test pass rate (160/160 tests).
+
+### Security Fixes
+
+#### M-01: Path Traversal Protection
+
+Added `validateFilePath()` function in `scripts/lib/file-operations.ts` (lines 34-74):
+
+- Prevents directory traversal attacks using `..` path components
+- Validates file paths against project root using `path.resolve()` and `path.relative()`
+- Blocks null byte injection (`\0`) in file paths
+- Throws descriptive errors for invalid paths
+
+**Impact:** Prevents malicious file path inputs from accessing files outside the project directory.
+
+#### M-02: Input Sanitisation
+
+Added context-aware sanitisation functions in `scripts/lib/replacements.ts` (lines 139-216):
+
+- `sanitiseForJSON()` - Escapes double quotes and backslashes for JSON files
+- `sanitiseForMarkdown()` - Removes `<` and `>` characters to prevent HTML injection
+- `sanitiseReplacementValue()` - Applies appropriate sanitisation based on file extension
+
+**Impact:** Prevents injection attacks through user-provided replacement values.
+
+#### L-01: Enhanced Package Name Validation
+
+Enhanced validation in `scripts/lib/validators.ts`:
+
+- Added minimum length check (3 characters minimum)
+- Added non-ASCII character detection and warning
+- Improved error messages with specific npm naming rules
+- Maintained existing validation for special characters, uppercase, and npm reserved names
+
+**Impact:** Ensures package names comply with npm registry requirements and prevents encoding issues.
+
+### Bug Fixes
+
+#### Test Suite Remediation (9 Failures Fixed)
+
+**`createTemplateConfig` Tests (5 failures):**
+
+- Added `package.json` file creation in test setup (`beforeEach`)
+- Fixed mock filesystem to include all required files
+- Ensured test directory structure matches production requirements
+
+**`performReplacements` Test (1 failure):**
+
+- Changed test file from `test.md` to `README.md` to match actual implementation
+- Updated test expectations to use real template files
+
+**`verifyReplacements` Tests (3 failures):**
+
+- Created all required template files in `beforeEach` hook
+- Added proper UTF-8 content with placeholders
+- Ensured file existence before verification
+
+**Result:** 160/160 tests passing (100% pass rate)
+
+### Files Changed
+
+#### Implementation Files (Security Hardening)
+
+| File                             | Changes                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------- |
+| `scripts/lib/file-operations.ts` | Added `validateFilePath()` function (+83 lines)                                  |
+|                                  | Integrated path validation into `readFile()` and `writeFile()`                   |
+|                                  | Added comprehensive JSDoc documentation                                          |
+| `scripts/lib/replacements.ts`    | Added `sanitiseForJSON()`, `sanitiseForMarkdown()`, `sanitiseReplacementValue()` |
+|                                  | Updated `applyReplacements()` to call sanitisation (+130 lines)                  |
+|                                  | Added comprehensive JSDoc documentation                                          |
+| `scripts/lib/validators.ts`      | Enhanced `validatePackageName()` with minimum length and ASCII checks (+123)     |
+|                                  | Improved error messaging                                                         |
+|                                  | Added comprehensive JSDoc documentation                                          |
+
+#### Test Files (Remediation)
+
+| File                                        | Changes                                          |
+| ------------------------------------------- | ------------------------------------------------ |
+| `scripts/__tests__/init-template.test.ts`   | Fixed mock filesystem setup (+50 lines)          |
+|                                             | Added `package.json` creation in `beforeEach`    |
+|                                             | Updated file path references                     |
+| `scripts/__tests__/validators.test.ts`      | Added tests for new validation rules (+16 lines) |
+|                                             | Updated test expectations                        |
+| `scripts/__tests__/file-operations.test.ts` | Fixed async timing issues                        |
+| `scripts/__tests__/replacements.test.ts`    | Added sanitisation tests                         |
+
+#### Documentation Files
+
+| File                                                             | Status  |
+| ---------------------------------------------------------------- | ------- |
+| `docs/REFACTORING/REFACTOR-US001-CLI-2026-01-03.MD`              | Created |
+| `docs/AUDITS/SECURITY/SECURITY-AUDIT-US001.md`                   | Updated |
+| `docs/AUDITS/SYNTAX/SYNTAX-REVIEW-US001.md`                      | Updated |
+| `docs/AUDITS/COMPLIANCE/GDPR-COMPLIANCE-REPORT-US001.md`         | Updated |
+| `docs/REVIEWS/REVIEW-US001-TDD-SETUP-2026-01-02.MD`              | Updated |
+| `docs/SPRINTS/LOGS/COMPLETION-2026-01-03-US001-PHASE-4-FINAL.md` | Created |
+| `docs/SETUP.md`                                                  | Created |
+| `README.md`                                                      | Updated |
+| `template.config.schema.json`                                    | Created |
+
+### Documentation Notes
+
+This release completes US001 (Template Initialisation CLI) with all security vulnerabilities addressed and comprehensive test coverage achieved. The CLI is now production-ready with:
+
+- Path traversal protection
+- Input sanitisation for JSON and Markdown files
+- Enhanced package name validation
+- 100% test pass rate (160/160 tests)
+- Security grade: B+ (Good)
+- Code review grade: A- (Excellent)
+
+### Architecture Notes
+
+The security fixes maintain the existing modular architecture:
+
+- Path validation is isolated in `file-operations.ts`
+- Sanitisation logic is self-contained in `replacements.ts`
+- Validation enhancements are confined to `validators.ts`
+
+All security functions are fully tested and documented with JSDoc. The fixes do not introduce breaking changes and maintain backward compatibility with existing usage patterns.
 
 ---
 

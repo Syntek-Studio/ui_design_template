@@ -1,7 +1,7 @@
 # Changelog
 
-**Last Updated**: 02/01/2026
-**Version**: 0.9.0
+**Last Updated**: 03/01/2026
+**Version**: 0.9.1
 **Maintained By**: Development Team
 **Language**: British English (en_GB)
 **Timezone**: Europe/London
@@ -24,6 +24,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More comprehensive design tokens documentation
 
 - Accessibility testing and ARIA enhancements
+
+---
+
+## [0.9.1] - 03/01/2026
+
+### Security
+
+- Add path traversal protection (`validateFilePath()` function)
+- Add input sanitisation for JSON and Markdown files (`sanitiseForJSON()`, `sanitiseForMarkdown()`, `sanitiseReplacementValue()`)
+- Enhance package name validation with minimum length and ASCII character checks
+
+### Fixed
+
+- Fix 9 test failures in template initialisation CLI test suite
+  - Fix `createTemplateConfig` tests (5) - add package.json to test setup
+  - Fix `performReplacements` test (1) - use README.md instead of test.md
+  - Fix `verifyReplacements` tests (3) - create all required files in beforeEach
+- Achieve 100% test pass rate (160/160 tests passing)
+
+### Documentation
+
+- Add comprehensive security refactoring documentation (`docs/REFACTORING/REFACTOR-US001-CLI-2026-01-03.MD`)
+- Update security audit with post-fix review (`docs/AUDITS/SECURITY/SECURITY-AUDIT-US001.md`)
+- Update syntax review with test resolution summary (`docs/AUDITS/SYNTAX/SYNTAX-REVIEW-US001.md`)
+- Update GDPR compliance report with deferred recommendations (`docs/AUDITS/COMPLIANCE/GDPR-COMPLIANCE-REPORT-US001.md`)
+- Update code review with final assessment (`docs/REVIEWS/REVIEW-US001-TDD-SETUP-2026-01-02.MD`)
+- Add sprint completion log (`docs/SPRINTS/LOGS/COMPLETION-2026-01-03-US001-PHASE-4-FINAL.md`)
+- Add comprehensive setup guide (`docs/SETUP.md`)
+- Update README with getting started section
+- Add JSON schema for template configuration (`template.config.schema.json`)
 
 ---
 
